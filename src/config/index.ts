@@ -20,6 +20,10 @@ export const envConfigs: Record<string, string> = {
   app_description: publicEnv('VITE_APP_DESCRIPTION') ?? 'Ship your SaaS faster',
   app_logo: publicEnv('VITE_APP_LOGO') ?? '/logo.svg',
 
+  // Game Site Engine deployment identity. One Worker deployment owns one
+  // logical site; SITE_KEY resolves to game_site.key in the database.
+  site_key: procEnv.SITE_KEY ?? '',
+
   // Database
   database_url: procEnv.DATABASE_URL ?? '',
   database_auth_token: procEnv.DATABASE_AUTH_TOKEN ?? '',
