@@ -30,7 +30,9 @@ const dbCredentials =
       };
 
 export default defineConfig({
-  schema: './src/config/db/schema.ts',
+  // Keep ShipAny infrastructure tables and Game Site Engine domain tables in
+  // separate source files. db:setup generates both files for the active dialect.
+  schema: ['./src/config/db/schema.ts', './src/config/db/game-schema.ts'],
   out: './drizzle',
   dialect,
   dbCredentials,
