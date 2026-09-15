@@ -59,6 +59,7 @@ yarn-error.log*
 /data/
 /drizzle/
 src/config/db/schema.ts
+src/config/db/game-schema.ts
 
 # npm (project uses pnpm)
 package-lock.json
