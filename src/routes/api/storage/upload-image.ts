@@ -3,10 +3,10 @@ import path from 'node:path';
 import { createFileRoute } from '@tanstack/react-router';
 
 import { envConfigs } from '@/config';
-import { getAuth } from '@/core/auth';
 import { md5 } from '@/lib/hash';
 import { enforceMinIntervalRateLimit } from '@/lib/rate-limit';
 import { respData, respErr } from '@/lib/resp';
+import { requireAdmin } from '@/modules/admin/guard';
 import { getStorage } from '@/modules/storage/service';
 
 const SAFE_IMAGE_TYPES: Record<string, string> = {
@@ -25,7 +25,12 @@ const IMAGE_MAX_BYTES =
 
 function hasExpectedSignature(type: string, body: Uint8Array) {
   if (type === 'image/jpeg' || type === 'image/jpg') {
-    return body.length >= 3 && body[0] === 0xff && body[1] === 0xd8 && body[2] === 0xff;
+    return (
+      body.length >= 3 &&
+      body[0] === 0xff &&
+      body[1] === 0xd8 &&
+      body[2] === 0xff
+    );
   }
   if (type === 'image/png') {
     const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
@@ -56,9 +61,10 @@ async function POST({ request }: { request: Request }) {
   if (limited) return limited;
 
   try {
-    const auth = getAuth();
-    const session = await auth.api.getSession({ headers: request.headers });
-    if (!session?.user) return respErr('Unauthorized');
+    // Game Site Engine image uploads are CMS/admin operations. Keeping this
+    // admin-only prevents ordinary signed-in users from consuming R2/storage
+    // quota if public registration is enabled later.
+    await requireAdmin(request);
 
     const formData = await request.formData();
     const files = formData.getAll('files') as File[];
@@ -90,7 +96,9 @@ async function POST({ request }: { request: Request }) {
       const arrayBuffer = await file.arrayBuffer();
       const body = new Uint8Array(arrayBuffer);
       if (!hasExpectedSignature(file.type, body)) {
-        return respErr(`File ${file.name} does not match its declared image type`);
+        return respErr(
+          `File ${file.name} does not match its declared image type`
+        );
       }
 
       const digest = md5(body);
