@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { BlogCard } from '@/components/blog-card';
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { formatPostDate } from '@/content/posts';
 import { listPublished as listCategories } from '@/modules/categories/service';
@@ -8,6 +9,7 @@ import {
   listPublished as listSitePosts,
   SitePostType,
 } from '@/modules/site-posts/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -21,29 +23,31 @@ export const Route = createFileRoute('/guides/')({
     const locale = getLocale();
     if (!site.enabledLocales.includes(locale)) throw notFound();
 
-    const [categories, guides, localeAvailability] = await Promise.all([
-      listCategories({ siteId: site.id, locale, limit: 8 }),
-      listSitePosts({
-        siteId: site.id,
-        locale,
-        type: SitePostType.GUIDE,
-        limit: 100,
-      }),
-      Promise.all(
-        site.enabledLocales.map(async (candidate) => ({
-          locale: candidate,
-          hasContent:
-            (
-              await listSitePosts({
-                siteId: site.id,
-                locale: candidate,
-                type: SitePostType.GUIDE,
-                limit: 1,
-              })
-            ).length > 0,
-        }))
-      ),
-    ]);
+    const [categories, guides, localeAvailability, publicConfig] =
+      await Promise.all([
+        listCategories({ siteId: site.id, locale, limit: 8 }),
+        listSitePosts({
+          siteId: site.id,
+          locale,
+          type: SitePostType.GUIDE,
+          limit: 100,
+        }),
+        Promise.all(
+          site.enabledLocales.map(async (candidate) => ({
+            locale: candidate,
+            hasContent:
+              (
+                await listSitePosts({
+                  siteId: site.id,
+                  locale: candidate,
+                  type: SitePostType.GUIDE,
+                  limit: 1,
+                })
+              ).length > 0,
+          }))
+        ),
+        getPublicSiteConfig(site.id),
+      ]);
 
     if (locale !== site.defaultLocale && guides.length === 0) throw notFound();
 
@@ -51,7 +55,14 @@ export const Route = createFileRoute('/guides/')({
       .filter((item) => item.hasContent || item.locale === site.defaultLocale)
       .map((item) => item.locale);
 
-    return { site, locale, categories, guides, availableLocales };
+    return {
+      site,
+      locale,
+      categories,
+      guides,
+      availableLocales,
+      publicConfig,
+    };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
@@ -90,7 +101,8 @@ export const Route = createFileRoute('/guides/')({
 });
 
 function GuidesPage() {
-  const { site, locale, categories, guides } = Route.useLoaderData();
+  const { site, locale, categories, guides, publicConfig } =
+    Route.useLoaderData();
 
   return (
     <div className="bg-background text-foreground min-h-screen">
@@ -130,6 +142,10 @@ function GuidesPage() {
           </div>
         )}
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
