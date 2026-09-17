@@ -106,7 +106,11 @@ function BlogPage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="mb-10">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Blog</h1>
@@ -143,6 +147,7 @@ function BlogPage() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
