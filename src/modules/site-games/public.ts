@@ -1,6 +1,11 @@
-import { and, desc, eq } from 'drizzle-orm';
+import { and, desc, eq, inArray, ne } from 'drizzle-orm';
 
-import { game, siteGame, siteGameLocale } from '@/config/db/game-schema';
+import {
+  game,
+  siteGame,
+  siteGameCategory,
+  siteGameLocale,
+} from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { GameStatus } from '@/modules/games/service';
 
@@ -66,6 +71,52 @@ export async function listHot(input: {
       and(publicFilters(input.siteId, input.locale), eq(siteGame.hot, true))
     )
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.viewCount))
+    .limit(limit);
+}
+
+export async function listSimilar(input: {
+  siteId: string;
+  siteGameId: string;
+  locale: string;
+  limit?: number;
+}) {
+  const limit = Math.min(Math.max(input.limit || 12, 1), 50);
+  const categoryRows = await db()
+    .select({ siteCategoryId: siteGameCategory.siteCategoryId })
+    .from(siteGameCategory)
+    .where(eq(siteGameCategory.siteGameId, input.siteGameId));
+  const categoryIds = categoryRows.map((row) => row.siteCategoryId);
+
+  if (categoryIds.length === 0) {
+    return db()
+      .select(cardSelection)
+      .from(siteGame)
+      .innerJoin(game, eq(game.id, siteGame.gameId))
+      .innerJoin(siteGameLocale, eq(siteGameLocale.siteGameId, siteGame.id))
+      .where(
+        and(
+          publicFilters(input.siteId, input.locale),
+          ne(siteGame.id, input.siteGameId)
+        )
+      )
+      .orderBy(desc(siteGame.hot), desc(siteGame.viewCount), desc(siteGame.sortWeight))
+      .limit(limit);
+  }
+
+  return db()
+    .selectDistinct(cardSelection)
+    .from(siteGameCategory)
+    .innerJoin(siteGame, eq(siteGame.id, siteGameCategory.siteGameId))
+    .innerJoin(game, eq(game.id, siteGame.gameId))
+    .innerJoin(siteGameLocale, eq(siteGameLocale.siteGameId, siteGame.id))
+    .where(
+      and(
+        inArray(siteGameCategory.siteCategoryId, categoryIds),
+        publicFilters(input.siteId, input.locale),
+        ne(siteGame.id, input.siteGameId)
+      )
+    )
+    .orderBy(desc(siteGame.hot), desc(siteGame.viewCount), desc(siteGame.sortWeight))
     .limit(limit);
 }
 
