@@ -1,23 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { getAuth } from '@/core/auth';
-import { hasPermission } from '@/modules/rbac/service';
-import { getLocaleContent } from '@/modules/site-posts/content';
-import { upsertLocaleContent } from '@/modules/site-posts/service';
 import { respData, respErr } from '@/lib/resp';
-
-async function checkAdmin(request: Request) {
-  const auth = getAuth();
-  const session = await auth.api.getSession({ headers: request.headers });
-  if (!session?.user) throw new Error('Unauthorized');
-  if (!(await hasPermission(session.user.id, 'admin.*'))) {
-    throw new Error('Forbidden');
-  }
-}
+import { requireAdmin } from '@/modules/admin/guard';
+import {
+  parseBody,
+  sitePostContentSchema,
+} from '@/modules/admin/game-engine-validation';
+import { getLocaleContent } from '@/modules/site-posts/content';
+import {
+  SitePostContentStatus,
+  upsertLocaleContent,
+} from '@/modules/site-posts/service';
 
 async function GET({ request }: { request: Request }) {
   try {
-    await checkAdmin(request);
+    await requireAdmin(request);
     const { searchParams } = new URL(request.url);
     const siteId = searchParams.get('siteId');
     const sitePostId = searchParams.get('sitePostId');
@@ -33,11 +30,9 @@ async function GET({ request }: { request: Request }) {
 
 async function PUT({ request }: { request: Request }) {
   try {
-    await checkAdmin(request);
-    const body = await request.json();
-    if (!body.siteId || !body.sitePostId || !body.locale || !body.slug || !body.title) {
-      return respErr('siteId, sitePostId, locale, slug and title are required');
-    }
+    await requireAdmin(request);
+    const body = parseBody(sitePostContentSchema, await request.json());
+
     return respData(
       await upsertLocaleContent({
         siteId: body.siteId,
@@ -45,7 +40,7 @@ async function PUT({ request }: { request: Request }) {
         locale: body.locale,
         slug: body.slug,
         title: body.title,
-        status: body.status,
+        status: body.status as SitePostContentStatus | undefined,
         metaTitle: body.metaTitle ?? null,
         metaDescription: body.metaDescription ?? null,
         description: body.description ?? null,
