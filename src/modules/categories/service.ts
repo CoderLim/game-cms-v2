@@ -1,0 +1,294 @@
+import { and, desc, eq } from 'drizzle-orm';
+
+import {
+  game,
+  gameCategory,
+  siteCategory,
+  siteCategoryLocale,
+  siteGame,
+  siteGameCategory,
+  siteGameLocale,
+} from '@/config/db/game-schema';
+import { db } from '@/core/db';
+import { getUuid } from '@/lib/hash';
+
+import { GameStatus } from '@/modules/games/service';
+import {
+  SiteContentStatus,
+  SiteGameStatus,
+} from '@/modules/site-games/service';
+
+export enum SiteCategoryStatus {
+  DRAFT = 'draft',
+  PUBLISHED = 'published',
+  ARCHIVED = 'archived',
+}
+
+function normalizeKey(value: string) {
+  return value.trim().toLowerCase();
+}
+
+function normalizeSlug(value: string) {
+  return value.trim().toLowerCase();
+}
+
+export async function createCategory(input: { key: string }) {
+  const values = {
+    id: getUuid(),
+    key: normalizeKey(input.key),
+  };
+
+  const [row] = await db().insert(gameCategory).values(values).returning();
+  return row;
+}
+
+export async function attachCategory(input: {
+  siteId: string;
+  categoryId: string;
+  status?: SiteCategoryStatus;
+  indexable?: boolean;
+  sortWeight?: number;
+}) {
+  const values = {
+    id: getUuid(),
+    siteId: input.siteId,
+    categoryId: input.categoryId,
+    status: input.status || SiteCategoryStatus.DRAFT,
+    indexable: input.indexable ?? false,
+    sortWeight: input.sortWeight ?? 0,
+  };
+
+  const [row] = await db().insert(siteCategory).values(values).returning();
+  return row;
+}
+
+export async function upsertLocaleContent(input: {
+  siteId: string;
+  siteCategoryId: string;
+  locale: string;
+  slug: string;
+  title: string;
+  status?: SiteContentStatus;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  description?: string | null;
+  content?: string | null;
+}) {
+  const [parent] = await db()
+    .select({ id: siteCategory.id })
+    .from(siteCategory)
+    .where(
+      and(
+        eq(siteCategory.id, input.siteCategoryId),
+        eq(siteCategory.siteId, input.siteId)
+      )
+    )
+    .limit(1);
+
+  if (!parent) {
+    throw new Error('site_category does not belong to the supplied site');
+  }
+
+  const values = {
+    id: getUuid(),
+    siteId: input.siteId,
+    siteCategoryId: input.siteCategoryId,
+    locale: input.locale,
+    slug: normalizeSlug(input.slug),
+    status: input.status || SiteContentStatus.DRAFT,
+    title: input.title.trim(),
+    metaTitle: input.metaTitle ?? null,
+    metaDescription: input.metaDescription ?? null,
+    description: input.description ?? null,
+    content: input.content ?? null,
+  };
+
+  const [row] = await db()
+    .insert(siteCategoryLocale)
+    .values(values)
+    .onConflictDoUpdate({
+      target: [siteCategoryLocale.siteCategoryId, siteCategoryLocale.locale],
+      set: {
+        siteId: values.siteId,
+        slug: values.slug,
+        status: values.status,
+        title: values.title,
+        metaTitle: values.metaTitle,
+        metaDescription: values.metaDescription,
+        description: values.description,
+        content: values.content,
+        updatedAt: new Date(),
+      },
+    })
+    .returning();
+
+  return row;
+}
+
+export async function assignGame(input: {
+  siteId: string;
+  siteGameId: string;
+  siteCategoryId: string;
+}) {
+  // Both sides must belong to the same site. Keeping this check in the service
+  // makes cross-site category leakage impossible even if an admin UI passes a
+  // stale or tampered identifier.
+  const [gameParent] = await db()
+    .select({ id: siteGame.id })
+    .from(siteGame)
+    .where(
+      and(eq(siteGame.id, input.siteGameId), eq(siteGame.siteId, input.siteId))
+    )
+    .limit(1);
+
+  const [categoryParent] = await db()
+    .select({ id: siteCategory.id })
+    .from(siteCategory)
+    .where(
+      and(
+        eq(siteCategory.id, input.siteCategoryId),
+        eq(siteCategory.siteId, input.siteId)
+      )
+    )
+    .limit(1);
+
+  if (!gameParent || !categoryParent) {
+    throw new Error('site_game and site_category must belong to the supplied site');
+  }
+
+  const values = {
+    id: getUuid(),
+    siteGameId: input.siteGameId,
+    siteCategoryId: input.siteCategoryId,
+  };
+
+  const [row] = await db()
+    .insert(siteGameCategory)
+    .values(values)
+    .onConflictDoNothing({
+      target: [siteGameCategory.siteGameId, siteGameCategory.siteCategoryId],
+    })
+    .returning();
+
+  return row;
+}
+
+export async function getPublishedBySlug(input: {
+  siteId: string;
+  locale: string;
+  slug: string;
+}) {
+  const [row] = await db()
+    .select({
+      siteCategoryId: siteCategory.id,
+      categoryId: gameCategory.id,
+      categoryKey: gameCategory.key,
+      slug: siteCategoryLocale.slug,
+      title: siteCategoryLocale.title,
+      metaTitle: siteCategoryLocale.metaTitle,
+      metaDescription: siteCategoryLocale.metaDescription,
+      description: siteCategoryLocale.description,
+      content: siteCategoryLocale.content,
+      sortWeight: siteCategory.sortWeight,
+      contentUpdatedAt: siteCategoryLocale.updatedAt,
+    })
+    .from(siteCategoryLocale)
+    .innerJoin(
+      siteCategory,
+      eq(siteCategory.id, siteCategoryLocale.siteCategoryId)
+    )
+    .innerJoin(gameCategory, eq(gameCategory.id, siteCategory.categoryId))
+    .where(
+      and(
+        eq(siteCategoryLocale.siteId, input.siteId),
+        eq(siteCategoryLocale.locale, input.locale),
+        eq(siteCategoryLocale.slug, normalizeSlug(input.slug)),
+        eq(siteCategoryLocale.status, SiteContentStatus.PUBLISHED),
+        eq(siteCategory.status, SiteCategoryStatus.PUBLISHED)
+      )
+    )
+    .limit(1);
+
+  return row;
+}
+
+export async function listPublished(input: {
+  siteId: string;
+  locale: string;
+  indexableOnly?: boolean;
+  limit?: number;
+}) {
+  const limit = Math.min(Math.max(input.limit || 100, 1), 500);
+  const filters = [
+    eq(siteCategoryLocale.siteId, input.siteId),
+    eq(siteCategoryLocale.locale, input.locale),
+    eq(siteCategoryLocale.status, SiteContentStatus.PUBLISHED),
+    eq(siteCategory.status, SiteCategoryStatus.PUBLISHED),
+  ];
+
+  if (input.indexableOnly) filters.push(eq(siteCategory.indexable, true));
+
+  return db()
+    .select({
+      siteCategoryId: siteCategory.id,
+      categoryKey: gameCategory.key,
+      slug: siteCategoryLocale.slug,
+      title: siteCategoryLocale.title,
+      description: siteCategoryLocale.description,
+      sortWeight: siteCategory.sortWeight,
+    })
+    .from(siteCategoryLocale)
+    .innerJoin(
+      siteCategory,
+      eq(siteCategory.id, siteCategoryLocale.siteCategoryId)
+    )
+    .innerJoin(gameCategory, eq(gameCategory.id, siteCategory.categoryId))
+    .where(and(...filters))
+    .orderBy(desc(siteCategory.sortWeight), siteCategoryLocale.title)
+    .limit(limit);
+}
+
+export async function listGames(input: {
+  siteId: string;
+  siteCategoryId: string;
+  locale: string;
+  limit?: number;
+}) {
+  const limit = Math.min(Math.max(input.limit || 24, 1), 100);
+
+  return db()
+    .select({
+      siteGameId: siteGame.id,
+      gameId: game.id,
+      gameKey: game.key,
+      slug: siteGameLocale.slug,
+      title: siteGameLocale.title,
+      imageUrl: game.imageUrl,
+      viewCount: siteGame.viewCount,
+      featured: siteGame.featured,
+      hot: siteGame.hot,
+      sortWeight: siteGame.sortWeight,
+    })
+    .from(siteGameCategory)
+    .innerJoin(siteGame, eq(siteGame.id, siteGameCategory.siteGameId))
+    .innerJoin(game, eq(game.id, siteGame.gameId))
+    .innerJoin(
+      siteGameLocale,
+      and(
+        eq(siteGameLocale.siteGameId, siteGame.id),
+        eq(siteGameLocale.siteId, input.siteId),
+        eq(siteGameLocale.locale, input.locale)
+      )
+    )
+    .where(
+      and(
+        eq(siteGameCategory.siteCategoryId, input.siteCategoryId),
+        eq(siteGame.siteId, input.siteId),
+        eq(siteGame.status, SiteGameStatus.PUBLISHED),
+        eq(siteGameLocale.status, SiteContentStatus.PUBLISHED),
+        eq(game.status, GameStatus.ACTIVE)
+      )
+    )
+    .orderBy(desc(siteGame.sortWeight), desc(siteGame.viewCount))
+    .limit(limit);
+}
