@@ -20,6 +20,12 @@ export type SiteContext = {
   enabledLocales: string[];
 };
 
+const SITE_CONTEXT_TTL_MS = 5 * 60 * 1000;
+const siteContextCache = new Map<
+  string,
+  { value: SiteContext; expiresAt: number }
+>();
+
 function normalizeKey(value: string) {
   return value.trim().toLowerCase();
 }
@@ -34,6 +40,27 @@ function parseLocales(raw: string): string[] {
     // Fall back below. Invalid persisted config should not crash every request.
   }
   return ['en'];
+}
+
+function toSiteContext(row: typeof site.$inferSelect): SiteContext {
+  const enabledLocales = parseLocales(row.enabledLocales);
+  if (!enabledLocales.includes(row.defaultLocale)) {
+    enabledLocales.unshift(row.defaultLocale);
+  }
+
+  return {
+    id: row.id,
+    key: row.key,
+    domain: row.domain,
+    name: row.name,
+    defaultLocale: row.defaultLocale,
+    enabledLocales: [...new Set(enabledLocales)],
+  };
+}
+
+export function clearSiteContextCache(key?: string) {
+  if (key) siteContextCache.delete(normalizeKey(key));
+  else siteContextCache.clear();
 }
 
 export async function getByKey(key: string) {
@@ -52,31 +79,29 @@ export async function getActiveByKey(key: string) {
 }
 
 export async function getCurrentSiteContext(): Promise<SiteContext> {
-  const siteKey = envConfigs.site_key;
+  const siteKey = normalizeKey(envConfigs.site_key || '');
   if (!siteKey) {
     throw new Error(
       'SITE_KEY is required for Game Site Engine public requests. Configure one logical site per deployment.'
     );
   }
 
+  const now = Date.now();
+  const cached = siteContextCache.get(siteKey);
+  if (cached && cached.expiresAt > now) return cached.value;
+
   const row = await getActiveByKey(siteKey);
   if (!row) {
+    siteContextCache.delete(siteKey);
     throw new Error(`Active site not found for SITE_KEY=${siteKey}`);
   }
 
-  const enabledLocales = parseLocales(row.enabledLocales);
-  if (!enabledLocales.includes(row.defaultLocale)) {
-    enabledLocales.unshift(row.defaultLocale);
-  }
-
-  return {
-    id: row.id,
-    key: row.key,
-    domain: row.domain,
-    name: row.name,
-    defaultLocale: row.defaultLocale,
-    enabledLocales: [...new Set(enabledLocales)],
-  };
+  const value = toSiteContext(row);
+  siteContextCache.set(siteKey, {
+    value,
+    expiresAt: now + SITE_CONTEXT_TTL_MS,
+  });
+  return value;
 }
 
 export async function create(input: {
@@ -108,6 +133,7 @@ export async function create(input: {
   };
 
   const [row] = await db().insert(site).values(values).returning();
+  clearSiteContextCache(values.key);
   return row;
 }
 
@@ -143,10 +169,23 @@ export async function update(
 
   if (Object.keys(values).length === 0) return undefined;
 
+  const existing = await db()
+    .select({ key: site.key })
+    .from(site)
+    .where(eq(site.id, id))
+    .limit(1);
+
   const [row] = await db()
     .update(site)
     .set(values)
     .where(eq(site.id, id))
     .returning();
+
+  // Admin changes to domain/name/locales/status must become visible without
+  // waiting for the TTL. Clear both the previous and new key when a rename
+  // occurs. This cache is only an isolate-local optimization, never a source of
+  // truth.
+  if (existing[0]?.key) clearSiteContextCache(existing[0].key);
+  if (row?.key) clearSiteContextCache(row.key);
   return row;
 }
