@@ -1,22 +1,24 @@
 import { SiteRuntime } from '@/components/game-site/site-runtime';
 import { Link } from '@/core/i18n/navigation';
-
-export type SiteFooterSocialLink = {
-  name?: string;
-  displayName?: string;
-  url: string;
-};
+import type {
+  PublicAdsConfig,
+  PublicAnalyticsConfig,
+  PublicFooterConfig,
+  PublicSocialLink,
+} from '@/modules/site-settings/service';
 
 export function SiteFooter({
   siteName,
   socialLinks = [],
+  footer,
   analytics,
   ads,
 }: {
   siteName: string;
-  socialLinks?: SiteFooterSocialLink[];
-  analytics?: Record<string, unknown>;
-  ads?: Record<string, unknown>;
+  socialLinks?: PublicSocialLink[];
+  footer?: PublicFooterConfig;
+  analytics?: PublicAnalyticsConfig;
+  ads?: PublicAdsConfig;
 }) {
   return (
     <>
@@ -27,7 +29,8 @@ export function SiteFooter({
               {siteName}
             </Link>
             <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-6">
-              Play browser games and discover guides, updates, and related content.
+              {footer?.description ||
+                'Play browser games and discover guides, updates, and related content.'}
             </p>
           </div>
 
