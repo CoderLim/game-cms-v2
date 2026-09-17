@@ -1,9 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import {
-  GamePlayer,
-  type GamePlayerSettings,
-} from '@/components/game-site/game-player';
+import { GamePlayer } from '@/components/game-site/game-player';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { getPublishedBySlug } from '@/modules/site-games/service';
 import { getPublicSiteConfig } from '@/modules/site-settings/service';
@@ -49,7 +46,7 @@ function EmbedPage() {
             embedType: game.embedType,
             aspectRatio: game.aspectRatio,
           }}
-          settings={publicConfig.gamePlayer as GamePlayerSettings}
+          settings={publicConfig.gamePlayer}
         />
       </div>
     </main>
