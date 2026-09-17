@@ -1,4 +1,5 @@
 import { Link } from '@/core/i18n/navigation';
+import type { PublicNavigationItem } from '@/modules/site-settings/service';
 
 export type SiteHeaderCategory = {
   slug: string;
@@ -8,9 +9,11 @@ export type SiteHeaderCategory = {
 export function SiteHeader({
   siteName,
   categories = [],
+  navigation = [],
 }: {
   siteName: string;
   categories?: SiteHeaderCategory[];
+  navigation?: PublicNavigationItem[];
 }) {
   return (
     <header className="bg-background/95 border-border sticky top-0 z-40 border-b backdrop-blur">
@@ -18,19 +21,26 @@ export function SiteHeader({
         <Link href="/" className="text-foreground text-lg font-bold tracking-tight">
           {siteName}
         </Link>
-        {categories.length > 0 ? (
-          <nav className="hidden min-w-0 flex-1 items-center gap-1 overflow-x-auto md:flex">
-            {categories.slice(0, 8).map((category) => (
-              <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                className="text-muted-foreground hover:bg-muted hover:text-foreground shrink-0 rounded-lg px-3 py-1.5 text-sm transition"
-              >
-                {category.title}
-              </Link>
-            ))}
-          </nav>
-        ) : null}
+        <nav className="hidden min-w-0 flex-1 items-center gap-1 overflow-x-auto md:flex">
+          {navigation.map((item) => (
+            <Link
+              key={`${item.href}:${item.label}`}
+              href={item.href}
+              className="text-muted-foreground hover:bg-muted hover:text-foreground shrink-0 rounded-lg px-3 py-1.5 text-sm transition"
+            >
+              {item.label}
+            </Link>
+          ))}
+          {categories.slice(0, 8).map((category) => (
+            <Link
+              key={category.slug}
+              href={`/category/${category.slug}`}
+              className="text-muted-foreground hover:bg-muted hover:text-foreground shrink-0 rounded-lg px-3 py-1.5 text-sm transition"
+            >
+              {category.title}
+            </Link>
+          ))}
+        </nav>
       </div>
     </header>
   );
