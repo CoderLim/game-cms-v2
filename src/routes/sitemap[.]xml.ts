@@ -1,6 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { listPublished as listCategories } from '@/modules/categories/service';
+import {
+  listPublished as listPosts,
+  publicPathForPost,
+  SitePostType,
+} from '@/modules/site-posts/service';
 import { listIndexable as listGames } from '@/modules/site-games/public';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { localizeUrl } from '@/paraglide/runtime.js';
@@ -78,7 +83,7 @@ export const Route = createFileRoute('/sitemap.xml')({
 
         const localeData = await Promise.all(
           site.enabledLocales.map(async (locale) => {
-            const [games, categories] = await Promise.all([
+            const [games, categories, posts] = await Promise.all([
               listGames({ siteId: site.id, locale, limit: 5000 }),
               listCategories({
                 siteId: site.id,
@@ -86,8 +91,14 @@ export const Route = createFileRoute('/sitemap.xml')({
                 indexableOnly: true,
                 limit: 500,
               }),
+              listPosts({
+                siteId: site.id,
+                locale,
+                indexableOnly: true,
+                limit: 1000,
+              }),
             ]);
-            return { locale, games, categories };
+            return { locale, games, categories, posts };
           })
         );
 
@@ -175,6 +186,75 @@ export const Route = createFileRoute('/sitemap.xml')({
           });
         }
 
+        const postGroups = new Map<
+          string,
+          {
+            alternates: Alternate[];
+            updatedAt: Date | string | null;
+          }
+        >();
+        const blogLocales = new Set<string>();
+        const guideLocales = new Set<string>();
+
+        for (const { locale, posts } of localeData) {
+          for (const post of posts) {
+            if (post.type === SitePostType.PAGE) continue;
+            if (post.type === SitePostType.GUIDE) guideLocales.add(locale);
+            else blogLocales.add(locale);
+
+            const group = postGroups.get(post.sitePostId) || {
+              alternates: [],
+              updatedAt: post.updatedAt,
+            };
+            group.alternates.push({
+              locale,
+              path: publicPathForPost(post.type, post.slug),
+            });
+            if (
+              post.updatedAt &&
+              (!group.updatedAt ||
+                new Date(post.updatedAt) > new Date(group.updatedAt))
+            ) {
+              group.updatedAt = post.updatedAt;
+            }
+            postGroups.set(post.sitePostId, group);
+          }
+        }
+
+        for (const group of postGroups.values()) {
+          const primary =
+            group.alternates.find(
+              (item) => item.locale === site.defaultLocale
+            ) || group.alternates[0];
+          if (!primary) continue;
+          entries.push({
+            path: primary.path,
+            locale: primary.locale,
+            alternates: group.alternates,
+            lastModified: group.updatedAt,
+            priority: primary.path.startsWith('/guides/') ? 0.8 : 0.7,
+            changeFrequency: 'monthly',
+          });
+        }
+
+        const addIndexEntry = (path: string, localeSet: Set<string>) => {
+          const alternates = [...localeSet].map((locale) => ({ locale, path }));
+          const primary =
+            alternates.find((item) => item.locale === site.defaultLocale) ||
+            alternates[0];
+          if (!primary) return;
+          entries.push({
+            path,
+            locale: primary.locale,
+            alternates,
+            priority: 0.7,
+            changeFrequency: 'weekly',
+          });
+        };
+
+        addIndexEntry('/blog', blogLocales);
+        addIndexEntry('/guides', guideLocales);
+
         const xml = [
           '<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
@@ -186,7 +266,8 @@ export const Route = createFileRoute('/sitemap.xml')({
         return new Response(xml, {
           headers: {
             'Content-Type': 'application/xml; charset=utf-8',
-            'Cache-Control': 'public, max-age=300, s-maxage=1800, stale-while-revalidate=86400',
+            'Cache-Control':
+              'public, max-age=300, s-maxage=1800, stale-while-revalidate=86400',
           },
         });
       },
