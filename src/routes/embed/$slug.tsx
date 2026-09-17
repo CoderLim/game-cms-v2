@@ -1,8 +1,12 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { GamePlayer } from '@/components/game-site/game-player';
+import {
+  GamePlayer,
+  type GamePlayerSettings,
+} from '@/components/game-site/game-player';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { getPublishedBySlug } from '@/modules/site-games/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale } from '@/paraglide/runtime.js';
 
@@ -19,7 +23,8 @@ export const Route = createFileRoute('/embed/$slug')({
     });
     if (!game) throw notFound();
 
-    return { game };
+    const publicConfig = await getPublicSiteConfig(site.id);
+    return { game, publicConfig };
   },
   head: () => ({
     meta: [
@@ -31,7 +36,7 @@ export const Route = createFileRoute('/embed/$slug')({
 });
 
 function EmbedPage() {
-  const { game } = Route.useLoaderData();
+  const { game, publicConfig } = Route.useLoaderData();
 
   return (
     <main className="min-h-screen bg-black p-0">
@@ -44,6 +49,7 @@ function EmbedPage() {
             embedType: game.embedType,
             aspectRatio: game.aspectRatio,
           }}
+          settings={publicConfig.gamePlayer as GamePlayerSettings}
         />
       </div>
     </main>
