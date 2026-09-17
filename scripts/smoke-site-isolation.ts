@@ -2,6 +2,7 @@ import * as games from '../src/modules/games/service';
 import { findCrossSiteDuplicateGameContent } from '../src/modules/site-games/duplicate-content';
 import * as siteGames from '../src/modules/site-games/service';
 import * as sitePosts from '../src/modules/site-posts/service';
+import * as siteContent from '../src/modules/sites/content';
 import * as sites from '../src/modules/sites/service';
 
 async function main() {
@@ -16,7 +17,7 @@ async function main() {
       domain: 'isolation-b.example.test',
       name: 'Isolation B',
       defaultLocale: 'en',
-      enabledLocales: ['en'],
+      enabledLocales: ['en', 'es'],
     });
   }
 
@@ -65,6 +66,33 @@ async function main() {
   }
   if (siteBGame.title !== 'Site B Demo Game') {
     throw new Error(`Site B game content mismatch: ${siteBGame.title}`);
+  }
+
+  // Enabled locale is only a capability flag. A non-default homepage must not
+  // become public/hreflang-eligible until its own site_locale row is published.
+  await siteContent.upsert({
+    siteId: siteB.id,
+    locale: 'en',
+    status: siteContent.SiteLocaleStatus.PUBLISHED,
+    metaTitle: 'Isolation B Home',
+  });
+  await siteContent.upsert({
+    siteId: siteB.id,
+    locale: 'es',
+    status: siteContent.SiteLocaleStatus.DRAFT,
+    metaTitle: 'Isolation B Inicio Draft',
+  });
+
+  const [publishedHomeLocales, draftSpanishHome] = await Promise.all([
+    siteContent.listPublishedLocales(siteB.id),
+    siteContent.getPublished({ siteId: siteB.id, locale: 'es' }),
+  ]);
+  const publishedLocaleCodes = publishedHomeLocales.map((item) => item.locale);
+  if (!publishedLocaleCodes.includes('en')) {
+    throw new Error('Published default homepage locale was not discoverable');
+  }
+  if (publishedLocaleCodes.includes('es') || draftSpanishHome) {
+    throw new Error('Draft non-default homepage locale leaked into public locale set');
   }
 
   // Separate rows are necessary but not sufficient for SEO uniqueness. Prove
@@ -157,7 +185,7 @@ async function main() {
   if (guideB?.title !== 'Site B Guide') throw new Error('Site B post isolation failed');
 
   console.log(
-    'Cross-site Game/Post isolation + duplicate-content guard smoke test passed'
+    'Cross-site Game/Post isolation + homepage locale publishing + duplicate-content guard smoke test passed'
   );
 }
 
