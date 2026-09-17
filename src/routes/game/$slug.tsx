@@ -1,15 +1,19 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { MarkdownContent } from '@/components/markdown-content';
 import { GameCard } from '@/components/game-site/game-card';
 import { GamePlayer } from '@/components/game-site/game-player';
+import { GameRating } from '@/components/game-site/game-rating';
+import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { SiteHeader } from '@/components/game-site/site-header';
-import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
+import { MarkdownContent } from '@/components/markdown-content';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { listPublishedLocales } from '@/modules/site-games/locales';
-import { listPublished } from '@/modules/site-games/service';
-import { getPublishedBySlug } from '@/modules/site-games/service';
+import {
+  getPublishedBySlug,
+  listPublished,
+} from '@/modules/site-games/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
+import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
 function siteOrigin(domain: string) {
   return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
@@ -102,6 +106,8 @@ function GamePage() {
     <div className="bg-background text-foreground min-h-screen">
       <SiteHeader siteName={site.name} categories={categories} />
       <main className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
+        <GameViewTracker siteGameId={game.siteGameId} />
+
         <div className="mb-5">
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
             {game.title}
@@ -121,6 +127,14 @@ function GamePage() {
             aspectRatio: game.aspectRatio,
           }}
         />
+
+        <div className="mx-auto max-w-4xl">
+          <GameRating
+            siteGameId={game.siteGameId}
+            initialLikes={game.likeCount}
+            initialDislikes={game.dislikeCount}
+          />
+        </div>
 
         <article className="mx-auto mt-10 max-w-4xl space-y-9">
           {game.description ? (
