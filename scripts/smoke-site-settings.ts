@@ -42,4 +42,18 @@ const validNavigation = validatePublicSiteSetting('navigation', [
 ]);
 if (validNavigation) throw new Error(validNavigation);
 
+const invalidNavigation = validatePublicSiteSetting('navigation', [
+  { label: 'Bad', href: 'javascript:alert(1)' },
+]);
+if (!invalidNavigation) {
+  throw new Error('Expected unsafe navigation href to be rejected');
+}
+
+const protocolRelativeNavigation = validatePublicSiteSetting('navigation', [
+  { label: 'Bad', href: '//evil.example.com' },
+]);
+if (!protocolRelativeNavigation) {
+  throw new Error('Expected protocol-relative navigation href to be rejected');
+}
+
 console.log('Public site settings validation smoke passed');
