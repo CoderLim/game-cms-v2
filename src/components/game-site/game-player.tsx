@@ -5,7 +5,18 @@ export type GamePlayerData = {
   aspectRatio: string | null;
 };
 
-export function GamePlayer({ game }: { game: GamePlayerData }) {
+export type GamePlayerSettings = {
+  allowFullscreen?: boolean;
+  autoplay?: boolean;
+};
+
+export function GamePlayer({
+  game,
+  settings,
+}: {
+  game: GamePlayerData;
+  settings?: GamePlayerSettings;
+}) {
   if (!game.embedUrl) {
     return (
       <div className="bg-muted text-muted-foreground flex min-h-[420px] items-center justify-center rounded-2xl text-sm">
@@ -36,6 +47,18 @@ export function GamePlayer({ game }: { game: GamePlayerData }) {
     );
   }
 
+  const allowFullscreen = settings?.allowFullscreen !== false;
+  const allowAutoplay = settings?.autoplay !== false;
+  const permissions = [
+    allowAutoplay ? 'autoplay' : null,
+    allowFullscreen ? 'fullscreen' : null,
+    'gamepad',
+    'clipboard-read',
+    'clipboard-write',
+  ]
+    .filter(Boolean)
+    .join('; ');
+
   return (
     <div
       className="bg-black border-border w-full overflow-hidden rounded-2xl border"
@@ -45,8 +68,8 @@ export function GamePlayer({ game }: { game: GamePlayerData }) {
         src={game.embedUrl}
         title={game.title}
         loading="eager"
-        allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write"
-        allowFullScreen
+        allow={permissions}
+        allowFullScreen={allowFullscreen}
         className="h-full w-full border-0"
         referrerPolicy="strict-origin-when-cross-origin"
       />
