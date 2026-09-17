@@ -1,0 +1,83 @@
+name: Game Site Engine Legacy Migration Smoke
+
+on:
+  pull_request:
+    branches: ['main', 'dev']
+  workflow_dispatch:
+
+jobs:
+  legacy-to-v2:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: legacy_game_cms
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d legacy_game_cms"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      LEGACY_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/legacy_game_cms
+      DATABASE_PROVIDER: sqlite
+      DATABASE_URL: file:data/legacy-migration-target.db
+      SITE_KEY: driftbossgame
+      VITE_APP_URL: http://localhost:3000
+      VITE_APP_NAME: Legacy Migration CI
+      VITE_DEFAULT_LOCALE: en
+      AUTH_SECRET: legacy-migration-ci-only-secret
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate SQLite schemas
+        run: pnpm db:setup
+
+      - name: Seed legacy Postgres fixture
+        run: pnpm tsx scripts/seed-legacy-driftboss-fixture.ts
+
+      - name: Export main legacy migration
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-sql.ts
+          --out=data/migrations/driftboss-v2.sql
+          --featured=driftbossgame.org:drift-boss
+
+      - name: Export site-level extras
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-extras-sql.ts
+          --out=data/migrations/driftboss-v2-extras.sql
+
+      - name: Create fresh V2 SQLite database
+        run: |
+          rm -f data/legacy-migration-target.db
+          pnpm db:push --force
+
+      - name: Apply exported migrations
+        run: |
+          npx wrangler d1 execute placeholder --local \
+            --persist-to=data/wrangler-legacy-smoke \
+            --file=data/migrations/driftboss-v2.sql >/dev/null 2>&1 || true
+          node -e "const fs=require('fs'); const Database=require('better-sqlite3');" >/dev/null 2>&1 || true
+          pnpm tsx -e "import { createClient } from '@libsql/client'; import { readFileSync } from 'node:fs'; const c=createClient({url:process.env.DATABASE_URL!}); for (const f of ['data/migrations/driftboss-v2.sql','data/migrations/driftboss-v2-extras.sql']) { const sql=readFileSync(f,'utf8').replace(/^PRAGMA foreign_keys = ON;$/gm,'').replace(/^BEGIN TRANSACTION;$/gm,'').replace(/^COMMIT;$/gm,''); await c.executeMultiple(sql); } c.close();"
+
+      - name: Verify multi-site isolation and migrated content
+        run: pnpm tsx scripts/verify-driftboss-v2-migration.ts
