@@ -2,31 +2,51 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createFileRoute } from '@tanstack/react-router';
 
-import { getAuth } from '@/core/auth';
 import { envConfigs } from '@/config';
-import { getStorage } from '@/modules/storage/service';
+import { getAuth } from '@/core/auth';
 import { md5 } from '@/lib/hash';
 import { enforceMinIntervalRateLimit } from '@/lib/rate-limit';
 import { respData, respErr } from '@/lib/resp';
+import { getStorage } from '@/modules/storage/service';
 
-const extFromMime = (mimeType: string) => {
-  const map: Record<string, string> = {
-    'image/jpeg': 'jpg',
-    'image/jpg': 'jpg',
-    'image/png': 'png',
-    'image/webp': 'webp',
-    'image/gif': 'gif',
-    'image/svg+xml': 'svg',
-    'image/avif': 'avif',
-    'image/heic': 'heic',
-    'image/heif': 'heif',
-  };
-  return map[mimeType] || '';
+const SAFE_IMAGE_TYPES: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+  'image/gif': 'gif',
+  'image/avif': 'avif',
 };
 
-// Cap for the no-storage local-disk fallback (dev). Configurable via INLINE_IMAGE_MAX_KB.
-const INLINE_MAX_BYTES =
+// Global upload cap, enforced before reading a File into Worker memory. The
+// existing config name is retained for backward compatibility.
+const IMAGE_MAX_BYTES =
   (Number(envConfigs.inline_image_max_kb) || 10240) * 1024;
+
+function hasExpectedSignature(type: string, body: Uint8Array) {
+  if (type === 'image/jpeg' || type === 'image/jpg') {
+    return body.length >= 3 && body[0] === 0xff && body[1] === 0xd8 && body[2] === 0xff;
+  }
+  if (type === 'image/png') {
+    const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+    return signature.every((byte, index) => body[index] === byte);
+  }
+  if (type === 'image/gif') {
+    const header = new TextDecoder().decode(body.slice(0, 6));
+    return header === 'GIF87a' || header === 'GIF89a';
+  }
+  if (type === 'image/webp') {
+    const riff = new TextDecoder().decode(body.slice(0, 4));
+    const webp = new TextDecoder().decode(body.slice(8, 12));
+    return riff === 'RIFF' && webp === 'WEBP';
+  }
+  if (type === 'image/avif') {
+    const boxType = new TextDecoder().decode(body.slice(4, 8));
+    const brand = new TextDecoder().decode(body.slice(8, 12));
+    return boxType === 'ftyp' && ['avif', 'avis'].includes(brand);
+  }
+  return false;
+}
 
 async function POST({ request }: { request: Request }) {
   const limited = enforceMinIntervalRateLimit(request, {
@@ -53,33 +73,35 @@ async function POST({ request }: { request: Request }) {
     }> = [];
 
     for (const file of files) {
-      if (!file.type.startsWith('image/')) {
-        return respErr(`File ${file.name} is not an image`);
+      const ext = SAFE_IMAGE_TYPES[file.type];
+      if (!ext) {
+        return respErr(
+          `File ${file.name} must be JPEG, PNG, WebP, GIF, or AVIF. SVG and other active/unsupported image formats are rejected.`
+        );
+      }
+
+      if (file.size <= 0 || file.size > IMAGE_MAX_BYTES) {
+        const limitKb = Math.round(IMAGE_MAX_BYTES / 1024);
+        return respErr(
+          `Image ${file.name} is too large or empty (${Math.round(file.size / 1024)}KB; max ${limitKb}KB).`
+        );
       }
 
       const arrayBuffer = await file.arrayBuffer();
       const body = new Uint8Array(arrayBuffer);
+      if (!hasExpectedSignature(file.type, body)) {
+        return respErr(`File ${file.name} does not match its declared image type`);
+      }
 
       const digest = md5(body);
-      const ext =
-        (extFromMime(file.type) || file.name.split('.').pop() || 'bin').replace(
-          /[^a-zA-Z0-9]/g,
-          ''
-        ) || 'bin';
       // R2Provider prepends its own uploadPath (default `uploads`), so the object
       // key is the bare filename. The local fallback uses `public/uploads/<file>`.
       const objectKey = `${digest}.${ext}`;
 
       // No storage configured → persist to public/uploads and return a short
-      // local URL. Avoids inlining a giant base64 data URL into DB columns (some
-      // are varchar(255)). Configure R2 (admin → Storage) for production.
+      // local URL. Production Workers should configure R2 because the local
+      // filesystem is not durable across deployments/isolates.
       if (!storage) {
-        if (body.length > INLINE_MAX_BYTES) {
-          const limitKb = Math.round(INLINE_MAX_BYTES / 1024);
-          return respErr(
-            `Image too large (${(body.length / 1024).toFixed(0)}KB > ${limitKb}KB). Configure storage or use a smaller image.`
-          );
-        }
         const dir = path.join(process.cwd(), 'public', 'uploads');
         await mkdir(dir, { recursive: true });
         await writeFile(path.join(dir, objectKey), body);
