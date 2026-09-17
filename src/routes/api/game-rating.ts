@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import { enforceMinIntervalRateLimit } from '@/lib/rate-limit';
 import { incrementRating } from '@/modules/site-games/mutations';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 
@@ -20,6 +21,13 @@ async function POST({ request }: { request: Request }) {
         { status: 400 }
       );
     }
+
+    const limited = enforceMinIntervalRateLimit(request, {
+      intervalMs: 3000,
+      keyPrefix: 'game-rating',
+      extraKey: siteGameId,
+    });
+    if (limited) return limited;
 
     const name = cookieName(siteGameId);
     const cookies = request.headers.get('cookie') || '';
@@ -45,6 +53,7 @@ async function POST({ request }: { request: Request }) {
 
     return Response.json(result, {
       headers: {
+        'Cache-Control': 'no-store',
         'Set-Cookie': `${name}=${vote}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`,
       },
     });
