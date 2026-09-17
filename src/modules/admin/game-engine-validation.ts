@@ -112,6 +112,32 @@ export const siteGameContentSchema = z.object({
   faq: optionalText(200_000),
 });
 
+export const attachSiteCategorySchema = z.object({
+  siteId: identifier,
+  categoryId: identifier,
+  status: publishStatusSchema.optional(),
+  indexable: z.boolean().optional(),
+  sortWeight: z.number().int().min(-1_000_000).max(1_000_000).optional(),
+});
+
+export const updateSiteCategorySchema = attachSiteCategorySchema
+  .omit({ categoryId: true })
+  .partial()
+  .extend({ id: identifier, siteId: identifier });
+
+export const siteCategoryContentSchema = z.object({
+  siteId: identifier,
+  siteCategoryId: identifier,
+  locale,
+  slug,
+  title: z.string().trim().min(1).max(240),
+  status: publishStatusSchema.optional(),
+  metaTitle: optionalText(300),
+  metaDescription: optionalText(1000),
+  description: optionalText(100_000),
+  content: optionalText(500_000),
+});
+
 const postLocaleFields = {
   locale: locale.optional(),
   slug: slug.optional(),
