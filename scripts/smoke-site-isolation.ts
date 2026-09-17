@@ -1,3 +1,7 @@
+import { eq } from 'drizzle-orm';
+
+import { site as siteTable } from '../src/config/db/game-schema';
+import { db } from '../src/core/db';
 import * as games from '../src/modules/games/service';
 import { findCrossSiteDuplicateGameContent } from '../src/modules/site-games/duplicate-content';
 import * as siteGames from '../src/modules/site-games/service';
@@ -184,8 +188,37 @@ async function main() {
   if (guideA?.title !== 'Site A Guide') throw new Error('Site A post isolation failed');
   if (guideB?.title !== 'Site B Guide') throw new Error('Site B post isolation failed');
 
+  // Corrupt persisted locale JSON deliberately. The runtime must fail closed to
+  // the site's own default locale rather than inventing English as a fallback.
+  let localeFallbackSite = await sites.getByKey('locale-fallback');
+  if (!localeFallbackSite) {
+    localeFallbackSite = await sites.create({
+      key: 'locale-fallback',
+      domain: 'locale-fallback.example.test',
+      name: 'Locale Fallback',
+      defaultLocale: 'zh',
+      enabledLocales: ['zh'],
+    });
+  }
+  await db()
+    .update(siteTable)
+    .set({ enabledLocales: '{not-json' })
+    .where(eq(siteTable.id, localeFallbackSite.id));
+  sites.clearSiteContextCache('locale-fallback');
+
+  const fallbackContext = await sites.getSiteContextByKey('locale-fallback');
+  if (
+    fallbackContext.defaultLocale !== 'zh' ||
+    fallbackContext.enabledLocales.length !== 1 ||
+    fallbackContext.enabledLocales[0] !== 'zh'
+  ) {
+    throw new Error(
+      `Invalid locale config created phantom locales: ${fallbackContext.enabledLocales.join(',')}`
+    );
+  }
+
   console.log(
-    'Cross-site Game/Post isolation + homepage locale publishing + duplicate-content guard smoke test passed'
+    'Cross-site Game/Post isolation + homepage locale publishing + duplicate-content + locale fallback smoke test passed'
   );
 }
 
