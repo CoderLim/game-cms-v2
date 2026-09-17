@@ -2,6 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr, respPage } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  attachSiteCategorySchema,
+  parseBody,
+  updateSiteCategorySchema,
+} from '@/modules/admin/game-engine-validation';
 import { listSiteCategories } from '@/modules/categories/admin';
 import { updateSiteCategory } from '@/modules/categories/mutations';
 import {
@@ -40,15 +45,12 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.categoryId) {
-      return respErr('siteId and categoryId are required');
-    }
+    const body = parseBody(attachSiteCategorySchema, await request.json());
 
     const row = await attachCategory({
       siteId: body.siteId,
       categoryId: body.categoryId,
-      status: body.status,
+      status: body.status as SiteCategoryStatus | undefined,
       indexable: body.indexable,
       sortWeight: body.sortWeight,
     });
@@ -61,10 +63,7 @@ async function POST({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.id) {
-      return respErr('siteId and id are required');
-    }
+    const body = parseBody(updateSiteCategorySchema, await request.json());
 
     const row = await updateSiteCategory({
       siteId: body.siteId,
