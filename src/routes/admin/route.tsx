@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import {
   CreditCard,
+  FileText,
   FolderOpen,
   Gamepad2,
   Globe2,
@@ -38,6 +39,7 @@ function AdminLayout() {
         { href: '/admin/game-catalog', label: 'Game Catalog', icon: Library },
         { href: '/admin/site-games', label: 'Site Games', icon: Gamepad2 },
         { href: '/admin/game-categories', label: 'Game Categories', icon: FolderOpen },
+        { href: '/admin/site-posts', label: 'Posts & Guides', icon: FileText },
         { href: '/admin/site-settings', label: 'Site Settings', icon: Settings },
       ],
     },
