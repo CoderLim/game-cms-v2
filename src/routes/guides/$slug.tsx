@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { Calendar } from 'lucide-react';
 
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
 import { StructuredData } from '@/components/seo/structured-data';
@@ -11,6 +12,7 @@ import {
   listPublishedLocales,
   SitePostType,
 } from '@/modules/site-posts/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -32,9 +34,10 @@ export const Route = createFileRoute('/guides/$slug')({
     });
     if (!guide) throw notFound();
 
-    const [categories, availableLocales] = await Promise.all([
+    const [categories, availableLocales, publicConfig] = await Promise.all([
       listCategories({ siteId: site.id, locale, limit: 8 }),
       listPublishedLocales({ siteId: site.id, sitePostId: guide.sitePostId }),
+      getPublicSiteConfig(site.id),
     ]);
 
     const origin = siteOrigin(site.domain);
@@ -54,6 +57,7 @@ export const Route = createFileRoute('/guides/$slug')({
       availableLocales,
       canonical,
       description,
+      publicConfig,
     };
   },
   head: ({ loaderData }) => {
@@ -116,12 +120,16 @@ export const Route = createFileRoute('/guides/$slug')({
 });
 
 function GuidePage() {
-  const { site, locale, guide, categories, canonical, description } =
-    Route.useLoaderData();
+  const {
+    site,
+    locale,
+    guide,
+    categories,
+    canonical,
+    description,
+    publicConfig,
+  } = Route.useLoaderData();
 
-  // The editor stores free-form guide Markdown rather than structured steps,
-  // so TechArticle is safer than inventing HowToStep objects that may not
-  // correspond to the actual content.
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -191,6 +199,10 @@ function GuidePage() {
           <MarkdownContent content={guide.content || ''} />
         </article>
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
