@@ -2,10 +2,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { AdSlot } from '@/components/game-site/ad-slot';
 import { GameCard } from '@/components/game-site/game-card';
-import {
-  GamePlayer,
-  type GamePlayerSettings,
-} from '@/components/game-site/game-player';
+import { GamePlayer } from '@/components/game-site/game-player';
 import { GameRating } from '@/components/game-site/game-rating';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { SiteFooter } from '@/components/game-site/site-footer';
@@ -162,7 +159,11 @@ function GamePage() {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <StructuredData data={structuredData} />
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
         <GameViewTracker siteGameId={game.siteGameId} />
 
@@ -190,7 +191,7 @@ function GamePage() {
             embedType: game.embedType,
             aspectRatio: game.aspectRatio,
           }}
-          settings={publicConfig.gamePlayer as GamePlayerSettings}
+          settings={publicConfig.gamePlayer}
         />
 
         <div className="mx-auto max-w-4xl">
@@ -263,6 +264,7 @@ function GamePage() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
