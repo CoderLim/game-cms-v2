@@ -168,7 +168,11 @@ function BlogPostPage() {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <StructuredData data={structuredData} />
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="px-4 py-10 md:px-6 md:py-14">
         <article className="mx-auto max-w-3xl">
           <header className="border-border mb-8 border-b pb-7">
@@ -205,6 +209,7 @@ function BlogPostPage() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
