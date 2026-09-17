@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { GameCard } from '@/components/game-site/game-card';
 import { SiteHeader } from '@/components/game-site/site-header';
+import { Link } from '@/core/i18n/navigation';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { getFeatured, listHot } from '@/modules/site-games/public';
 import { listPublished as listGames } from '@/modules/site-games/service';
@@ -83,15 +84,15 @@ function HomePage() {
                 <p className="text-muted-foreground mt-3 max-w-xl leading-7">
                   Play {featured.title} instantly in your browser.
                 </p>
-                <a
+                <Link
                   href={`/game/${featured.slug}`}
                   className="bg-primary text-primary-foreground mt-6 inline-flex rounded-xl px-5 py-2.5 font-semibold"
                 >
                   Play Now
-                </a>
+                </Link>
               </div>
               {featured.imageUrl ? (
-                <a
+                <Link
                   href={`/game/${featured.slug}`}
                   className="bg-muted aspect-[4/3] overflow-hidden rounded-2xl"
                 >
@@ -100,7 +101,7 @@ function HomePage() {
                     alt={featured.title}
                     className="h-full w-full object-cover"
                   />
-                </a>
+                </Link>
               ) : null}
             </div>
           </section>
