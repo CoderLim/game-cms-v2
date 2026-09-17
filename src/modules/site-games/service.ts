@@ -1,4 +1,4 @@
-import { and, desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, ne } from 'drizzle-orm';
 
 import {
   game,
@@ -26,6 +26,13 @@ function normalizeSlug(value: string) {
   return value.trim().toLowerCase();
 }
 
+async function clearOtherFeaturedGames(siteId: string, keepId: string) {
+  await db()
+    .update(siteGame)
+    .set({ featured: false })
+    .where(and(eq(siteGame.siteId, siteId), ne(siteGame.id, keepId)));
+}
+
 export async function attachGame(input: {
   siteId: string;
   gameId: string;
@@ -41,7 +48,10 @@ export async function attachGame(input: {
     gameId: input.gameId,
     status: input.status || SiteGameStatus.DRAFT,
     indexable: input.indexable ?? false,
-    featured: input.featured ?? false,
+    featured:
+      (input.status || SiteGameStatus.DRAFT) === SiteGameStatus.PUBLISHED
+        ? (input.featured ?? false)
+        : false,
     hot: input.hot ?? false,
     sortWeight: input.sortWeight ?? 0,
     publishedAt:
@@ -49,6 +59,7 @@ export async function attachGame(input: {
   };
 
   const [row] = await db().insert(siteGame).values(values).returning();
+  if (row?.featured) await clearOtherFeaturedGames(row.siteId, row.id);
   return row;
 }
 
@@ -76,10 +87,15 @@ export async function updateSiteGame(
     values.status = input.status;
     if (input.status === SiteGameStatus.PUBLISHED) {
       values.publishedAt = new Date();
+    } else {
+      // A draft/archived row must never remain the site's homepage feature.
+      values.featured = false;
     }
   }
   if (input.indexable !== undefined) values.indexable = input.indexable;
-  if (input.featured !== undefined) values.featured = input.featured;
+  if (input.featured !== undefined && values.featured !== false) {
+    values.featured = input.featured;
+  }
   if (input.hot !== undefined) values.hot = input.hot;
   if (input.sortWeight !== undefined) values.sortWeight = input.sortWeight;
 
@@ -90,6 +106,8 @@ export async function updateSiteGame(
     .set(values)
     .where(eq(siteGame.id, id))
     .returning();
+
+  if (row?.featured) await clearOtherFeaturedGames(row.siteId, row.id);
   return row;
 }
 
@@ -261,13 +279,4 @@ export async function listPublished(input: {
     )
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.publishedAt))
     .limit(limit);
-}
-
-export async function incrementView(siteGameId: string) {
-  const [row] = await db()
-    .update(siteGame)
-    .set({ viewCount: sql`${siteGame.viewCount} + 1` })
-    .where(eq(siteGame.id, siteGameId))
-    .returning({ viewCount: siteGame.viewCount });
-  return row?.viewCount;
 }
