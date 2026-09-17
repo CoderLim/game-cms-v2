@@ -17,6 +17,7 @@ interface SiteSettingsPayload {
   navigation: string;
   footer: string;
   game_player: string;
+  social_links: string;
 }
 
 const EMPTY_SETTINGS: SiteSettingsPayload = {
@@ -25,6 +26,7 @@ const EMPTY_SETTINGS: SiteSettingsPayload = {
   navigation: '',
   footer: '',
   game_player: '',
+  social_links: '',
 };
 
 const labels: Record<keyof SiteSettingsPayload, string> = {
@@ -33,6 +35,7 @@ const labels: Record<keyof SiteSettingsPayload, string> = {
   navigation: 'Navigation JSON',
   footer: 'Footer JSON',
   game_player: 'Game player JSON',
+  social_links: 'Social links JSON',
 };
 
 export const Route = createFileRoute('/admin/site-settings')({
@@ -132,9 +135,15 @@ function SiteSettingsPage() {
               </button>
             </div>
             <textarea
-              rows={key === 'navigation' ? 14 : 10}
+              rows={key === 'navigation' || key === 'social_links' ? 14 : 10}
               className="border-input bg-background w-full rounded-md border p-3 font-mono text-xs leading-5"
-              placeholder={key === 'analytics' ? '{\n  "gaId": "G-..."\n}' : '{}'}
+              placeholder={
+                key === 'analytics'
+                  ? '{\n  "gaId": "G-..."\n}'
+                  : key === 'social_links'
+                    ? '[\n  { "name": "YouTube", "url": "https://..." }\n]'
+                    : '{}'
+              }
               value={settings[key]}
               onChange={(event) =>
                 setSettings((current) => ({ ...current, [key]: event.target.value }))
