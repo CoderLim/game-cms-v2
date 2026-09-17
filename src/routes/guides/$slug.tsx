@@ -3,6 +3,7 @@ import { Calendar } from 'lucide-react';
 
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
+import { StructuredData } from '@/components/seo/structured-data';
 import { formatPostDate } from '@/content/posts';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import {
@@ -115,10 +116,44 @@ export const Route = createFileRoute('/guides/$slug')({
 });
 
 function GuidePage() {
-  const { site, locale, guide, categories } = Route.useLoaderData();
+  const { site, locale, guide, categories, canonical, description } =
+    Route.useLoaderData();
+
+  // The editor stores free-form guide Markdown rather than structured steps,
+  // so TechArticle is safer than inventing HowToStep objects that may not
+  // correspond to the actual content.
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: guide.title,
+    url: canonical,
+    description,
+    ...(guide.imageUrl ? { image: guide.imageUrl } : {}),
+    ...(guide.publishedAt
+      ? { datePublished: new Date(guide.publishedAt).toISOString() }
+      : {}),
+    ...(guide.updatedAt
+      ? { dateModified: new Date(guide.updatedAt).toISOString() }
+      : {}),
+    ...(guide.authorName
+      ? {
+          author: {
+            '@type': 'Person',
+            name: guide.authorName,
+          },
+        }
+      : {}),
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: siteOrigin(site.domain),
+    },
+    mainEntityOfPage: canonical,
+  };
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <StructuredData data={structuredData} />
       <SiteHeader siteName={site.name} categories={categories} />
       <main className="px-4 py-10 md:px-6 md:py-14">
         <article className="mx-auto max-w-3xl">
