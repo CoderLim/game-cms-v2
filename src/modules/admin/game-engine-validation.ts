@@ -30,15 +30,21 @@ const optionalUrl = z
 export const siteStatusSchema = z.enum(['active', 'inactive', 'archived']);
 export const gameStatusSchema = z.enum(['active', 'inactive', 'archived']);
 export const publishStatusSchema = z.enum(['draft', 'published', 'archived']);
+export const postTypeSchema = z.enum(['article', 'guide', 'update', 'page']);
 
 export const createSiteSchema = z.object({
-  key: identifier.regex(/^[a-z0-9-]+$/, 'key must use lowercase letters, numbers and hyphens'),
+  key: identifier.regex(
+    /^[a-z0-9-]+$/,
+    'key must use lowercase letters, numbers and hyphens'
+  ),
   domain: z
     .string()
     .trim()
     .min(1)
     .max(253)
-    .transform((value) => value.replace(/^https?:\/\//i, '').replace(/\/$/, '').toLowerCase())
+    .transform((value) =>
+      value.replace(/^https?:\/\//i, '').replace(/\/$/, '').toLowerCase()
+    )
     .refine((value) => !value.includes('/') && value.includes('.'), 'invalid domain'),
   name: z.string().trim().min(1).max(120),
   defaultLocale: locale.default('en'),
@@ -53,7 +59,10 @@ export const updateSiteSchema = createSiteSchema.partial().extend({
 });
 
 export const createGameSchema = z.object({
-  key: identifier.regex(/^[a-z0-9-]+$/, 'key must use lowercase letters, numbers and hyphens'),
+  key: identifier.regex(
+    /^[a-z0-9-]+$/,
+    'key must use lowercase letters, numbers and hyphens'
+  ),
   title: z.string().trim().min(1).max(180),
   description: optionalText(20_000),
   embedUrl: optionalUrl,
@@ -102,6 +111,61 @@ export const siteGameContentSchema = z.object({
   features: optionalText(100_000),
   faq: optionalText(200_000),
 });
+
+const postLocaleFields = {
+  locale: locale.optional(),
+  slug: slug.optional(),
+  title: z.string().trim().min(1).max(240).optional(),
+  contentStatus: publishStatusSchema.optional(),
+  metaTitle: optionalText(300),
+  metaDescription: optionalText(1000),
+  description: optionalText(20_000),
+  imageUrl: optionalUrl,
+  content: optionalText(1_000_000),
+};
+
+export const createSitePostSchema = z
+  .object({
+    siteId: identifier,
+    type: postTypeSchema.optional(),
+    status: publishStatusSchema.optional(),
+    indexable: z.boolean().optional(),
+    featured: z.boolean().optional(),
+    authorName: optionalText(180),
+    ...postLocaleFields,
+  })
+  .superRefine((value, ctx) => {
+    const supplied = [value.locale, value.slug, value.title].filter(Boolean).length;
+    if (supplied !== 0 && supplied !== 3) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'locale, slug and title must be supplied together',
+        path: ['locale'],
+      });
+    }
+  });
+
+export const updateSitePostSchema = z
+  .object({
+    siteId: identifier,
+    sitePostId: identifier,
+    type: postTypeSchema.optional(),
+    status: publishStatusSchema.optional(),
+    indexable: z.boolean().optional(),
+    featured: z.boolean().optional(),
+    authorName: optionalText(180),
+    ...postLocaleFields,
+  })
+  .superRefine((value, ctx) => {
+    const supplied = [value.locale, value.slug, value.title].filter(Boolean).length;
+    if (supplied !== 0 && supplied !== 3) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'locale, slug and title must be supplied together',
+        path: ['locale'],
+      });
+    }
+  });
 
 export function parseBody<T>(schema: z.ZodType<T>, body: unknown): T {
   const result = schema.safeParse(body);
