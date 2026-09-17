@@ -34,12 +34,14 @@ function parseLocales(raw: string): string[] {
   try {
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed)) {
-      return parsed.filter((item): item is string => typeof item === 'string');
+      return parsed.filter(
+        (item): item is string => typeof item === 'string' && item.trim().length > 0
+      );
     }
   } catch {
-    // Fall back below. Invalid persisted config should not crash every request.
+    // Invalid persisted config falls back to the site's default locale below.
   }
-  return ['en'];
+  return [];
 }
 
 function toSiteContext(row: typeof site.$inferSelect): SiteContext {
