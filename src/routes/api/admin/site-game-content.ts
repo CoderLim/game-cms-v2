@@ -2,6 +2,10 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  parseBody,
+  siteGameContentSchema,
+} from '@/modules/admin/game-engine-validation';
 import { getLocaleContent } from '@/modules/site-games/admin';
 import { findCrossSiteDuplicateGameContent } from '@/modules/site-games/duplicate-content';
 import * as siteGameService from '@/modules/site-games/service';
@@ -27,19 +31,11 @@ async function GET({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.siteGameId || !body?.locale) {
-      return respErr('siteId, siteGameId and locale are required');
-    }
-    if (!body?.slug || !body?.title) {
-      return respErr('slug and title are required');
-    }
+    const body = parseBody(siteGameContentSchema, await request.json());
 
-    // Publishing is the boundary that matters for SEO. Drafts may temporarily
-    // duplicate source material while an editor rewrites it, but a published
-    // page must not reuse the same substantial body for the same global game
-    // on another domain.
-    if (body.status === siteGameService.SiteContentStatus.PUBLISHED) {
+    // Publishing is the SEO boundary. Drafts may duplicate temporary source
+    // material, but published copy for the same game must be site-specific.
+    if (body.status === 'published') {
       const duplicate = await findCrossSiteDuplicateGameContent({
         siteId: body.siteId,
         siteGameId: body.siteGameId,
@@ -65,7 +61,7 @@ async function PUT({ request }: { request: Request }) {
       locale: body.locale,
       slug: body.slug,
       title: body.title,
-      status: body.status,
+      status: body.status as siteGameService.SiteContentStatus | undefined,
       metaTitle: body.metaTitle,
       metaDescription: body.metaDescription,
       intro: body.intro,
