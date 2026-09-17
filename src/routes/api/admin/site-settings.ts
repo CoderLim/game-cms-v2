@@ -7,6 +7,7 @@ import {
   PUBLIC_SITE_SETTING_KEYS,
 } from '@/modules/site-settings/public-keys';
 import * as siteSettings from '@/modules/site-settings/service';
+import { validatePublicSiteSetting } from '@/modules/site-settings/validation';
 
 async function GET({ request }: { request: Request }) {
   try {
@@ -42,12 +43,16 @@ async function PUT({ request }: { request: Request }) {
       return respErr('value must be a JSON string or null');
     }
 
+    let parsed: unknown = null;
     if (body.value) {
       try {
-        JSON.parse(body.value);
+        parsed = JSON.parse(body.value);
       } catch {
         return respErr('value must contain valid JSON');
       }
+
+      const validationError = validatePublicSiteSetting(body.key, parsed);
+      if (validationError) return respErr(validationError);
     }
 
     const row = await siteSettings.set({
