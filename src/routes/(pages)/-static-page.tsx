@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 import { notFound, useLoaderData } from '@tanstack/react-router';
 
 import { MarkdownContent } from '@/components/markdown-content';
+import { envConfigs } from '@/config';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import {
   getPublishedBySlug,
@@ -42,6 +43,12 @@ function siteOrigin(domain: string) {
   return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
 }
 
+function allowBundledFallback() {
+  return ['development', 'local', 'test'].includes(
+    (envConfigs.deploy_env || '').toLowerCase()
+  );
+}
+
 type LoaderData = {
   site: Awaited<ReturnType<typeof getCurrentSiteContext>>;
   slug: string;
@@ -54,9 +61,10 @@ type LoaderData = {
 /**
  * Shared route options for legal/info pages.
  *
- * Production content is site-scoped in `site_post` / `site_post_locale`.
- * Bundled MDX remains a development/template fallback so a fresh install can
- * render legal pages before content is entered, but migrated site content wins.
+ * Production/preview content must be site-scoped in `site_post` /
+ * `site_post_locale`. Bundled MDX is only a local/test fallback, otherwise a
+ * missing page returns 404 instead of silently duplicating template content
+ * across multiple domains.
  */
 export function staticPageRouteOptions(slug: string) {
   return {
@@ -86,6 +94,8 @@ export function staticPageRouteOptions(slug: string) {
           localMeta: null,
         };
       }
+
+      if (!allowBundledFallback()) throw notFound();
 
       const localPage = loadLocalPage(slug, locale);
       if (!localPage) throw notFound();
