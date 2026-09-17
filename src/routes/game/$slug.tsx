@@ -6,6 +6,7 @@ import { GameRating } from '@/components/game-site/game-rating';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
+import { StructuredData } from '@/components/seo/structured-data';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { listPublishedLocales } from '@/modules/site-games/locales';
 import {
@@ -39,10 +40,22 @@ export const Route = createFileRoute('/game/$slug')({
       listPublished({ siteId: site.id, locale, limit: 13 }),
     ]);
 
+    const origin = siteOrigin(site.domain);
+    const canonical = localizeUrl(`${origin}/game/${game.slug}`, {
+      locale: locale as any,
+    }).href;
+    const description =
+      game.metaDescription ||
+      game.description ||
+      game.gameDescription ||
+      `Play ${game.title} online.`;
+
     return {
       site,
       locale,
       game,
+      canonical,
+      description,
       categories,
       availableLocales,
       moreGames: moreGames
@@ -52,26 +65,37 @@ export const Route = createFileRoute('/game/$slug')({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { site, locale, game, availableLocales } = loaderData;
+    const {
+      site,
+      locale,
+      game,
+      canonical,
+      description,
+      availableLocales,
+    } = loaderData;
     const origin = siteOrigin(site.domain);
-    const canonical = localizeUrl(`${origin}/game/${game.slug}`, {
-      locale: locale as any,
-    }).href;
+    const title = game.metaTitle || `${game.title} | ${site.name}`;
     const defaultEntry =
       availableLocales.find((entry) => entry.locale === site.defaultLocale) ||
       availableLocales[0];
 
     return {
       meta: [
-        { title: game.metaTitle || `${game.title} | ${site.name}` },
-        {
-          name: 'description',
-          content:
-            game.metaDescription ||
-            game.description ||
-            game.gameDescription ||
-            `Play ${game.title} online.`,
-        },
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:url', content: canonical },
+        ...(game.imageUrl
+          ? [{ property: 'og:image', content: game.imageUrl }]
+          : []),
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        ...(game.imageUrl
+          ? [{ name: 'twitter:image', content: game.imageUrl }]
+          : []),
       ],
       links: [
         { rel: 'canonical', href: canonical },
@@ -100,10 +124,27 @@ export const Route = createFileRoute('/game/$slug')({
 });
 
 function GamePage() {
-  const { site, game, categories, moreGames } = Route.useLoaderData();
+  const { site, game, canonical, description, categories, moreGames } =
+    Route.useLoaderData();
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    url: canonical,
+    description,
+    gamePlatform: 'Web Browser',
+    ...(game.imageUrl ? { image: game.imageUrl } : {}),
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: siteOrigin(site.domain),
+    },
+  };
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <StructuredData data={structuredData} />
       <SiteHeader siteName={site.name} categories={categories} />
       <main className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
         <GameViewTracker siteGameId={game.siteGameId} />
