@@ -2,10 +2,12 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { GameCard } from '@/components/game-site/game-card';
 import { SiteHeader } from '@/components/game-site/site-header';
+import { MarkdownContent } from '@/components/markdown-content';
 import { Link } from '@/core/i18n/navigation';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { getFeatured, listHot } from '@/modules/site-games/public';
 import { listPublished as listGames } from '@/modules/site-games/service';
+import { getPublished as getSiteContent } from '@/modules/sites/content';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -19,29 +21,39 @@ export const Route = createFileRoute('/')({
     const locale = getLocale();
     if (!site.enabledLocales.includes(locale)) throw notFound();
 
-    const [categories, featured, hotGames, games] = await Promise.all([
+    const [siteContent, categories, featured, hotGames, games] = await Promise.all([
+      getSiteContent({ siteId: site.id, locale }),
       listCategories({ siteId: site.id, locale, limit: 8 }),
       getFeatured({ siteId: site.id, locale }),
       listHot({ siteId: site.id, locale, limit: 12 }),
       listGames({ siteId: site.id, locale, limit: 36 }),
     ]);
 
-    return { site, locale, categories, featured, hotGames, games };
+    return { site, siteContent, locale, categories, featured, hotGames, games };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { site, locale } = loaderData;
+    const { site, siteContent, locale } = loaderData;
     const origin = siteOrigin(site.domain);
     const urlFor = (loc: string) =>
       localizeUrl(`${origin}/`, { locale: loc as any }).href;
+    const title = siteContent?.metaTitle || siteContent?.title || site.name;
+    const description =
+      siteContent?.metaDescription ||
+      siteContent?.intro ||
+      `Play games on ${site.name}. Browse featured, popular, and category-based games.`;
 
     return {
       meta: [
-        { title: site.name },
-        {
-          name: 'description',
-          content: `Play games on ${site.name}. Browse featured, popular, and category-based games.`,
-        },
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:url', content: urlFor(locale) },
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
       ],
       links: [
         { rel: 'canonical', href: urlFor(locale) },
@@ -62,7 +74,8 @@ export const Route = createFileRoute('/')({
 });
 
 function HomePage() {
-  const { site, categories, featured, hotGames, games } = Route.useLoaderData();
+  const { site, siteContent, categories, featured, hotGames, games } =
+    Route.useLoaderData();
   const latestGames = games.filter(
     (item) => !hotGames.some((hot) => hot.siteGameId === item.siteGameId)
   );
@@ -71,6 +84,17 @@ function HomePage() {
     <div className="bg-background text-foreground min-h-screen">
       <SiteHeader siteName={site.name} categories={categories} />
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-6">
+        {siteContent?.intro ? (
+          <section className="mb-8 max-w-4xl">
+            <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
+              {siteContent.title || site.name}
+            </h1>
+            <p className="text-muted-foreground mt-3 text-base leading-7 md:text-lg">
+              {siteContent.intro}
+            </p>
+          </section>
+        ) : null}
+
         {featured ? (
           <section className="mb-12">
             <div className="bg-muted/40 border-border grid items-center gap-6 rounded-3xl border p-5 md:grid-cols-[1.2fr_1fr] md:p-8">
@@ -78,9 +102,15 @@ function HomePage() {
                 <p className="text-primary mb-2 text-sm font-semibold uppercase tracking-wide">
                   Featured Game
                 </p>
-                <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
-                  {featured.title}
-                </h1>
+                {siteContent?.intro ? (
+                  <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+                    {featured.title}
+                  </h2>
+                ) : (
+                  <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
+                    {featured.title}
+                  </h1>
+                )}
                 <p className="text-muted-foreground mt-3 max-w-xl leading-7">
                   Play {featured.title} instantly in your browser.
                 </p>
@@ -138,6 +168,12 @@ function HomePage() {
           <div className="bg-muted text-muted-foreground rounded-2xl px-6 py-20 text-center">
             This site is ready. Publish games from the Game CMS to populate it.
           </div>
+        ) : null}
+
+        {siteContent?.content ? (
+          <section className="mx-auto mt-14 max-w-4xl border-t pt-10">
+            <MarkdownContent content={siteContent.content} />
+          </section>
         ) : null}
       </main>
     </div>
