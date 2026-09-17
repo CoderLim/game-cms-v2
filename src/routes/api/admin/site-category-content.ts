@@ -2,8 +2,15 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  parseBody,
+  siteCategoryContentSchema,
+} from '@/modules/admin/game-engine-validation';
 import { getLocaleContent } from '@/modules/categories/admin';
-import { upsertLocaleContent } from '@/modules/categories/service';
+import {
+  type SiteContentStatus,
+  upsertLocaleContent,
+} from '@/modules/categories/service';
 
 async function GET({ request }: { request: Request }) {
   try {
@@ -26,13 +33,7 @@ async function GET({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.siteCategoryId || !body?.locale) {
-      return respErr('siteId, siteCategoryId and locale are required');
-    }
-    if (!body?.slug || !body?.title) {
-      return respErr('slug and title are required');
-    }
+    const body = parseBody(siteCategoryContentSchema, await request.json());
 
     const row = await upsertLocaleContent({
       siteId: body.siteId,
@@ -40,7 +41,7 @@ async function PUT({ request }: { request: Request }) {
       locale: body.locale,
       slug: body.slug,
       title: body.title,
-      status: body.status,
+      status: body.status as SiteContentStatus | undefined,
       metaTitle: body.metaTitle,
       metaDescription: body.metaDescription,
       description: body.description,
