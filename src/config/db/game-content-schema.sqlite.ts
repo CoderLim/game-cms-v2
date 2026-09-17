@@ -12,6 +12,37 @@ import { site } from './game-schema';
 const table = sqliteTable;
 const sqliteNowMs = sql`(cast((julianday('now') - 2440587.5)*86400000 as integer))`;
 
+// Site-level localized content for homepage SEO and introductory copy.
+// This keeps homepage metadata/site copy isolated by site + locale just like
+// game/category/post content.
+export const siteLocale = table(
+  'site_locale',
+  {
+    id: text('id').primaryKey(),
+    siteId: text('site_id')
+      .notNull()
+      .references(() => site.id, { onDelete: 'cascade' }),
+    locale: text('locale').notNull(),
+    status: text('status').notNull().default('draft'),
+    title: text('title'),
+    metaTitle: text('meta_title'),
+    metaDescription: text('meta_description'),
+    intro: text('intro'),
+    content: text('content'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (t) => [
+    uniqueIndex('uq_site_locale').on(t.siteId, t.locale),
+    index('idx_site_locale_status').on(t.siteId, t.status),
+  ]
+);
+
 // Site-scoped editorial content (articles, guides, updates and pages).
 // Keep this separate from ShipAny's generic `post` table so Game Site Engine
 // public content is always isolated by site and can be migrated/sold cleanly.
@@ -82,6 +113,8 @@ export const sitePostLocale = table(
   ]
 );
 
+export type SiteLocale = typeof siteLocale.$inferSelect;
+export type NewSiteLocale = typeof siteLocale.$inferInsert;
 export type SitePost = typeof sitePost.$inferSelect;
 export type NewSitePost = typeof sitePost.$inferInsert;
 export type SitePostLocale = typeof sitePostLocale.$inferSelect;
