@@ -1,0 +1,58 @@
+name: Game Site Engine Migrations
+
+on:
+  pull_request:
+    branches: ['main', 'dev']
+  workflow_dispatch:
+
+jobs:
+  generate-d1-migrations:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_PROVIDER: sqlite
+      DATABASE_URL: file:data/migration-generation.db
+      SITE_KEY: migration-ci
+      VITE_APP_URL: http://localhost:3000
+      VITE_APP_NAME: Migration CI
+      VITE_DEFAULT_LOCALE: en
+      AUTH_SECRET: migration-ci-only-secret
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate provider schemas
+        run: pnpm db:setup
+
+      - name: Generate migrations from current schema
+        run: |
+          rm -rf drizzle
+          pnpm db:generate
+
+      - name: Verify migrations were generated
+        run: |
+          test -f drizzle/meta/_journal.json
+          test "$(find drizzle -maxdepth 1 -name '*.sql' | wc -l)" -gt 0
+          echo "Generated migration files:"
+          find drizzle -maxdepth 2 -type f | sort
+
+      - name: Upload migration artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-engine-drizzle
+          path: drizzle
+          if-no-files-found: error
+          retention-days: 7
