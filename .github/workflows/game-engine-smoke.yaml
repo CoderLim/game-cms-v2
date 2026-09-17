@@ -1,0 +1,89 @@
+name: Game Site Engine Smoke
+
+on:
+  pull_request:
+    branches: ['main', 'dev']
+  push:
+    branches: ['main', 'dev']
+  workflow_dispatch:
+
+jobs:
+  sqlite-domain-smoke:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_PROVIDER: sqlite
+      DATABASE_URL: file:data/game-engine-ci.db
+      SITE_KEY: local-dev
+      DEPLOY_ENV: development
+      VITE_APP_URL: http://localhost:3000
+      VITE_APP_NAME: Game Engine CI
+      VITE_DEFAULT_LOCALE: en
+      AUTH_SECRET: game-engine-ci-only-secret
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate provider schemas
+        run: pnpm db:setup
+
+      - name: Create fresh SQLite schema
+        run: pnpm db:push
+
+      - name: Seed Game Site Engine fixture
+        run: pnpm game:seed
+
+      - name: Verify site isolation fixture
+        run: |
+          node --input-type=module <<'NODE'
+          import { createClient } from '@libsql/client';
+          const client = createClient({ url: 'file:data/game-engine-ci.db' });
+
+          const site = await client.execute({
+            sql: 'SELECT id, key FROM game_site WHERE key = ?',
+            args: ['local-dev'],
+          });
+          if (site.rows.length !== 1) throw new Error('Expected one local-dev site');
+
+          const games = await client.execute({
+            sql: `SELECT sg.id
+                  FROM site_game sg
+                  JOIN game_site s ON s.id = sg.site_id
+                  JOIN site_game_locale l ON l.site_game_id = sg.id
+                  WHERE s.key = ? AND l.locale = ? AND l.slug = ?
+                    AND sg.status = 'published' AND l.status = 'published'`,
+            args: ['local-dev', 'en', 'demo-game'],
+          });
+          if (games.rows.length !== 1) {
+            throw new Error('Expected one published site-scoped demo game');
+          }
+
+          const categories = await client.execute({
+            sql: `SELECT sc.id
+                  FROM site_category sc
+                  JOIN game_site s ON s.id = sc.site_id
+                  JOIN site_category_locale l ON l.site_category_id = sc.id
+                  WHERE s.key = ? AND l.locale = ? AND l.slug = ?
+                    AND sc.status = 'published' AND l.status = 'published'`,
+            args: ['local-dev', 'en', 'demo-games'],
+          });
+          if (categories.rows.length !== 1) {
+            throw new Error('Expected one published site-scoped demo category');
+          }
+
+          await client.close();
+          console.log('Game Site Engine SQLite smoke test passed');
+          NODE
