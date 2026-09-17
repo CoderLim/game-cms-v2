@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
+import { AdSlot } from '@/components/game-site/ad-slot';
 import { GameCard } from '@/components/game-site/game-card';
 import { GamePlayer } from '@/components/game-site/game-player';
 import { GameRating } from '@/components/game-site/game-rating';
@@ -173,6 +174,12 @@ function GamePage() {
           ) : null}
         </div>
 
+        <AdSlot
+          ads={publicConfig.ads}
+          slotKey="gameTop"
+          className="mx-auto mb-5 max-w-5xl"
+        />
+
         <GamePlayer
           game={{
             title: game.title,
@@ -189,6 +196,12 @@ function GamePage() {
             initialDislikes={game.dislikeCount}
           />
         </div>
+
+        <AdSlot
+          ads={publicConfig.ads}
+          slotKey="gameBottom"
+          className="mx-auto mt-6 max-w-5xl"
+        />
 
         <article className="mx-auto mt-10 max-w-4xl space-y-9">
           {game.description ? (
