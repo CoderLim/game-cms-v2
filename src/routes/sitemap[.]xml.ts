@@ -7,6 +7,7 @@ import {
   SitePostType,
 } from '@/modules/site-posts/service';
 import { listIndexable as listGames } from '@/modules/site-games/public';
+import { listPublishedLocales as listPublishedSiteLocales } from '@/modules/sites/content';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { localizeUrl } from '@/paraglide/runtime.js';
 
@@ -80,6 +81,11 @@ export const Route = createFileRoute('/sitemap.xml')({
       GET: async () => {
         const site = await getCurrentSiteContext();
         const origin = siteOrigin(site.domain);
+        const publishedSiteLocales = await listPublishedSiteLocales(site.id);
+        const homepageLocales = [
+          site.defaultLocale,
+          ...publishedSiteLocales.map((entry) => entry.locale),
+        ].filter((value, index, array) => array.indexOf(value) === index);
 
         const localeData = await Promise.all(
           site.enabledLocales.map(async (locale) => {
@@ -106,7 +112,7 @@ export const Route = createFileRoute('/sitemap.xml')({
           {
             path: '/',
             locale: site.defaultLocale,
-            alternates: site.enabledLocales.map((locale) => ({
+            alternates: homepageLocales.map((locale) => ({
               locale,
               path: '/',
             })),
