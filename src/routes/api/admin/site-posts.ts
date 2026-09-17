@@ -1,7 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { getAuth } from '@/core/auth';
-import { hasPermission } from '@/modules/rbac/service';
+import { respData, respErr, respPage } from '@/lib/resp';
+import { requireAdmin } from '@/modules/admin/guard';
+import {
+  createSitePostSchema,
+  parseBody,
+  updateSitePostSchema,
+} from '@/modules/admin/game-engine-validation';
 import {
   createPost,
   listAdmin,
@@ -11,26 +16,19 @@ import {
   updatePost,
   upsertLocaleContent,
 } from '@/modules/site-posts/service';
-import { respData, respErr, respPage } from '@/lib/resp';
-
-async function checkAdmin(request: Request) {
-  const auth = getAuth();
-  const session = await auth.api.getSession({ headers: request.headers });
-  if (!session?.user) throw new Error('Unauthorized');
-  if (!(await hasPermission(session.user.id, 'admin.*'))) {
-    throw new Error('Forbidden');
-  }
-}
 
 async function GET({ request }: { request: Request }) {
   try {
-    await checkAdmin(request);
+    await requireAdmin(request);
     const { searchParams } = new URL(request.url);
     const siteId = searchParams.get('siteId');
     if (!siteId) return respErr('siteId is required');
 
     const page = Math.max(1, Number(searchParams.get('page') || 1));
-    const pageSize = Math.min(100, Math.max(1, Number(searchParams.get('pageSize') || 20)));
+    const pageSize = Math.min(
+      100,
+      Math.max(1, Number(searchParams.get('pageSize') || 20))
+    );
     const locale = searchParams.get('locale') || undefined;
     const search = searchParams.get('search') || undefined;
     const result = await listAdmin({ siteId, locale, search, page, pageSize });
@@ -42,16 +40,15 @@ async function GET({ request }: { request: Request }) {
 
 async function POST({ request }: { request: Request }) {
   try {
-    await checkAdmin(request);
-    const body = await request.json();
-    if (!body.siteId) return respErr('siteId is required');
+    await requireAdmin(request);
+    const body = parseBody(createSitePostSchema, await request.json());
 
     const post = await createPost({
       siteId: body.siteId,
-      type: body.type || SitePostType.ARTICLE,
-      status: body.status || SitePostStatus.DRAFT,
-      indexable: Boolean(body.indexable),
-      featured: Boolean(body.featured),
+      type: (body.type || SitePostType.ARTICLE) as SitePostType,
+      status: (body.status || SitePostStatus.DRAFT) as SitePostStatus,
+      indexable: body.indexable ?? false,
+      featured: body.featured ?? false,
       authorName: body.authorName || null,
     });
 
@@ -62,7 +59,8 @@ async function POST({ request }: { request: Request }) {
         locale: body.locale,
         slug: body.slug,
         title: body.title,
-        status: body.contentStatus || SitePostContentStatus.DRAFT,
+        status: (body.contentStatus ||
+          SitePostContentStatus.DRAFT) as SitePostContentStatus,
         metaTitle: body.metaTitle || null,
         metaDescription: body.metaDescription || null,
         description: body.description || null,
@@ -79,15 +77,12 @@ async function POST({ request }: { request: Request }) {
 
 async function PUT({ request }: { request: Request }) {
   try {
-    await checkAdmin(request);
-    const body = await request.json();
-    if (!body.siteId || !body.sitePostId) {
-      return respErr('siteId and sitePostId are required');
-    }
+    await requireAdmin(request);
+    const body = parseBody(updateSitePostSchema, await request.json());
 
     const post = await updatePost(body.sitePostId, body.siteId, {
-      type: body.type,
-      status: body.status,
+      type: body.type as SitePostType | undefined,
+      status: body.status as SitePostStatus | undefined,
       indexable: body.indexable,
       featured: body.featured,
       authorName: body.authorName,
@@ -100,7 +95,7 @@ async function PUT({ request }: { request: Request }) {
         locale: body.locale,
         slug: body.slug,
         title: body.title,
-        status: body.contentStatus,
+        status: body.contentStatus as SitePostContentStatus | undefined,
         metaTitle: body.metaTitle ?? null,
         metaDescription: body.metaDescription ?? null,
         description: body.description ?? null,
