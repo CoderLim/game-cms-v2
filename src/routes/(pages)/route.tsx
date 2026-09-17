@@ -27,7 +27,11 @@ function PagesLayout() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="mx-auto max-w-3xl px-6 py-10 md:px-8 md:py-14">
         <MDXProvider components={mdxComponents}>
           <Outlet />
@@ -36,6 +40,7 @@ function PagesLayout() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
