@@ -42,16 +42,14 @@ jobs:
       - name: Generate provider schemas
         run: pnpm db:setup
 
-      - name: Generate migrations from current schema
-        run: |
-          rm -rf drizzle
-          pnpm db:generate
+      - name: Generate incremental migrations from current schema
+        run: pnpm db:generate
 
-      - name: Verify migrations were generated
+      - name: Verify migration state
         run: |
           test -f drizzle/meta/_journal.json
           test "$(find drizzle -maxdepth 1 -name '*.sql' | wc -l)" -gt 0
-          echo "Generated migration files:"
+          echo "Current migration files:"
           find drizzle -maxdepth 2 -type f | sort
 
       - name: Upload migration artifact
@@ -62,12 +60,12 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Commit migration files when changed
+      - name: Commit migration files only when schema changed
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           git add -f drizzle
           if git diff --cached --quiet; then
-            echo 'Drizzle migrations already match current schema.'
+            echo 'Drizzle migrations already match current schema; no commit needed.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
