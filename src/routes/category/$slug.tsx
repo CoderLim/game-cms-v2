@@ -113,7 +113,11 @@ function CategoryPage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-6">
         <header className="mb-8 max-w-3xl">
           <h1 className="text-3xl font-bold tracking-tight">{category.title}</h1>
@@ -145,6 +149,7 @@ function CategoryPage() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
