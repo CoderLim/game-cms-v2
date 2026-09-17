@@ -38,6 +38,35 @@ const labels: Record<keyof SiteSettingsPayload, string> = {
   social_links: 'Social links JSON',
 };
 
+const examples: Record<keyof SiteSettingsPayload, string> = {
+  analytics: `{
+  "gaId": "G-XXXXXXXXXX",
+  "clarityId": "abcdef1234"
+}`,
+  ads: `{
+  "enabled": true,
+  "adsenseClient": "ca-pub-1234567890123456",
+  "slots": {
+    "gameTop": "1234567890",
+    "gameBottom": "0987654321"
+  }
+}`,
+  navigation: `[
+  { "label": "Guides", "href": "/guides" },
+  { "label": "Blog", "href": "/blog" }
+]`,
+  footer: `{
+  "description": "Play browser games and discover guides."
+}`,
+  game_player: `{
+  "allowFullscreen": true,
+  "autoplay": false
+}`,
+  social_links: `[
+  { "name": "YouTube", "url": "https://youtube.com/..." }
+]`,
+};
+
 export const Route = createFileRoute('/admin/site-settings')({
   component: SiteSettingsPage,
 });
@@ -137,18 +166,18 @@ function SiteSettingsPage() {
             <textarea
               rows={key === 'navigation' || key === 'social_links' ? 14 : 10}
               className="border-input bg-background w-full rounded-md border p-3 font-mono text-xs leading-5"
-              placeholder={
-                key === 'analytics'
-                  ? '{\n  "gaId": "G-..."\n}'
-                  : key === 'social_links'
-                    ? '[\n  { "name": "YouTube", "url": "https://..." }\n]'
-                    : '{}'
-              }
+              placeholder={examples[key]}
               value={settings[key]}
               onChange={(event) =>
                 setSettings((current) => ({ ...current, [key]: event.target.value }))
               }
             />
+            <details className="text-muted-foreground mt-2 text-xs">
+              <summary className="cursor-pointer">Example</summary>
+              <pre className="bg-muted mt-2 overflow-x-auto rounded-md p-3 whitespace-pre-wrap">
+                {examples[key]}
+              </pre>
+            </details>
             <button
               type="button"
               disabled={!siteId || saveSetting.isPending}
