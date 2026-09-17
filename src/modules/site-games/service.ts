@@ -73,6 +73,7 @@ export async function getById(id: string) {
 }
 
 export async function updateSiteGame(
+  siteId: string,
   id: string,
   input: Partial<{
     status: SiteGameStatus;
@@ -104,10 +105,10 @@ export async function updateSiteGame(
   const [row] = await db()
     .update(siteGame)
     .set(values)
-    .where(eq(siteGame.id, id))
+    .where(and(eq(siteGame.id, id), eq(siteGame.siteId, siteId)))
     .returning();
 
-  if (row?.featured) await clearOtherFeaturedGames(row.siteId, row.id);
+  if (row?.featured) await clearOtherFeaturedGames(siteId, row.id);
   return row;
 }
 
@@ -233,6 +234,7 @@ export async function getPublishedBySlug(input: {
     .where(
       and(
         eq(siteGameLocale.siteId, input.siteId),
+        eq(siteGame.siteId, input.siteId),
         eq(siteGameLocale.locale, input.locale),
         eq(siteGameLocale.slug, normalizeSlug(input.slug)),
         eq(siteGameLocale.status, SiteContentStatus.PUBLISHED),
@@ -271,6 +273,7 @@ export async function listPublished(input: {
     .where(
       and(
         eq(siteGameLocale.siteId, input.siteId),
+        eq(siteGame.siteId, input.siteId),
         eq(siteGameLocale.locale, input.locale),
         eq(siteGameLocale.status, SiteContentStatus.PUBLISHED),
         eq(siteGame.status, SiteGameStatus.PUBLISHED),
