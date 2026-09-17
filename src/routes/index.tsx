@@ -121,7 +121,11 @@ function HomePage() {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <SiteHeader siteName={site.name} categories={categories} />
+      <SiteHeader
+        siteName={site.name}
+        categories={categories}
+        navigation={publicConfig.navigation}
+      />
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-6">
         {siteContent?.intro ? (
           <section className="mb-8 max-w-4xl">
@@ -218,6 +222,7 @@ function HomePage() {
       <SiteFooter
         siteName={site.name}
         socialLinks={publicConfig.socialLinks}
+        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
