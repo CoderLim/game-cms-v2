@@ -2,15 +2,16 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  assignSiteCategoryGameSchema,
+  parseBody,
+} from '@/modules/admin/game-engine-validation';
 import { assignGame } from '@/modules/categories/service';
 
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.siteGameId || !body?.siteCategoryId) {
-      return respErr('siteId, siteGameId and siteCategoryId are required');
-    }
+    const body = parseBody(assignSiteCategoryGameSchema, await request.json());
 
     const row = await assignGame({
       siteId: body.siteId,
