@@ -36,6 +36,18 @@ export async function getPublished(input: { siteId: string; locale: string }) {
   return row;
 }
 
+export async function listPublishedLocales(siteId: string) {
+  return db()
+    .select({ locale: siteLocale.locale, updatedAt: siteLocale.updatedAt })
+    .from(siteLocale)
+    .where(
+      and(
+        eq(siteLocale.siteId, siteId),
+        eq(siteLocale.status, SiteLocaleStatus.PUBLISHED)
+      )
+    );
+}
+
 export async function upsert(input: {
   siteId: string;
   locale: string;
