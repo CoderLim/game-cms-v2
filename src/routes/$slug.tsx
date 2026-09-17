@@ -54,8 +54,7 @@ export const Route = createFileRoute('/$slug')({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { site, locale, page, availableLocales, canonical, description } =
-      loaderData;
+    const { site, page, availableLocales, canonical, description } = loaderData;
     const origin = siteOrigin(site.domain);
     const title = page.metaTitle || `${page.title} | ${site.name}`;
     const defaultEntry =
@@ -72,6 +71,15 @@ export const Route = createFileRoute('/$slug')({
         { property: 'og:url', content: canonical },
         ...(page.imageUrl
           ? [{ property: 'og:image', content: page.imageUrl }]
+          : []),
+        {
+          name: 'twitter:card',
+          content: page.imageUrl ? 'summary_large_image' : 'summary',
+        },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        ...(page.imageUrl
+          ? [{ name: 'twitter:image', content: page.imageUrl }]
           : []),
       ],
       links: [
