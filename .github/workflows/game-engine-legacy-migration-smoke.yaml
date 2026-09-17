@@ -55,6 +55,9 @@ jobs:
       - name: Seed legacy Postgres fixture
         run: pnpm tsx scripts/seed-legacy-driftboss-fixture.ts
 
+      - name: Audit legacy source before export
+        run: pnpm tsx scripts/audit-legacy-driftboss-source.ts
+
       - name: Export main legacy migration
         run: >-
           pnpm tsx scripts/export-driftboss-v2-sql.ts
