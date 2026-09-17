@@ -3,6 +3,8 @@ import { Calendar } from 'lucide-react';
 
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
+import { StructuredData } from '@/components/seo/structured-data';
+import { formatPostDate } from '@/content/posts';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import {
   getPublishedBySlug,
@@ -11,7 +13,6 @@ import {
 } from '@/modules/site-posts/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
-import { formatPostDate } from '@/content/posts';
 
 function siteOrigin(domain: string) {
   return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
@@ -121,10 +122,41 @@ export const Route = createFileRoute('/blog/$slug')({
 });
 
 function BlogPostPage() {
-  const { site, locale, post, categories } = Route.useLoaderData();
+  const { site, locale, post, categories, canonical, description } =
+    Route.useLoaderData();
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': post.type === SitePostType.UPDATE ? 'NewsArticle' : 'Article',
+    headline: post.title,
+    url: canonical,
+    description,
+    ...(post.imageUrl ? { image: post.imageUrl } : {}),
+    ...(post.publishedAt
+      ? { datePublished: new Date(post.publishedAt).toISOString() }
+      : {}),
+    ...(post.updatedAt
+      ? { dateModified: new Date(post.updatedAt).toISOString() }
+      : {}),
+    ...(post.authorName
+      ? {
+          author: {
+            '@type': 'Person',
+            name: post.authorName,
+          },
+        }
+      : {}),
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: siteOrigin(site.domain),
+    },
+    mainEntityOfPage: canonical,
+  };
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <StructuredData data={structuredData} />
       <SiteHeader siteName={site.name} categories={categories} />
       <main className="px-4 py-10 md:px-6 md:py-14">
         <article className="mx-auto max-w-3xl">
