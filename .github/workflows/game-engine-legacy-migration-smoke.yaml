@@ -69,6 +69,11 @@ jobs:
           pnpm tsx scripts/export-driftboss-v2-extras-sql.ts
           --out=data/migrations/driftboss-v2-extras.sql
 
+      - name: Export per-site stats reset
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-reset-stats-sql.ts
+          --out=data/migrations/driftboss-v2-reset-stats.sql
+
       - name: Create fresh V2 SQLite database
         run: |
           rm -f data/legacy-migration-target.db
@@ -79,6 +84,7 @@ jobs:
           pnpm tsx scripts/apply-sql-files.ts
           data/migrations/driftboss-v2.sql
           data/migrations/driftboss-v2-extras.sql
+          data/migrations/driftboss-v2-reset-stats.sql
 
       - name: Verify multi-site isolation and migrated content
         run: pnpm tsx scripts/verify-driftboss-v2-migration.ts
