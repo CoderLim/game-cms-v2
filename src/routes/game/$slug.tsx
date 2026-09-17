@@ -2,7 +2,10 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { AdSlot } from '@/components/game-site/ad-slot';
 import { GameCard } from '@/components/game-site/game-card';
-import { GamePlayer } from '@/components/game-site/game-player';
+import {
+  GamePlayer,
+  type GamePlayerSettings,
+} from '@/components/game-site/game-player';
 import { GameRating } from '@/components/game-site/game-rating';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { SiteFooter } from '@/components/game-site/site-footer';
@@ -187,6 +190,7 @@ function GamePage() {
             embedType: game.embedType,
             aspectRatio: game.aspectRatio,
           }}
+          settings={publicConfig.gamePlayer as GamePlayerSettings}
         />
 
         <div className="mx-auto max-w-4xl">
