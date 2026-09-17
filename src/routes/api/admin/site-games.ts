@@ -2,6 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr, respPage } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  attachSiteGameSchema,
+  parseBody,
+  updateSiteGameSchema,
+} from '@/modules/admin/game-engine-validation';
 import { listSiteGames } from '@/modules/site-games/admin';
 import * as siteGameService from '@/modules/site-games/service';
 
@@ -36,15 +41,12 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.siteId || !body?.gameId) {
-      return respErr('siteId and gameId are required');
-    }
+    const body = parseBody(attachSiteGameSchema, await request.json());
 
     const row = await siteGameService.attachGame({
       siteId: body.siteId,
       gameId: body.gameId,
-      status: body.status,
+      status: body.status as siteGameService.SiteGameStatus | undefined,
       indexable: body.indexable,
       featured: body.featured,
       hot: body.hot,
@@ -59,18 +61,19 @@ async function POST({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.id) return respErr('id is required');
+    const body = parseBody(updateSiteGameSchema, await request.json());
 
     // Prefer an explicit site boundary from newer clients. Older admin builds
     // only sent the row id; resolve its persisted owner so the service still
     // performs an id+site_id update rather than a global id-only mutation.
-    const existing = body.siteId ? undefined : await siteGameService.getById(body.id);
+    const existing = body.siteId
+      ? undefined
+      : await siteGameService.getById(body.id);
     const siteId = body.siteId || existing?.siteId;
     if (!siteId) return respErr('site game not found');
 
     const row = await siteGameService.updateSiteGame(siteId, body.id, {
-      status: body.status,
+      status: body.status as siteGameService.SiteGameStatus | undefined,
       indexable: body.indexable,
       featured: body.featured,
       hot: body.hot,
