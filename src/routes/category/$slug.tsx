@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { GameCard } from '@/components/game-site/game-card';
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
 import { listPublishedLocales } from '@/modules/categories/locales';
@@ -9,6 +10,7 @@ import {
   listGames,
   listPublished,
 } from '@/modules/categories/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -29,21 +31,31 @@ export const Route = createFileRoute('/category/$slug')({
     });
     if (!category) throw notFound();
 
-    const [categories, availableLocales, games] = await Promise.all([
-      listPublished({ siteId: site.id, locale, limit: 8 }),
-      listPublishedLocales({
-        siteId: site.id,
-        siteCategoryId: category.siteCategoryId,
-      }),
-      listGames({
-        siteId: site.id,
-        siteCategoryId: category.siteCategoryId,
-        locale,
-        limit: 48,
-      }),
-    ]);
+    const [categories, availableLocales, games, publicConfig] =
+      await Promise.all([
+        listPublished({ siteId: site.id, locale, limit: 8 }),
+        listPublishedLocales({
+          siteId: site.id,
+          siteCategoryId: category.siteCategoryId,
+        }),
+        listGames({
+          siteId: site.id,
+          siteCategoryId: category.siteCategoryId,
+          locale,
+          limit: 48,
+        }),
+        getPublicSiteConfig(site.id),
+      ]);
 
-    return { site, locale, category, categories, availableLocales, games };
+    return {
+      site,
+      locale,
+      category,
+      categories,
+      availableLocales,
+      games,
+      publicConfig,
+    };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
@@ -96,7 +108,8 @@ export const Route = createFileRoute('/category/$slug')({
 });
 
 function CategoryPage() {
-  const { site, category, categories, games } = Route.useLoaderData();
+  const { site, category, categories, games, publicConfig } =
+    Route.useLoaderData();
 
   return (
     <div className="bg-background text-foreground min-h-screen">
@@ -129,6 +142,10 @@ function CategoryPage() {
           </article>
         ) : null}
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
