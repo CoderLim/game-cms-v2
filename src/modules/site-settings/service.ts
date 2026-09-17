@@ -85,13 +85,15 @@ export async function remove(siteId: string, key: string) {
 }
 
 export async function getPublicSiteConfig(siteId: string) {
-  const [analytics, ads, navigation, footer, gamePlayer] = await Promise.all([
-    getJson(siteId, 'analytics', {}),
-    getJson(siteId, 'ads', {}),
-    getJson(siteId, 'navigation', []),
-    getJson(siteId, 'footer', {}),
-    getJson(siteId, 'game_player', {}),
-  ]);
+  const [analytics, ads, navigation, footer, gamePlayer, socialLinks] =
+    await Promise.all([
+      getJson(siteId, 'analytics', {}),
+      getJson(siteId, 'ads', {}),
+      getJson(siteId, 'navigation', []),
+      getJson(siteId, 'footer', {}),
+      getJson(siteId, 'game_player', {}),
+      getJson(siteId, 'social_links', []),
+    ]);
 
   return {
     analytics,
@@ -99,5 +101,6 @@ export async function getPublicSiteConfig(siteId: string) {
     navigation,
     footer,
     gamePlayer,
+    socialLinks,
   };
 }
