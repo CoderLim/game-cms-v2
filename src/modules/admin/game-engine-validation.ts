@@ -13,6 +13,10 @@ const slug = z
   .min(1)
   .max(180)
   .regex(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/, 'slug must be URL-safe');
+const key = identifier.regex(
+  /^[a-z0-9-]+$/,
+  'key must use lowercase letters, numbers and hyphens'
+);
 const optionalText = (max: number) => z.string().max(max).nullish();
 const optionalUrl = z
   .string()
@@ -33,10 +37,7 @@ export const publishStatusSchema = z.enum(['draft', 'published', 'archived']);
 export const postTypeSchema = z.enum(['article', 'guide', 'update', 'page']);
 
 export const createSiteSchema = z.object({
-  key: identifier.regex(
-    /^[a-z0-9-]+$/,
-    'key must use lowercase letters, numbers and hyphens'
-  ),
+  key,
   domain: z
     .string()
     .trim()
@@ -54,15 +55,10 @@ export const createSiteSchema = z.object({
   status: siteStatusSchema.optional(),
 });
 
-export const updateSiteSchema = createSiteSchema.partial().extend({
-  id: identifier,
-});
+export const updateSiteSchema = createSiteSchema.partial().extend({ id: identifier });
 
 export const createGameSchema = z.object({
-  key: identifier.regex(
-    /^[a-z0-9-]+$/,
-    'key must use lowercase letters, numbers and hyphens'
-  ),
+  key,
   title: z.string().trim().min(1).max(180),
   description: optionalText(20_000),
   embedUrl: optionalUrl,
@@ -75,9 +71,9 @@ export const createGameSchema = z.object({
   status: gameStatusSchema.optional(),
 });
 
-export const updateGameSchema = createGameSchema.partial().extend({
-  id: identifier,
-});
+export const updateGameSchema = createGameSchema.partial().extend({ id: identifier });
+
+export const createGameCategorySchema = z.object({ key });
 
 export const attachSiteGameSchema = z.object({
   siteId: identifier,
@@ -138,6 +134,23 @@ export const siteCategoryContentSchema = z.object({
   content: optionalText(500_000),
 });
 
+export const assignSiteCategoryGameSchema = z.object({
+  siteId: identifier,
+  siteGameId: identifier,
+  siteCategoryId: identifier,
+});
+
+export const siteLocaleContentSchema = z.object({
+  siteId: identifier,
+  locale,
+  status: publishStatusSchema.optional(),
+  title: optionalText(240),
+  metaTitle: optionalText(300),
+  metaDescription: optionalText(1000),
+  intro: optionalText(20_000),
+  content: optionalText(500_000),
+});
+
 const postLocaleFields = {
   locale: locale.optional(),
   slug: slug.optional(),
@@ -192,6 +205,20 @@ export const updateSitePostSchema = z
       });
     }
   });
+
+export const sitePostContentSchema = z.object({
+  siteId: identifier,
+  sitePostId: identifier,
+  locale,
+  slug,
+  title: z.string().trim().min(1).max(240),
+  status: publishStatusSchema.optional(),
+  metaTitle: optionalText(300),
+  metaDescription: optionalText(1000),
+  description: optionalText(20_000),
+  imageUrl: optionalUrl,
+  content: optionalText(1_000_000),
+});
 
 export function parseBody<T>(schema: z.ZodType<T>, body: unknown): T {
   const result = schema.safeParse(body);
