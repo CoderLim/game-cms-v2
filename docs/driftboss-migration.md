@@ -4,7 +4,7 @@ This migration moves data from the legacy `CoderLim/driftbossgame` PostgreSQL/Su
 
 ## Migration policy
 
-The legacy database has a shared `games` catalog and uses `domain` on `seo_games`, `seo_categories`, `blogs`, and `game_sites` to separate sites.
+The legacy database has a shared `games` catalog and uses `domain` on `seo_games`, `seo_categories`, `blogs`, `game_sites`, and `social_links` to separate sites.
 
 V2 mapping:
 
@@ -14,16 +14,19 @@ V2 mapping:
 | `categories` | `game_category` |
 | `game_categories` | `game_category_map` |
 | `game_sites` | `game_site` |
+| `game_sites.meta_* / seo_content` | `site_locale` |
+| `game_sites.about/contact/privacy/terms` | `site_post(type=page)` + `site_post_locale` |
 | `seo_games(domain, game_key)` | `site_game` + `site_game_locale` |
 | `seo_categories(domain, category)` | `site_category` + `site_category_locale` |
 | `game_categories` intersected with site exposure | `site_game_category` |
 | `blogs(domain, slug)` | `site_post` + `site_post_locale` |
+| `social_links(domain, ...)` | `site_setting.social_links` |
 
 ### Important safety rule
 
 A global legacy game is attached to a V2 site **only when that domain has a `seo_games` row for the game**.
 
-The migration intentionally does not map every row in the shared legacy `games` catalog to every site. This is what prevents URLs such as an unrelated site's `/game/drift-boss` from reappearing after migration.
+The migration intentionally does not map every row in the shared legacy `games` catalog to every site. This prevents URLs such as an unrelated site's `/game/drift-boss` from reappearing after migration.
 
 ## 1. Prepare the V2 database
 
@@ -43,30 +46,15 @@ pnpm db:generate
 npx wrangler d1 migrations apply <database-name> --remote
 ```
 
-Do not import migration data before the schema containing `game_site`, `game_catalog`, `site_game`, `site_game_locale`, category tables, and `site_post` tables has been applied.
+Do not import migration data before the schema containing the Game Domain and Game Content tables has been applied.
 
 ## 2. Export legacy data as V2 SQL
 
 Use a read-capable connection string for the old Supabase/Postgres database.
 
-Do not commit the connection string or generated SQL to Git.
+Do not commit the connection string or generated production SQL to Git.
 
-```bash
-LEGACY_DATABASE_URL='postgresql://...' \
-  pnpm game:migrate:driftboss -- \
-  --out=data/migrations/driftboss-v2.sql
-```
-
-Export only one domain during initial validation:
-
-```bash
-LEGACY_DATABASE_URL='postgresql://...' \
-  pnpm game:migrate:driftboss -- \
-  --domain=driftbossgame.org \
-  --out=data/migrations/driftbossgame-v2.sql
-```
-
-Mark a known primary game as featured during export:
+Main game/category/blog dataset:
 
 ```bash
 LEGACY_DATABASE_URL='postgresql://...' \
@@ -76,37 +64,61 @@ LEGACY_DATABASE_URL='postgresql://...' \
   --out=data/migrations/driftbossgame-v2.sql
 ```
 
-Multiple featured pairs can be comma separated when exporting several sites.
+Site-level homepage/static-page/social extras:
 
-The exporter is read-only against the legacy database.
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm tsx scripts/export-driftboss-v2-extras-sql.ts \
+  --domain=driftbossgame.org \
+  --out=data/migrations/driftbossgame-v2-extras.sql
+```
+
+`--domain` is optional. Omit it only when intentionally exporting all historical domains.
+
+Multiple featured game pairs can be comma-separated in `--featured`.
+
+Both exporters are read-only against the legacy database and generate deterministic UUIDv5 + idempotent UPSERT SQL.
 
 ## 3. Inspect the generated SQL
 
-Before applying it, check the summary printed by the exporter and inspect counts in the SQL.
+Before applying it, check the exporter summaries and inspect both SQL files.
 
 Expected properties:
 
-- deterministic UUIDv5 identifiers
-- `ON CONFLICT` upserts so the import can be repeated
-- global catalog imported once
-- site games sourced from legacy site-specific SEO rows
-- site categories sourced from legacy site-specific category SEO rows
-- blog rows converted to site-scoped posts
-- locale defaults to `en` when the old row has no locale column/value
+- expected domains only;
+- global catalog imported once;
+- site games sourced only from legacy site-specific SEO rows;
+- each site keeps its own slug/meta/body content;
+- homepage SEO is site-scoped;
+- legal/contact pages are `type=page` records;
+- social links are stored only on their matching site;
+- no secrets are included;
+- generated IDs are stable across repeated exports.
 
-Historical databases may contain runtime columns that are absent from the checked-in old `schema.sql` (for example `locale` or `meta_title`). The exporter reads `SELECT *` and consumes those fields when present.
+Historical databases may contain runtime columns absent from the checked-in old `schema.sql` (for example `locale`, `meta_title`, or `slug`). The exporter reads `SELECT *` and consumes those fields when present.
 
 ## 4. Validate in local SQLite first
 
-Create a clean local database, then import the SQL.
+Create a clean local database. Never use your normal development database for the migration dry-run.
 
 ```bash
 rm -f data/migration-test.db
-DATABASE_PROVIDER=sqlite DATABASE_URL=file:data/migration-test.db pnpm db:push
-sqlite3 data/migration-test.db < data/migrations/driftbossgame-v2.sql
+export DATABASE_PROVIDER=sqlite
+export DATABASE_URL=file:data/migration-test.db
+
+pnpm db:setup
+pnpm db:push
 ```
 
-Run these checks:
+Apply both files in order:
+
+```bash
+pnpm tsx scripts/apply-sql-files.ts \
+  data/migrations/driftbossgame-v2.sql \
+  data/migrations/driftbossgame-v2-extras.sql
+```
+
+Validate:
 
 ```sql
 SELECT key, domain, name FROM game_site;
@@ -116,30 +128,60 @@ FROM site_game sg
 JOIN game_site s ON s.id = sg.site_id
 GROUP BY s.domain;
 
-SELECT s.domain, l.locale, COUNT(*) AS localized_games
+SELECT s.domain, l.locale, l.slug, l.meta_title
 FROM site_game_locale l
 JOIN game_site s ON s.id = l.site_id
-GROUP BY s.domain, l.locale;
+ORDER BY s.domain, l.locale, l.slug;
 
-SELECT s.domain, COUNT(*) AS posts
+SELECT s.domain, sl.locale, sl.meta_title
+FROM site_locale sl
+JOIN game_site s ON s.id = sl.site_id;
+
+SELECT s.domain, p.type, l.slug
 FROM site_post p
+JOIN site_post_locale l ON l.site_post_id = p.id
 JOIN game_site s ON s.id = p.site_id
-GROUP BY s.domain;
+ORDER BY s.domain, p.type, l.slug;
 ```
 
-For the first DriftBoss validation, also verify there are no games attached to the site unless the old database had a corresponding `seo_games` row.
+For DriftBoss specifically, verify there are no games attached to the site unless the old database had a corresponding `seo_games` row.
+
+The CI workflow `Game Site Engine Legacy Migration Smoke` automatically tests this full chain using:
+
+```text
+temporary legacy PostgreSQL
+  → main exporter
+  → extras exporter
+  → clean V2 SQLite schema
+  → SQL import
+  → cross-site isolation assertions
+```
+
+Its fixture deliberately puts the same `drift-boss` global game on two sites with different slugs and SEO content, so a regression that merges/cross-falls-back content fails CI.
 
 ## 5. Import to D1
 
-After local validation:
+After local validation, apply V2 schema migrations to the target D1 first:
+
+```bash
+npx wrangler d1 migrations apply <database-name> --remote
+```
+
+Back up/export the target database before inserting migrated production content.
+
+Then, only after explicit production confirmation, apply:
 
 ```bash
 npx wrangler d1 execute <database-name> \
   --remote \
   --file=data/migrations/driftbossgame-v2.sql
+
+npx wrangler d1 execute <database-name> \
+  --remote \
+  --file=data/migrations/driftbossgame-v2-extras.sql
 ```
 
-The generated file is transactional and idempotent, so it can be re-run after fixing data mapping issues.
+The order matters: extras reference `game_site` rows created by the main import.
 
 ## 6. Configure the Worker
 
@@ -150,60 +192,82 @@ For the DriftBoss Worker:
   "vars": {
     "DATABASE_PROVIDER": "d1",
     "SITE_KEY": "driftbossgame",
-    "DEPLOY_ENV": "production"
+    "DEPLOY_ENV": "preview",
+    "VITE_APP_URL": "https://driftbossgame.org",
+    "VITE_APP_NAME": "Drift Boss"
   }
 }
 ```
 
 `SITE_KEY` must match the generated `game_site.key`.
 
+Keep `DEPLOY_ENV=preview` while validating so robots blocks indexing before cutover.
+
 ## 7. URL/SEO acceptance checks
 
-Before switching the production domain, compare the old production site and V2 for:
+Deploy a preview Worker and run the reusable audit while its canonical still points at the intended production domain:
 
-- `/`
-- important `/game/:slug` URLs
-- important `/category/:slug` URLs
-- `/blog/:slug`
-- `/guides/:slug` where applicable
-- canonical URL
-- hreflang
-- title / meta description
-- JSON-LD
-- sitemap membership
-- robots behavior
+```bash
+pnpm tsx scripts/audit-game-site-cutover.ts \
+  --base=https://<preview-worker>.workers.dev \
+  --canonical=https://driftbossgame.org \
+  --game=drift-boss \
+  --pages=about-us,privacy-policy,terms-of-service \
+  --expect-indexable=false
+```
+
+The audit checks:
+
+- critical pages return 200;
+- canonical points to the intended production domain;
+- preview robots contains `Disallow: /`;
+- robots points to the correct canonical sitemap URL;
+- sitemap uses the canonical production origin.
+
+Also manually compare the old production site and V2 for important:
+
+- `/game/:slug` URLs;
+- `/category/:slug` URLs;
+- `/blog/:slug`;
+- `/guides/:slug`;
+- root static pages;
+- hreflang;
+- title/meta description;
+- JSON-LD;
+- sitemap membership.
 
 Existing indexed URLs should be preserved whenever possible. Any intentionally changed URL requires a permanent redirect.
 
-## 8. What is not migrated automatically
-
-The exporter deliberately does not guess ambiguous business intent:
-
-- which game should be `featured` unless provided via `--featured`
-- `hot` status
-- new V2 `sort_weight`
-- site navigation/footer/theme settings
-- analytics and ad configuration
-- secrets
-- precise per-site historical views when the old view counter was global
-
-Legacy `games.view` is copied only as an initial `site_game.view_count` for a migrated site-game row. Treat this as legacy popularity, not precise per-domain analytics.
-
-## 9. Production cutover strategy
-
-Migrate one site first, preferably `driftbossgame.org`.
+## 8. Production cutover
 
 Recommended order:
 
-1. export only `driftbossgame.org`
-2. import into a test/local database
-3. verify page counts and critical URLs
-4. import into production D1
-5. deploy a preview Worker with `DEPLOY_ENV=preview`
-6. crawl preview pages while robots remains blocked
-7. switch the production route/domain
-8. set `DEPLOY_ENV=production`
-9. validate GSC, sitemap, canonical and 404 logs
-10. only then migrate Klotski / Tekken3
+1. export only `driftbossgame.org`;
+2. dry-run both SQL files locally;
+3. compare row/page counts;
+4. back up target D1;
+5. import both files into production D1;
+6. deploy a preview Worker with `DEPLOY_ENV=preview`;
+7. run `audit-game-site-cutover.ts` against preview;
+8. verify important old URLs manually;
+9. switch production route/domain;
+10. set `DEPLOY_ENV=production`;
+11. run audit again with `--expect-indexable=true`;
+12. validate GSC, sitemap, canonical and 404 logs;
+13. only then migrate Klotski / Tekken3.
 
-Do not migrate every site in one cutover.
+Keep the legacy production application/database intact until rollback is no longer needed.
+
+## 9. What is not migrated automatically
+
+The exporters deliberately do not guess ambiguous business intent:
+
+- which game should be `featured` unless provided via `--featured`;
+- `hot` status;
+- new V2 `sort_weight` strategy;
+- custom theme/navigation/footer decisions beyond migrated social links;
+- analytics and ad configuration;
+- secrets;
+- precise per-site historical views when the old view counter was global.
+
+Legacy `games.view` is copied only as an initial `site_game.view_count` for a migrated site-game row. Treat it as legacy popularity, not precise per-domain analytics.
