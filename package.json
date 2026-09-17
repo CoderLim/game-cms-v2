@@ -21,6 +21,7 @@
     "game:migrate:driftboss:audit": "tsx scripts/audit-legacy-driftboss-source.ts",
     "game:migrate:driftboss": "tsx scripts/export-driftboss-v2-sql.ts",
     "game:migrate:driftboss:extras": "tsx scripts/export-driftboss-v2-extras-sql.ts",
+    "game:migrate:driftboss:reset-stats": "tsx scripts/export-driftboss-v2-reset-stats-sql.ts",
     "game:migrate:apply": "tsx scripts/apply-sql-files.ts",
     "game:audit:cutover": "tsx scripts/audit-game-site-cutover.ts",
     "rbac:init": "tsx scripts/with-env.ts tsx scripts/init-rbac.ts",
