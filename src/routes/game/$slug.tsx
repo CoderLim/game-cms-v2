@@ -9,10 +9,8 @@ import { MarkdownContent } from '@/components/markdown-content';
 import { StructuredData } from '@/components/seo/structured-data';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { listPublishedLocales } from '@/modules/site-games/locales';
-import {
-  getPublishedBySlug,
-  listPublished,
-} from '@/modules/site-games/service';
+import { listSimilar } from '@/modules/site-games/public';
+import { getPublishedBySlug } from '@/modules/site-games/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -37,7 +35,12 @@ export const Route = createFileRoute('/game/$slug')({
     const [categories, availableLocales, moreGames] = await Promise.all([
       listCategories({ siteId: site.id, locale, limit: 8 }),
       listPublishedLocales({ siteId: site.id, siteGameId: game.siteGameId }),
-      listPublished({ siteId: site.id, locale, limit: 13 }),
+      listSimilar({
+        siteId: site.id,
+        siteGameId: game.siteGameId,
+        locale,
+        limit: 12,
+      }),
     ]);
 
     const origin = siteOrigin(site.domain);
@@ -58,9 +61,7 @@ export const Route = createFileRoute('/game/$slug')({
       description,
       categories,
       availableLocales,
-      moreGames: moreGames
-        .filter((item) => item.siteGameId !== game.siteGameId)
-        .slice(0, 12),
+      moreGames,
     };
   },
   head: ({ loaderData }) => {
