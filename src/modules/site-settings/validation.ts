@@ -91,6 +91,9 @@ export function validatePublicSiteSetting(
       ) {
         return `navigation[${index}] must contain label and href strings`;
       }
+      if (!item.href.startsWith('/') || item.href.startsWith('//')) {
+        return `navigation[${index}].href must be a site-local path starting with /`;
+      }
     }
     return null;
   }
