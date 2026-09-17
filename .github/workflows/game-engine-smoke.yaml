@@ -87,3 +87,6 @@ jobs:
           await client.close();
           console.log('Game Site Engine SQLite smoke test passed');
           NODE
+
+      - name: Verify cross-site service isolation
+        run: pnpm exec tsx scripts/smoke-site-isolation.ts
