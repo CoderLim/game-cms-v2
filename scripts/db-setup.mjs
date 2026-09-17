@@ -1,6 +1,6 @@
-// Copies the matching base and game-domain schema templates into generated
-// runtime schema files based on DATABASE_PROVIDER. Called from `pnpm db:setup`
-// and from `prebuild` so builds line up with the runtime dialect.
+// Copies the matching base and Game Site Engine domain schema templates into
+// generated runtime schema files based on DATABASE_PROVIDER. Called from
+// `pnpm db:setup` and from `prebuild` so builds line up with the runtime dialect.
 //
 // Base templates committed to git:
 //   schema.sqlite.ts   (default; also used by turso / d1)
@@ -8,8 +8,10 @@
 //   schema.mysql.ts    (legacy ShipAny support)
 //
 // Game-domain templates committed to git:
-//   game-schema.sqlite.ts   (V1 first-class: sqlite / d1)
-//   game-schema.postgres.ts (compatibility path; not yet a V1 support promise)
+//   game-schema.sqlite.ts
+//   game-schema.postgres.ts
+//   game-content-schema.sqlite.ts
+//   game-content-schema.postgres.ts
 //
 // Env-file loading mirrors scripts/with-env.ts so this script picks up
 // DATABASE_PROVIDER from .env.<NODE_ENV> / .env.local / .env when run from
@@ -84,8 +86,12 @@ const baseSrc = resolve(`src/config/db/schema.${templateName}.ts`);
 const baseDst = resolve('src/config/db/schema.ts');
 const gameSrc = resolve(`src/config/db/game-schema.${gameTemplateName}.ts`);
 const gameDst = resolve('src/config/db/game-schema.ts');
+const gameContentSrc = resolve(
+  `src/config/db/game-content-schema.${gameTemplateName}.ts`
+);
+const gameContentDst = resolve('src/config/db/game-content-schema.ts');
 
-for (const src of [baseSrc, gameSrc]) {
+for (const src of [baseSrc, gameSrc, gameContentSrc]) {
   if (!existsSync(src)) {
     console.error(`db-setup: template not found at ${src}`);
     process.exit(1);
@@ -94,7 +100,8 @@ for (const src of [baseSrc, gameSrc]) {
 
 copyFileSync(baseSrc, baseDst);
 copyFileSync(gameSrc, gameDst);
+copyFileSync(gameContentSrc, gameContentDst);
 
 console.log(
-  `db-setup: schema.ts ← schema.${templateName}.ts; game-schema.ts ← game-schema.${gameTemplateName}.ts (DATABASE_PROVIDER=${provider})`
+  `db-setup: schema.ts ← schema.${templateName}.ts; game-schema.ts + game-content-schema.ts ← ${gameTemplateName} templates (DATABASE_PROVIDER=${provider})`
 );
