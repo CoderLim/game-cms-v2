@@ -10,12 +10,37 @@ export type PublicSocialLink = {
   url: string;
 };
 
+export type PublicNavigationItem = {
+  label: string;
+  href: string;
+};
+
+export type PublicAnalyticsConfig = {
+  gaId?: string;
+  clarityId?: string;
+};
+
+export type PublicAdsConfig = {
+  enabled?: boolean;
+  adsenseClient?: string;
+  slots?: Record<string, string>;
+};
+
+export type PublicFooterConfig = {
+  description?: string;
+};
+
+export type PublicGamePlayerConfig = {
+  allowFullscreen?: boolean;
+  autoplay?: boolean;
+};
+
 export type PublicSiteConfig = {
-  analytics: Record<string, unknown>;
-  ads: Record<string, unknown>;
-  navigation: unknown[];
-  footer: Record<string, unknown>;
-  gamePlayer: Record<string, unknown>;
+  analytics: PublicAnalyticsConfig;
+  ads: PublicAdsConfig;
+  navigation: PublicNavigationItem[];
+  footer: PublicFooterConfig;
+  gamePlayer: PublicGamePlayerConfig;
   socialLinks: PublicSocialLink[];
 };
 
@@ -104,11 +129,11 @@ export async function getPublicSiteConfig(
 ): Promise<PublicSiteConfig> {
   const [analytics, ads, navigation, footer, gamePlayer, socialLinks] =
     await Promise.all([
-      getJson<Record<string, unknown>>(siteId, 'analytics', {}),
-      getJson<Record<string, unknown>>(siteId, 'ads', {}),
-      getJson<unknown[]>(siteId, 'navigation', []),
-      getJson<Record<string, unknown>>(siteId, 'footer', {}),
-      getJson<Record<string, unknown>>(siteId, 'game_player', {}),
+      getJson<PublicAnalyticsConfig>(siteId, 'analytics', {}),
+      getJson<PublicAdsConfig>(siteId, 'ads', {}),
+      getJson<PublicNavigationItem[]>(siteId, 'navigation', []),
+      getJson<PublicFooterConfig>(siteId, 'footer', {}),
+      getJson<PublicGamePlayerConfig>(siteId, 'game_player', {}),
       getJson<PublicSocialLink[]>(siteId, 'social_links', []),
     ]);
 
