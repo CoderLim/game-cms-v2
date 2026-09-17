@@ -2,6 +2,10 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr, respPage } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  createGameCategorySchema,
+  parseBody,
+} from '@/modules/admin/game-engine-validation';
 import { listCategoryCatalog } from '@/modules/categories/admin';
 import { createCategory } from '@/modules/categories/service';
 
@@ -16,11 +20,7 @@ async function GET({ request }: { request: Request }) {
     );
     const search = searchParams.get('search') || undefined;
 
-    const { items, total } = await listCategoryCatalog({
-      search,
-      page,
-      pageSize,
-    });
+    const { items, total } = await listCategoryCatalog({ search, page, pageSize });
     return respPage(items, total);
   } catch (error: any) {
     return respErr(error.message || 'Failed to list game categories');
@@ -30,8 +30,7 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.key) return respErr('key is required');
+    const body = parseBody(createGameCategorySchema, await request.json());
     return respData(await createCategory({ key: body.key }));
   } catch (error: any) {
     return respErr(error.message || 'Failed to create game category');
