@@ -88,3 +88,6 @@ jobs:
 
       - name: Verify multi-site isolation and migrated content
         run: pnpm tsx scripts/verify-driftboss-v2-migration.ts
+
+      - name: Verify per-site counters restart at zero
+        run: pnpm tsx scripts/verify-driftboss-v2-stats-reset.ts
