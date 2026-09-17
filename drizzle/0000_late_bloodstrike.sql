@@ -549,6 +549,24 @@ CREATE TABLE `site_game_locale` (
 CREATE UNIQUE INDEX `uq_site_game_locale` ON `site_game_locale` (`site_game_id`,`locale`);--> statement-breakpoint
 CREATE UNIQUE INDEX `uq_site_game_locale_slug` ON `site_game_locale` (`site_id`,`locale`,`slug`);--> statement-breakpoint
 CREATE INDEX `idx_site_game_locale_lookup` ON `site_game_locale` (`site_id`,`locale`,`status`);--> statement-breakpoint
+CREATE TABLE `site_post` (
+	`id` text PRIMARY KEY NOT NULL,
+	`site_id` text NOT NULL,
+	`type` text DEFAULT 'article' NOT NULL,
+	`status` text DEFAULT 'draft' NOT NULL,
+	`indexable` integer DEFAULT false NOT NULL,
+	`featured` integer DEFAULT false NOT NULL,
+	`author_name` text,
+	`author_image` text,
+	`published_at` integer,
+	`created_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
+	`updated_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
+	FOREIGN KEY (`site_id`) REFERENCES `game_site`(`id`) ON UPDATE no action ON DELETE cascade
+);
+--> statement-breakpoint
+CREATE INDEX `idx_site_post_site_type_status` ON `site_post` (`site_id`,`type`,`status`);--> statement-breakpoint
+CREATE INDEX `idx_site_post_site_indexable` ON `site_post` (`site_id`,`indexable`,`status`);--> statement-breakpoint
+CREATE INDEX `idx_site_post_site_featured` ON `site_post` (`site_id`,`featured`,`status`);--> statement-breakpoint
 CREATE TABLE `site_setting` (
 	`id` text PRIMARY KEY NOT NULL,
 	`site_id` text NOT NULL,
@@ -577,24 +595,6 @@ CREATE TABLE `site_locale` (
 --> statement-breakpoint
 CREATE UNIQUE INDEX `uq_site_locale` ON `site_locale` (`site_id`,`locale`);--> statement-breakpoint
 CREATE INDEX `idx_site_locale_status` ON `site_locale` (`site_id`,`status`);--> statement-breakpoint
-CREATE TABLE `site_post` (
-	`id` text PRIMARY KEY NOT NULL,
-	`site_id` text NOT NULL,
-	`type` text DEFAULT 'article' NOT NULL,
-	`status` text DEFAULT 'draft' NOT NULL,
-	`indexable` integer DEFAULT false NOT NULL,
-	`featured` integer DEFAULT false NOT NULL,
-	`author_name` text,
-	`author_image` text,
-	`published_at` integer,
-	`created_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
-	`updated_at` integer DEFAULT (cast((julianday('now') - 2440587.5)*86400000 as integer)) NOT NULL,
-	FOREIGN KEY (`site_id`) REFERENCES `game_site`(`id`) ON UPDATE no action ON DELETE cascade
-);
---> statement-breakpoint
-CREATE INDEX `idx_site_post_site_type_status` ON `site_post` (`site_id`,`type`,`status`);--> statement-breakpoint
-CREATE INDEX `idx_site_post_site_indexable` ON `site_post` (`site_id`,`indexable`,`status`);--> statement-breakpoint
-CREATE INDEX `idx_site_post_site_featured` ON `site_post` (`site_id`,`featured`,`status`);--> statement-breakpoint
 CREATE TABLE `site_post_locale` (
 	`id` text PRIMARY KEY NOT NULL,
 	`site_id` text NOT NULL,
