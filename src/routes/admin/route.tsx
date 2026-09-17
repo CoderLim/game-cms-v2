@@ -36,6 +36,7 @@ function AdminLayout() {
       group,
       items: [
         { href: '/admin/game-sites', label: 'Sites', icon: Globe2 },
+        { href: '/admin/site-content', label: 'Homepage SEO', icon: Home },
         { href: '/admin/game-catalog', label: 'Game Catalog', icon: Library },
         { href: '/admin/site-games', label: 'Site Games', icon: Gamepad2 },
         { href: '/admin/game-categories', label: 'Game Categories', icon: FolderOpen },
