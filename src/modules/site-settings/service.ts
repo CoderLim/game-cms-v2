@@ -124,25 +124,39 @@ export async function remove(siteId: string, key: string) {
   return row;
 }
 
+function parseSetting<T>(
+  values: Map<string, string | null>,
+  key: string,
+  fallback: T
+): T {
+  const raw = values.get(key);
+  if (!raw) return fallback;
+
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
 export async function getPublicSiteConfig(
   siteId: string
 ): Promise<PublicSiteConfig> {
-  const [analytics, ads, navigation, footer, gamePlayer, socialLinks] =
-    await Promise.all([
-      getJson<PublicAnalyticsConfig>(siteId, 'analytics', {}),
-      getJson<PublicAdsConfig>(siteId, 'ads', {}),
-      getJson<PublicNavigationItem[]>(siteId, 'navigation', []),
-      getJson<PublicFooterConfig>(siteId, 'footer', {}),
-      getJson<PublicGamePlayerConfig>(siteId, 'game_player', {}),
-      getJson<PublicSocialLink[]>(siteId, 'social_links', []),
-    ]);
+  // Public pages need several independent settings at once. Reading all rows for
+  // the current site avoids six round-trips to D1 on every page request.
+  const rows = await list(siteId);
+  const values = new Map(rows.map((row) => [row.key, row.value]));
 
   return {
-    analytics,
-    ads,
-    navigation,
-    footer,
-    gamePlayer,
-    socialLinks,
+    analytics: parseSetting<PublicAnalyticsConfig>(values, 'analytics', {}),
+    ads: parseSetting<PublicAdsConfig>(values, 'ads', {}),
+    navigation: parseSetting<PublicNavigationItem[]>(values, 'navigation', []),
+    footer: parseSetting<PublicFooterConfig>(values, 'footer', {}),
+    gamePlayer: parseSetting<PublicGamePlayerConfig>(
+      values,
+      'game_player',
+      {}
+    ),
+    socialLinks: parseSetting<PublicSocialLink[]>(values, 'social_links', []),
   };
 }
