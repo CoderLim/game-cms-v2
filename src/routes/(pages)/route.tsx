@@ -35,7 +35,9 @@ function PagesLayout() {
       </main>
       <SiteFooter
         siteName={site.name}
-        socialLinks={publicConfig.socialLinks as any[]}
+        socialLinks={publicConfig.socialLinks}
+        analytics={publicConfig.analytics}
+        ads={publicConfig.ads}
       />
     </div>
   );
