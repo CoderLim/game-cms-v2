@@ -215,10 +215,7 @@ function HomePage() {
           </section>
         ) : null}
       </main>
-      <SiteFooter
-        siteName={site.name}
-        socialLinks={publicConfig.socialLinks as any[]}
-      />
+      <SiteFooter siteName={site.name} socialLinks={publicConfig.socialLinks} />
     </div>
   );
 }
