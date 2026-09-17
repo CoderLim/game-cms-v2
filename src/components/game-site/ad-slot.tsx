@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
 
+import type { PublicAdsConfig } from '@/modules/site-settings/service';
+
 const ADSENSE_CLIENT = /^ca-pub-\d+$/i;
 const ADSENSE_SLOT = /^\d+$/;
-
-type AdsConfig = {
-  enabled?: unknown;
-  adsenseClient?: unknown;
-  slots?: unknown;
-};
 
 function asString(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
@@ -18,20 +14,15 @@ export function AdSlot({
   slotKey,
   className,
 }: {
-  ads?: Record<string, unknown>;
+  ads?: PublicAdsConfig;
   slotKey: string;
   className?: string;
 }) {
-  const config = (ads || {}) as AdsConfig;
-  const client = asString(config.adsenseClient);
-  const slots =
-    config.slots && typeof config.slots === 'object'
-      ? (config.slots as Record<string, unknown>)
-      : {};
-  const slot = asString(slots[slotKey]);
+  const client = asString(ads?.adsenseClient);
+  const slot = asString(ads?.slots?.[slotKey]);
 
   const enabled =
-    config.enabled !== false &&
+    ads?.enabled !== false &&
     ADSENSE_CLIENT.test(client) &&
     ADSENSE_SLOT.test(slot);
 
