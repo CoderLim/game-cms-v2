@@ -2,6 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr, respPage } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  createGameSchema,
+  parseBody,
+  updateGameSchema,
+} from '@/modules/admin/game-engine-validation';
 import * as gameService from '@/modules/games/service';
 
 async function GET({ request }: { request: Request }) {
@@ -29,10 +34,7 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.key || !body?.title) {
-      return respErr('key and title are required');
-    }
+    const body = parseBody(createGameSchema, await request.json());
 
     const row = await gameService.create({
       key: body.key,
@@ -42,10 +44,10 @@ async function POST({ request }: { request: Request }) {
       sourceUrl: body.sourceUrl || undefined,
       imageUrl: body.imageUrl || undefined,
       provider: body.provider || undefined,
-      embedType: body.embedType || undefined,
+      embedType: body.embedType,
       orientation: body.orientation || undefined,
       aspectRatio: body.aspectRatio || undefined,
-      status: body.status,
+      status: body.status as gameService.GameStatus | undefined,
     });
     return respData(row);
   } catch (error: any) {
@@ -56,8 +58,7 @@ async function POST({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.id) return respErr('id is required');
+    const body = parseBody(updateGameSchema, await request.json());
 
     const row = await gameService.update(body.id, {
       key: body.key,
@@ -70,7 +71,7 @@ async function PUT({ request }: { request: Request }) {
       embedType: body.embedType,
       orientation: body.orientation,
       aspectRatio: body.aspectRatio,
-      status: body.status,
+      status: body.status as gameService.GameStatus | undefined,
     });
     return respData(row);
   } catch (error: any) {
