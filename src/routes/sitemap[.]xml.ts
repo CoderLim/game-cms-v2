@@ -191,6 +191,7 @@ export const Route = createFileRoute('/sitemap.xml')({
           {
             alternates: Alternate[];
             updatedAt: Date | string | null;
+            type: SitePostType;
           }
         >();
         const blogLocales = new Set<string>();
@@ -198,13 +199,13 @@ export const Route = createFileRoute('/sitemap.xml')({
 
         for (const { locale, posts } of localeData) {
           for (const post of posts) {
-            if (post.type === SitePostType.PAGE) continue;
             if (post.type === SitePostType.GUIDE) guideLocales.add(locale);
-            else blogLocales.add(locale);
+            else if (post.type !== SitePostType.PAGE) blogLocales.add(locale);
 
             const group = postGroups.get(post.sitePostId) || {
               alternates: [],
               updatedAt: post.updatedAt,
+              type: post.type,
             };
             group.alternates.push({
               locale,
@@ -232,7 +233,12 @@ export const Route = createFileRoute('/sitemap.xml')({
             locale: primary.locale,
             alternates: group.alternates,
             lastModified: group.updatedAt,
-            priority: primary.path.startsWith('/guides/') ? 0.8 : 0.7,
+            priority:
+              group.type === SitePostType.GUIDE
+                ? 0.8
+                : group.type === SitePostType.PAGE
+                  ? 0.6
+                  : 0.7,
             changeFrequency: 'monthly',
           });
         }
