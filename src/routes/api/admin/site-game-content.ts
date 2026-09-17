@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { respData, respErr } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
 import { getLocaleContent } from '@/modules/site-games/admin';
+import { findCrossSiteDuplicateGameContent } from '@/modules/site-games/duplicate-content';
 import * as siteGameService from '@/modules/site-games/service';
 
 async function GET({ request }: { request: Request }) {
@@ -32,6 +33,30 @@ async function PUT({ request }: { request: Request }) {
     }
     if (!body?.slug || !body?.title) {
       return respErr('slug and title are required');
+    }
+
+    // Publishing is the boundary that matters for SEO. Drafts may temporarily
+    // duplicate source material while an editor rewrites it, but a published
+    // page must not reuse the same substantial body for the same global game
+    // on another domain.
+    if (body.status === siteGameService.SiteContentStatus.PUBLISHED) {
+      const duplicate = await findCrossSiteDuplicateGameContent({
+        siteId: body.siteId,
+        siteGameId: body.siteGameId,
+        locale: body.locale,
+        description: body.description,
+        content: body.content,
+        howToPlay: body.howToPlay,
+        controls: body.controls,
+        features: body.features,
+        faq: body.faq,
+      });
+
+      if (duplicate) {
+        return respErr(
+          `Publishing blocked: this game has the same long-form ${body.locale} content on ${duplicate.domain} (${duplicate.slug}). Rewrite the page for this site before publishing.`
+        );
+      }
     }
 
     const row = await siteGameService.upsertLocaleContent({
