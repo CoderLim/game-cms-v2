@@ -69,6 +69,22 @@ async function rows(table: string) {
   }
 }
 
+async function columns(table: string) {
+  try {
+    const result = await client`
+      SELECT column_name
+        FROM information_schema.columns
+       WHERE table_schema = current_schema()
+         AND table_name = ${table}
+       ORDER BY ordinal_position
+    `;
+    return new Set(result.map((row: any) => String(row.column_name)));
+  } catch (error) {
+    console.warn(`WARN: unable to inspect legacy table ${table}: ${(error as Error).message}`);
+    return new Set<string>();
+  }
+}
+
 function filteredByDomain(items: any[]) {
   if (!onlyDomain) return items;
   return items.filter((row) => normalizeDomain(row.domain) === onlyDomain);
@@ -86,20 +102,39 @@ function duplicates<T>(items: T[], keyOf: (item: T) => string) {
   return [...buckets.entries()].filter(([, bucket]) => bucket.length > 1);
 }
 
+function capabilityLine(table: string, actual: Set<string>, optional: string[]) {
+  const enabled = optional.filter((column) => actual.has(column));
+  const fallback = optional.filter((column) => !actual.has(column));
+  return `${table}: extended=[${enabled.join(', ') || 'none'}], fallback=[${fallback.join(', ') || 'none'}]`;
+}
+
 const errors: string[] = [];
 const warnings: string[] = [];
 
 try {
-  const [games, categories, gameCategories, sites, seoGamesRaw, seoCategoriesRaw, blogsRaw] =
-    await Promise.all([
-      rows('games'),
-      rows('categories'),
-      rows('game_categories'),
-      rows('game_sites'),
-      rows('seo_games'),
-      rows('seo_categories'),
-      rows('blogs'),
-    ]);
+  const [
+    games,
+    categories,
+    gameCategories,
+    sites,
+    seoGamesRaw,
+    seoCategoriesRaw,
+    blogsRaw,
+    seoGameColumns,
+    seoCategoryColumns,
+    blogColumns,
+  ] = await Promise.all([
+    rows('games'),
+    rows('categories'),
+    rows('game_categories'),
+    rows('game_sites'),
+    rows('seo_games'),
+    rows('seo_categories'),
+    rows('blogs'),
+    columns('seo_games'),
+    columns('seo_categories'),
+    columns('blogs'),
+  ]);
 
   const seoGames = filteredByDomain(seoGamesRaw);
   const seoCategories = filteredByDomain(seoCategoriesRaw);
@@ -118,9 +153,6 @@ try {
     errors.push(`requested domain ${onlyDomain} has no site-scoped legacy rows`);
   }
 
-  // `game_site.key` is globally unique. The current exporter intentionally
-  // preserves the short historical key (domain without TLD), so detect a
-  // collision before SQL generation rather than failing during D1 import.
   for (const [key, matchingDomains] of duplicates([...domains], (domain) => siteKey(domain))) {
     errors.push(
       `SITE_KEY collision "${key}": ${matchingDomains.join(', ')}. Export these domains separately or choose explicit V2 site keys.`
@@ -208,8 +240,6 @@ try {
     );
   }
 
-  // site_post groups translations by domain+slug. A repeated domain+slug+locale
-  // is invalid; a title-derived empty slug is also dangerous.
   for (const row of blogs) {
     const slug = String(row.slug || slugify(row.title || '')).trim().toLowerCase();
     if (!slug) {
@@ -233,6 +263,38 @@ try {
   console.log(`Site game SEO rows: ${seoGames.length}`);
   console.log(`Site category SEO rows: ${seoCategories.length}`);
   console.log(`Blogs: ${blogs.length}`);
+  console.log('\nSchema capabilities:');
+  console.log(
+    capabilityLine('seo_games', seoGameColumns, [
+      'locale',
+      'slug',
+      'title',
+      'meta_title',
+      'updated_at',
+    ])
+  );
+  console.log(
+    capabilityLine('seo_categories', seoCategoryColumns, [
+      'locale',
+      'slug',
+      'title',
+      'meta_title',
+      'updated_at',
+    ])
+  );
+  console.log(
+    capabilityLine('blogs', blogColumns, ['locale', 'updated_at', 'meta_title'])
+  );
+
+  if (!seoGameColumns.has('locale')) {
+    warnings.push('seo_games has no locale column; exporter will treat all rows as en');
+  }
+  if (!seoCategoryColumns.has('locale')) {
+    warnings.push('seo_categories has no locale column; exporter will treat all rows as en');
+  }
+  if (!blogColumns.has('locale')) {
+    warnings.push('blogs has no locale column; exporter will treat all rows as en');
+  }
 
   if (warnings.length) {
     console.log('\nWarnings:');
