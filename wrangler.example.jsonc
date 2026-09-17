@@ -1,31 +1,37 @@
 // Cloudflare Workers deploy config — TEMPLATE.
 // The /deploy-cloudflare skill copies this to wrangler.jsonc (gitignored, your
-// working copy) and fills in the real values (D1 database_id, production URL).
-// `pnpm cf:build` (NITRO_PRESET=cloudflare_module) merges wrangler.jsonc into
-// the generated .output/server/wrangler.json; deploy with `pnpm cf:deploy`.
+// working copy) and fills in the real values (D1 database_id, production URL,
+// SITE_KEY). `pnpm cf:build` (NITRO_PRESET=cloudflare_module) merges
+// wrangler.jsonc into the generated .output/server/wrangler.json; deploy with
+// `pnpm cf:deploy`.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "shipany-tanstack",
+  "name": "game-site-engine",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true,
   },
   "vars": {
     "DATABASE_PROVIDER": "d1",
+    // One Worker deployment resolves exactly one logical game_site row.
+    "SITE_KEY": "REPLACE_WITH_GAME_SITE_KEY",
+    // Only production is indexable; robots.txt blocks all other values.
+    "DEPLOY_ENV": "production",
     // Server-side runtime fallbacks for the build-time VITE_* values — keep in
     // sync with .env.production (better-auth trustedOrigins, payment callbacks).
-    "VITE_APP_URL": "https://<worker>.<your-subdomain>.workers.dev",
-    "VITE_APP_NAME": "My App",
+    "VITE_APP_URL": "https://example.com",
+    "VITE_APP_NAME": "Game Site",
   },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "shipany-db",
+      // Multiple site Workers may deliberately bind the same shared D1 DB.
+      "database_name": "game-site-engine-db",
       "database_id": "REPLACE_WITH_OUTPUT_OF_WRANGLER_D1_CREATE",
       "migrations_dir": "drizzle",
     },
   ],
-  // ── Postgres via Hyperdrive (instead of D1) ────────────────────────────────
+  // ── Future PostgreSQL via Hyperdrive (not first-class in Game Engine V1) ───
   // 1. npx wrangler hyperdrive create <name> --connection-string="postgres://..." (your direct PG url)
   // 2. Set vars.DATABASE_PROVIDER to "postgresql" and remove the d1_databases block
   // 3. Uncomment and fill the binding (the build keeps the postgres driver in
