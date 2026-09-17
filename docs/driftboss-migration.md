@@ -48,7 +48,31 @@ npx wrangler d1 migrations apply <database-name> --remote
 
 Do not import migration data before the schema containing the Game Domain and Game Content tables has been applied.
 
-## 2. Export legacy data as V2 SQL
+## 2. Audit the real legacy source before export
+
+The checked-in `driftbossgame/db/schema.sql` is historical and may not exactly match the current production Supabase database. In particular, runtime databases may have optional columns such as `locale`, `slug`, `meta_title`, `title`, or `updated_at` that are not present in the old schema file.
+
+Always run the read-only source audit against the real legacy database first:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss:audit -- \
+  --domain=driftbossgame.org
+```
+
+The audit blocks export when it finds:
+
+- orphan game/category references;
+- duplicate site+game+locale rows;
+- duplicate localized URLs;
+- blog slug collisions;
+- `SITE_KEY` collisions after domain normalization.
+
+It also prints a **Schema capabilities** section showing which optional legacy columns actually exist. Missing optional columns are not automatically fatal: exporters deliberately fall back to `en`, the global game/category title, the historical key-derived slug, or `created_at` where appropriate. The important point is that this fallback is visible before export rather than silently assumed.
+
+Do not continue to production export if the audit reports blocking issues.
+
+## 3. Export legacy data as V2 SQL
 
 Use a read-capable connection string for the old Supabase/Postgres database.
 
@@ -79,7 +103,7 @@ Multiple featured game pairs can be comma-separated in `--featured`.
 
 Both exporters are read-only against the legacy database and generate deterministic UUIDv5 + idempotent UPSERT SQL.
 
-## 3. Inspect the generated SQL
+## 4. Inspect the generated SQL
 
 Before applying it, check the exporter summaries and inspect both SQL files.
 
@@ -97,7 +121,7 @@ Expected properties:
 
 Historical databases may contain runtime columns absent from the checked-in old `schema.sql` (for example `locale`, `meta_title`, or `slug`). The exporter reads `SELECT *` and consumes those fields when present.
 
-## 4. Validate in local SQLite first
+## 5. Validate in local SQLite first
 
 Create a clean local database. Never use your normal development database for the migration dry-run.
 
@@ -159,7 +183,7 @@ temporary legacy PostgreSQL
 
 Its fixture deliberately puts the same `drift-boss` global game on two sites with different slugs and SEO content, so a regression that merges/cross-falls-back content fails CI.
 
-## 5. Import to D1
+## 6. Import to D1
 
 After local validation, apply V2 schema migrations to the target D1 first:
 
@@ -183,7 +207,7 @@ npx wrangler d1 execute <database-name> \
 
 The order matters: extras reference `game_site` rows created by the main import.
 
-## 6. Configure the Worker
+## 7. Configure the Worker
 
 For the DriftBoss Worker:
 
@@ -203,12 +227,12 @@ For the DriftBoss Worker:
 
 Keep `DEPLOY_ENV=preview` while validating so robots blocks indexing before cutover.
 
-## 7. URL/SEO acceptance checks
+## 8. URL/SEO acceptance checks
 
 Deploy a preview Worker and run the reusable audit while its canonical still points at the intended production domain:
 
 ```bash
-pnpm tsx scripts/audit-game-site-cutover.ts \
+pnpm game:audit:cutover -- \
   --base=https://<preview-worker>.workers.dev \
   --canonical=https://driftbossgame.org \
   --game=drift-boss \
@@ -220,9 +244,18 @@ The audit checks:
 
 - critical pages return 200;
 - canonical points to the intended production domain;
+- JSON-LD URL matches game canonical;
+- hreflang sets include `x-default` when alternates are emitted;
 - preview robots contains `Disallow: /`;
 - robots points to the correct canonical sitemap URL;
-- sitemap uses the canonical production origin.
+- sitemap uses the canonical production origin;
+- explicitly supplied cross-site game slugs return 404 and never leak into sitemap.
+
+For example, pass known games that should not exist on DriftBoss with:
+
+```bash
+--not-found=tekken-3,mahjong-link
+```
 
 Also manually compare the old production site and V2 for important:
 
@@ -238,27 +271,28 @@ Also manually compare the old production site and V2 for important:
 
 Existing indexed URLs should be preserved whenever possible. Any intentionally changed URL requires a permanent redirect.
 
-## 8. Production cutover
+## 9. Production cutover
 
 Recommended order:
 
-1. export only `driftbossgame.org`;
-2. dry-run both SQL files locally;
-3. compare row/page counts;
-4. back up target D1;
-5. import both files into production D1;
-6. deploy a preview Worker with `DEPLOY_ENV=preview`;
-7. run `audit-game-site-cutover.ts` against preview;
-8. verify important old URLs manually;
-9. switch production route/domain;
-10. set `DEPLOY_ENV=production`;
-11. run audit again with `--expect-indexable=true`;
-12. validate GSC, sitemap, canonical and 404 logs;
-13. only then migrate Klotski / Tekken3.
+1. audit the real legacy source database;
+2. export only `driftbossgame.org`;
+3. dry-run both SQL files locally;
+4. compare row/page counts;
+5. back up target D1;
+6. import both files into production D1;
+7. deploy a preview Worker with `DEPLOY_ENV=preview`;
+8. run `audit-game-site-cutover.ts` against preview;
+9. verify important old URLs manually;
+10. switch production route/domain;
+11. set `DEPLOY_ENV=production`;
+12. run audit again with `--expect-indexable=true`;
+13. validate GSC, sitemap, canonical and 404 logs;
+14. only then migrate Klotski / Tekken3.
 
 Keep the legacy production application/database intact until rollback is no longer needed.
 
-## 9. What is not migrated automatically
+## 10. What is not migrated automatically
 
 The exporters deliberately do not guess ambiguous business intent:
 
