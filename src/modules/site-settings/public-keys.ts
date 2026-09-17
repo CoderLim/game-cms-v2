@@ -4,6 +4,7 @@ export const PUBLIC_SITE_SETTING_KEYS = [
   'navigation',
   'footer',
   'game_player',
+  'social_links',
 ] as const;
 
 export type PublicSiteSettingKey = (typeof PUBLIC_SITE_SETTING_KEYS)[number];
