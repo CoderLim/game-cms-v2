@@ -1,12 +1,14 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
 import { GameCard } from '@/components/game-site/game-card';
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
 import { Link } from '@/core/i18n/navigation';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { getFeatured, listHot } from '@/modules/site-games/public';
 import { listPublished as listGames } from '@/modules/site-games/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import {
   getPublished as getSiteContent,
   listPublishedLocales as listPublishedSiteLocales,
@@ -24,20 +26,24 @@ export const Route = createFileRoute('/')({
     const locale = getLocale();
     if (!site.enabledLocales.includes(locale)) throw notFound();
 
-    const [siteContent, publishedSiteLocales, categories, featured, hotGames, games] =
-      await Promise.all([
-        getSiteContent({ siteId: site.id, locale }),
-        listPublishedSiteLocales(site.id),
-        listCategories({ siteId: site.id, locale, limit: 8 }),
-        getFeatured({ siteId: site.id, locale }),
-        listHot({ siteId: site.id, locale, limit: 12 }),
-        listGames({ siteId: site.id, locale, limit: 36 }),
-      ]);
+    const [
+      siteContent,
+      publishedSiteLocales,
+      categories,
+      featured,
+      hotGames,
+      games,
+      publicConfig,
+    ] = await Promise.all([
+      getSiteContent({ siteId: site.id, locale }),
+      listPublishedSiteLocales(site.id),
+      listCategories({ siteId: site.id, locale, limit: 8 }),
+      getFeatured({ siteId: site.id, locale }),
+      listHot({ siteId: site.id, locale, limit: 12 }),
+      listGames({ siteId: site.id, locale, limit: 36 }),
+      getPublicSiteConfig(site.id),
+    ]);
 
-    // The default locale may use the site identity as a safe fallback while a
-    // homepage copy row is still being authored. Non-default locales must have
-    // explicit published site_locale content or the localized homepage does
-    // not exist; this prevents thin translated URLs from being indexable.
     if (locale !== site.defaultLocale && !siteContent) throw notFound();
 
     const availableHomepageLocales = [
@@ -54,6 +60,7 @@ export const Route = createFileRoute('/')({
       featured,
       hotGames,
       games,
+      publicConfig,
     };
   },
   head: ({ loaderData }) => {
@@ -99,8 +106,15 @@ export const Route = createFileRoute('/')({
 });
 
 function HomePage() {
-  const { site, siteContent, categories, featured, hotGames, games } =
-    Route.useLoaderData();
+  const {
+    site,
+    siteContent,
+    categories,
+    featured,
+    hotGames,
+    games,
+    publicConfig,
+  } = Route.useLoaderData();
   const latestGames = games.filter(
     (item) => !hotGames.some((hot) => hot.siteGameId === item.siteGameId)
   );
@@ -201,6 +215,10 @@ function HomePage() {
           </section>
         ) : null}
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
