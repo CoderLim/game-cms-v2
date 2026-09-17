@@ -55,11 +55,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# database
+# database runtime/generated schema copies
 /data/
-/drizzle/
 src/config/db/schema.ts
 src/config/db/game-schema.ts
+src/config/db/game-content-schema.ts
+
+# Drizzle migration files under /drizzle are intentionally version controlled
+# because Cloudflare D1 production deploys apply them via `wrangler d1 migrations apply`.
 
 # npm (project uses pnpm)
 package-lock.json
