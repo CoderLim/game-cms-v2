@@ -80,13 +80,9 @@ export async function getActiveByKey(key: string) {
   return row;
 }
 
-export async function getCurrentSiteContext(): Promise<SiteContext> {
-  const siteKey = normalizeKey(envConfigs.site_key || '');
-  if (!siteKey) {
-    throw new Error(
-      'SITE_KEY is required for Game Site Engine public requests. Configure one logical site per deployment.'
-    );
-  }
+export async function getSiteContextByKey(key: string): Promise<SiteContext> {
+  const siteKey = normalizeKey(key);
+  if (!siteKey) throw new Error('site key is required');
 
   const now = Date.now();
   const cached = siteContextCache.get(siteKey);
@@ -104,6 +100,16 @@ export async function getCurrentSiteContext(): Promise<SiteContext> {
     expiresAt: now + SITE_CONTEXT_TTL_MS,
   });
   return value;
+}
+
+export async function getCurrentSiteContext(): Promise<SiteContext> {
+  const siteKey = normalizeKey(envConfigs.site_key || '');
+  if (!siteKey) {
+    throw new Error(
+      'SITE_KEY is required for Game Site Engine public requests. Configure one logical site per deployment.'
+    );
+  }
+  return getSiteContextByKey(siteKey);
 }
 
 export async function create(input: {
