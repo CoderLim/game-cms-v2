@@ -7,7 +7,10 @@ import { Link } from '@/core/i18n/navigation';
 import { listPublished as listCategories } from '@/modules/categories/service';
 import { getFeatured, listHot } from '@/modules/site-games/public';
 import { listPublished as listGames } from '@/modules/site-games/service';
-import { getPublished as getSiteContent } from '@/modules/sites/content';
+import {
+  getPublished as getSiteContent,
+  listPublishedLocales as listPublishedSiteLocales,
+} from '@/modules/sites/content';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -21,19 +24,41 @@ export const Route = createFileRoute('/')({
     const locale = getLocale();
     if (!site.enabledLocales.includes(locale)) throw notFound();
 
-    const [siteContent, categories, featured, hotGames, games] = await Promise.all([
-      getSiteContent({ siteId: site.id, locale }),
-      listCategories({ siteId: site.id, locale, limit: 8 }),
-      getFeatured({ siteId: site.id, locale }),
-      listHot({ siteId: site.id, locale, limit: 12 }),
-      listGames({ siteId: site.id, locale, limit: 36 }),
-    ]);
+    const [siteContent, publishedSiteLocales, categories, featured, hotGames, games] =
+      await Promise.all([
+        getSiteContent({ siteId: site.id, locale }),
+        listPublishedSiteLocales(site.id),
+        listCategories({ siteId: site.id, locale, limit: 8 }),
+        getFeatured({ siteId: site.id, locale }),
+        listHot({ siteId: site.id, locale, limit: 12 }),
+        listGames({ siteId: site.id, locale, limit: 36 }),
+      ]);
 
-    return { site, siteContent, locale, categories, featured, hotGames, games };
+    // The default locale may use the site identity as a safe fallback while a
+    // homepage copy row is still being authored. Non-default locales must have
+    // explicit published site_locale content or the localized homepage does
+    // not exist; this prevents thin translated URLs from being indexable.
+    if (locale !== site.defaultLocale && !siteContent) throw notFound();
+
+    const availableHomepageLocales = [
+      site.defaultLocale,
+      ...publishedSiteLocales.map((entry) => entry.locale),
+    ].filter((value, index, array) => array.indexOf(value) === index);
+
+    return {
+      site,
+      siteContent,
+      locale,
+      availableHomepageLocales,
+      categories,
+      featured,
+      hotGames,
+      games,
+    };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { site, siteContent, locale } = loaderData;
+    const { site, siteContent, locale, availableHomepageLocales } = loaderData;
     const origin = siteOrigin(site.domain);
     const urlFor = (loc: string) =>
       localizeUrl(`${origin}/`, { locale: loc as any }).href;
@@ -57,7 +82,7 @@ export const Route = createFileRoute('/')({
       ],
       links: [
         { rel: 'canonical', href: urlFor(locale) },
-        ...site.enabledLocales.map((loc) => ({
+        ...availableHomepageLocales.map((loc) => ({
           rel: 'alternate',
           hrefLang: loc,
           href: urlFor(loc),
