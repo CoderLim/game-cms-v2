@@ -60,15 +60,18 @@ async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
     const body = await request.json();
-    if (!body?.id) return respErr('id is required');
+    if (!body?.siteId || !body?.id) {
+      return respErr('siteId and id are required');
+    }
 
-    const row = await siteGameService.updateSiteGame(body.id, {
+    const row = await siteGameService.updateSiteGame(body.siteId, body.id, {
       status: body.status,
       indexable: body.indexable,
       featured: body.featured,
       hot: body.hot,
       sortWeight: body.sortWeight,
     });
+    if (!row) return respErr('site game not found for supplied site');
     return respData(row);
   } catch (error: any) {
     return respErr(error.message || 'Failed to update site game');
