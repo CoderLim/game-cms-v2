@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { Calendar } from 'lucide-react';
 
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
 import { StructuredData } from '@/components/seo/structured-data';
@@ -11,6 +12,7 @@ import {
   listPublishedLocales,
   SitePostType,
 } from '@/modules/site-posts/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -40,9 +42,10 @@ export const Route = createFileRoute('/blog/$slug')({
 
     if (!post) throw notFound();
 
-    const [categories, availableLocales] = await Promise.all([
+    const [categories, availableLocales, publicConfig] = await Promise.all([
       listCategories({ siteId: site.id, locale, limit: 8 }),
       listPublishedLocales({ siteId: site.id, sitePostId: post.sitePostId }),
+      getPublicSiteConfig(site.id),
     ]);
 
     const origin = siteOrigin(site.domain);
@@ -60,6 +63,7 @@ export const Route = createFileRoute('/blog/$slug')({
       availableLocales,
       canonical,
       description,
+      publicConfig,
     };
   },
   head: ({ loaderData }) => {
@@ -122,8 +126,15 @@ export const Route = createFileRoute('/blog/$slug')({
 });
 
 function BlogPostPage() {
-  const { site, locale, post, categories, canonical, description } =
-    Route.useLoaderData();
+  const {
+    site,
+    locale,
+    post,
+    categories,
+    canonical,
+    description,
+    publicConfig,
+  } = Route.useLoaderData();
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -191,6 +202,10 @@ function BlogPostPage() {
           <MarkdownContent content={post.content || ''} />
         </article>
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
