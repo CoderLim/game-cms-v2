@@ -264,6 +264,45 @@ export const siteSetting = table(
   (t) => [uniqueIndex('uq_site_setting_key').on(t.siteId, t.key)]
 );
 
+export const sitePost = table(
+  'site_post',
+  {
+    id: text('id').primaryKey(),
+    siteId: text('site_id')
+      .notNull()
+      .references(() => site.id, { onDelete: 'cascade' }),
+    locale: text('locale').notNull(),
+    slug: text('slug').notNull(),
+    type: text('type').notNull().default('article'),
+    status: text('status').notNull().default('draft'),
+    indexable: boolean('indexable').notNull().default(false),
+    title: text('title').notNull(),
+    metaTitle: text('meta_title'),
+    metaDescription: text('meta_description'),
+    description: text('description'),
+    imageUrl: text('image_url'),
+    content: text('content'),
+    authorName: text('author_name'),
+    publishedAt: timestamp('published_at'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (t) => [
+    uniqueIndex('uq_site_post_slug').on(t.siteId, t.locale, t.type, t.slug),
+    index('idx_site_post_public').on(
+      t.siteId,
+      t.locale,
+      t.type,
+      t.status,
+      t.indexable
+    ),
+    index('idx_site_post_published_at').on(t.siteId, t.publishedAt),
+  ]
+);
+
 export type Site = typeof site.$inferSelect;
 export type NewSite = typeof site.$inferInsert;
 export type Game = typeof game.$inferSelect;
@@ -280,3 +319,5 @@ export type SiteCategoryLocale = typeof siteCategoryLocale.$inferSelect;
 export type NewSiteCategoryLocale = typeof siteCategoryLocale.$inferInsert;
 export type SiteSetting = typeof siteSetting.$inferSelect;
 export type NewSiteSetting = typeof siteSetting.$inferInsert;
+export type SitePost = typeof sitePost.$inferSelect;
+export type NewSitePost = typeof sitePost.$inferInsert;
