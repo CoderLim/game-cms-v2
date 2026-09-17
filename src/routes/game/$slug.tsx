@@ -4,6 +4,7 @@ import { GameCard } from '@/components/game-site/game-card';
 import { GamePlayer } from '@/components/game-site/game-player';
 import { GameRating } from '@/components/game-site/game-rating';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
+import { SiteFooter } from '@/components/game-site/site-footer';
 import { SiteHeader } from '@/components/game-site/site-header';
 import { MarkdownContent } from '@/components/markdown-content';
 import { StructuredData } from '@/components/seo/structured-data';
@@ -11,6 +12,7 @@ import { listPublished as listCategories } from '@/modules/categories/service';
 import { listPublishedLocales } from '@/modules/site-games/locales';
 import { listSimilar } from '@/modules/site-games/public';
 import { getPublishedBySlug } from '@/modules/site-games/service';
+import { getPublicSiteConfig } from '@/modules/site-settings/service';
 import { getCurrentSiteContext } from '@/modules/sites/service';
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
@@ -32,16 +34,18 @@ export const Route = createFileRoute('/game/$slug')({
     });
     if (!game) throw notFound();
 
-    const [categories, availableLocales, moreGames] = await Promise.all([
-      listCategories({ siteId: site.id, locale, limit: 8 }),
-      listPublishedLocales({ siteId: site.id, siteGameId: game.siteGameId }),
-      listSimilar({
-        siteId: site.id,
-        siteGameId: game.siteGameId,
-        locale,
-        limit: 12,
-      }),
-    ]);
+    const [categories, availableLocales, moreGames, publicConfig] =
+      await Promise.all([
+        listCategories({ siteId: site.id, locale, limit: 8 }),
+        listPublishedLocales({ siteId: site.id, siteGameId: game.siteGameId }),
+        listSimilar({
+          siteId: site.id,
+          siteGameId: game.siteGameId,
+          locale,
+          limit: 12,
+        }),
+        getPublicSiteConfig(site.id),
+      ]);
 
     const origin = siteOrigin(site.domain);
     const canonical = localizeUrl(`${origin}/game/${game.slug}`, {
@@ -62,6 +66,7 @@ export const Route = createFileRoute('/game/$slug')({
       categories,
       availableLocales,
       moreGames,
+      publicConfig,
     };
   },
   head: ({ loaderData }) => {
@@ -125,8 +130,15 @@ export const Route = createFileRoute('/game/$slug')({
 });
 
 function GamePage() {
-  const { site, game, canonical, description, categories, moreGames } =
-    Route.useLoaderData();
+  const {
+    site,
+    game,
+    canonical,
+    description,
+    categories,
+    moreGames,
+    publicConfig,
+  } = Route.useLoaderData();
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -231,6 +243,10 @@ function GamePage() {
           </section>
         ) : null}
       </main>
+      <SiteFooter
+        siteName={site.name}
+        socialLinks={publicConfig.socialLinks as any[]}
+      />
     </div>
   );
 }
