@@ -23,6 +23,7 @@ export const envConfigs: Record<string, string> = {
   // Game Site Engine deployment identity. One Worker deployment owns one
   // logical site; SITE_KEY resolves to game_site.key in the database.
   site_key: procEnv.SITE_KEY ?? '',
+  deploy_env: procEnv.DEPLOY_ENV ?? 'development',
 
   // Database
   database_url: procEnv.DATABASE_URL ?? '',
