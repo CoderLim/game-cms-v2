@@ -13,13 +13,14 @@ declare global {
 }
 
 function getClientIpFromRequest(request: Request): string {
+  // On Cloudflare, CF-Connecting-IP is the authoritative visitor address.
+  // Prefer it over caller-controlled forwarding headers.
+  const cfIp = request.headers.get('cf-connecting-ip');
+  if (cfIp) return cfIp.trim();
+
   const xff = request.headers.get('x-forwarded-for');
   if (xff) return xff.split(',')[0]?.trim() || '';
-  return (
-    request.headers.get('cf-connecting-ip') ||
-    request.headers.get('x-real-ip') ||
-    ''
-  );
+  return request.headers.get('x-real-ip') || '';
 }
 
 function getStore(): Store {
@@ -29,14 +30,24 @@ function getStore(): Store {
   return globalThis.__minIntervalRateLimitStore;
 }
 
+function pruneStore(store: Store, now: number) {
+  // Isolate-local throttling is intentionally lightweight, but it still must
+  // not grow forever on a busy public game site.
+  if (store.size < 10_000) return;
+  const cutoff = now - 60 * 60 * 1000;
+  for (const [key, timestamp] of store) {
+    if (timestamp < cutoff) store.delete(key);
+  }
+}
+
 function buildKey(request: Request, opts: MinIntervalOptions): string {
   const url = new URL(request.url);
   const ip = getClientIpFromRequest(request);
-  const cookie = request.headers.get('cookie') || '';
-  const cookieHash = cookie ? md5(cookie) : 'no-cookie';
+  const userAgent = request.headers.get('user-agent') || '';
+  const clientHash = md5(`${ip}|${userAgent}`);
   const prefix = opts.keyPrefix || 'min-interval';
   const extra = opts.extraKey ? `|${opts.extraKey}` : '';
-  return `${prefix}|${request.method}|${url.pathname}|${ip}|${cookieHash}${extra}`;
+  return `${prefix}|${request.method}|${url.pathname}|${clientHash}${extra}`;
 }
 
 export function enforceMinIntervalRateLimit(
@@ -47,6 +58,7 @@ export function enforceMinIntervalRateLimit(
   if (!intervalMs) return null;
   const now = Date.now();
   const store = getStore();
+  pruneStore(store, now);
   const key = buildKey(request, opts);
   const last = store.get(key);
   if (typeof last === 'number') {
