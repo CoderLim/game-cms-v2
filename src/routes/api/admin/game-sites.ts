@@ -2,6 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { respData, respErr, respPage } from '@/lib/resp';
 import { requireAdmin } from '@/modules/admin/guard';
+import {
+  createSiteSchema,
+  parseBody,
+  updateSiteSchema,
+} from '@/modules/admin/game-engine-validation';
 import { listSites } from '@/modules/sites/admin';
 import * as siteService from '@/modules/sites/service';
 
@@ -26,22 +31,20 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.key || !body?.domain || !body?.name) {
-      return respErr('key, domain and name are required');
-    }
+    const body = parseBody(createSiteSchema, await request.json());
+    const enabledLocales = body.enabledLocales?.length
+      ? body.enabledLocales
+      : [body.defaultLocale];
 
     const row = await siteService.create({
       key: body.key,
       domain: body.domain,
       name: body.name,
-      defaultLocale: body.defaultLocale || 'en',
-      enabledLocales: Array.isArray(body.enabledLocales)
-        ? body.enabledLocales
-        : [body.defaultLocale || 'en'],
+      defaultLocale: body.defaultLocale,
+      enabledLocales,
       logoUrl: body.logoUrl || undefined,
       faviconUrl: body.faviconUrl || undefined,
-      status: body.status,
+      status: body.status as siteService.SiteStatus | undefined,
     });
     return respData(row);
   } catch (error: any) {
@@ -52,8 +55,7 @@ async function POST({ request }: { request: Request }) {
 async function PUT({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = await request.json();
-    if (!body?.id) return respErr('id is required');
+    const body = parseBody(updateSiteSchema, await request.json());
 
     const row = await siteService.update(body.id, {
       key: body.key,
@@ -63,7 +65,7 @@ async function PUT({ request }: { request: Request }) {
       enabledLocales: body.enabledLocales,
       logoUrl: body.logoUrl,
       faviconUrl: body.faviconUrl,
-      status: body.status,
+      status: body.status as siteService.SiteStatus | undefined,
     });
     return respData(row);
   } catch (error: any) {
