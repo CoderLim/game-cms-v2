@@ -91,6 +91,9 @@ jobs:
       - name: Verify cross-site service isolation
         run: pnpm exec tsx scripts/smoke-site-isolation.ts
 
+      - name: Verify public settings validation
+        run: pnpm exec tsx scripts/smoke-site-settings.ts
+
       - name: Verify Worker config generation
         run: |
           pnpm exec tsx scripts/configure-game-site-worker.ts \
