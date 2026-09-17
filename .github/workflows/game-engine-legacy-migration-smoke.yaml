@@ -72,12 +72,10 @@ jobs:
           pnpm db:push --force
 
       - name: Apply exported migrations
-        run: |
-          npx wrangler d1 execute placeholder --local \
-            --persist-to=data/wrangler-legacy-smoke \
-            --file=data/migrations/driftboss-v2.sql >/dev/null 2>&1 || true
-          node -e "const fs=require('fs'); const Database=require('better-sqlite3');" >/dev/null 2>&1 || true
-          pnpm tsx -e "import { createClient } from '@libsql/client'; import { readFileSync } from 'node:fs'; const c=createClient({url:process.env.DATABASE_URL!}); for (const f of ['data/migrations/driftboss-v2.sql','data/migrations/driftboss-v2-extras.sql']) { const sql=readFileSync(f,'utf8').replace(/^PRAGMA foreign_keys = ON;$/gm,'').replace(/^BEGIN TRANSACTION;$/gm,'').replace(/^COMMIT;$/gm,''); await c.executeMultiple(sql); } c.close();"
+        run: >-
+          pnpm tsx scripts/apply-sql-files.ts
+          data/migrations/driftboss-v2.sql
+          data/migrations/driftboss-v2-extras.sql
 
       - name: Verify multi-site isolation and migrated content
         run: pnpm tsx scripts/verify-driftboss-v2-migration.ts
