@@ -4,6 +4,21 @@ import { siteSetting } from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
 
+export type PublicSocialLink = {
+  name?: string;
+  displayName?: string;
+  url: string;
+};
+
+export type PublicSiteConfig = {
+  analytics: Record<string, unknown>;
+  ads: Record<string, unknown>;
+  navigation: unknown[];
+  footer: Record<string, unknown>;
+  gamePlayer: Record<string, unknown>;
+  socialLinks: PublicSocialLink[];
+};
+
 export async function get(siteId: string, key: string) {
   const [row] = await db()
     .select()
@@ -84,15 +99,17 @@ export async function remove(siteId: string, key: string) {
   return row;
 }
 
-export async function getPublicSiteConfig(siteId: string) {
+export async function getPublicSiteConfig(
+  siteId: string
+): Promise<PublicSiteConfig> {
   const [analytics, ads, navigation, footer, gamePlayer, socialLinks] =
     await Promise.all([
-      getJson(siteId, 'analytics', {}),
-      getJson(siteId, 'ads', {}),
-      getJson(siteId, 'navigation', []),
-      getJson(siteId, 'footer', {}),
-      getJson(siteId, 'game_player', {}),
-      getJson(siteId, 'social_links', []),
+      getJson<Record<string, unknown>>(siteId, 'analytics', {}),
+      getJson<Record<string, unknown>>(siteId, 'ads', {}),
+      getJson<unknown[]>(siteId, 'navigation', []),
+      getJson<Record<string, unknown>>(siteId, 'footer', {}),
+      getJson<Record<string, unknown>>(siteId, 'game_player', {}),
+      getJson<PublicSocialLink[]>(siteId, 'social_links', []),
     ]);
 
   return {
