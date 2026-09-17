@@ -7,10 +7,8 @@ import {
   siteCategoryContentSchema,
 } from '@/modules/admin/game-engine-validation';
 import { getLocaleContent } from '@/modules/categories/admin';
-import {
-  type SiteContentStatus,
-  upsertLocaleContent,
-} from '@/modules/categories/service';
+import { upsertLocaleContent } from '@/modules/categories/service';
+import { type SiteContentStatus } from '@/modules/site-games/service';
 
 async function GET({ request }: { request: Request }) {
   try {
