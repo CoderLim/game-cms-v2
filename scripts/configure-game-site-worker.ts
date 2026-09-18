@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
  * Materialize a site-specific wrangler.jsonc for one Game Site Engine Worker.
  *
  * This intentionally does not deploy. It only prepares the local, gitignored
- * config so multiple Workers can reuse the same shared D1 database while each
- * deployment gets its own SITE_KEY and canonical URL.
+ * config. Production Workers normally share the production Game Engine D1;
+ * migration previews may point at a dedicated disposable Preview D1.
  *
  * Usage:
  *   pnpm tsx scripts/configure-game-site-worker.ts \
@@ -14,7 +14,8 @@ import { resolve } from 'node:path';
  *     --domain=driftbossgame.org \
  *     --worker=driftbossgame \
  *     --site-name="Drift Boss" \
- *     --database-id=<shared-d1-id> \
+ *     --app-url=https://driftboss-preview.example.workers.dev \
+ *     --database-id=<target-d1-id> \
  *     --database-name=game-site-engine-db \
  *     --deploy-env=preview
  */
@@ -47,6 +48,7 @@ function jsonString(value: string) {
 
 const siteKey = required('site-key').toLowerCase();
 const domain = normalizeDomain(required('domain'));
+const appUrl = String(args.get('app-url') || `https://${domain}`).trim();
 const workerName = (args.get('worker') || siteKey).trim().toLowerCase();
 const siteName = (args.get('site-name') || siteKey).trim();
 const databaseId = required('database-id');
@@ -56,6 +58,10 @@ const output = resolve(args.get('out') || 'wrangler.jsonc');
 const templatePath = resolve(
   args.get('template') || 'wrangler.example.jsonc'
 );
+
+if (!/^https?:\/\//i.test(appUrl)) {
+  throw new Error('--app-url must be an absolute http(s) URL');
+}
 
 if (!['preview', 'staging', 'production'].includes(deployEnv)) {
   throw new Error('--deploy-env must be preview, staging, or production');
@@ -103,7 +109,7 @@ replaceOnce(
 );
 replaceOnce(
   /"VITE_APP_URL"\s*:\s*"https:\/\/example\.com"/,
-  `"VITE_APP_URL": ${jsonString(`https://${domain}`)}`,
+  `"VITE_APP_URL": ${jsonString(appUrl)}`,
   'VITE_APP_URL'
 );
 replaceOnce(
@@ -127,7 +133,8 @@ writeFileSync(output, text, 'utf8');
 console.log(`Prepared ${output}`);
 console.log(`Worker: ${workerName}`);
 console.log(`SITE_KEY: ${siteKey}`);
-console.log(`Domain: https://${domain}`);
+console.log(`Canonical domain: https://${domain}`);
+console.log(`App URL: ${appUrl}`);
 console.log(`Deploy env: ${deployEnv}`);
-console.log(`Shared D1: ${databaseName} (${databaseId})`);
+console.log(`Target D1: ${databaseName} (${databaseId})`);
 console.log('No deployment was performed.');
