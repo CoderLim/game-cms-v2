@@ -94,6 +94,17 @@ jobs:
       - name: Verify public settings validation
         run: pnpm exec tsx scripts/smoke-site-settings.ts
 
+      - name: Verify D1 RBAC bootstrap SQL generation
+        run: |
+          pnpm game:rbac:bootstrap-d1 -- \
+            --admin-email=admin@example.com \
+            --out=data/rbac.smoke.sql
+          grep -q "INSERT INTO permission" data/rbac.smoke.sql
+          grep -q "INSERT INTO role " data/rbac.smoke.sql
+          grep -q "INSERT INTO role_permission" data/rbac.smoke.sql
+          grep -q "INSERT INTO user_role" data/rbac.smoke.sql
+          grep -q "admin@example.com" data/rbac.smoke.sql
+
       - name: Verify Worker config generation
         run: |
           pnpm exec tsx scripts/configure-game-site-worker.ts \
