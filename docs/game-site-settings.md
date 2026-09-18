@@ -106,3 +106,17 @@ V1 stores and validates this object. Player behavior should consume these values
 4. Social links reject non-HTTP(S) schemes.
 5. The frontend never accepts arbitrary JavaScript from `site_setting`.
 6. Missing/invalid optional settings fail closed: no script/ad is rendered.
+
+
+## Runtime wiring status
+
+| Setting | Status | Current consumer |
+| --- | --- | --- |
+| `analytics` | Wired | `SiteRuntime` via `SiteFooter` |
+| `ads` | Wired | `SiteRuntime`, `AdSlot`, `/ads.txt` |
+| `social_links` | Wired | `SiteFooter` |
+| `navigation` | Wired | `SiteHeader` |
+| `footer` | Wired | `SiteFooter` |
+| `game_player` | Wired | `GamePlayer` on game pages |
+
+The table describes the current default Game Site theme. A future alternate theme may consume the same validated settings differently, but should continue reading them through `getPublicSiteConfig()` rather than hardcoded per-domain values.
