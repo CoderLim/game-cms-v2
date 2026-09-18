@@ -137,7 +137,7 @@ pnpm db:push
 Apply both files in order:
 
 ```bash
-pnpm tsx scripts/apply-sql-files.ts \
+pnpm game:migrate:apply -- \
   data/migrations/driftboss-v2.sql \
   data/migrations/driftboss-v2-extras.sql
 ```
