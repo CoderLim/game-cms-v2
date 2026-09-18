@@ -1,13 +1,13 @@
 ---
 name: deploy-game-site
-description: "Prepare and deploy one Game Site Engine site to Cloudflare Workers using a shared D1 database and a site-specific SITE_KEY. Use when the user says deploy a game site, publish a new game site, ship SITE_KEY to Cloudflare, or asks to deploy DriftBoss/Klotski/Tekken from this engine."
+description: "Prepare and deploy one Game Site Engine site to Cloudflare Workers using a site-specific SITE_KEY and an explicitly selected D1 database. Production sites may share D1; legacy migration previews should use an isolated Preview D1."
 argument-hint: "--site-key=X --domain=X [--worker=X --site-name=X --database-id=X --database-name=X --production]"
 user-invocable: true
 ---
 
 # Deploy Game Site — $ARGUMENTS
 
-This skill deploys one logical Game Site Engine site as its own Cloudflare Worker while reusing the shared Game Engine D1 database.
+This skill deploys one logical Game Site Engine site as its own Cloudflare Worker. Production Workers may reuse a shared Game Engine D1. A legacy migration Preview should instead use a dedicated Preview D1 so import/reset/RBAC operations are isolated.
 
 ## Architecture contract
 
@@ -19,14 +19,15 @@ same Git commit
   ├─ Worker B: SITE_KEY=klotski
   └─ Worker C: SITE_KEY=tekken3
         ↓
-     shared D1
+ selected D1
+ (shared in production, dedicated for migration Preview)
 ```
 
-Every Worker must have a distinct `SITE_KEY` and canonical domain. Multiple Workers may intentionally use the same `database_id`.
+Every Worker must have a distinct `SITE_KEY` and canonical domain. Multiple production Workers may intentionally use the same `database_id`; migration Preview Workers may intentionally bind a dedicated Preview database.
 
 ## Hard safety rules
 
-1. Never create a new D1 automatically when a shared Game Engine D1 already exists.
+1. Never create a D1 silently. Reuse the shared production D1 for normal production deployments; use a separately approved dedicated D1 for legacy migration Preview isolation.
 2. Never import or migrate production content without explicit confirmation.
 3. Never switch `DEPLOY_ENV` to `production` before preview/cutover audit passes.
 4. Never echo Cloudflare secrets.
@@ -45,8 +46,9 @@ Optional:
 
 - `--worker`: Worker name; defaults to `site-key`
 - `--site-name`: public name; defaults to `site-key`
-- `--database-id`: shared D1 id
-- `--database-name`: defaults to `game-site-engine-db`
+- `--database-id`: selected D1 id
+- `--database-name`: selected D1 name; defaults to `game-site-engine-db`
+- `--app-url`: actual runtime/Preview URL. Defaults to `https://<domain>`. For Preview it should be the Preview hostname, while `--domain` remains the production canonical domain.
 - `--production`: prepare production robots/indexing mode; otherwise default to preview
 
 ## Phase 1 — preflight
@@ -67,16 +69,19 @@ Verify the branch has passing Game Engine CI if GitHub status is available:
 
 Stop on build/test failure.
 
-## Phase 2 — resolve shared D1
+## Phase 2 — resolve the target D1
 
-Preferred order:
+For a normal production site, prefer the existing shared production Game Engine D1.
+
+For a legacy migration Preview, prefer a dedicated Preview D1 (for example `game-site-engine-driftboss-preview`) so data import and counter resets are isolated.
+
+Resolution order:
 
 1. If `--database-id` is supplied, use it.
-2. Else if local `wrangler.jsonc` already contains a real Game Engine D1 id, reuse it.
-3. Else inspect `npx wrangler d1 list` for `--database-name` / `game-site-engine-db`.
-4. Only if no shared DB exists, explain that the first Game Engine D1 needs to be created and ask before creating it.
+2. Otherwise inspect `npx wrangler d1 list` for the explicitly intended database name.
+3. Never create a database silently; creation is an explicit infrastructure action.
 
-Do not silently create one database per site.
+Do not infer that Preview and production must use the same D1.
 
 ## Phase 3 — confirm logical site exists
 
@@ -102,9 +107,10 @@ If absent, use the Admin UI or an approved seed/import flow to create it. Do not
 Default to preview:
 
 ```bash
-pnpm tsx scripts/configure-game-site-worker.ts \
+pnpm game:worker:configure -- \
   --site-key=<site-key> \
   --domain=<domain> \
+  --app-url=https://<actual-runtime-or-preview-host> \
   --worker=<worker> \
   --site-name="<site-name>" \
   --database-id=<shared-d1-id> \
@@ -120,13 +126,13 @@ Inspect `wrangler.jsonc` for:
 DATABASE_PROVIDER=d1
 SITE_KEY=<site-key>
 DEPLOY_ENV=preview|production
-VITE_APP_URL=https://<domain>
-DB binding=<shared D1>
+VITE_APP_URL=https://<actual runtime/Preview host>
+DB binding=<selected D1>
 ```
 
 ## Phase 5 — schema migrations
 
-Shared D1 schema is global. Apply migrations once per schema revision, not once because a new site exists.
+For a shared production D1, schema is global and migrations are applied once per schema revision. A fresh dedicated Preview D1 needs the current migrations applied before importing sample content.
 
 Check:
 
@@ -161,7 +167,7 @@ Worker
 SITE_KEY
 Canonical domain
 DEPLOY_ENV
-Shared D1 name/id
+D1 name/id
 Migration status
 ```
 
