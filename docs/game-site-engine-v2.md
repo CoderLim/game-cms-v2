@@ -110,6 +110,29 @@ Avoid making the domain dependent on:
 
 ## 5. Domain schema
 
+### Physical table names
+
+The design discussion sometimes uses conceptual nouns such as “sites” or “games”. The actual V2 physical tables are:
+
+| Concept | Physical table |
+| --- | --- |
+| sites | `game_site` |
+| games / global catalog | `game_catalog` |
+| categories | `game_category` |
+| game_categories | `game_category_map` |
+| site_games | `site_game` |
+| site_game_locales | `site_game_locale` |
+| site_categories | `site_category` |
+| site_category_locales | `site_category_locale` |
+| site_game_categories | `site_game_category` |
+| site_settings | `site_setting` |
+| site homepage locale content | `site_locale` |
+| site posts | `site_post` |
+| site post locales | `site_post_locale` |
+
+Use physical names in migrations, SQL and operational runbooks.
+
+
 The game domain lives in separate schema files from ShipAny's base schema:
 
 ```text
