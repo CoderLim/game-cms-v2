@@ -204,7 +204,7 @@ pnpm game:migrate:driftboss \
 Export site-level extras:
 
 ```bash
-pnpm tsx scripts/export-driftboss-v2-extras-sql.ts \
+pnpm game:migrate:driftboss:extras -- \
   --out=data/migrations/driftboss-v2-extras.sql \
   --domain=driftbossgame.org
 ```
@@ -359,3 +359,12 @@ Before making a Worker indexable:
 - embed pages are `noindex,nofollow`.
 - admin APIs require Better Auth + `admin.*`.
 - secrets are in Worker secrets/env, not Git or `site_setting`.
+
+
+### Preview migration database policy
+
+Production Game Site Workers may share the production Game Engine D1.
+
+A **legacy data migration Preview** is different: use a dedicated Preview D1 so schema/import experiments, counter resets, RBAC initialization and sample data cannot affect shared production data.
+
+For DriftBoss, use the authoritative checklist in `docs/HANDOFF.md §16`. The first sample export uses `--games=drift-boss,drive-mad,eggy-car`; `--domain` alone does not physically filter the global catalog.
