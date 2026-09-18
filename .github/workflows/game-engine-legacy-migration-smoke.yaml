@@ -60,18 +60,30 @@ jobs:
 
       - name: Export main legacy migration
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-sql.ts
+          pnpm game:migrate:driftboss --
           --out=data/migrations/driftboss-v2.sql
           --featured=driftbossgame.org:drift-boss
 
+      - name: Verify filtered Preview export stays physically small
+        run: |
+          pnpm game:migrate:driftboss -- \
+            --domain=driftbossgame.org \
+            --games=drift-boss \
+            --include-posts=false \
+            --out=data/migrations/driftboss-v2-preview-sample.sql
+          test "$(grep -c 'INSERT INTO game_catalog' data/migrations/driftboss-v2-preview-sample.sql)" -eq 1
+          test "$(grep -c 'INSERT INTO game_category ' data/migrations/driftboss-v2-preview-sample.sql)" -eq 1
+          ! grep -q "'klotski'" data/migrations/driftboss-v2-preview-sample.sql
+          ! grep -q 'INSERT INTO site_post ' data/migrations/driftboss-v2-preview-sample.sql
+
       - name: Export site-level extras
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-extras-sql.ts
+          pnpm game:migrate:driftboss:extras --
           --out=data/migrations/driftboss-v2-extras.sql
 
       - name: Export per-site stats reset
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-reset-stats-sql.ts
+          pnpm game:migrate:driftboss:reset-stats --
           --out=data/migrations/driftboss-v2-reset-stats.sql
 
       - name: Create fresh V2 SQLite database
