@@ -9,16 +9,20 @@ RUN apk add --no-cache libc6-compat && npm install -g pnpm@10
 WORKDIR /app
 
 # Copy package manifests, build config, and ALL dialect templates so the
-# postinstall hook can stamp out a matching schema.ts during install.
+# postinstall hook can stamp out matching base + Game Domain schemas during install.
 COPY package.json pnpm-lock.yaml* vite.config.ts ./
 COPY scripts/db-setup.mjs scripts/db-setup.mjs
 COPY src/config/db/schema.sqlite.ts src/config/db/schema.sqlite.ts
 COPY src/config/db/schema.postgres.ts src/config/db/schema.postgres.ts
 COPY src/config/db/schema.mysql.ts src/config/db/schema.mysql.ts
+COPY src/config/db/game-schema.sqlite.ts src/config/db/game-schema.sqlite.ts
+COPY src/config/db/game-schema.postgres.ts src/config/db/game-schema.postgres.ts
+COPY src/config/db/game-content-schema.sqlite.ts src/config/db/game-content-schema.sqlite.ts
+COPY src/config/db/game-content-schema.postgres.ts src/config/db/game-content-schema.postgres.ts
 
 # DATABASE_PROVIDER must be set at build time so prebuild / postinstall pick
-# the matching schema template. Pass it via `docker build --build-arg
-# DATABASE_PROVIDER=postgresql` or set in your CI / k8s build pipeline.
+# the matching schema template. Game Site Engine V1 officially targets
+# sqlite/d1; PostgreSQL is kept as the compatibility path.
 ARG DATABASE_PROVIDER=sqlite
 ENV DATABASE_PROVIDER=${DATABASE_PROVIDER}
 

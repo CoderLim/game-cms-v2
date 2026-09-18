@@ -1,16 +1,20 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import {
   CreditCard,
+  FileText,
   FolderOpen,
+  Gamepad2,
+  Globe2,
   Home,
   LayoutDashboard,
+  Library,
   Settings,
   Shield,
 } from 'lucide-react';
 
+import { AppLayout } from '@/components/app-layout';
 import { envConfigs } from '@/config';
 import { m } from '@/paraglide/messages.js';
-import { AppLayout } from '@/components/app-layout';
 
 export const Route = createFileRoute('/admin')({
   component: AdminLayout,
@@ -24,6 +28,21 @@ function AdminLayout() {
       label: m['admin.nav.overview'](),
       icon: LayoutDashboard,
       group,
+    },
+    {
+      href: '/admin/game-sites',
+      label: 'Game Engine',
+      icon: Gamepad2,
+      group,
+      items: [
+        { href: '/admin/game-sites', label: 'Sites', icon: Globe2 },
+        { href: '/admin/site-content', label: 'Homepage SEO', icon: Home },
+        { href: '/admin/game-catalog', label: 'Game Catalog', icon: Library },
+        { href: '/admin/site-games', label: 'Site Games', icon: Gamepad2 },
+        { href: '/admin/game-categories', label: 'Game Categories', icon: FolderOpen },
+        { href: '/admin/site-posts', label: 'Posts & Guides', icon: FileText },
+        { href: '/admin/site-settings', label: 'Site Settings', icon: Settings },
+      ],
     },
     {
       href: '/admin/users',

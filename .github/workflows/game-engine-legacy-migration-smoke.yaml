@@ -1,0 +1,93 @@
+name: Game Site Engine Legacy Migration Smoke
+
+on:
+  pull_request:
+    branches: ['main', 'dev']
+  workflow_dispatch:
+
+jobs:
+  legacy-to-v2:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: legacy_game_cms
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d legacy_game_cms"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      LEGACY_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/legacy_game_cms
+      DATABASE_PROVIDER: sqlite
+      DATABASE_URL: file:data/legacy-migration-target.db
+      SITE_KEY: driftbossgame
+      VITE_APP_URL: http://localhost:3000
+      VITE_APP_NAME: Legacy Migration CI
+      VITE_DEFAULT_LOCALE: en
+      AUTH_SECRET: legacy-migration-ci-only-secret
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate SQLite schemas
+        run: pnpm db:setup
+
+      - name: Seed legacy Postgres fixture
+        run: pnpm tsx scripts/seed-legacy-driftboss-fixture.ts
+
+      - name: Audit legacy source before export
+        run: pnpm tsx scripts/audit-legacy-driftboss-source.ts
+
+      - name: Export main legacy migration
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-sql.ts
+          --out=data/migrations/driftboss-v2.sql
+          --featured=driftbossgame.org:drift-boss
+
+      - name: Export site-level extras
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-extras-sql.ts
+          --out=data/migrations/driftboss-v2-extras.sql
+
+      - name: Export per-site stats reset
+        run: >-
+          pnpm tsx scripts/export-driftboss-v2-reset-stats-sql.ts
+          --out=data/migrations/driftboss-v2-reset-stats.sql
+
+      - name: Create fresh V2 SQLite database
+        run: |
+          rm -f data/legacy-migration-target.db
+          pnpm db:push --force
+
+      - name: Apply exported migrations
+        run: >-
+          pnpm tsx scripts/apply-sql-files.ts
+          data/migrations/driftboss-v2.sql
+          data/migrations/driftboss-v2-extras.sql
+          data/migrations/driftboss-v2-reset-stats.sql
+
+      - name: Verify multi-site isolation and migrated content
+        run: pnpm tsx scripts/verify-driftboss-v2-migration.ts
+
+      - name: Verify per-site counters restart at zero
+        run: pnpm tsx scripts/verify-driftboss-v2-stats-reset.ts

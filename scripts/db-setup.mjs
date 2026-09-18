@@ -1,11 +1,17 @@
-// Copies the matching schema template into src/config/db/schema.ts based on
-// DATABASE_PROVIDER. Called from `pnpm db:setup` and from `prebuild` so the
-// build always lines up with the runtime dialect.
+// Copies the matching base and Game Site Engine domain schema templates into
+// generated runtime schema files based on DATABASE_PROVIDER. Called from
+// `pnpm db:setup` and from `prebuild` so builds line up with the runtime dialect.
 //
-// Templates committed to git:
+// Base templates committed to git:
 //   schema.sqlite.ts   (default; also used by turso / d1)
 //   schema.postgres.ts (used by postgres / postgresql)
-//   schema.mysql.ts    (mysql)
+//   schema.mysql.ts    (legacy ShipAny support)
+//
+// Game-domain templates committed to git:
+//   game-schema.sqlite.ts
+//   game-schema.postgres.ts
+//   game-content-schema.sqlite.ts
+//   game-content-schema.postgres.ts
 //
 // Env-file loading mirrors scripts/with-env.ts so this script picks up
 // DATABASE_PROVIDER from .env.<NODE_ENV> / .env.local / .env when run from
@@ -49,8 +55,17 @@ const TEMPLATE_BY_PROVIDER = {
   mysql: 'mysql',
 };
 
+const GAME_TEMPLATE_BY_PROVIDER = {
+  sqlite: 'sqlite',
+  turso: 'sqlite',
+  d1: 'sqlite',
+  postgres: 'postgres',
+  postgresql: 'postgres',
+};
+
 const provider = (process.env.DATABASE_PROVIDER || 'sqlite').toLowerCase();
 const templateName = TEMPLATE_BY_PROVIDER[provider];
+const gameTemplateName = GAME_TEMPLATE_BY_PROVIDER[provider];
 
 if (!templateName) {
   console.error(
@@ -59,15 +74,34 @@ if (!templateName) {
   process.exit(1);
 }
 
-const src = resolve(`src/config/db/schema.${templateName}.ts`);
-const dst = resolve('src/config/db/schema.ts');
-
-if (!existsSync(src)) {
-  console.error(`db-setup: template not found at ${src}`);
+if (!gameTemplateName) {
+  console.error(
+    `db-setup: Game Site Engine does not support DATABASE_PROVIDER=${provider}. ` +
+      'V1 officially supports d1/sqlite; PostgreSQL is the compatibility path.'
+  );
   process.exit(1);
 }
 
-copyFileSync(src, dst);
+const baseSrc = resolve(`src/config/db/schema.${templateName}.ts`);
+const baseDst = resolve('src/config/db/schema.ts');
+const gameSrc = resolve(`src/config/db/game-schema.${gameTemplateName}.ts`);
+const gameDst = resolve('src/config/db/game-schema.ts');
+const gameContentSrc = resolve(
+  `src/config/db/game-content-schema.${gameTemplateName}.ts`
+);
+const gameContentDst = resolve('src/config/db/game-content-schema.ts');
+
+for (const src of [baseSrc, gameSrc, gameContentSrc]) {
+  if (!existsSync(src)) {
+    console.error(`db-setup: template not found at ${src}`);
+    process.exit(1);
+  }
+}
+
+copyFileSync(baseSrc, baseDst);
+copyFileSync(gameSrc, gameDst);
+copyFileSync(gameContentSrc, gameContentDst);
+
 console.log(
-  `db-setup: schema.ts ← schema.${templateName}.ts (DATABASE_PROVIDER=${provider})`
+  `db-setup: schema.ts ← schema.${templateName}.ts; game-schema.ts + game-content-schema.ts ← ${gameTemplateName} templates (DATABASE_PROVIDER=${provider})`
 );

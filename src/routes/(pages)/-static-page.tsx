@@ -1,9 +1,20 @@
 import type { ComponentType } from 'react';
 import { notFound, useLoaderData } from '@tanstack/react-router';
 
+import { MarkdownContent } from '@/components/markdown-content';
 import { envConfigs } from '@/config';
+import { getCurrentSiteContext } from '@/modules/sites/service';
+import {
+  getPublishedBySlug,
+  listPublishedLocales,
+  SitePostType,
+} from '@/modules/site-posts/service';
 import { m } from '@/paraglide/messages.js';
-import { baseLocale, getLocale, localizeUrl } from '@/paraglide/runtime.js';
+import {
+  baseLocale,
+  getLocale,
+  localizeUrl,
+} from '@/paraglide/runtime.js';
 
 type PageMeta = {
   title: string;
@@ -16,13 +27,11 @@ type PageModule = {
   meta: PageMeta;
 };
 
-// Eagerly bundle the static content pages (small legal/info MDX files).
-// Keys are absolute from the project root.
 const pages = import.meta.glob<PageModule>('/src/content/pages/*.mdx', {
   eager: true,
 });
 
-function loadPage(slug: string, locale: string): PageModule | null {
+function loadLocalPage(slug: string, locale: string): PageModule | null {
   return (
     pages[`/src/content/pages/${slug}.${locale}.mdx`] ??
     pages[`/src/content/pages/${slug}.${baseLocale}.mdx`] ??
@@ -30,32 +39,123 @@ function loadPage(slug: string, locale: string): PageModule | null {
   );
 }
 
-type LoaderData = { meta: PageMeta; slug: string; locale: string };
+function siteOrigin(domain: string) {
+  return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
+}
 
-// Shared route options for static MDX pages. Each page gets its own
-// explicit route file (e.g. privacy-policy.tsx) so static segments
-// always outrank dynamic ones — add a new page by creating the MDX
-// content plus a thin route file using this factory.
+function allowBundledFallback() {
+  return ['development', 'local', 'test'].includes(
+    (envConfigs.deploy_env || '').toLowerCase()
+  );
+}
+
+type LoaderData = {
+  site: Awaited<ReturnType<typeof getCurrentSiteContext>>;
+  slug: string;
+  locale: string;
+  dbPage: Awaited<ReturnType<typeof getPublishedBySlug>> | null;
+  availableLocales: Awaited<ReturnType<typeof listPublishedLocales>>;
+  localMeta: PageMeta | null;
+};
+
+/**
+ * Shared route options for legal/info pages.
+ *
+ * Production/preview content must be site-scoped in `site_post` /
+ * `site_post_locale`. Bundled MDX is only a local/test fallback, otherwise a
+ * missing page returns 404 instead of silently duplicating template content
+ * across multiple domains.
+ */
 export function staticPageRouteOptions(slug: string) {
   return {
-    loader: (): LoaderData => {
+    loader: async (): Promise<LoaderData> => {
+      const site = await getCurrentSiteContext();
       const locale = getLocale();
-      const page = loadPage(slug, locale);
-      if (!page) throw notFound();
-      return { meta: page.meta, slug, locale };
+      if (!site.enabledLocales.includes(locale)) throw notFound();
+
+      const dbPage = await getPublishedBySlug({
+        siteId: site.id,
+        locale,
+        slug,
+        type: SitePostType.PAGE,
+      });
+
+      if (dbPage) {
+        const availableLocales = await listPublishedLocales({
+          siteId: site.id,
+          sitePostId: dbPage.sitePostId,
+        });
+        return {
+          site,
+          slug,
+          locale,
+          dbPage,
+          availableLocales,
+          localMeta: null,
+        };
+      }
+
+      if (!allowBundledFallback()) throw notFound();
+
+      const localPage = loadLocalPage(slug, locale);
+      if (!localPage) throw notFound();
+
+      return {
+        site,
+        slug,
+        locale,
+        dbPage: null,
+        availableLocales: [],
+        localMeta: localPage.meta,
+      };
     },
     head: ({ loaderData }: { loaderData?: LoaderData }) => {
       if (!loaderData) return {};
-      const { meta, locale } = loaderData;
-      const canonical = localizeUrl(`${envConfigs.app_url}/${slug}`, {
-        locale: locale as ReturnType<typeof getLocale>,
+      const { site, slug, locale, dbPage, availableLocales, localMeta } =
+        loaderData;
+      const origin = siteOrigin(site.domain);
+      const canonical = localizeUrl(`${origin}/${slug}`, {
+        locale: locale as any,
       }).href;
+
+      const title =
+        dbPage?.metaTitle || dbPage?.title || localMeta?.title || site.name;
+      const description =
+        dbPage?.metaDescription ||
+        dbPage?.description ||
+        localMeta?.description ||
+        '';
+
+      const defaultEntry =
+        availableLocales.find((entry) => entry.locale === site.defaultLocale) ||
+        availableLocales[0];
+
       return {
         meta: [
-          { title: meta.title },
-          { name: 'description', content: meta.description },
+          { title },
+          { name: 'description', content: description },
         ],
-        links: [{ rel: 'canonical', href: canonical }],
+        links: [
+          { rel: 'canonical', href: canonical },
+          ...availableLocales.map((entry) => ({
+            rel: 'alternate',
+            hrefLang: entry.locale,
+            href: localizeUrl(`${origin}/${entry.slug}`, {
+              locale: entry.locale as any,
+            }).href,
+          })),
+          ...(defaultEntry
+            ? [
+                {
+                  rel: 'alternate',
+                  hrefLang: 'x-default',
+                  href: localizeUrl(`${origin}/${defaultEntry.slug}`, {
+                    locale: defaultEntry.locale as any,
+                  }).href,
+                },
+              ]
+            : []),
+        ],
       };
     },
     component: StaticPage,
@@ -63,22 +163,46 @@ export function staticPageRouteOptions(slug: string) {
 }
 
 function StaticPage() {
-  const { meta, slug, locale } = useLoaderData({
+  const { dbPage, localMeta, slug, locale } = useLoaderData({
     strict: false,
   }) as LoaderData;
 
-  const page = loadPage(slug, locale)!;
+  if (dbPage) {
+    return (
+      <article>
+        <header className="border-border mb-6 border-b pb-5">
+          <h1 className="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
+            {dbPage.title}
+          </h1>
+          {dbPage.description ? (
+            <p className="text-muted-foreground mt-2 text-sm">
+              {dbPage.description}
+            </p>
+          ) : null}
+          <p className="text-muted-foreground mt-2 text-xs">
+            {m['common.pages.last_updated']()}:{' '}
+            {new Date(dbPage.updatedAt).toLocaleDateString(locale)}
+          </p>
+        </header>
+        <MarkdownContent content={dbPage.content || ''} />
+      </article>
+    );
+  }
+
+  const page = loadLocalPage(slug, locale)!;
   const Content = page.default;
 
   return (
     <article>
       <header className="border-border mb-6 border-b pb-5">
         <h1 className="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
-          {meta.title}
+          {localMeta!.title}
         </h1>
-        <p className="text-muted-foreground mt-2 text-sm">{meta.description}</p>
+        <p className="text-muted-foreground mt-2 text-sm">
+          {localMeta!.description}
+        </p>
         <p className="text-muted-foreground mt-2 text-xs">
-          {m['common.pages.last_updated']()}: {meta.updated_at}
+          {m['common.pages.last_updated']()}: {localMeta!.updated_at}
         </p>
       </header>
       <div className="text-foreground/90 text-[15px] leading-7">
