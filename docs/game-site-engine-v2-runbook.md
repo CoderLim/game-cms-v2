@@ -101,9 +101,11 @@ Typical workflow for a new site:
 8. `/admin/site-settings` — configure public analytics/ads/navigation/footer/social settings.
 9. Verify `/sitemap.xml` before production launch.
 
-## Cloudflare D1 production model
+## Cloudflare D1 deployment model
 
-One shared D1 database may serve many logical sites. Each public site gets its own Worker deployment and points at the same D1 `database_id`.
+Production: one shared D1 database may serve many logical sites. Each public site gets its own Worker deployment and points at the same production D1 `database_id`.
+
+Migration/cutover Preview: use a dedicated disposable Preview D1 by default. This keeps sample imports, preview admin users and retries isolated from the shared production database.
 
 Example:
 
@@ -169,17 +171,21 @@ Do not use `db:push` against production D1.
 
 The legacy `driftbossgame` database is treated as a read-only migration source. Never transform the production legacy database in-place.
 
-The migration is split into two generated SQL files:
+The migration uses three generated SQL files:
 
 ```text
 driftboss-v2.sql
-  games/categories/site_games/site_game_locales/
-  site_categories/site_category_locales/blogs
+  game_catalog/game_category/game_category_map/
+  site_game/site_game_locale/site_category/
+  site_category_locale/site_game_category/site posts
 
 driftboss-v2-extras.sql
   homepage SEO/site_locale
   about/contact/privacy/terms pages
   social links
+
+driftboss-v2-reset-stats.sql
+  resets per-site view/like/dislike counters to zero
 ```
 
 Both exporters use deterministic UUIDv5 identifiers and idempotent UPSERT statements, so the same export can be applied repeatedly during testing.
@@ -192,24 +198,27 @@ Set the old Supabase/PostgreSQL connection string only in your shell/private env
 export LEGACY_DATABASE_URL='postgresql://...'
 ```
 
-Export the main dataset:
+For the first Preview, export only the selected three games:
 
 ```bash
-pnpm game:migrate:driftboss \
-  --out=data/migrations/driftboss-v2.sql \
+pnpm game:migrate:driftboss -- \
   --domain=driftbossgame.org \
-  --featured=driftbossgame.org:drift-boss
+  --games=drift-boss,drive-mad,eggy-car \
+  --featured=driftbossgame.org:drift-boss \
+  --out=data/migrations/driftboss-v2.sql
+
+pnpm game:migrate:driftboss:extras -- \
+  --domain=driftbossgame.org \
+  --out=data/migrations/driftboss-v2-extras.sql
+
+pnpm game:migrate:driftboss:reset-stats -- \
+  --domain=driftbossgame.org \
+  --out=data/migrations/driftboss-v2-reset-stats.sql
 ```
 
-Export site-level extras:
+`--domain` scopes site-owned content. It does **not** mean "small catalog" by itself. `--games` is what restricts `game_catalog`, related categories/mappings and site-game rows.
 
-```bash
-pnpm tsx scripts/export-driftboss-v2-extras-sql.ts \
-  --out=data/migrations/driftboss-v2-extras.sql \
-  --domain=driftbossgame.org
-```
-
-`--domain` is optional. Omit it when intentionally migrating every historical domain found in the legacy database.
+With `--games`, legacy blog articles are omitted by default. Omit `--games` only for the later full production export, where the complete shared global catalog is intentional.
 
 Important mapping rule:
 
@@ -245,7 +254,16 @@ rm -f data/driftboss-migration-check.db
 pnpm db:push
 ```
 
-Apply the generated SQL with a SQLite/libSQL client, then verify at minimum:
+Apply the generated SQL using the package entry point:
+
+```bash
+pnpm game:migrate:apply -- \
+  data/migrations/driftboss-v2.sql \
+  data/migrations/driftboss-v2-extras.sql \
+  data/migrations/driftboss-v2-reset-stats.sql
+```
+
+Then verify at minimum:
 
 ```text
 1 global Drift Boss game
@@ -259,33 +277,73 @@ no other site's slug/content resolves under the DriftBoss site_id
 
 CI performs the same class of test in `Game Site Engine Legacy Migration Smoke` using a temporary PostgreSQL legacy fixture and a fresh SQLite V2 database.
 
-### 4. Apply schema migrations to D1 first
+### 4. Create/apply the dedicated Preview D1
 
-The target D1 must already contain the V2 schema before importing content:
+For migration Preview, create a disposable D1 rather than using the shared production D1:
 
 ```bash
-npx wrangler d1 migrations apply <database-name> --remote
+npx wrangler d1 create game-site-engine-driftboss-preview
+npx wrangler d1 migrations apply game-site-engine-driftboss-preview --remote
 ```
 
-Verify the new tables exist before continuing.
-
-### 5. Production D1 import — explicit confirmation boundary
-
-Importing real legacy content into the shared production D1 is an irreversible production mutation. Do **not** automate this step without explicit confirmation.
-
-After local validation and a backup/export of the target D1, apply in this order:
+Import in order:
 
 ```bash
-npx wrangler d1 execute <database-name> --remote \
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
   --file=data/migrations/driftboss-v2.sql
 
-npx wrangler d1 execute <database-name> --remote \
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
   --file=data/migrations/driftboss-v2-extras.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/driftboss-v2-reset-stats.sql
 ```
 
-The order matters because extras reference the `game_site` rows created by the main import.
+### 5. Bootstrap Preview Admin when needed
 
-### 6. Post-import validation
+`pnpm rbac:init` cannot directly mutate a remote D1 binding. For a fresh Preview D1:
+
+```bash
+export GAME_ADMIN_EMAIL='admin@example.com'
+export GAME_ADMIN_PASSWORD='<strong-local-secret>'
+
+pnpm game:admin:bootstrap:sql -- \
+  --out=data/migrations/d1-preview-admin-bootstrap.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/d1-preview-admin-bootstrap.sql
+
+rm -f data/migrations/d1-preview-admin-bootstrap.sql
+unset GAME_ADMIN_PASSWORD
+```
+
+The generated SQL is for a fresh disposable Preview DB. The shared production D1 should use its existing RBAC/admin lifecycle.
+
+### 6. Configure and deploy Preview Worker
+
+```bash
+pnpm game:worker:configure -- \
+  --site-key=driftbossgame \
+  --domain=driftbossgame.org \
+  --app-url=https://<preview-worker>.workers.dev \
+  --worker=driftboss-v2-preview \
+  --site-name="Drift Boss Preview" \
+  --database-id=<PREVIEW_D1_ID> \
+  --database-name=game-site-engine-driftboss-preview \
+  --deploy-env=preview
+
+npx wrangler secret put AUTH_SECRET
+pnpm cf:build
+pnpm cf:deploy
+```
+
+`VITE_APP_URL` is the Preview origin; canonical URLs still come from `game_site.domain`.
+
+### 7. Production D1 import — explicit confirmation boundary
+
+After owner Preview approval, regenerate the main export without `--games`, validate locally, back up the shared production D1, and apply the same core → extras → reset-stats order there. Do **not** import the filtered Preview sample into production as the final migration.
+
+### 8. Post-import validation
 
 Before pointing the production domain at V2, verify:
 
@@ -301,9 +359,27 @@ SITE_KEY=driftbossgame resolves exactly one active site
 /robots.txt
 ```
 
-Also compare old versus V2 URLs. Preserve existing indexed URLs whenever possible. Any intentional URL change requires a permanent redirect before cutover.
+Also compare old versus V2 URLs. V1 has no redirect table, so preserve existing indexed slugs. If a URL must change, create a permanent Cloudflare redirect before cutover.
 
 Keep the old production application/database untouched until the new Worker has passed this validation and the cutover can be rolled back safely.
+
+## Redirect policy
+
+V1 intentionally has no database-backed redirect subsystem. Treat legacy slugs as frozen during migration. Use Cloudflare Redirect Rules (or equivalent edge redirects) only for unavoidable URL changes, and create them **before** production cutover.
+
+## Legacy rich-content mapping
+
+The migration deliberately preserves old content rather than trying to restructure it:
+
+- `games.description` → `site_game_locale.description`
+- `seo_games.seo_content` → `site_game_locale.content`
+- `how_to_play`, `controls`, `features`, `faq` remain empty unless there is an explicit source
+
+Populate the richer fields later through Admin/content work.
+
+## Admin i18n debt
+
+Game Engine Admin labels are currently mostly English. This is known V1 UI debt, not a migration regression and not a Preview/cutover blocker.
 
 ## First production site initialization
 

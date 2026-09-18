@@ -120,7 +120,7 @@ src/config/db/game-schema.ts        # generated, gitignored
 
 `db:setup` generates both `schema.ts` and `game-schema.ts` for the selected provider. Keeping the schemas separate reduces conflicts when syncing upstream ShipAny changes.
 
-### 5.1 sites
+### 5.1 `game_site` (logical: sites)
 
 Represents a logical website.
 
@@ -139,7 +139,7 @@ Important fields:
 
 Cloudflare deployments use `SITE_KEY`, not a database ID.
 
-### 5.2 games
+### 5.2 `game_catalog` (logical: games)
 
 Global game catalog. It describes the game itself, not its presentation on any site.
 
@@ -161,11 +161,11 @@ Fields include:
 
 SEO copy, indexability, site views, and site ordering do not belong here.
 
-### 5.3 site_games
+### 5.3 `site_game`
 
 Core multi-site boundary.
 
-A public game page can exist only when a `site_games` row connects the active site and the game.
+A public game page can exist only when a `site_game` row connects the active site and the game.
 
 Fields:
 
@@ -189,7 +189,7 @@ Constraint:
 UNIQUE(site_id, game_id)
 ```
 
-### 5.4 site_game_locales
+### 5.4 `site_game_locale`
 
 Complete site-specific localized page content for a game.
 
@@ -220,27 +220,27 @@ UNIQUE(site_id, locale, slug)   # enforced through service/schema design where p
 
 A different site using the same global game gets its own `site_game` and therefore its own SEO/content rows.
 
-### 5.5 categories
+### 5.5 `game_category` (logical: categories)
 
 Global taxonomy identity, e.g. `racing`, `drift`, `retro`.
 
-### 5.6 game_categories
+### 5.6 `game_category_map`
 
 Global factual classification of games.
 
-### 5.7 site_categories
+### 5.7 `site_category`
 
 Which categories a site exposes, their status, indexability, and order.
 
-### 5.8 site_category_locales
+### 5.8 `site_category_locale`
 
 Localized site-specific category title, slug and SEO content.
 
-### 5.9 site_game_categories
+### 5.9 `site_game_category`
 
 Final site-specific relationship used for navigation and related-game discovery.
 
-### 5.10 site_settings
+### 5.10 `site_setting`
 
 Key/value configuration rather than a PostgreSQL-only JSONB design.
 
@@ -252,7 +252,7 @@ site_id | key                  | value
 ...     | navigation           | JSON string
 ```
 
-Secrets must stay in Cloudflare secrets/environment configuration, not `site_settings`.
+Secrets must stay in Cloudflare secrets/environment configuration, not `site_setting`.
 
 ## 6. Site Context
 
@@ -265,7 +265,7 @@ SITE_KEY=driftbossgame
 Request/server code resolves once:
 
 ```text
-SITE_KEY -> sites.key -> SiteContext
+SITE_KEY -> game_site.key -> SiteContext
 ```
 
 Example:
@@ -335,7 +335,9 @@ Stable public routes:
 
 Locale prefixes continue to be handled by Paraglide/TanStack routing, with the default locale unprefixed and non-default locales prefixed.
 
-Existing production URLs should be retained during migration wherever possible. Changed URLs require permanent redirects.
+Existing production URLs should be retained during migration wherever possible.
+
+V1 intentionally does **not** ship a redirect table/router. Migration should therefore freeze existing indexed slugs. If a URL absolutely must change, create the permanent redirect at the Cloudflare edge (Redirect Rules or equivalent) before cutover and record it in the migration checklist. Do not cut over a changed slug first and "add redirects later".
 
 ## 9. SEO rules
 
@@ -450,7 +452,7 @@ Rules:
 
 - never pass arbitrary request JSON directly into Drizzle `.set()`
 - URL-based asset import must block localhost/private/metadata IPs, restrict protocol, redirects, size, timeout and content type
-- secrets never live in Git or `site_settings`
+- secrets never live in Git or `site_setting`
 - production and preview robots rules differ; preview deployments should be noindex
 
 ## 15. ShipAny isolation and future template sale
@@ -479,18 +481,18 @@ Until redistribution rights are confirmed, the repository should remain private 
 
 ### Phase 1 — Domain model
 
-Implement:
+Implement the physical tables (module names may stay plural/domain-oriented):
 
-- sites
-- games
-- categories
-- game_categories
-- site_games
-- site_game_locales
-- site_categories
-- site_category_locales
-- site_game_categories
-- site_settings
+- `game_site`
+- `game_catalog`
+- `game_category`
+- `game_category_map`
+- `site_game`
+- `site_game_locale`
+- `site_category`
+- `site_category_locale`
+- `site_game_category`
+- `site_setting`
 
 Add services for Sites, Games and Site Games first.
 

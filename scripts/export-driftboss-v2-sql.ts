@@ -14,6 +14,10 @@ import { v5 as uuidv5 } from 'uuid';
  *
  * Optional:
  *   --domain=driftbossgame.org     Export only one legacy domain.
+ *   --games=drift-boss,drive-mad   Export only these global games and the
+ *                                 categories/mappings needed by them.
+ *   --include-posts=true|false      Defaults to false when --games is set,
+ *                                 otherwise true.
  *   --featured=driftbossgame.org:drift-boss
  *                                 Mark a site/game pair as featured.
  *
@@ -40,6 +44,15 @@ const args = new Map(
 
 const outputPath = resolve(args.get('out') || 'data/migrations/driftboss-v2.sql');
 const onlyDomain = normalizeDomain(args.get('domain') || '');
+const onlyGameKeys = new Set(
+  (args.get('games') || '')
+    .split(',')
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean)
+);
+const includePosts = args.has('include-posts')
+  ? String(args.get('include-posts')).toLowerCase() !== 'false'
+  : onlyGameKeys.size === 0;
 const featuredPairs = new Set(
   (args.get('featured') || '')
     .split(',')
@@ -122,6 +135,64 @@ try {
       rows('blogs'),
     ]);
 
+  const requestedMissingGames = [...onlyGameKeys].filter(
+    (key) => !legacyGames.some((row: any) => String(row.game_key || '').trim().toLowerCase() === key)
+  );
+  if (requestedMissingGames.length > 0) {
+    throw new Error(`Requested --games entries not found in legacy games: ${requestedMissingGames.join(', ')}`);
+  }
+
+  const selectedGames = onlyGameKeys.size
+    ? legacyGames.filter((row: any) =>
+        onlyGameKeys.has(String(row.game_key || '').trim().toLowerCase())
+      )
+    : legacyGames;
+  const selectedGameKeys = new Set(
+    selectedGames.map((row: any) => String(row.game_key || '').trim())
+  );
+  const selectedGameCategories = legacyGameCategories.filter((row: any) =>
+    selectedGameKeys.has(String(row.game_key || '').trim())
+  );
+  const selectedCategoryKeys = new Set(
+    selectedGameCategories.map((row: any) => String(row.category || '').trim())
+  );
+  const selectedCategories = onlyGameKeys.size
+    ? legacyCategories.filter((row: any) =>
+        selectedCategoryKeys.has(String(row.category || '').trim())
+      )
+    : legacyCategories;
+  const selectedSeoGames = legacySeoGames.filter((row: any) => {
+    const domain = normalizeDomain(row.domain || '');
+    const gameKey = String(row.game_key || '').trim();
+    return (!onlyDomain || domain === onlyDomain) && selectedGameKeys.has(gameKey);
+  });
+  if (onlyDomain && onlyGameKeys.size > 0) {
+    const attachedKeys = new Set(
+      selectedSeoGames.map((row: any) => String(row.game_key || '').trim().toLowerCase())
+    );
+    const missingSiteGames = [...onlyGameKeys].filter((key) => !attachedKeys.has(key));
+    if (missingSiteGames.length > 0) {
+      throw new Error(
+        `Requested --games entries are not attached to ${onlyDomain} in legacy seo_games: ${missingSiteGames.join(', ')}`
+      );
+    }
+  }
+
+  const selectedSeoCategories = legacySeoCategories.filter((row: any) => {
+    const domain = normalizeDomain(row.domain || '');
+    const categoryKey = String(row.category || '').trim();
+    return (
+      (!onlyDomain || domain === onlyDomain) &&
+      (!onlyGameKeys.size || selectedCategoryKeys.has(categoryKey))
+    );
+  });
+  const selectedBlogs = includePosts
+    ? legacyBlogs.filter((row: any) => {
+        const domain = normalizeDomain(row.domain || '');
+        return !onlyDomain || domain === onlyDomain;
+      })
+    : [];
+
   const sitesByDomain = new Map<string, any>();
   for (const row of legacySites) {
     const domain = normalizeDomain(row.domain || '');
@@ -131,7 +202,7 @@ try {
 
   // Some historical databases may have domain-scoped SEO rows without a
   // matching game_sites row. Preserve them by synthesizing a minimal site.
-  for (const row of [...legacySeoGames, ...legacySeoCategories, ...legacyBlogs]) {
+  for (const row of [...selectedSeoGames, ...selectedSeoCategories, ...selectedBlogs]) {
     const domain = normalizeDomain(row.domain || '');
     if (!domain || (onlyDomain && domain !== onlyDomain)) continue;
     if (!sitesByDomain.has(domain)) sitesByDomain.set(domain, { domain, site_name: domain });
@@ -150,9 +221,9 @@ try {
   for (const [domain, row] of sitesByDomain) {
     const siteId = id('site', domain);
     const locales = new Set<string>(['en']);
-    for (const item of legacySeoGames) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
-    for (const item of legacySeoCategories) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
-    for (const item of legacyBlogs) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
+    for (const item of selectedSeoGames) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
+    for (const item of selectedSeoCategories) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
+    for (const item of selectedBlogs) if (normalizeDomain(item.domain || '') === domain) locales.add(localeOf(item));
 
     output.push(
       sqlInsert(
@@ -166,7 +237,7 @@ try {
   }
 
   // Global catalog is imported once. Site exposure is created separately below.
-  for (const row of legacyGames) {
+  for (const row of selectedGames) {
     const key = String(row.game_key || '').trim();
     if (!key) continue;
     output.push(
@@ -180,7 +251,7 @@ try {
     );
   }
 
-  for (const row of legacyCategories) {
+  for (const row of selectedCategories) {
     const key = String(row.category || '').trim();
     if (!key) continue;
     output.push(
@@ -188,7 +259,7 @@ try {
     );
   }
 
-  for (const row of legacyGameCategories) {
+  for (const row of selectedGameCategories) {
     const gameKey = String(row.game_key || '').trim();
     const categoryKey = String(row.category || '').trim();
     if (!gameByKey.has(gameKey) || !categoryByKey.has(categoryKey)) continue;
@@ -198,7 +269,7 @@ try {
   }
 
   // Attach only games that already had site-specific SEO/content in legacy DB.
-  for (const row of legacySeoGames) {
+  for (const row of selectedSeoGames) {
     const domain = normalizeDomain(row.domain || '');
     const gameKey = String(row.game_key || '').trim();
     if (!sitesByDomain.has(domain) || !gameByKey.has(gameKey)) continue;
@@ -229,7 +300,7 @@ try {
     );
   }
 
-  for (const row of legacySeoCategories) {
+  for (const row of selectedSeoCategories) {
     const domain = normalizeDomain(row.domain || '');
     const categoryKey = String(row.category || '').trim();
     if (!sitesByDomain.has(domain) || !categoryByKey.has(categoryKey)) continue;
@@ -261,12 +332,12 @@ try {
   // explicitly exposed by that site. This prevents cross-domain leakage.
   for (const domain of sitesByDomain.keys()) {
     const attachedGames = new Set(
-      legacySeoGames.filter((r: any) => normalizeDomain(r.domain || '') === domain).map((r: any) => String(r.game_key))
+      selectedSeoGames.filter((r: any) => normalizeDomain(r.domain || '') === domain).map((r: any) => String(r.game_key))
     );
     const attachedCategories = new Set(
-      legacySeoCategories.filter((r: any) => normalizeDomain(r.domain || '') === domain).map((r: any) => String(r.category))
+      selectedSeoCategories.filter((r: any) => normalizeDomain(r.domain || '') === domain).map((r: any) => String(r.category))
     );
-    for (const mapping of legacyGameCategories) {
+    for (const mapping of selectedGameCategories) {
       const gameKey = String(mapping.game_key || '');
       const categoryKey = String(mapping.category || '');
       if (!attachedGames.has(gameKey) || !attachedCategories.has(categoryKey)) continue;
@@ -276,7 +347,7 @@ try {
     }
   }
 
-  for (const row of legacyBlogs) {
+  for (const row of selectedBlogs) {
     const domain = normalizeDomain(row.domain || '');
     if (!sitesByDomain.has(domain)) continue;
     const locale = localeOf(row);
@@ -309,10 +380,14 @@ try {
 
   console.log(`Migration SQL written: ${outputPath}`);
   console.log(`Sites: ${sitesByDomain.size}`);
-  console.log(`Catalog games: ${legacyGames.length}`);
-  console.log(`Site game SEO rows: ${legacySeoGames.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
-  console.log(`Site category SEO rows: ${legacySeoCategories.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
-  console.log(`Posts: ${legacyBlogs.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
+  console.log(`Catalog games: ${selectedGames.length}`);
+  console.log(`Catalog categories: ${selectedCategories.length}`);
+  console.log(`Site game SEO rows: ${selectedSeoGames.length}`);
+  console.log(`Site category SEO rows: ${selectedSeoCategories.length}`);
+  console.log(`Posts: ${selectedBlogs.length} (include-posts=${includePosts})`);
+  if (onlyGameKeys.size > 0) {
+    console.log(`Game filter: ${[...onlyGameKeys].join(', ')}`);
+  }
 } finally {
   await client.end();
 }
