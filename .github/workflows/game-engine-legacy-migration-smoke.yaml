@@ -58,20 +58,37 @@ jobs:
       - name: Audit legacy source before export
         run: pnpm tsx scripts/audit-legacy-driftboss-source.ts
 
+      - name: Export filtered preview sample
+        run: >-
+          pnpm game:migrate:driftboss --
+          --domain=driftbossgame.org
+          --games=drift-boss
+          --featured=driftbossgame.org:drift-boss
+          --out=data/migrations/driftboss-preview-sample.sql
+
+      - name: Create filtered preview sample database
+        env:
+          DATABASE_URL: file:data/legacy-preview-sample.db
+        run: |
+          rm -f data/legacy-preview-sample.db
+          pnpm db:push --force
+          pnpm game:migrate:apply -- data/migrations/driftboss-preview-sample.sql
+          pnpm tsx scripts/verify-driftboss-preview-sample.ts
+
       - name: Export main legacy migration
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-sql.ts
+          pnpm game:migrate:driftboss --
           --out=data/migrations/driftboss-v2.sql
           --featured=driftbossgame.org:drift-boss
 
       - name: Export site-level extras
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-extras-sql.ts
+          pnpm game:migrate:driftboss:extras --
           --out=data/migrations/driftboss-v2-extras.sql
 
       - name: Export per-site stats reset
         run: >-
-          pnpm tsx scripts/export-driftboss-v2-reset-stats-sql.ts
+          pnpm game:migrate:driftboss:reset-stats --
           --out=data/migrations/driftboss-v2-reset-stats.sql
 
       - name: Create fresh V2 SQLite database
@@ -81,7 +98,7 @@ jobs:
 
       - name: Apply exported migrations
         run: >-
-          pnpm tsx scripts/apply-sql-files.ts
+          pnpm game:migrate:apply --
           data/migrations/driftboss-v2.sql
           data/migrations/driftboss-v2-extras.sql
           data/migrations/driftboss-v2-reset-stats.sql
