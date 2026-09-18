@@ -281,3 +281,44 @@ A site is ready to cut over only when all are true:
 - preview robots are noindex/disallow;
 - production robots are indexable;
 - per-site counters start from zero after migration.
+
+
+## Preview sample profile
+
+The first owner-facing Preview should be isolated and deliberately small:
+
+- dedicated D1: `game-site-engine-driftboss-preview`
+- games: `drift-boss,drive-mad,eggy-car`
+- legacy posts skipped for the first visual pass
+- site-level extras retained
+- counters reset to zero
+- `DEPLOY_ENV=preview`
+
+Main export:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss -- \
+  --domain=driftbossgame.org \
+  --games=drift-boss,drive-mad,eggy-car \
+  --include-posts=false \
+  --featured=driftbossgame.org:drift-boss \
+  --out=data/migrations/driftboss-v2.sql
+```
+
+Important: `--domain` alone does not filter the global catalog. Use `--games` when the Preview database itself must remain small.
+
+For Worker materialization, use:
+
+```bash
+pnpm game:worker:configure -- \
+  --site-key=driftbossgame \
+  --domain=driftbossgame.org \
+  --app-url=https://<preview-worker-url> \
+  --worker=driftbossgame-preview \
+  --database-id=<preview-d1-id> \
+  --database-name=game-site-engine-driftboss-preview \
+  --deploy-env=preview
+```
+
+`--domain` is the production canonical domain; `--app-url` is the actual Preview runtime host.
