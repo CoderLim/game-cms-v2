@@ -624,13 +624,30 @@ npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
 
 Alternatively, for a local SQLite dry-run, use `pnpm game:migrate:apply` as documented in the migration runbook.
 
-Initialize RBAC for the fresh Preview DB before using Admin:
+Initialize minimal RBAC directly for the remote Preview D1:
 
 ```bash
-pnpm rbac:init
+pnpm game:rbac:bootstrap-d1 -- \
+  --out=data/migrations/game-engine-d1-rbac-bootstrap.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/game-engine-d1-rbac-bootstrap.sql
 ```
 
-Create/sign in the intended administrator account and assign the admin role using the existing auth/RBAC flow. Do not seed a production password into Git.
+This creates the `super_admin` role and wildcard `*` permission. The existing `pnpm rbac:init` script is for local/libSQL or TCP databases and should not be treated as a direct remote-D1 command.
+
+After the intended administrator user has signed in/registered on Preview, generate an assignment SQL file:
+
+```bash
+pnpm game:rbac:bootstrap-d1 -- \
+  --admin-email=<admin-email> \
+  --out=data/migrations/game-engine-d1-rbac-admin.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/game-engine-d1-rbac-admin.sql
+```
+
+The user must already exist in the Preview D1 `user` table. Do not put passwords or secrets into generated SQL or Git.
 
 ### 16.4 Preview Worker
 
