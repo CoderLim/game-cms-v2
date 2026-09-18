@@ -452,7 +452,7 @@ Rules:
 
 - never pass arbitrary request JSON directly into Drizzle `.set()`
 - URL-based asset import must block localhost/private/metadata IPs, restrict protocol, redirects, size, timeout and content type
-- secrets never live in Git or `site_settings`
+- secrets never live in Git or `site_setting`
 - production and preview robots rules differ; preview deployments should be noindex
 
 ## 15. ShipAny isolation and future template sale
@@ -481,18 +481,18 @@ Until redistribution rights are confirmed, the repository should remain private 
 
 ### Phase 1 — Domain model
 
-Implement:
+Implement the physical tables (module names may stay plural/domain-oriented):
 
-- sites
-- games
-- categories
-- game_categories
-- site_games
-- site_game_locales
-- site_categories
-- site_category_locales
-- site_game_categories
-- site_settings
+- `game_site`
+- `game_catalog`
+- `game_category`
+- `game_category_map`
+- `site_game`
+- `site_game_locale`
+- `site_category`
+- `site_category_locale`
+- `site_game_category`
+- `site_setting`
 
 Add services for Sites, Games and Site Games first.
 
