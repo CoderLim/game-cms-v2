@@ -85,16 +85,16 @@ LEGACY_DATABASE_URL='postgresql://...' \
   pnpm game:migrate:driftboss -- \
   --domain=driftbossgame.org \
   --featured=driftbossgame.org:drift-boss \
-  --out=data/migrations/driftbossgame-v2.sql
+  --out=data/migrations/driftboss-v2.sql
 ```
 
 Site-level homepage/static-page/social extras:
 
 ```bash
 LEGACY_DATABASE_URL='postgresql://...' \
-  pnpm tsx scripts/export-driftboss-v2-extras-sql.ts \
+  pnpm game:migrate:driftboss:extras -- \
   --domain=driftbossgame.org \
-  --out=data/migrations/driftbossgame-v2-extras.sql
+  --out=data/migrations/driftboss-v2-extras.sql
 ```
 
 `--domain` is optional. Omit it only when intentionally exporting all historical domains.
@@ -138,8 +138,8 @@ Apply both files in order:
 
 ```bash
 pnpm tsx scripts/apply-sql-files.ts \
-  data/migrations/driftbossgame-v2.sql \
-  data/migrations/driftbossgame-v2-extras.sql
+  data/migrations/driftboss-v2.sql \
+  data/migrations/driftboss-v2-extras.sql
 ```
 
 Validate:
@@ -198,11 +198,11 @@ Then, only after explicit production confirmation, apply:
 ```bash
 npx wrangler d1 execute <database-name> \
   --remote \
-  --file=data/migrations/driftbossgame-v2.sql
+  --file=data/migrations/driftboss-v2.sql
 
 npx wrangler d1 execute <database-name> \
   --remote \
-  --file=data/migrations/driftbossgame-v2-extras.sql
+  --file=data/migrations/driftboss-v2-extras.sql
 ```
 
 The order matters: extras reference `game_site` rows created by the main import.
@@ -305,3 +305,22 @@ The exporters deliberately do not guess ambiguous business intent:
 - precise per-site historical views when the old view counter was global.
 
 Legacy `games.view` is copied only as an initial `site_game.view_count` for a migrated site-game row. Treat it as legacy popularity, not precise per-domain analytics.
+
+
+## Preview sample export
+
+For the first visual DriftBoss Preview, do not export the whole global catalog. The main exporter supports a physical game filter:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss -- \
+  --domain=driftbossgame.org \
+  --games=drift-boss,drive-mad,eggy-car \
+  --include-posts=false \
+  --featured=driftbossgame.org:drift-boss \
+  --out=data/migrations/driftboss-v2.sql
+```
+
+`--domain` limits site-scoped rows but does **not** by itself limit the global catalog. `--games` limits `game_catalog`, the game/category graph, and site-game rows to the requested game keys.
+
+Use a dedicated Preview D1 for this legacy migration dry-run. See `docs/HANDOFF.md §16` for the authoritative end-to-end Preview checklist.
