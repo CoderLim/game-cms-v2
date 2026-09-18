@@ -70,16 +70,22 @@ ON CONFLICT(code) DO UPDATE SET resource=excluded.resource, action=excluded.acti
 VALUES (${q(roleId)}, 'super_admin', 'Super Admin', 'Full system access', 'active', 1, ${now}, ${now})
 ON CONFLICT(name) DO UPDATE SET title=excluded.title, description=excluded.description, status=excluded.status, sort=excluded.sort, updated_at=excluded.updated_at;`,
   `INSERT INTO role_permission (id, role_id, permission_id, created_at, updated_at)
-VALUES (${q(rolePermissionId)}, ${q(roleId)}, ${q(permissionId)}, ${now}, ${now})
+SELECT ${q(rolePermissionId)}, r.id, p.id, ${now}, ${now}
+FROM role r, permission p
+WHERE r.name = 'super_admin' AND p.code = '*'
 ON CONFLICT(id) DO UPDATE SET role_id=excluded.role_id, permission_id=excluded.permission_id, updated_at=excluded.updated_at;`,
   `INSERT INTO user (id, name, email, email_verified, image, created_at, updated_at, utm_source, ip, locale)
 VALUES (${q(userId)}, ${q(name)}, ${q(email)}, 1, NULL, ${now}, ${now}, '', '', '')
 ON CONFLICT(email) DO UPDATE SET name=excluded.name, email_verified=1, updated_at=excluded.updated_at;`,
   `INSERT INTO account (id, account_id, provider_id, user_id, access_token, refresh_token, id_token, access_token_expires_at, refresh_token_expires_at, scope, password, created_at, updated_at)
-VALUES (${q(accountId)}, ${q(userId)}, 'credential', ${q(userId)}, NULL, NULL, NULL, NULL, NULL, NULL, ${q(passwordHash)}, ${now}, ${now})
-ON CONFLICT(id) DO UPDATE SET user_id=excluded.user_id, password=excluded.password, updated_at=excluded.updated_at;`,
+SELECT ${q(accountId)}, u.id, 'credential', u.id, NULL, NULL, NULL, NULL, NULL, NULL, ${q(passwordHash)}, ${now}, ${now}
+FROM user u
+WHERE u.email = ${q(email)}
+ON CONFLICT(id) DO UPDATE SET account_id=excluded.account_id, user_id=excluded.user_id, password=excluded.password, updated_at=excluded.updated_at;`,
   `INSERT INTO user_role (id, user_id, role_id, created_at, updated_at, expires_at)
-VALUES (${q(userRoleId)}, ${q(userId)}, ${q(roleId)}, ${now}, ${now}, NULL)
+SELECT ${q(userRoleId)}, u.id, r.id, ${now}, ${now}, NULL
+FROM user u, role r
+WHERE u.email = ${q(email)} AND r.name = 'super_admin'
 ON CONFLICT(id) DO UPDATE SET user_id=excluded.user_id, role_id=excluded.role_id, expires_at=NULL, updated_at=excluded.updated_at;`,
   'COMMIT;',
 ];
