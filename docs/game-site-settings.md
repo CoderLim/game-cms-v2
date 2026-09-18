@@ -73,7 +73,7 @@ Key: `navigation`
 ]
 ```
 
-V1 stores and validates this structure. Public navigation can progressively consume it as the theme layer evolves.
+The public `SiteHeader` consumes this setting today. Category links are appended separately from published site categories.
 
 ## Footer
 
@@ -96,7 +96,7 @@ Key: `game_player`
 }
 ```
 
-V1 stores and validates this object. Player behavior should consume these values through the site runtime rather than hardcoded per-domain conditionals.
+The public `GamePlayer` consumes these values today. They control iframe fullscreen and autoplay permissions without per-domain conditionals.
 
 ## Safety rules
 
@@ -106,3 +106,17 @@ V1 stores and validates this object. Player behavior should consume these values
 4. Social links reject non-HTTP(S) schemes.
 5. The frontend never accepts arbitrary JavaScript from `site_setting`.
 6. Missing/invalid optional settings fail closed: no script/ad is rendered.
+
+
+## Runtime wiring matrix
+
+| Setting key | Validation/storage | Public runtime consumer | Status |
+| --- | --- | --- | --- |
+| `analytics` | allowlisted + format validated | `SiteRuntime` via `SiteFooter` | wired |
+| `ads` | allowlisted + AdSense/slot validation | `AdSlot`, `SiteRuntime`, `/ads.txt` | wired |
+| `navigation` | allowlisted JSON | `SiteHeader` | wired |
+| `footer` | allowlisted JSON | `SiteFooter` | wired |
+| `game_player` | allowlisted JSON | `GamePlayer` | wired |
+| `social_links` | allowlisted + HTTP(S)-only URLs | `SiteFooter` | wired |
+
+This table is the source of truth for V1. If a new setting is added, update validation, Admin UI, runtime consumption, and this table together.
