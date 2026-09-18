@@ -75,6 +75,16 @@ jobs:
           pnpm game:migrate:apply -- data/migrations/driftboss-preview-sample.sql
           pnpm tsx scripts/verify-driftboss-preview-sample.ts
 
+      - name: Bootstrap and verify Preview admin SQL
+        env:
+          DATABASE_URL: file:data/legacy-preview-sample.db
+          GAME_ADMIN_EMAIL: preview-admin@example.com
+          GAME_ADMIN_PASSWORD: preview-admin-ci-password
+        run: |
+          pnpm game:admin:bootstrap:sql -- --out=data/migrations/d1-preview-admin-bootstrap.sql
+          pnpm game:migrate:apply -- data/migrations/d1-preview-admin-bootstrap.sql
+          pnpm tsx scripts/verify-d1-admin-bootstrap.ts
+
       - name: Export main legacy migration
         run: >-
           pnpm game:migrate:driftboss --
