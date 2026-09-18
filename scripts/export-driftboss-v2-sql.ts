@@ -166,6 +166,18 @@ try {
     const gameKey = String(row.game_key || '').trim();
     return (!onlyDomain || domain === onlyDomain) && selectedGameKeys.has(gameKey);
   });
+  if (onlyDomain && onlyGameKeys.size > 0) {
+    const attachedKeys = new Set(
+      selectedSeoGames.map((row: any) => String(row.game_key || '').trim().toLowerCase())
+    );
+    const missingSiteGames = [...onlyGameKeys].filter((key) => !attachedKeys.has(key));
+    if (missingSiteGames.length > 0) {
+      throw new Error(
+        `Requested --games entries are not attached to ${onlyDomain} in legacy seo_games: ${missingSiteGames.join(', ')}`
+      );
+    }
+  }
+
   const selectedSeoCategories = legacySeoCategories.filter((row: any) => {
     const domain = normalizeDomain(row.domain || '');
     const categoryKey = String(row.category || '').trim();
