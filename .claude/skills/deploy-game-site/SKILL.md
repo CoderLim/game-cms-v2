@@ -57,7 +57,7 @@ Optional:
 - `--app-url`: actual deployed origin. Preview should use its workers.dev/preview URL; production defaults to the canonical domain.
 - `--worker`: Worker name; defaults to `site-key`
 - `--site-name`: public name; defaults to `site-key`
-- `--database-id`: shared D1 id
+- `--database-id`: target D1 id
 - `--database-name`: defaults to `game-site-engine-db`
 - `--production`: prepare production robots/indexing mode; otherwise default to preview
 
@@ -132,7 +132,7 @@ If absent, use the Admin UI or an approved seed/import flow to create it. Do not
 Default to preview:
 
 ```bash
-pnpm tsx scripts/configure-game-site-worker.ts \
+pnpm game:worker:configure -- \
   --site-key=<site-key> \
   --domain=<domain> \
   --app-url=https://<preview-worker>.workers.dev \
@@ -151,8 +151,8 @@ Inspect `wrangler.jsonc` for:
 DATABASE_PROVIDER=d1
 SITE_KEY=<site-key>
 DEPLOY_ENV=preview|production
-VITE_APP_URL=https://<domain>
-DB binding=<shared D1>
+VITE_APP_URL=https://<app-url>
+DB binding=<target D1>
 ```
 
 ## Phase 5 — schema migrations
@@ -211,7 +211,7 @@ Keep `DEPLOY_ENV=preview` for first deployment so robots blocks indexing.
 Run:
 
 ```bash
-pnpm tsx scripts/audit-game-site-cutover.ts \
+pnpm game:audit:cutover -- \
   --base=https://<preview-worker-url> \
   --canonical=https://<domain> \
   --game=<representative-game-slug> \
