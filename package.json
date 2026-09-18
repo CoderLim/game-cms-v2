@@ -25,6 +25,7 @@
     "game:migrate:apply": "tsx scripts/apply-sql-files.ts",
     "game:audit:cutover": "tsx scripts/audit-game-site-cutover.ts",
     "game:worker:configure": "tsx scripts/configure-game-site-worker.ts",
+    "game:admin:bootstrap:sql": "tsx scripts/export-d1-admin-bootstrap-sql.ts",
     "rbac:init": "tsx scripts/with-env.ts tsx scripts/init-rbac.ts",
     "rbac:assign": "tsx scripts/with-env.ts tsx scripts/assign-role.ts",
     "format": "prettier --write .",
