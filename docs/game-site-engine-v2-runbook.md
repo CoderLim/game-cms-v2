@@ -175,8 +175,9 @@ The migration uses three generated SQL files:
 
 ```text
 driftboss-v2.sql
-  games/categories/site_games/site_game_locales/
-  site_categories/site_category_locales/blogs
+  game_catalog/game_category/game_category_map/
+  site_game/site_game_locale/site_category/
+  site_category_locale/site_game_category/site posts
 
 driftboss-v2-extras.sql
   homepage SEO/site_locale
