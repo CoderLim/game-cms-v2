@@ -186,7 +186,7 @@ Keep `DEPLOY_ENV=preview` for first deployment so robots blocks indexing.
 Run:
 
 ```bash
-pnpm tsx scripts/audit-game-site-cutover.ts \
+pnpm game:audit:cutover -- \
   --base=https://<preview-worker-url> \
   --canonical=https://<domain> \
   --game=<representative-game-slug> \
