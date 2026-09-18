@@ -99,6 +99,7 @@ jobs:
           pnpm exec tsx scripts/configure-game-site-worker.ts \
             --site-key=smoke-site \
             --domain=smoke.example.com \
+            --app-url=https://smoke-preview.example.workers.dev \
             --worker=smoke-site \
             --site-name='Smoke Site' \
             --database-id=11111111-1111-4111-8111-111111111111 \
@@ -109,6 +110,6 @@ jobs:
           grep -q '"name": "smoke-site"' data/wrangler.smoke.jsonc
           grep -q '"SITE_KEY": "smoke-site"' data/wrangler.smoke.jsonc
           grep -q '"DEPLOY_ENV": "preview"' data/wrangler.smoke.jsonc
-          grep -q '"VITE_APP_URL": "https://smoke.example.com"' data/wrangler.smoke.jsonc
+          grep -q '"VITE_APP_URL": "https://smoke-preview.example.workers.dev"' data/wrangler.smoke.jsonc
           grep -q '"database_id": "11111111-1111-4111-8111-111111111111"' data/wrangler.smoke.jsonc
           grep -q '"binding": "DB"' data/wrangler.smoke.jsonc
