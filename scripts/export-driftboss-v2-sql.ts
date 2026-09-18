@@ -360,10 +360,13 @@ try {
 
   console.log(`Migration SQL written: ${outputPath}`);
   console.log(`Sites: ${sitesByDomain.size}`);
-  console.log(`Catalog games: ${legacyGames.length}`);
+  console.log(`Catalog games: ${selectedGames.length}`);
   console.log(`Site game SEO rows: ${selectedSeoGames.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
   console.log(`Site category SEO rows: ${selectedSeoCategories.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
-  console.log(`Posts: ${legacyBlogs.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
+  console.log(`Posts: ${selectedBlogs.filter((r: any) => !onlyDomain || normalizeDomain(r.domain || '') === onlyDomain).length}`);
+  if (selectedGameKeys.size) {
+    console.log(`Game filter: ${[...selectedGameKeys].join(', ')}`);
+  }
 } finally {
   await client.end();
 }
