@@ -50,7 +50,25 @@ Do not continue until the audit prints `PASS`.
 
 ## 4. Generate core migration SQL
 
-Example for Drift Boss only:
+### Filtered Preview sample
+
+For the first visual Preview, export only the three selected games:
+
+```bash
+pnpm game:migrate:driftboss -- \
+  --domain=driftbossgame.org \
+  --games=drift-boss,drive-mad,eggy-car \
+  --featured=driftbossgame.org:drift-boss \
+  --out=data/migrations/driftboss-v2.sql
+```
+
+With `--games`, the exporter filters the global catalog and game-category mappings as well as site attachment rows. It also defaults to `--include-posts=false`, so legacy blog articles do not make the small Preview unexpectedly large.
+
+The selected Drift Boss `zh` locale fixture is still exported because it belongs to `drift-boss`.
+
+### Full production export
+
+After Preview approval, regenerate the same filename **without `--games`**:
 
 ```bash
 pnpm game:migrate:driftboss -- \
@@ -58,6 +76,8 @@ pnpm game:migrate:driftboss -- \
   --featured=driftbossgame.org:drift-boss \
   --out=data/migrations/driftboss-v2.sql
 ```
+
+A full domain export attaches only that site's `seo_games`, but imports the complete global catalog for reuse by the shared production Game Engine D1.
 
 This exports:
 
@@ -73,6 +93,8 @@ This exports:
 - legacy blogs into site-scoped posts.
 
 Important: only games with a matching legacy `seo_games` row become `site_game` records. This intentionally prevents the old shared global catalog from leaking unrelated games into a vertical site.
+
+Legacy content mapping is deliberately conservative: `games.description` maps to `site_game_locale.description`, and `seo_games.seo_content` maps to `site_game_locale.content`. V2 fields `how_to_play`, `controls`, `features`, and `faq` remain empty during first migration unless an explicit trustworthy source exists. Enrich them after cutover rather than heuristically splitting old Markdown.
 
 ## 5. Generate site-level extras
 
@@ -172,36 +194,81 @@ FROM site_post;
 
 ## 9. Apply to D1
 
-First make sure V2 schema migrations have already been applied to the target D1.
+### Preview target
 
-Then apply the generated SQL:
+Use a **dedicated disposable Preview D1** for the filtered sample. Do not import sample data into the shared production D1.
+
+Example:
 
 ```bash
-npx wrangler d1 execute <DB_NAME> --remote \
+npx wrangler d1 create game-site-engine-driftboss-preview
+npx wrangler d1 migrations apply game-site-engine-driftboss-preview --remote
+```
+
+### Import order
+
+Apply the generated SQL:
+
+```bash
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
   --file=data/migrations/driftboss-v2.sql
 
-npx wrangler d1 execute <DB_NAME> --remote \
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
   --file=data/migrations/driftboss-v2-extras.sql
 
-npx wrangler d1 execute <DB_NAME> --remote \
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
   --file=data/migrations/driftboss-v2-reset-stats.sql
 ```
 
-The generated SQL is idempotent, but still back up the D1 database before production migration.
+The generated SQL is idempotent. A disposable Preview D1 can be recreated instead of manually cleaned.
 
-## 10. Deploy a preview Worker before DNS cutover
+For the later full production migration, switch the commands to the shared production Game Engine D1 and back it up/export it first.
 
-Use the same production `SITE_KEY`, but deploy to a preview Worker/domain first.
+## 10. Bootstrap Admin and deploy a Preview Worker
 
-Example logical configuration:
+Use the same production `SITE_KEY`, but deploy to a Preview Worker/domain backed by the dedicated Preview D1.
 
-```text
-SITE_KEY=driftbossgame
-DEPLOY_ENV=preview
-VITE_APP_URL=https://preview-worker.example.workers.dev
+If Admin UI validation is needed, bootstrap a fresh Preview admin first:
+
+```bash
+export GAME_ADMIN_EMAIL='admin@example.com'
+export GAME_ADMIN_PASSWORD='<strong-local-secret>'
+
+pnpm game:admin:bootstrap:sql -- \
+  --out=data/migrations/d1-preview-admin-bootstrap.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/d1-preview-admin-bootstrap.sql
+
+rm -f data/migrations/d1-preview-admin-bootstrap.sql
+unset GAME_ADMIN_PASSWORD
 ```
 
-The site row still contains the canonical production domain `driftbossgame.org`. That allows you to test the preview Worker while verifying production canonical URLs.
+Do not use `pnpm rbac:init` against remote D1; that script is for directly connectable SQLite/libSQL/Postgres/MySQL databases.
+
+Materialize the Worker config:
+
+```bash
+pnpm game:worker:configure -- \
+  --site-key=driftbossgame \
+  --domain=driftbossgame.org \
+  --app-url=https://<preview-worker>.workers.dev \
+  --worker=driftboss-v2-preview \
+  --site-name="Drift Boss Preview" \
+  --database-id=<PREVIEW_D1_ID> \
+  --database-name=game-site-engine-driftboss-preview \
+  --deploy-env=preview
+```
+
+Then set secrets and build/deploy:
+
+```bash
+npx wrangler secret put AUTH_SECRET
+pnpm cf:build
+pnpm cf:deploy
+```
+
+The site row still contains the canonical production domain `driftbossgame.org`, while `VITE_APP_URL` is the Preview origin. That allows you to test the Preview Worker while verifying production canonical URLs.
 
 Preview `robots.txt` must remain `Disallow: /`.
 
