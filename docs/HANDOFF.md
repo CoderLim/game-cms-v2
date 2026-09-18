@@ -191,7 +191,7 @@ Use:
 
 > one site = one Cloudflare Worker deployment
 
-All sites can use the same code commit and shared D1.
+All sites use the same code commit. Production sites may share the Game Engine D1; **legacy migration previews should use a dedicated Preview D1** so sample imports, resets and RBAC setup cannot affect production/shared data.
 
 Each deployment gets its own:
 
@@ -373,6 +373,7 @@ pnpm game:migrate:driftboss:reset-stats
 pnpm game:migrate:apply
 
 pnpm game:audit:cutover
+pnpm game:worker:configure
 
 pnpm cf:build
 pnpm cf:deploy
@@ -536,46 +537,207 @@ This is a business/legal boundary, not just a technical detail.
 
 ## 16. Immediate next task
 
-The next implementation goal is **not** more architecture work.
+Goal: migrate a deliberately small DriftBoss preview dataset into a **dedicated Preview D1** and deploy a non-indexed Preview Worker for owner visual inspection.
 
-It is:
+### 16.1 Prerequisites
 
-> migrate a small real DriftBoss sample into V2 D1 and deploy a non-indexed Preview Worker that the owner can visually inspect.
+- [ ] Work from `main`.
+- [ ] Cloudflare account is available and `npx wrangler whoami` succeeds.
+- [ ] Put a **read-only** legacy PostgreSQL/Supabase connection in the shell as `LEGACY_DATABASE_URL`. Never commit it.
+- [ ] Confirm Game Engine CI is green: Docker Build, Game Site Engine Smoke, Game Site Engine Migrations, Legacy Migration Smoke.
+- [ ] Create a dedicated Preview D1 (recommended name: `game-site-engine-driftboss-preview`). Production sites may later use a shared D1; this migration Preview intentionally does not.
 
-Recommended sequence:
+### 16.2 Audit and export the small sample
 
-1. Work from `main`.
-2. Audit the real legacy DriftBoss source read-only.
-3. Export a deliberately small initial sample:
-   - Drift Boss
-   - Drive Mad
-   - Eggy Car
-   - the Drift Boss Chinese locale fixture
-   - only the minimum categories/site settings needed for the preview
-4. Create/use a Preview D1 database.
-5. Apply the V2 schema/migrations.
-6. Import the sample.
-7. Deploy a Preview Worker with:
-   - `SITE_KEY=driftbossgame`
-   - preview/staging deploy environment
-   - robots blocking indexing
-8. Verify manually and with `game:audit:cutover`:
-   - homepage
-   - game play/embed
-   - game metadata
-   - category pages
-   - canonical
-   - hreflang
-   - sitemap
-   - robots
-   - 404 for games not attached to this site
-   - no content leakage from another site
-9. Let the owner inspect the Preview UI.
-10. Only after explicit approval:
-    - migrate the full DriftBoss dataset
-    - create production D1 / production Worker as needed
-    - perform final cutover audit
-    - switch the real domain/DNS
+First audit the real source:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss:audit -- \
+  --domain=driftbossgame.org
+```
+
+Export exactly the three real sample games plus their category graph. `--games` filters the global catalog as well as site-game rows, so the Preview D1 does **not** receive the full ~3.9k catalog. `--include-posts=false` keeps editorial posts out of this first visual sample.
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss -- \
+  --domain=driftbossgame.org \
+  --games=drift-boss,drive-mad,eggy-car \
+  --include-posts=false \
+  --featured=driftbossgame.org:drift-boss \
+  --out=data/migrations/driftboss-v2.sql
+```
+
+Export site-level homepage/legal/social settings:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss:extras -- \
+  --domain=driftbossgame.org \
+  --out=data/migrations/driftboss-v2-extras.sql
+```
+
+Generate the mandatory per-site counter reset:
+
+```bash
+LEGACY_DATABASE_URL='postgresql://...' \
+  pnpm game:migrate:driftboss:reset-stats -- \
+  --domain=driftbossgame.org \
+  --out=data/migrations/driftboss-v2-reset-stats.sql
+```
+
+Review all generated files under `data/migrations/` before applying them. These files are local/generated and should remain gitignored.
+
+**Important:** `--domain=driftbossgame.org` by itself does **not** filter the global catalog. Use `--games=...` when a physically small catalog is required.
+
+### 16.3 Preview database and import
+
+Create the isolated Preview D1:
+
+```bash
+npx wrangler d1 create game-site-engine-driftboss-preview
+```
+
+Record the returned database id locally; do not commit it.
+
+Generate/apply the V2 schema to that Preview D1:
+
+```bash
+pnpm db:setup
+pnpm db:generate
+npx wrangler d1 migrations apply game-site-engine-driftboss-preview --remote
+```
+
+Apply migration data in this order:
+
+```bash
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/driftboss-v2.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/driftboss-v2-extras.sql
+
+npx wrangler d1 execute game-site-engine-driftboss-preview --remote \
+  --file=data/migrations/driftboss-v2-reset-stats.sql
+```
+
+Alternatively, for a local SQLite dry-run, use `pnpm game:migrate:apply` as documented in the migration runbook.
+
+Initialize RBAC for the fresh Preview DB before using Admin:
+
+```bash
+pnpm rbac:init
+```
+
+Create/sign in the intended administrator account and assign the admin role using the existing auth/RBAC flow. Do not seed a production password into Git.
+
+### 16.4 Preview Worker
+
+Use the checked-in template and the official configure command:
+
+```bash
+pnpm game:worker:configure -- \
+  --site-key=driftbossgame \
+  --domain=driftbossgame.org \
+  --app-url=https://<preview-worker-url> \
+  --worker=driftbossgame-preview \
+  --site-name="Drift Boss Preview" \
+  --database-id=<preview-d1-id> \
+  --database-name=game-site-engine-driftboss-preview \
+  --deploy-env=preview
+```
+
+This materializes local/gitignored `wrangler.jsonc` from `wrangler.example.jsonc`. See `.claude/skills/deploy-game-site/SKILL.md`.
+
+Required Preview runtime configuration:
+
+```env
+DATABASE_PROVIDER=d1
+SITE_KEY=driftbossgame
+DEPLOY_ENV=preview
+VITE_APP_URL=https://<preview-worker-url>
+VITE_APP_NAME=Drift Boss Preview
+AUTH_SECRET=<secret>
+```
+
+`VITE_APP_URL` is the actual Preview hostname used by auth/runtime callbacks. The canonical SEO origin remains `game_site.domain = driftbossgame.org`. These values are intentionally allowed to differ.
+
+Set secrets through Wrangler/Cloudflare secrets, not `site_setting` or Git.
+
+Build/deploy:
+
+```bash
+pnpm cf:build
+pnpm cf:deploy
+```
+
+Preview must remain `DEPLOY_ENV=preview`; `robots.txt` must return `Disallow: /`.
+
+### 16.5 Verify
+
+Manual checks:
+
+- [ ] homepage
+- [ ] Drift Boss / Drive Mad / Eggy Car pages
+- [ ] game player/embed
+- [ ] category pages
+- [ ] Drift Boss Chinese locale fixture
+- [ ] canonical points to `https://driftbossgame.org`, never the Preview host
+- [ ] hreflang only contains actually published locales
+- [ ] sitemap is site-scoped
+- [ ] robots blocks indexing
+- [ ] an unrelated global game returns 404 because it is not attached to this site
+- [ ] no content leaks from another site
+- [ ] Admin can edit the imported content
+
+Run the cutover audit:
+
+```bash
+pnpm game:audit:cutover -- \
+  --base=https://<preview-worker-url> \
+  --canonical=https://driftbossgame.org \
+  --game=drift-boss \
+  --expect-indexable=false
+```
+
+When available, also pass representative `--category`, `--pages`, and `--not-found` values as described in `docs/driftboss-v2-migration-runbook.md`.
+
+Owner visual sign-off is required before proceeding.
+
+### 16.6 After approval only
+
+Only after the Preview is accepted:
+
+- export/import the full DriftBoss dataset
+- decide whether production uses the shared production Game Engine D1 or a dedicated production D1
+- configure the production Worker with `DEPLOY_ENV=production`
+- run the final cutover audit with `--expect-indexable=true`
+- switch the real domain/DNS
+- keep the old production app/data available for rollback until traffic/indexing is healthy
+
+### 16.7 Migration field scope
+
+The first legacy migration intentionally maps the legacy long-form `seo_content` into `site_game_locale.content`.
+
+V2 fields such as `how_to_play`, `controls`, `features`, and `faq` are **not lost legacy columns**; the old DB does not provide structured sources for them. They remain empty on first migration and may be populated later through Admin/content enrichment.
+
+### 16.8 URL/redirect rule for V1
+
+V1 does not yet have a database-backed redirect subsystem.
+
+Therefore, during the DriftBoss cutover:
+
+- preserve existing public slugs/URL shapes whenever they already have traffic/indexing;
+- do not change a legacy indexed slug unless a permanent redirect is configured first;
+- if a redirect is unavoidable, use Cloudflare Redirect Rules (or an explicitly reviewed Worker redirect) as the temporary V1 mechanism.
+
+A generalized redirect table/router can be added later; it is not required for the first cutover.
+
+### 16.9 Known non-blocking UI debt
+
+- Game Engine Admin labels are currently largely English/hardcoded. Treat full Admin i18n as backlog, not a migration blocker.
+- `site_setting` consumption status is documented in `docs/game-site-settings.md`; do not assume every validated setting is already wired into every theme component.
 
 ## 17. Explicit approval boundaries
 
