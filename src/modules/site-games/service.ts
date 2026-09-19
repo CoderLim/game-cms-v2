@@ -113,6 +113,16 @@ export async function updateSiteGame(
   return row;
 }
 
+export async function removeSiteGame(siteId: string, id: string) {
+  const [row] = await db()
+    .delete(siteGame)
+    .where(and(eq(siteGame.id, id), eq(siteGame.siteId, siteId)))
+    .returning();
+
+  if (!row) throw new Error('Site game not found');
+  return row;
+}
+
 export async function upsertLocaleContent(input: {
   siteId: string;
   siteGameId: string;
