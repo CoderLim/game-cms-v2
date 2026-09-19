@@ -33,6 +33,7 @@ md.renderer.rules.heading_open = function (tokens, idx) {
 
 // Relative Markdown images are portable DB asset paths. Resolve them through
 // the deployment-level static asset origin instead of the current site host.
+const defaultImageRenderer = md.renderer.rules.image;
 md.renderer.rules.image = function (tokens, idx, options, env, renderer) {
   const token = tokens[idx];
   const src = token.attrGet('src');
@@ -40,7 +41,10 @@ md.renderer.rules.image = function (tokens, idx, options, env, renderer) {
     const resolved = resolveStaticAssetUrl(src);
     if (resolved) token.attrSet('src', resolved);
   }
-  return renderer.renderToken(tokens, idx, options);
+
+  return defaultImageRenderer
+    ? defaultImageRenderer(tokens, idx, options, env, renderer)
+    : renderer.renderToken(tokens, idx, options);
 };
 
 // External links open in a new tab with nofollow
