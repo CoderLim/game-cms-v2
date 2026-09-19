@@ -19,6 +19,9 @@ export const envConfigs: Record<string, string> = {
   app_name: publicEnv('VITE_APP_NAME') ?? 'ShipAny',
   app_description: publicEnv('VITE_APP_DESCRIPTION') ?? 'Ship your SaaS faster',
   app_logo: publicEnv('VITE_APP_LOGO') ?? '/logo.svg',
+  static_asset_origin: (
+    publicEnv('VITE_STATIC_ASSET_ORIGIN') ?? ''
+  ).replace(/\/$/, ''),
 
   // Game Site Engine deployment identity. One Worker deployment owns one
   // logical site; SITE_KEY resolves to game_site.key in the database.
