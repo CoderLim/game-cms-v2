@@ -106,6 +106,7 @@ function GamePage() {
     description,
     categories,
     recommendationTiles,
+    stageHeight,
     publicConfig,
   } = Route.useLoaderData();
 
@@ -128,7 +129,7 @@ function GamePage() {
     <>
       <StructuredData data={structuredData} />
       <PokiGamePage
-        layout={detailLayout}
+        layout={{ ...detailLayout, stageHeight }}
         siteName={site.name}
         game={game}
         categories={categories}

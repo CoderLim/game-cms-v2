@@ -51,11 +51,11 @@
 
 ## 现状
 
-| 页面 | 现在 | 改造目标 |
-| --- | --- | --- |
-| `/` | `PokiHome` 直接读 `src/data/poki-home.json` | 恢复 CMS loader，用 JSON 只保留背景和格子布局 |
-| `/game/$slug` | loader 已接 CMS，但渲染旧 `SiteHeader + GamePlayer + cards` | loader/SEO 逻辑保留，换成当前详情 UI |
-| `/en/g/pool-club` | 静态 Pool Club 克隆 | redirect 到正式详情地址 |
+| 页面              | 现在                                                        | 改造目标                                      |
+| ----------------- | ----------------------------------------------------------- | --------------------------------------------- |
+| `/`               | `PokiHome` 直接读 `src/data/poki-home.json`                 | 恢复 CMS loader，用 JSON 只保留背景和格子布局 |
+| `/game/$slug`     | loader 已接 CMS，但渲染旧 `SiteHeader + GamePlayer + cards` | loader/SEO 逻辑保留，换成当前详情 UI          |
+| `/en/g/pool-club` | 静态 Pool Club 克隆                                         | redirect 到正式详情地址                       |
 
 本地 `data/local.db`、`SITE_KEY=local-dev` 当前只有 `demo-game`。首页接通后只有少量格子是正常的数据状态，不应回退显示克隆里的 Poki 游戏。
 
@@ -313,7 +313,6 @@ Footer：
 - 导航来自 `publicConfig.navigation`
 - social links 来自 `publicConfig.socialLinks`
 - 保留 About / Contact / Privacy / Terms 站内链接
-- 保留 `BuiltWithShipAny`
 - 不保留 “Let the world play” 等 Poki 品牌文案
 
 ## 组件边界

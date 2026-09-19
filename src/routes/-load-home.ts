@@ -13,7 +13,6 @@ type GameCardData = {
 
 const CELL = 94;
 
-
 function uniqueGames(
   featured: GameCardData | undefined,
   hotGames: GameCardData[],
@@ -87,6 +86,7 @@ function mapCategoryGrid(
         y: slot.y,
         w: slot.w,
         h: slot.h,
+        caption: slot.h < slot.w ? 'side' : 'bottom',
       };
     }),
   };

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { BuiltWithShipAny } from '@/components/built-with-shipany';
+import { Link } from '@/core/i18n/navigation';
 import { AdSlot } from '@/components/game-site/ad-slot';
 import { GamePlayer } from '@/components/game-site/game-player';
 import { GameRating } from '@/components/game-site/game-rating';
 import { GameViewTracker } from '@/components/game-site/game-view-tracker';
 import { SiteRuntime } from '@/components/game-site/site-runtime';
 import { MarkdownContent } from '@/components/markdown-content';
-import { Link } from '@/core/i18n/navigation';
+import { PokiFooter, PokiFrame } from '@/components/poki/poki-chrome';
 
 import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/600.css';
@@ -181,6 +181,7 @@ export function PokiGamePage({
   const searchGames = useMemo(() => {
     const unique = new Map<string, DetailTile>();
     for (const tile of recommendationTiles) {
+      if (!tile.href.startsWith('/game/')) continue;
       if (!unique.has(tile.siteGameId)) unique.set(tile.siteGameId, tile);
     }
     return [...unique.values()];
@@ -199,24 +200,15 @@ export function PokiGamePage({
   const showDescriptionInDetails = Boolean(game.intro && game.description);
   const hasLongContent = Boolean(
     showDescriptionInDetails ||
-      game.howToPlay ||
-      game.controls ||
-      game.features ||
-      game.faq ||
-      game.content
+    game.howToPlay ||
+    game.controls ||
+    game.features ||
+    game.faq ||
+    game.content
   );
 
   return (
-    <div
-      className="min-h-screen overflow-x-hidden text-[#002b50]"
-      style={{
-        backgroundColor: '#83ffe7',
-        backgroundImage: `url(${layout.background})`,
-        backgroundSize: 'max(624px, 100%)',
-        backgroundPosition: 'center top',
-        fontFamily: '"Open Sans", "Proxima Nova", Arial, sans-serif',
-      }}
-    >
+    <PokiFrame background={layout.background}>
       <GameViewTracker siteGameId={game.siteGameId} />
 
       <nav
@@ -385,15 +377,8 @@ export function PokiGamePage({
                   width: layout.ad.w,
                 }}
               >
-                <div
-                  className="bg-white/50"
-                  style={{ height: layout.ad.h }}
-                >
-                  <AdSlot
-                    ads={ads}
-                    slotKey="gameTop"
-                    className="size-full"
-                  />
+                <div className="bg-white/50" style={{ height: layout.ad.h }}>
+                  <AdSlot ads={ads} slotKey="gameTop" className="size-full" />
                 </div>
                 <p className="mt-1 text-center text-[10px] tracking-wide text-[#5d6b84] uppercase">
                   Advertisement
@@ -451,7 +436,7 @@ export function PokiGamePage({
             </p>
           ) : game.description ? (
             <MarkdownContent
-                        variant="game-site"
+              variant="game-site"
               content={game.description}
               className="mt-4 max-w-[784px] text-[#002b50]"
             />
@@ -560,7 +545,9 @@ export function PokiGamePage({
             {categories.length > 0 ? (
               <>
                 <dt className="font-semibold">Categories</dt>
-                <dd>{categories.map((category) => category.title).join(', ')}</dd>
+                <dd>
+                  {categories.map((category) => category.title).join(', ')}
+                </dd>
               </>
             ) : null}
             <dt className="font-semibold">Views</dt>
@@ -623,95 +610,18 @@ export function PokiGamePage({
         </article>
       </main>
 
-      <footer className="mx-auto w-full max-w-[1304px] px-6 py-10 text-sm font-semibold">
-        <p className="text-lg">{siteName}</p>
-        {footerDescription ? (
-          <p className="mt-2 max-w-2xl font-normal leading-6 text-[#31506c]">
-            {footerDescription}
-          </p>
-        ) : null}
-        <div className="mt-6 grid gap-8 sm:grid-cols-3">
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Explore
-            </p>
-            <ul className="space-y-1">
-              {(navigation || []).slice(0, 8).map((item) => (
-                <li key={`${item.href}:${item.label}`}>
-                  <Link href={item.href} className="hover:underline">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              {(navigation || []).length === 0 ? (
-                <li>
-                  <Link href="/" className="hover:underline">
-                    Games
-                  </Link>
-                </li>
-              ) : null}
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Help
-            </p>
-            <ul className="space-y-1">
-              <li>
-                <Link href="/about-us" className="hover:underline">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact-us" className="hover:underline">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy-policy" className="hover:underline">
-                  Privacy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms-of-service" className="hover:underline">
-                  Terms
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Follow
-            </p>
-            {socialLinks?.length ? (
-              <ul className="space-y-1">
-                {socialLinks.map((item) => (
-                  <li key={item.url}>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      {item.displayName || item.name || item.url}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="font-normal opacity-70">More updates coming soon.</p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <BuiltWithShipAny />
-        </div>
-      </footer>
+      <PokiFooter
+        siteName={siteName}
+        footerDescription={footerDescription}
+        navigation={navigation}
+        popularLinks={categories.map((category) => ({
+          label: category.title,
+          href: `/category/${category.slug}`,
+        }))}
+        socialLinks={socialLinks}
+      />
 
       <SiteRuntime analytics={analytics} ads={ads} />
-    </div>
+    </PokiFrame>
   );
 }

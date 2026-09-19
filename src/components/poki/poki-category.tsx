@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Link } from '@/core/i18n/navigation';
-import { BuiltWithShipAny } from '@/components/built-with-shipany';
 import { AdSlot } from '@/components/game-site/ad-slot';
 import { SiteRuntime } from '@/components/game-site/site-runtime';
 import { MarkdownContent } from '@/components/markdown-content';
+import { PokiFooter, PokiFrame } from '@/components/poki/poki-chrome';
 
 import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/600.css';
@@ -128,16 +128,7 @@ export function PokiCategory({
   const hasEditorial = Boolean(categoryDescription || categoryContent);
 
   return (
-    <div
-      className="min-h-screen overflow-x-hidden text-[#002b50]"
-      style={{
-        backgroundColor: '#83ffe7',
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'max(624px, 100%)',
-        backgroundPosition: 'center top',
-        fontFamily: '"Open Sans", "Proxima Nova", Arial, sans-serif',
-      }}
-    >
+    <PokiFrame background={background}>
       <nav
         className="fixed top-4 z-20 flex h-[94px] w-[94px] flex-col overflow-hidden rounded-[16px] bg-white shadow-[0_3px_5px_3px_rgba(93,107,132,0.2)]"
         style={{ left: 'max(16px, calc(50% - 652px))' }}
@@ -324,12 +315,15 @@ export function PokiCategory({
             </h2>
             {categoryDescription ? (
               <div className="mt-4 max-w-[926px] text-base leading-6">
-                <MarkdownContent content={categoryDescription} variant="game-site" />
+                <MarkdownContent
+                  content={categoryDescription}
+                  variant="game-site"
+                />
               </div>
             ) : null}
             {categoryContent ? (
               <MarkdownContent
-                        variant="game-site"
+                variant="game-site"
                 content={categoryContent}
                 className="mt-6 max-w-[926px] text-[#002b50] [&_h2]:mt-4 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-4 [&_h3]:mb-4 [&_h3]:text-lg [&_h3]:leading-6 [&_h3]:font-bold [&_li]:mb-1 [&_p]:mb-4 [&_p]:text-base [&_p]:leading-6 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5"
               />
@@ -353,98 +347,18 @@ export function PokiCategory({
         </div>
       </main>
 
-      <footer className="mx-auto w-full max-w-[1304px] px-6 py-10 text-sm font-semibold">
-        <p className="text-lg">{siteName}</p>
-        {footerDescription ? (
-          <p className="mt-2 max-w-2xl leading-6 font-normal text-[#31506c]">
-            {footerDescription}
-          </p>
-        ) : null}
-
-        <div className="mt-6 grid gap-8 sm:grid-cols-3">
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Explore
-            </p>
-            <ul className="space-y-1">
-              {(navigation || []).slice(0, 8).map((item) => (
-                <li key={`${item.href}:${item.label}`}>
-                  <Link href={item.href} className="hover:underline">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              {(navigation || []).length === 0 ? (
-                <li>
-                  <Link href="/" className="hover:underline">
-                    Games
-                  </Link>
-                </li>
-              ) : null}
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Help
-            </p>
-            <ul className="space-y-1">
-              <li>
-                <Link href="/about-us" className="hover:underline">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact-us" className="hover:underline">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy-policy" className="hover:underline">
-                  Privacy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms-of-service" className="hover:underline">
-                  Terms
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-2 text-xs tracking-wide uppercase opacity-70">
-              Follow
-            </p>
-            {socialLinks?.length ? (
-              <ul className="space-y-1">
-                {socialLinks.map((item) => (
-                  <li key={item.url}>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      {item.displayName || item.name || item.url}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="font-normal opacity-70">
-                More updates coming soon.
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <BuiltWithShipAny />
-        </div>
-      </footer>
+      <PokiFooter
+        siteName={siteName}
+        footerDescription={footerDescription}
+        navigation={navigation}
+        popularLinks={relatedBanners.map((banner) => ({
+          label: banner.title,
+          href: banner.href,
+        }))}
+        socialLinks={socialLinks}
+      />
 
       <SiteRuntime analytics={analytics} ads={ads} />
-    </div>
+    </PokiFrame>
   );
 }

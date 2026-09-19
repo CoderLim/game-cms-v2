@@ -1,0 +1,193 @@
+{
+  "count": 8,
+  "square": {
+    "href": "/en/two-player",
+    "tree": {
+      "tag": "A",
+      "classes": "DIxbY_Wd8M99mMzbD9Jz WNKx5SMWQkliDlBi9d5r",
+      "text": null,
+      "w": 204,
+      "h": 204,
+      "display": "grid",
+      "flexDirection": "row",
+      "alignItems": "end",
+      "justify": "normal",
+      "fs": "16px",
+      "fw": "400",
+      "color": "rgb(0, 156, 255)",
+      "tt": "none",
+      "lh": "24px",
+      "bg": "rgb(255, 255, 255)",
+      "br": "16px",
+      "pad": "0px",
+      "pos": "static",
+      "objectFit": "fill",
+      "children": [
+        {
+          "tag": "IMG",
+          "classes": "VrWOfVJtTjn2FNJx0TFc",
+          "text": null,
+          "w": 204,
+          "h": 204,
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "justify": "normal",
+          "fs": "16px",
+          "fw": "400",
+          "color": "rgba(0, 0, 0, 0)",
+          "tt": "none",
+          "lh": "24px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "16px",
+          "pad": "0px",
+          "pos": "static",
+          "objectFit": "fill",
+          "children": []
+        },
+        {
+          "tag": "SPAN",
+          "classes": "QGnVckPD11ZTkQr8o8ci",
+          "text": "2 Player Games",
+          "w": 204,
+          "h": 40,
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "justify": "normal",
+          "fs": "12px",
+          "fw": "700",
+          "color": "rgb(0, 43, 80)",
+          "tt": "uppercase",
+          "lh": "20px",
+          "bg": "rgb(255, 255, 255)",
+          "br": "0px 0px 16px 16px",
+          "pad": "10px 16px",
+          "pos": "static",
+          "objectFit": "fill",
+          "children": []
+        }
+      ]
+    }
+  },
+  "rect": {
+    "href": "/en/multiplayer",
+    "tree": {
+      "tag": "A",
+      "classes": "DIxbY_Wd8M99mMzbD9Jz Ll7V72dm63WTr1buD4lg",
+      "text": null,
+      "w": 204,
+      "h": 94,
+      "display": "flex",
+      "flexDirection": "row",
+      "alignItems": "center",
+      "justify": "normal",
+      "fs": "16px",
+      "fw": "400",
+      "color": "rgb(0, 156, 255)",
+      "tt": "none",
+      "lh": "24px",
+      "bg": "rgb(255, 255, 255)",
+      "br": "16px",
+      "pad": "0px",
+      "pos": "static",
+      "objectFit": "fill",
+      "children": [
+        {
+          "tag": "IMG",
+          "classes": "VrWOfVJtTjn2FNJx0TFc",
+          "text": null,
+          "w": 94,
+          "h": 94,
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "justify": "normal",
+          "fs": "16px",
+          "fw": "400",
+          "color": "rgba(0, 0, 0, 0)",
+          "tt": "none",
+          "lh": "24px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "16px 0px 0px 16px",
+          "pad": "0px",
+          "pos": "static",
+          "objectFit": "fill",
+          "children": []
+        },
+        {
+          "tag": "SPAN",
+          "classes": "QGnVckPD11ZTkQr8o8ci",
+          "text": "Multiplayer Games",
+          "w": 110,
+          "h": 40,
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "justify": "normal",
+          "fs": "12px",
+          "fw": "700",
+          "color": "rgb(0, 43, 80)",
+          "tt": "uppercase",
+          "lh": "20px",
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "pad": "0px 8px",
+          "pos": "static",
+          "objectFit": "fill",
+          "children": []
+        }
+      ]
+    }
+  },
+  "sizes": [
+    {
+      "href": "/en/two-player",
+      "w": 204,
+      "h": 204,
+      "text": "2 Player Games"
+    },
+    {
+      "href": "/en/car",
+      "w": 204,
+      "h": 204,
+      "text": "Car Games"
+    },
+    {
+      "href": "/en/shooting",
+      "w": 204,
+      "h": 204,
+      "text": "Shooting Games"
+    },
+    {
+      "href": "/en/fighting",
+      "w": 204,
+      "h": 204,
+      "text": "Fighting Games"
+    },
+    {
+      "href": "/en/puzzle",
+      "w": 204,
+      "h": 204,
+      "text": "Puzzle Games"
+    },
+    {
+      "href": "/en/cooking",
+      "w": 204,
+      "h": 204,
+      "text": "Cooking Games"
+    },
+    {
+      "href": "/en/multiplayer",
+      "w": 204,
+      "h": 94,
+      "text": "Multiplayer Games"
+    },
+    {
+      "href": "/en/obby",
+      "w": 204,
+      "h": 94,
+      "text": "Obby Games"
+    }
+  ]
+}
