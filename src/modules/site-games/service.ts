@@ -7,6 +7,7 @@ import {
 } from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
 import { GameStatus } from '@/modules/games/service';
 
@@ -244,7 +245,12 @@ export async function getPublishedBySlug(input: {
     )
     .limit(1);
 
-  return row;
+  return row
+    ? {
+        ...row,
+        imageUrl: resolveStaticAssetUrl(row.imageUrl),
+      }
+    : undefined;
 }
 
 export async function listPublished(input: {
@@ -254,7 +260,7 @@ export async function listPublished(input: {
 }) {
   const limit = Math.min(Math.max(input.limit || 20, 1), 100);
 
-  return db()
+  const rows = await db()
     .select({
       siteGameId: siteGame.id,
       gameId: game.id,
@@ -282,4 +288,9 @@ export async function listPublished(input: {
     )
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.publishedAt))
     .limit(limit);
+
+  return rows.map((row) => ({
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+  }));
 }
