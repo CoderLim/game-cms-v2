@@ -287,6 +287,7 @@ export function PokiHome({
           ) : null}
           {siteContent?.content ? (
             <MarkdownContent
+                        variant="game-site"
               content={siteContent.content}
               className="mt-8 max-w-4xl text-[#002b50]"
             />
