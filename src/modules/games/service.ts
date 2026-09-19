@@ -1,6 +1,6 @@
 import { and, count, desc, eq, like, or, type SQL } from 'drizzle-orm';
 
-import { game, siteGame } from '@/config/db/game-schema';
+import { game, gameCategoryMap, siteGame } from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
 
@@ -135,14 +135,21 @@ export async function update(
 }
 
 export async function remove(id: string) {
-  const [usage] = await db()
+  const [siteUsage] = await db()
     .select({ count: count() })
     .from(siteGame)
     .where(eq(siteGame.gameId, id));
+  const [categoryUsage] = await db()
+    .select({ count: count() })
+    .from(gameCategoryMap)
+    .where(eq(gameCategoryMap.gameId, id));
 
-  if (Number(usage?.count || 0) > 0) {
+  if (
+    Number(siteUsage?.count || 0) > 0 ||
+    Number(categoryUsage?.count || 0) > 0
+  ) {
     throw new Error(
-      'Game is attached to one or more sites. Archive it or detach it before deleting.'
+      'Game is still in use. Remove its site/category assignments or archive it instead.'
     );
   }
 
