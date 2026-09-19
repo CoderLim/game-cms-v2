@@ -351,6 +351,51 @@ UI 组件只接 props，不 import `@/modules/*` 或 DB。
 9. 检查首页、详情的 locale-aware links。
 10. build / typecheck。
 
+## 真实数据 Preview Fixture
+
+为验证当前 UI wiring，仓库内保留一份从 legacy `game-cms` 只读抽取的 DriftBoss 小样本：
+
+- 24 个真实游戏
+- 20 个真实分类
+- 56 条游戏-分类关系
+- 25 条游戏 locale（Drift Boss 包含 `en + zh`）
+- homepage SEO / static pages
+- 6 条 social links
+
+文件：
+
+```text
+scripts/fixtures/driftboss-ui-preview.json
+scripts/seed-ui-preview.ts
+```
+
+这份 fixture 只用于 Preview / 本地验证，不是生产迁移源。
+
+推荐用独立 SQLite：
+
+```bash
+export DATABASE_PROVIDER=sqlite
+export DATABASE_URL=file:data/ui-wiring-preview.db
+export SITE_KEY=driftbossgame
+export DEPLOY_ENV=preview
+export VITE_DEFAULT_LOCALE=en
+
+pnpm db:setup
+pnpm db:push
+pnpm game:seed:ui-preview
+pnpm dev
+```
+
+测试策略：
+
+- `drift-boss` = featured
+- 8 个真实游戏 = hot
+- 24 个游戏按固定 `sortWeight` 填首页
+- Preview 保留旧库 view / like / dislike，只为验证 UI；正式生产迁移仍按 migration runbook 清零 site-level counters
+- 未选中的旧库游戏不会进入 Preview，因此访问其 `/game/$slug` 应 404
+
+CI `.github/workflows/ui-preview-fixture-smoke.yaml` 会在干净 SQLite 上真实导入该 fixture，并验证 game/category/locale/featured/hot/category mapping 后再跑 production build。
+
 ## 验收
 
 ### 首页
