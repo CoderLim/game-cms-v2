@@ -1,0 +1,134 @@
+name: UI Preview Fixture Smoke
+
+on:
+  push:
+    branches: ['main', 'dev']
+  pull_request:
+    branches: ['main', 'dev']
+  workflow_dispatch:
+
+jobs:
+  ui-preview-fixture:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_PROVIDER: sqlite
+      DATABASE_URL: file:data/ui-preview-ci.db
+      SITE_KEY: driftbossgame
+      DEPLOY_ENV: preview
+      VITE_APP_URL: http://localhost:3000
+      VITE_APP_NAME: Drift Boss UI Preview
+      VITE_DEFAULT_LOCALE: en
+      AUTH_SECRET: ui-preview-ci-only-secret
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.33.0 --activate
+          pnpm --version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate SQLite schemas
+        run: pnpm db:setup
+
+      - name: Create fresh SQLite schema
+        run: pnpm db:push
+
+      - name: Import real DriftBoss preview fixture
+        run: pnpm game:seed:ui-preview
+
+      - name: Verify migrated preview data
+        run: |
+          node --input-type=module <<'NODE'
+          import { createClient } from '@libsql/client';
+          const client = createClient({ url: 'file:data/ui-preview-ci.db' });
+
+          async function value(sql, args = []) {
+            const result = await client.execute({ sql, args });
+            return Number(result.rows[0]?.value ?? 0);
+          }
+
+          const site = await client.execute({
+            sql: "SELECT id, key, domain FROM game_site WHERE key = 'driftbossgame'",
+            args: [],
+          });
+          if (site.rows.length !== 1) throw new Error('Expected driftbossgame site');
+          const siteId = String(site.rows[0].id);
+
+          const gameCount = await value(
+            'SELECT COUNT(*) AS value FROM site_game WHERE site_id = ?',
+            [siteId]
+          );
+          if (gameCount !== 24) throw new Error(`Expected 24 site games, got ${gameCount}`);
+
+          const categoryCount = await value(
+            'SELECT COUNT(*) AS value FROM site_category WHERE site_id = ?',
+            [siteId]
+          );
+          if (categoryCount !== 20) throw new Error(`Expected 20 site categories, got ${categoryCount}`);
+
+          const featured = await client.execute({
+            sql: `SELECT g.key
+                    FROM site_game sg
+                    JOIN game_catalog g ON g.id = sg.game_id
+                    WHERE sg.site_id = ? AND sg.featured = 1`,
+            args: [siteId],
+          });
+          if (featured.rows.length !== 1 || featured.rows[0].key !== 'drift-boss') {
+            throw new Error('Drift Boss must be the single featured game');
+          }
+
+          const hotCount = await value(
+            'SELECT COUNT(*) AS value FROM site_game WHERE site_id = ? AND hot = 1',
+            [siteId]
+          );
+          if (hotCount !== 8) throw new Error(`Expected 8 hot games, got ${hotCount}`);
+
+          const drift = await client.execute({
+            sql: `SELECT sg.id
+                    FROM site_game sg
+                    JOIN game_catalog g ON g.id = sg.game_id
+                    WHERE sg.site_id = ? AND g.key = 'drift-boss'`,
+            args: [siteId],
+          });
+          if (drift.rows.length !== 1) throw new Error('Missing Drift Boss site game');
+          const driftId = String(drift.rows[0].id);
+
+          const driftLocales = await value(
+            'SELECT COUNT(*) AS value FROM site_game_locale WHERE site_game_id = ?',
+            [driftId]
+          );
+          if (driftLocales !== 2) {
+            throw new Error(`Expected Drift Boss en+zh locales, got ${driftLocales}`);
+          }
+
+          const driftCategories = await value(
+            'SELECT COUNT(*) AS value FROM site_game_category WHERE site_game_id = ?',
+            [driftId]
+          );
+          if (driftCategories !== 2) {
+            throw new Error(`Expected 2 Drift Boss categories, got ${driftCategories}`);
+          }
+
+          const homepage = await value(
+            "SELECT COUNT(*) AS value FROM site_locale WHERE site_id = ? AND locale = 'en' AND status = 'published'",
+            [siteId]
+          );
+          if (homepage !== 1) throw new Error('Missing published homepage locale');
+
+          await client.close();
+          console.log('UI preview fixture smoke passed');
+          NODE
+
+      - name: Production build with preview fixture schema
+        run: pnpm build
