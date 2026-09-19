@@ -3,6 +3,7 @@ import { and, count, desc, eq, like, or, type SQL } from 'drizzle-orm';
 import { sitePost, sitePostLocale } from '@/config/db/game-content-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
 export enum SitePostType {
   ARTICLE = 'article',
@@ -198,7 +199,13 @@ export async function getPublishedBySlug(input: {
     .where(and(...filters))
     .limit(1);
 
-  return row;
+  return row
+    ? {
+        ...row,
+        imageUrl: resolveStaticAssetUrl(row.imageUrl),
+        authorImage: resolveStaticAssetUrl(row.authorImage),
+      }
+    : undefined;
 }
 
 export async function listPublished(input: {
@@ -215,7 +222,7 @@ export async function listPublished(input: {
   if (input.indexableOnly) filters.push(eq(sitePost.indexable, true));
   if (input.featuredOnly) filters.push(eq(sitePost.featured, true));
 
-  return db()
+  const rows = await db()
     .select({
       sitePostId: sitePost.id,
       type: sitePost.type,
@@ -233,8 +240,18 @@ export async function listPublished(input: {
     .from(sitePostLocale)
     .innerJoin(sitePost, eq(sitePost.id, sitePostLocale.sitePostId))
     .where(and(...filters))
-    .orderBy(desc(sitePost.featured), desc(sitePost.publishedAt), desc(sitePostLocale.updatedAt))
+    .orderBy(
+      desc(sitePost.featured),
+      desc(sitePost.publishedAt),
+      desc(sitePostLocale.updatedAt)
+    )
     .limit(limit);
+
+  return rows.map((row) => ({
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+    authorImage: resolveStaticAssetUrl(row.authorImage),
+  }));
 }
 
 export async function listPublishedLocales(input: {
