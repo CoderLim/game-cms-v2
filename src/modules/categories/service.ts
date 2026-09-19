@@ -248,6 +248,43 @@ export async function listPublished(input: {
     .limit(limit);
 }
 
+export async function listForGame(input: {
+  siteId: string;
+  siteGameId: string;
+  locale: string;
+}) {
+  return db()
+    .select({
+      siteCategoryId: siteCategory.id,
+      categoryKey: gameCategory.key,
+      slug: siteCategoryLocale.slug,
+      title: siteCategoryLocale.title,
+    })
+    .from(siteGameCategory)
+    .innerJoin(
+      siteCategory,
+      eq(siteCategory.id, siteGameCategory.siteCategoryId)
+    )
+    .innerJoin(gameCategory, eq(gameCategory.id, siteCategory.categoryId))
+    .innerJoin(
+      siteCategoryLocale,
+      and(
+        eq(siteCategoryLocale.siteCategoryId, siteCategory.id),
+        eq(siteCategoryLocale.siteId, input.siteId),
+        eq(siteCategoryLocale.locale, input.locale)
+      )
+    )
+    .where(
+      and(
+        eq(siteGameCategory.siteGameId, input.siteGameId),
+        eq(siteCategory.siteId, input.siteId),
+        eq(siteCategory.status, SiteCategoryStatus.PUBLISHED),
+        eq(siteCategoryLocale.status, SiteContentStatus.PUBLISHED)
+      )
+    )
+    .orderBy(desc(siteCategory.sortWeight), siteCategoryLocale.title);
+}
+
 export async function listGames(input: {
   siteId: string;
   siteCategoryId: string;
