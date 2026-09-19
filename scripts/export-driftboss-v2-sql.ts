@@ -263,7 +263,7 @@ try {
       sqlInsert(
         'game_catalog',
         ['id', 'key', 'title', 'description', 'embed_url', 'source_url', 'image_url', 'provider', 'embed_type', 'status', 'created_at', 'updated_at'],
-        [id('game', key), key, row.title || key, row.description, row.url, row.url, portableAssetPath(row.image), 'legacy', 'iframe', 'active', timestamp(row.created_at), timestamp(row.created_at)],
+        [id('game', key), key, row.title || key, row.description, portableAssetPath(row.url), portableAssetPath(row.url), portableAssetPath(row.image), 'legacy', 'iframe', 'active', timestamp(row.created_at), timestamp(row.created_at)],
         '(id)',
         ['key', 'title', 'description', 'embed_url', 'source_url', 'image_url', 'provider', 'embed_type', 'status', 'updated_at']
       )
