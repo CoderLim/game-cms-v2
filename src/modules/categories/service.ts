@@ -100,6 +100,16 @@ export async function attachCategory(input: {
   return row;
 }
 
+export async function removeSiteCategory(siteId: string, id: string) {
+  const [row] = await db()
+    .delete(siteCategory)
+    .where(and(eq(siteCategory.id, id), eq(siteCategory.siteId, siteId)))
+    .returning();
+
+  if (!row) throw new Error('Site category not found');
+  return row;
+}
+
 export async function upsertLocaleContent(input: {
   siteId: string;
   siteCategoryId: string;
