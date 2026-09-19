@@ -1,15 +1,12 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { AdSlot } from '@/components/game-site/ad-slot';
-import { GameCard } from '@/components/game-site/game-card';
-import { GamePlayer } from '@/components/game-site/game-player';
-import { GameRating } from '@/components/game-site/game-rating';
-import { GameViewTracker } from '@/components/game-site/game-view-tracker';
-import { SiteFooter } from '@/components/game-site/site-footer';
-import { SiteHeader } from '@/components/game-site/site-header';
-import { MarkdownContent } from '@/components/markdown-content';
+import {
+  PokiGamePage,
+  type DetailTile,
+} from '@/components/poki/poki-game';
 import { StructuredData } from '@/components/seo/structured-data';
-import { listPublished as listCategories } from '@/modules/categories/service';
+import pageLayout from '@/data/poki-pool-club.json';
+import { listForGame as listGameCategories } from '@/modules/categories/service';
 import { listPublishedLocales } from '@/modules/site-games/locales';
 import { listSimilar } from '@/modules/site-games/public';
 import { getPublishedBySlug } from '@/modules/site-games/service';
@@ -19,6 +16,26 @@ import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 
 function siteOrigin(domain: string) {
   return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
+}
+
+function mapRecommendationTiles(
+  games: Array<{
+    siteGameId: string;
+    slug: string;
+    title: string;
+    imageUrl: string | null;
+  }>
+): DetailTile[] {
+  return pageLayout.tiles.slice(0, games.length).map((slot, index) => ({
+    siteGameId: games[index].siteGameId,
+    title: games[index].title,
+    image: games[index].imageUrl,
+    href: `/game/${games[index].slug}`,
+    x: slot.x,
+    y: slot.y,
+    w: slot.w,
+    h: slot.h,
+  }));
 }
 
 export const Route = createFileRoute('/game/$slug')({
@@ -37,13 +54,17 @@ export const Route = createFileRoute('/game/$slug')({
 
     const [categories, availableLocales, moreGames, publicConfig] =
       await Promise.all([
-        listCategories({ siteId: site.id, locale, limit: 8 }),
+        listGameCategories({
+          siteId: site.id,
+          siteGameId: game.siteGameId,
+          locale,
+        }),
         listPublishedLocales({ siteId: site.id, siteGameId: game.siteGameId }),
         listSimilar({
           siteId: site.id,
           siteGameId: game.siteGameId,
           locale,
-          limit: 12,
+          limit: 20,
         }),
         getPublicSiteConfig(site.id),
       ]);
@@ -54,6 +75,7 @@ export const Route = createFileRoute('/game/$slug')({
     }).href;
     const description =
       game.metaDescription ||
+      game.intro ||
       game.description ||
       game.gameDescription ||
       `Play ${game.title} online.`;
@@ -66,12 +88,13 @@ export const Route = createFileRoute('/game/$slug')({
       description,
       categories,
       availableLocales,
-      moreGames,
+      recommendationTiles: mapRecommendationTiles(moreGames),
       publicConfig,
     };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
+
     const {
       site,
       locale,
@@ -137,7 +160,7 @@ function GamePage() {
     canonical,
     description,
     categories,
-    moreGames,
+    recommendationTiles,
     publicConfig,
   } = Route.useLoaderData();
 
@@ -157,117 +180,21 @@ function GamePage() {
   };
 
   return (
-    <div className="bg-background text-foreground min-h-screen">
+    <>
       <StructuredData data={structuredData} />
-      <SiteHeader
+      <PokiGamePage
+        layout={pageLayout}
         siteName={site.name}
+        game={game}
         categories={categories}
+        recommendationTiles={recommendationTiles}
+        playerSettings={publicConfig.gamePlayer}
         navigation={publicConfig.navigation}
-      />
-      <main className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
-        <GameViewTracker siteGameId={game.siteGameId} />
-
-        <div className="mb-5">
-          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
-            {game.title}
-          </h1>
-          {game.intro ? (
-            <p className="text-muted-foreground mt-2 max-w-4xl leading-7">
-              {game.intro}
-            </p>
-          ) : null}
-        </div>
-
-        <AdSlot
-          ads={publicConfig.ads}
-          slotKey="gameTop"
-          className="mx-auto mb-5 max-w-5xl"
-        />
-
-        <GamePlayer
-          game={{
-            title: game.title,
-            embedUrl: game.embedUrl,
-            embedType: game.embedType,
-            aspectRatio: game.aspectRatio,
-          }}
-          settings={publicConfig.gamePlayer}
-        />
-
-        <div className="mx-auto max-w-4xl">
-          <GameRating
-            siteGameId={game.siteGameId}
-            initialLikes={game.likeCount}
-            initialDislikes={game.dislikeCount}
-          />
-        </div>
-
-        <AdSlot
-          ads={publicConfig.ads}
-          slotKey="gameBottom"
-          className="mx-auto mt-6 max-w-5xl"
-        />
-
-        <article className="mx-auto mt-10 max-w-4xl space-y-9">
-          {game.description ? (
-            <section>
-              <MarkdownContent content={game.description} />
-            </section>
-          ) : null}
-
-          {game.howToPlay ? (
-            <section>
-              <h2 className="mb-3 text-2xl font-semibold">How to Play</h2>
-              <MarkdownContent content={game.howToPlay} />
-            </section>
-          ) : null}
-
-          {game.controls ? (
-            <section>
-              <h2 className="mb-3 text-2xl font-semibold">Controls</h2>
-              <MarkdownContent content={game.controls} />
-            </section>
-          ) : null}
-
-          {game.features ? (
-            <section>
-              <h2 className="mb-3 text-2xl font-semibold">Features</h2>
-              <MarkdownContent content={game.features} />
-            </section>
-          ) : null}
-
-          {game.faq ? (
-            <section>
-              <h2 className="mb-3 text-2xl font-semibold">FAQ</h2>
-              <MarkdownContent content={game.faq} />
-            </section>
-          ) : null}
-
-          {game.content ? (
-            <section>
-              <MarkdownContent content={game.content} />
-            </section>
-          ) : null}
-        </article>
-
-        {moreGames.length > 0 ? (
-          <section className="mt-14">
-            <h2 className="mb-5 text-xl font-semibold">More Games</h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-              {moreGames.map((item) => (
-                <GameCard key={item.siteGameId} game={item} />
-              ))}
-            </div>
-          </section>
-        ) : null}
-      </main>
-      <SiteFooter
-        siteName={site.name}
+        footerDescription={publicConfig.footer.description}
         socialLinks={publicConfig.socialLinks}
-        footer={publicConfig.footer}
         analytics={publicConfig.analytics}
         ads={publicConfig.ads}
       />
-    </div>
+    </>
   );
 }
