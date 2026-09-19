@@ -324,11 +324,12 @@ export function PokiCategory({
             </h2>
             {categoryDescription ? (
               <div className="mt-4 max-w-[926px] text-base leading-6">
-                <MarkdownContent content={categoryDescription} />
+                <MarkdownContent content={categoryDescription} variant="game-site" />
               </div>
             ) : null}
             {categoryContent ? (
               <MarkdownContent
+                        variant="game-site"
                 content={categoryContent}
                 className="mt-6 max-w-[926px] text-[#002b50] [&_h2]:mt-4 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-4 [&_h3]:mb-4 [&_h3]:text-lg [&_h3]:leading-6 [&_h3]:font-bold [&_li]:mb-1 [&_p]:mb-4 [&_p]:text-base [&_p]:leading-6 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5"
               />
