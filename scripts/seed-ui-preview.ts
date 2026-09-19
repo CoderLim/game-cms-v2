@@ -266,7 +266,6 @@ async function main() {
         .onConflictDoUpdate({
           target: contentSchema.sitePost.id,
           set: {
-            imageUrl: portableAssetPath(category.image_url),
             status: 'published',
             indexable: true,
             updatedAt: asDate(
@@ -372,6 +371,7 @@ async function main() {
         .onConflictDoUpdate({
           target: domain.siteCategory.id,
           set: {
+            imageUrl: portableAssetPath(category.image_url),
             status: 'published',
             indexable: true,
             sortWeight: 1000 - categoryIndex * 10,
