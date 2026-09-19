@@ -11,6 +11,7 @@ import {
 } from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
 import { GameStatus } from '@/modules/games/service';
 import {
@@ -296,7 +297,7 @@ export async function listGames(input: {
 }) {
   const limit = Math.min(Math.max(input.limit || 24, 1), 100);
 
-  return db()
+  const rows = await db()
     .select({
       siteGameId: siteGame.id,
       gameId: game.id,
@@ -331,4 +332,9 @@ export async function listGames(input: {
     )
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.viewCount))
     .limit(limit);
+
+  return rows.map((row) => ({
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+  }));
 }
