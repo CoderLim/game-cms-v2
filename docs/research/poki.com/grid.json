@@ -1,0 +1,421 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "grids": [
+        {
+          "childCount": 145,
+          "class": "vtbwTfQNi80Hes0DzmGs Eu3YePRYW_jQ2bgCbNjr",
+          "cols": "94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px",
+          "gap": "16px",
+          "rows": "94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px ",
+          "w": "1304px"
+        },
+        {
+          "childCount": 41,
+          "class": "vtbwTfQNi80Hes0DzmGs Eu3YePRYW_jQ2bgCbNjr kAJ2gw7y5rtrdfkoJo",
+          "cols": "94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px 94px",
+          "gap": "16px",
+          "rows": "94px 94px 94px 94px 94px 94px 94px 94px",
+          "w": "1304px"
+        },
+        {
+          "childCount": 2,
+          "class": "DIxbY_Wd8M99mMzbD9Jz WNKx5SMWQkliDlBi9d5r",
+          "cols": "0px 204px",
+          "gap": "normal",
+          "rows": "204px",
+          "w": "204px"
+        },
+        {
+          "childCount": 2,
+          "class": "DIxbY_Wd8M99mMzbD9Jz WNKx5SMWQkliDlBi9d5r",
+          "cols": "0px 204px",
+          "gap": "normal",
+          "rows": "204px",
+          "w": "204px"
+        },
+        {
+          "childCount": 2,
+          "class": "DIxbY_Wd8M99mMzbD9Jz WNKx5SMWQkliDlBi9d5r",
+          "cols": "0px 204px",
+          "gap": "normal",
+          "rows": "204px",
+          "w": "204px"
+        },
+        {
+          "childCount": 2,
+          "class": "DIxbY_Wd8M99mMzbD9Jz WNKx5SMWQkliDlBi9d5r",
+          "cols": "0px 204px",
+          "gap": "normal",
+          "rows": "204px",
+          "w": "204px"
+        }
+      ],
+      "kids": [
+        {
+          "class": "",
+          "display": "none",
+          "h": "auto",
+          "tag": "SCRIPT",
+          "text": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://pok"
+        },
+        {
+          "class": "vtbwTfQNi80Hes0DzmGs Eu3YePRYW_jQ2bgCbNjr",
+          "display": "grid",
+          "h": "1854px",
+          "tag": "DIV",
+          "text": "Level Devil\nSlice Master\nKick The Buddy\nPool Club\nNeon Challenge Legends\nBeauty "
+        },
+        {
+          "class": "vtbwTfQNi80Hes0DzmGs Eu3YePRYW_jQ2bgCbNjr kAJ2gw7y5rtrdfkoJoa1",
+          "display": "grid",
+          "h": "864px",
+          "tag": "DIV",
+          "text": "2 PLAYER GAMES\nCAR GAMES\nSHOOTING GAMES\nPUZZLE GAMES\nFIGHTING GAMES\nMULTIPLAYER "
+        },
+        {
+          "class": "npmo3Vk8vdpOrUnRlo4K",
+          "display": "grid",
+          "h": "1947px",
+          "tag": "ARTICLE",
+          "text": "ABOUT POKI\nFree online games on Poki\n\nPlay 1500 free games instantly on Poki! Al"
+        }
+      ],
+      "main": { "bg": "rgba(0, 0, 0, 0)", "pad": "0px", "w": "1304px" },
+      "navBox": {
+        "br": "16px",
+        "h": "94px",
+        "left": "720px",
+        "pos": "fixed",
+        "shadow": "rgba(93, 107, 132, 0.2) 0px 3px 5px 3px",
+        "top": "16px",
+        "w": "94px",
+        "z": "10"
+      },
+      "tiles": [
+        {
+          "br": "16px",
+          "h": 314,
+          "href": "/en/g/level-devil",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/701e10b108ed7a0c68c738c46c9a705a/level-devil-logo.p",
+          "title": "Level Devil",
+          "w": 314
+        },
+        {
+          "br": "16px",
+          "h": 314,
+          "href": "/en/g/slice-master",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/743089b5c6b4dda8bd05d920ab00a0b3/slice-master-logo.",
+          "title": "Slice Master",
+          "w": 314
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/kick-the-buddy",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/cccd5145e3ae9d7bb6b3be7154db731e/kick-the-buddy-log",
+          "title": "Kick The Buddy",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/pool-club",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/fe7b5c8267b63ee56134841474fe0aea/pool-club-logo.png",
+          "title": "Pool Club",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/neon-challenge-legends",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/63a82be82b3449c174af1720e55cec67/neon-challenge-leg",
+          "title": "Neon Challenge Legends",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/beauty-salon",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/9ed4bc217ce6575d89ff7592fe0d1d1f/beauty-salon-logo.",
+          "title": "Beauty Salon",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/count-control-legends",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/e612cf6c7083881ffae58f633bcbc304/count-control-lege",
+          "title": "Count Control Legends",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/drive-mad",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/591d984dcac4fb694f3f8195bb8f6118/drive-mad-logo.png",
+          "title": "Drive Mad",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/soccer-real",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/3f04f947311f5c7de061cfdbd7c8068b/soccer-real-logo.p",
+          "title": "Soccer REAL",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/speed-stars",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/04f09e51e79fd1b6a5cc974b504d6379/speed-stars-logo.p",
+          "title": "Speed Stars",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/cat-pizza",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/5bdcb56b503c3f1136e37e0d485579db/cat-pizza-logo.png",
+          "title": "Cat Pizza",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/blocky-blast-puzzle",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/291aaf2dcf5c1322558a9c038b3c5251/blocky-blast-puzzl",
+          "title": "Blocky Blast Puzzle",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/stickman-climb-3d",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/68603c8d994fb481275a51f0d1a8676d/stickman-climb-3d-",
+          "title": "Stickman Climb 3D",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/talking-tom-gold-run",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/bd357473899b2c8724f73d65d403d087/talking-tom-gold-r",
+          "title": "Talking Tom Gold Run",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/brain-test-tricky-puzzles",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/f262d83ee394fcf98b378674e1430bfd/brain-test-tricky-",
+          "title": "Brain Test: Tricky Puzzles",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 204,
+          "href": "/en/g/blumgi-slime",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/9aa6000ed201eba3c8f878c489a7c3ce/blumgi-slime-logo.",
+          "title": "Blumgi Slime",
+          "w": 204
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/kawaii-fruits-3d",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/62d0c5d5fbbbba5f4aae560d6e4f0755/kawaii-fruits-3d-log",
+          "title": "Kawaii Fruits 3D",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/battle-blast",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/4fb99df830f3bb1205f3bc2e3c1f9782/battle-blast-logo.pn",
+          "title": "Battle Blast",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/under-the-red-sky",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/6520853de09433cadcf18ed968deef5b/under-the-red-sky-lo",
+          "title": "Under the Red Sky",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/blumgi-bounce",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/0364717f000f41088d794db6036f6ed2/blumgi-bounce-logo.p",
+          "title": "Blumgi Bounce",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/undead-slayer",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/fa717ab563312d7ea81fb8dab65d3167/undead-slayer-logo.p",
+          "title": "Undead Slayer",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/murder",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/baccf9660bfb476fe2c8ae9f5a2ec4d2/murder-logo.png",
+          "title": "Murder",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/four-in-a-row",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/e80686db-b0fb-4f2c-bd2f-3a89734f102a/four-in-a-row-lo",
+          "title": "Four in a Row",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/power-badminton",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/d13f7212a1c1108f4298f8e89f5dd578c54de6042a830535e9066",
+          "title": "Power Badminton",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/we-become-what-we-behold",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/a0929e5428c5af2666c9eeb3a0441d4c/we-become-what-we-be",
+          "title": "We Become What We Behold",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/subway-surfers",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/1c920b9279c2bedec567c1b58129ae8f/subway-surfers-logo.",
+          "title": "Subway Surfers",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/stickman-hook",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/99e090d154caf30f3625df7e456d5984/stickman-hook-logo.p",
+          "title": "Stickman Hook",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/watermelon-drop",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/02018885c1521dd2830683a0ecc86440/watermelon-drop-logo",
+          "title": "Watermelon Drop",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/planet-destruction",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/ddc9df67cac20cce381d18d202a80577/planet-destruction-l",
+          "title": "Planet Destruction",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/obby-roads",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/e5827d37b20530ba9b48b2b60054f27f/obby-roads-logo.png",
+          "title": "Obby Roads",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/slime-keyboard-escape",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/6724ed3de9d26b15f5c86172f617d9e4/slime-keyboard-escap",
+          "title": "Slime Keyboard Escape",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/plonky",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/ed3adaca348ed9bf21694505317d402b/plonky-logo.png",
+          "title": "Plonky",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/polytrack",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/1f03e11a55d301fbaab4408e8ec721e0/polytrack-logo.png",
+          "title": "PolyTrack",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/stickman-climb-2",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/3c338d4afffa6a269b9642efef13f5ca/stickman-climb-2-log",
+          "title": "Stickman Climb 2",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/cryzen-io",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/09b1a45bc919a925f78a8f789f5c1e07/cryzen-io-logo.png",
+          "title": "Cryzen.io",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/one-line-draw",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/317810ef2300e72a3bec82b8c5faee32/one-line-draw-logo.p",
+          "title": "One Line Draw",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/fruit-ninja",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/c4dc286c30b8fbde45a0b5d4fe6f2146/fruit-ninja-logo.png",
+          "title": "Fruit Ninja",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/tictactoe",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/b72f31aa574acaa5cbf6b6c69104c988/tictactoe-logo.png",
+          "title": "TicTacToe",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/hole-io",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/6a2eb719b17f667cda6680a8bb2f4e40/hole-io-logo.jfif",
+          "title": "Hole.io",
+          "w": 94
+        },
+        {
+          "br": "16px",
+          "h": 94,
+          "href": "/en/g/rail-in-the-air",
+          "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/0ac52582b500eefc23b6df0e0d35cfe8/rail-in-the-air-logo",
+          "title": "Rail in the Air",
+          "w": 94
+        }
+      ]
+    }
+  },
+  "error": null
+}

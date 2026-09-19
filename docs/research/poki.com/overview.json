@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "bg": "rgb(131, 255, 231)",
+      "bodyKids": [
+        { "class": "", "id": "bodyBackground", "tag": "DIV" },
+        { "class": "", "id": "app-root", "tag": "DIV" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "__LOADABLE_REQUIRED_CHUNKS__", "tag": "SCRIPT" },
+        {
+          "class": "",
+          "id": "__LOADABLE_REQUIRED_CHUNKS___ext",
+          "tag": "SCRIPT"
+        },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" }
+      ],
+      "color": "rgb(0, 43, 80)",
+      "fixed": [
+        {
+          "bg": "rgb(131, 255, 231)",
+          "class": "",
+          "h": "900px",
+          "id": "bodyBackground",
+          "tag": "DIV",
+          "top": "0px"
+        },
+        {
+          "bg": "rgb(255, 255, 255)",
+          "class": "qoMYGbBhf9dsbaBGBphh DJT17TB5hYo14sdLEAwk",
+          "h": "94px",
+          "id": "nav",
+          "tag": "NAV",
+          "top": "16px"
+        },
+        {
+          "bg": "rgb(131, 255, 231)",
+          "class": "fafg29H3Hva1K75XSI8h",
+          "h": "auto",
+          "id": "",
+          "tag": "SECTION",
+          "top": "0px"
+        },
+        {
+          "bg": "rgb(93, 107, 132)",
+          "class": "jN5ywPg1gHQE4Z3GCQh0",
+          "h": "auto",
+          "id": "",
+          "tag": "DIV",
+          "top": "0px"
+        }
+      ],
+      "font": "\"Proxima Nova\", \"Open Sans\", \"Gill Sans MT\", \"Gill Sans\", \"Noto Sans Arabic\", Arial, sans-serif",
+      "hasLenis": false,
+      "headings": [
+        { "tag": "H1", "text": "Free online games on Poki" },
+        { "tag": "H2", "text": "Top free games" },
+        { "tag": "H2", "text": "Poki web exclusive & licensed games" },
+        { "tag": "H2", "text": "Ready to play?" },
+        { "tag": "H3", "text": "Play with friends and others" },
+        { "tag": "H3", "text": "Challenge yourself" },
+        { "tag": "H3", "text": "Games to relax" },
+        { "tag": "H2", "text": "What is Poki?" }
+      ],
+      "htmlBg": "rgba(0, 0, 0, 0)",
+      "scrollHeight": 5147,
+      "title": "Free Online Games at Poki - Play Now!"
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "bg": "rgba(255, 255, 255, 0.07)",
+      "br": "16px",
+      "class": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-",
+      "h": "248.938px",
+      "kids": [
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "16px",
+          "class": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "h": "244.938px",
+          "kids": [
+            {
+              "bg": "rgba(0, 0, 0, 0)",
+              "br": "0px",
+              "class": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+              "h": "244.938px",
+              "kids": [],
+              "overflow": "clip",
+              "pos": "absolute",
+              "tag": "IMG",
+              "w": "436px"
+            }
+          ],
+          "overflow": "hidden",
+          "pos": "absolute",
+          "tag": "DIV",
+          "w": "436px"
+        }
+      ],
+      "overflow": "visible",
+      "pos": "relative",
+      "tag": "A",
+      "w": "440px"
+    }
+  },
+  "error": null
+}

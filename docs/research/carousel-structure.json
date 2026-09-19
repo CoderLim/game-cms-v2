@@ -1,0 +1,486 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "highlighted": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "class": "RecommendedCarouselTitle_flag__Lfxoa",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "20px",
+                      "fontWeight": "700",
+                      "gap": "normal",
+                      "height": "20px",
+                      "padding": "0px",
+                      "width": "26.6562px"
+                    },
+                    "tag": "span",
+                    "text": ""
+                  }
+                ],
+                "class": "",
+                "styles": {
+                  "borderRadius": "0px",
+                  "color": "rgb(255, 255, 255)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "20px",
+                  "fontWeight": "700",
+                  "gap": "normal",
+                  "height": "20px",
+                  "padding": "0px",
+                  "width": "229.156px"
+                },
+                "tag": "span"
+              }
+            ],
+            "class": "CarouselSectionTitle_carouselTitle__tDEqL RecommendedCarouselTitle_recommendedTitle__M_lew",
+            "styles": {
+              "borderRadius": "0px",
+              "color": "rgb(255, 255, 255)",
+              "display": "flex",
+              "flexDirection": "row",
+              "fontSize": "20px",
+              "fontWeight": "700",
+              "gap": "8px",
+              "height": "23px",
+              "padding": "0px 16px 3px 8px",
+              "width": "1372px"
+            },
+            "tag": "div"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  }
+                ],
+                "class": "CrazyCarousel_crazyCarouselContainer__63ph_ crazy-carousel",
+                "styles": {
+                  "borderRadius": "0px",
+                  "color": "rgb(255, 255, 255)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "14px",
+                  "fontWeight": "400",
+                  "gap": "normal",
+                  "height": "272.938px",
+                  "overflow": "scroll",
+                  "padding": "12px 8px",
+                  "width": "1372px"
+                },
+                "tag": "ul"
+              },
+              {
+                "children": [],
+                "class": "CrazyCarousel_crazyCarouselArrow__ueMx9 CrazyCarousel_crazyCarouselArrowRight__AMSPq arrow",
+                "styles": {
+                  "borderRadius": "22px",
+                  "color": "rgba(0, 0, 0, 0)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "gap": "normal",
+                  "height": "60px",
+                  "padding": "1px 6px",
+                  "position": "absolute",
+                  "width": "60px"
+                },
+                "tag": "button"
+              }
+            ],
+            "class": "CrazyCarousel_crazyCarouselRoot__l3JCg",
+            "styles": {
+              "borderRadius": "0px",
+              "color": "rgb(255, 255, 255)",
+              "display": "block",
+              "flexDirection": "row",
+              "fontSize": "14px",
+              "fontWeight": "400",
+              "gap": "normal",
+              "height": "272.938px",
+              "overflow": "hidden",
+              "padding": "0px",
+              "position": "relative",
+              "width": "1372px"
+            },
+            "tag": "div"
+          }
+        ],
+        "class": "CrazyCarousel_gamesCarouselSection__cDN02 CrazyCarousel_isHighlightedMode__R_Xpi",
+        "styles": {
+          "borderRadius": "0px",
+          "color": "rgb(255, 255, 255)",
+          "display": "block",
+          "flexDirection": "row",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": "295.938px",
+          "overflow": "hidden",
+          "padding": "0px",
+          "position": "relative",
+          "width": "1372px"
+        },
+        "tag": "div"
+      },
+      "normal": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "class": "RecommendedCarouselTitle_flag__Lfxoa",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "20px",
+                      "fontWeight": "700",
+                      "gap": "normal",
+                      "height": "20px",
+                      "padding": "0px",
+                      "width": "26.6562px"
+                    },
+                    "tag": "span",
+                    "text": ""
+                  }
+                ],
+                "class": "",
+                "styles": {
+                  "borderRadius": "0px",
+                  "color": "rgb(255, 255, 255)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "20px",
+                  "fontWeight": "700",
+                  "gap": "normal",
+                  "height": "20px",
+                  "padding": "0px",
+                  "width": "229.156px"
+                },
+                "tag": "span"
+              }
+            ],
+            "class": "CarouselSectionTitle_carouselTitle__tDEqL RecommendedCarouselTitle_recommendedTitle__M_lew",
+            "styles": {
+              "borderRadius": "0px",
+              "color": "rgb(255, 255, 255)",
+              "display": "flex",
+              "flexDirection": "row",
+              "fontSize": "20px",
+              "fontWeight": "700",
+              "gap": "8px",
+              "height": "23px",
+              "padding": "0px 16px 3px 8px",
+              "width": "1372px"
+            },
+            "tag": "div"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  },
+                  {
+                    "children": [],
+                    "class": "",
+                    "styles": {
+                      "borderRadius": "0px",
+                      "color": "rgb(255, 255, 255)",
+                      "display": "inline-block",
+                      "flexDirection": "row",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "gap": "normal",
+                      "height": "248.938px",
+                      "padding": "0px",
+                      "position": "relative",
+                      "width": "440px"
+                    },
+                    "tag": "li"
+                  }
+                ],
+                "class": "CrazyCarousel_crazyCarouselContainer__63ph_ crazy-carousel",
+                "styles": {
+                  "borderRadius": "0px",
+                  "color": "rgb(255, 255, 255)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "14px",
+                  "fontWeight": "400",
+                  "gap": "normal",
+                  "height": "272.938px",
+                  "overflow": "scroll",
+                  "padding": "12px 8px",
+                  "width": "1372px"
+                },
+                "tag": "ul"
+              },
+              {
+                "children": [],
+                "class": "CrazyCarousel_crazyCarouselArrow__ueMx9 CrazyCarousel_crazyCarouselArrowRight__AMSPq arrow",
+                "styles": {
+                  "borderRadius": "22px",
+                  "color": "rgba(0, 0, 0, 0)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "gap": "normal",
+                  "height": "60px",
+                  "padding": "1px 6px",
+                  "position": "absolute",
+                  "width": "60px"
+                },
+                "tag": "button"
+              }
+            ],
+            "class": "CrazyCarousel_crazyCarouselRoot__l3JCg",
+            "styles": {
+              "borderRadius": "0px",
+              "color": "rgb(255, 255, 255)",
+              "display": "block",
+              "flexDirection": "row",
+              "fontSize": "14px",
+              "fontWeight": "400",
+              "gap": "normal",
+              "height": "272.938px",
+              "overflow": "hidden",
+              "padding": "0px",
+              "position": "relative",
+              "width": "1372px"
+            },
+            "tag": "div"
+          }
+        ],
+        "class": "CrazyCarousel_gamesCarouselSection__cDN02 CrazyCarousel_isHighlightedMode__R_Xpi",
+        "styles": {
+          "borderRadius": "0px",
+          "color": "rgb(255, 255, 255)",
+          "display": "block",
+          "flexDirection": "row",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": "295.938px",
+          "overflow": "hidden",
+          "padding": "0px",
+          "position": "relative",
+          "width": "1372px"
+        },
+        "tag": "div"
+      }
+    }
+  },
+  "error": null
+}

@@ -46,6 +46,27 @@ function workersDbProvider(): string {
 const workersDb = isCloudflareBuild ? workersDbProvider() : '';
 const keepPostgres = workersDb === 'postgresql' || workersDb === 'postgres';
 
+// The browser bundle pulls route modules that import the DB layer. mysql2
+// throws `Buffer is not defined` at import time and stops React from
+// hydrating. Stub those Node drivers in the client only; SSR keeps them.
+function stubNodeDbDriversInBrowser() {
+  return {
+    name: 'stub-node-db-drivers-in-browser',
+    enforce: 'pre' as const,
+    resolveId(
+      id: string,
+      _importer: string | undefined,
+      options?: { ssr?: boolean }
+    ) {
+      if (options?.ssr) return null;
+      if (id === 'mysql2' || id === 'mysql2/promise' || id === 'postgres') {
+        return driverStub;
+      }
+      return null;
+    },
+  };
+}
+
 export default defineConfig({
   server: {
     port: 3000,
@@ -63,7 +84,11 @@ export default defineConfig({
         }
       : {},
   },
+  optimizeDeps: {
+    exclude: ['mysql2', 'postgres'],
+  },
   plugins: [
+    stubNodeDbDriversInBrowser(),
     // MDX must run before the react plugin so JSX in compiled MDX gets transformed.
     { enforce: 'pre', ...mdx({ providerImportSource: '@mdx-js/react' }) },
     tailwindcss(),

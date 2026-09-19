@@ -1,0 +1,842 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "backgroundImages": [
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "SPAN.fi",
+          "url": "url(\"https://builds.crazygames.com/portal-web/_next/static/media/hk.fbcde7e7.svg\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        },
+        {
+          "element": "BUTTON.CrazyCarousel_crazyCarouselArrow__ueMx9",
+          "url": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDEwIDE3IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAuMjU2NjA0IDE2LjQyMjZDMC41OTg3NDIgMTYuNzQ4IDEuMTUzNDYgMTYuNzQ4IDEuNDk1NiAxNi40MjI2TDEwIDguMzMzMzJMMS40OTU2IDAuMjQ0MDY0QzEuMTUzNDYgLTAuMDgxMzcyNyAwLjU5ODc0NSAtMC4wODEzNzI4IDAuMjU2NjA3IDAuMjQ0MDY0Qy0wLjA4NTUzMTggMC41Njk1MDIgLTAuMDg1NTMxOSAxLjA5NzE0IDAuMjU2NjA3IDEuNDIyNThMNy41MjIwMSA4LjMzMzMyTDAuMjU2NjA0IDE1LjI0NDFDLTAuMDg1NTM0NSAxNS41Njk1IC0wLjA4NTUzNDYgMTYuMDk3MSAwLjI1NjYwNCAxNi40MjI2WiIgZmlsbD0iI0VGRjBGNyIvPjwvc3ZnPg==\")"
+        }
+      ],
+      "favicons": [
+        {
+          "href": "https://imgs.crazygames.com/favicons/apple-touch-icon-3.png?metadata=none&quality=60&width=120&height=120&fit=crop&format=png",
+          "rel": "apple-touch-icon",
+          "sizes": ""
+        },
+        {
+          "href": "https://imgs.crazygames.com/favicons/apple-touch-icon-3.png?metadata=none&quality=60&width=152&height=152&fit=crop&format=png",
+          "rel": "apple-touch-icon",
+          "sizes": "152x152"
+        },
+        {
+          "href": "https://imgs.crazygames.com/favicons/apple-touch-icon-3.png?metadata=none&quality=60&width=167&height=167&fit=crop&format=png",
+          "rel": "apple-touch-icon",
+          "sizes": "167x167"
+        },
+        {
+          "href": "https://imgs.crazygames.com/favicons/apple-touch-icon-3.png?metadata=none&quality=60&width=180&height=180&fit=crop&format=png",
+          "rel": "apple-touch-icon",
+          "sizes": "180x180"
+        },
+        {
+          "href": "https://imgs.crazygames.com/favicons/safari-pinned-tab.svg",
+          "rel": "mask-icon",
+          "sizes": ""
+        }
+      ],
+      "imageCount": 368,
+      "svgCount": 1,
+      "unique": [
+        {
+          "alt": "CrazyGames",
+          "height": 190,
+          "parentClasses": "",
+          "position": "static",
+          "src": "https://www.crazygames.com/images/logo/master/logo-master-white.svg",
+          "width": 546,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Home icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup Sidebar_active__bltDp",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Home.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Recent icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup Sidebar_disabled__g_rzR",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Recent.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "New icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/New.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Trending icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Trending.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Updated icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Updated.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Originals icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Originals.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Multiplayer icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Multiplayer.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Leaderboards icon",
+          "height": 20,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Leaderboards.svg",
+          "width": 27,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Action icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Action.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Adventure icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Adventure.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Casual icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Casual.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Board icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Board.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Card icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Card.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Clicker icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Clicker.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Driving icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Driving.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Io icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/io.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Puzzle icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Puzzle.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Shooting icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Shooting.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Sports icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Sports.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Strategy icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Strategy.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Trivia icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Trivia.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Word icon",
+          "height": 24,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Word.svg",
+          "width": 24,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Tags icon",
+          "height": 32,
+          "parentClasses": "Sidebar_link__Tbdup",
+          "position": "static",
+          "src": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Tags.svg",
+          "width": 32,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "",
+          "height": 674,
+          "parentClasses": "Layout_backgroundContainer__c3CyJ",
+          "position": "absolute",
+          "src": "https://www.crazygames.com/images/background2.jpg",
+          "width": 1200,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Train your brain",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain3.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Adrenaline rush",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/adrenaline3.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "With friends",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/friends1.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "5-minute fun",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/5minutes2.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Meme & bloxy",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain2.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Timeless classics",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/magnific2.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Just relax",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/merge3.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "Deep progress",
+          "height": 60,
+          "parentClasses": "IntentCTAs_intentCTASlide__75Ngj",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/deep3.png?metadata=none&quality=60&width=60",
+          "width": 60,
+          "zIndex": "auto"
+        },
+        {
+          "alt": "",
+          "height": 379,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=675&fit=crop",
+          "width": 675,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/ragdoll-archers_16x9/20250926080758/ragdoll-archers_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 379,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=675&fit=crop",
+          "width": 675,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/traffic-rider-vvq_16x9/20250526021507/traffic-rider-vvq_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/paint-to-hide_16x9/20260903084057/paint-to-hide_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/skillwarz_16x9/20260318145302/skillwarz_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 379,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/evowarsio_16x9/20251003061326/evowarsio_16x9-cover?metadata=none&quality=85&width=675&fit=crop",
+          "width": 675,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/racing-limits_16x9/20250711091800/racing-limits_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/designville-merge-design_16x9/20260827034042/designville-merge-design_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/games/mahjongg-solitaire/cover_16x9-1707829450935.png?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/worldguessr_16x9/20241018082520/worldguessr_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/escape-tsunami-for-brainrots-wfe_16x9/20260209084358/escape-tsunami-for-brainrots-wfe_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/hexa-stack_16x9/20260914151011/hexa-stack_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/mister-mine_16x9/20260220044353/mister-mine_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/park-town_16x9/20250304132211/park-town_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/chicken-hell_16x9/20260623024937/chicken-hell_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/bowmasters-archery-shooting_16x9/20260818101555/bowmasters-archery-shooting_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/voxmaxa-com_16x9/20260902054448/voxmaxa-com_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/brainrot-arena-online_16x9/20260615041823/brainrot-arena-online_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/screw-out-bolts-and-nuts_16x9/20250711094331/screw-out-bolts-and-nuts_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/8-ball-pool-wyr_16x9/20251027031134/8-ball-pool-wyr_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/space-waves_16x9/20260805094726/space-waves_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/war-the-knights_16x9/20251104084824/war-the-knights_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/downhill-racer-bvk_16x9/20260702100727/downhill-racer-bvk_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/hazmob-fps-online-shooter_16x9/20260302022643/hazmob-fps-online-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/words-of-wonders_16x9/20231019163757/words-of-wonders_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/slice-master_16x9/20240731033229/slice-master_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/veck-io_16x9/20251204101357/veck-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 0,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/spider-solitaire-fuw_16x9/20251008073941/spider-solitaire-fuw_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 0,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/supermarket-simulator-cashier-game_16x9/20260220060008/supermarket-simulator-cashier-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/sky-riders-buk_16x9/20240206045724/sky-riders-buk_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/mansion-tale-merge-secrets_16x9/20260717040909/mansion-tale-merge-secrets_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/real-war-not-fake-sno_16x9/20260813072730/real-war-not-fake-sno_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/fortzone-battle-royale-xkd_16x9/20250513044222/fortzone-battle-royale-xkd_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/infinity-kingdom_16x9/20250923092253/infinity-kingdom_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 0,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/crazy-chameleon_16x9/20260831063015/crazy-chameleon_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 0,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/mini-golf-club_16x9/20260609101725/mini-golf-club_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/rocketgoal-io_16x9/20260108075807/rocketgoal-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/unmatched-ego-2_16x9/20260721024839/unmatched-ego-2_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/frontwars-io_16x9/20251027025421/frontwars-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/looking-for-aliens_16x9/20260713092336/looking-for-aliens_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        },
+        {
+          "alt": "",
+          "height": 153,
+          "parentClasses": "GameThumbDesktop_gameThumbMedia__L7si1",
+          "position": "absolute",
+          "src": "https://imgs.crazygames.com/blocky-sword_16x9/20260901073153/blocky-sword_16x9-cover?metadata=none&quality=85&width=273&fit=crop",
+          "width": 273,
+          "zIndex": "1"
+        }
+      ],
+      "uniqueCount": 236
+    }
+  },
+  "error": null
+}

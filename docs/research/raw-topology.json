@@ -1,0 +1,417 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "bgImgSrc": "https://www.crazygames.com/images/background2.jpg",
+      "colors": {
+        "bodyBg": "rgba(0, 0, 0, 0)",
+        "htmlBg": "rgba(0, 0, 0, 0)",
+        "mainBg": "rgba(0, 0, 0, 0)",
+        "pageBg": "rgba(0, 0, 0, 0)",
+        "sidebarBg": "rgb(12, 13, 20)"
+      },
+      "font": "Nunito, \"Nunito Fallback\"",
+      "layoutBgClass": "Layout_backgroundContainer__c3CyJ",
+      "sectionCount": 31,
+      "sections": [
+        {
+          "class": "TopPromotionalRecentBanner_wrapper__jvvcH",
+          "height": "130px",
+          "i": 0,
+          "imgCount": 8,
+          "linkCount": 0,
+          "title": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nMeme & bloxy\nTimeless"
+        },
+        {
+          "class": "HomePage_space__vobCm",
+          "height": "0px",
+          "i": 1,
+          "imgCount": 0,
+          "linkCount": 0,
+          "title": ""
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 CrazyCarousel_isHighlightedMode__R_Xpi",
+          "height": "295.938px",
+          "i": 2,
+          "imgCount": 15,
+          "linkCount": 15,
+          "title": "Top games in  today"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "171.359px",
+          "i": 3,
+          "imgCount": 30,
+          "linkCount": 30,
+          "title": "Featured games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 4,
+          "imgCount": 14,
+          "linkCount": 15,
+          "title": "New games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 CrazyCarousel_isPortrait__CdlEY CrazyCarousel_originalsCarousel__fIbi0",
+          "height": "378.359px",
+          "i": 5,
+          "imgCount": 20,
+          "linkCount": 21,
+          "title": "CrazyGames Originals"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 6,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Can’t stop playing"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 LeaderboardsCarousel_leaderboardsContainer__nrGgl",
+          "height": "221.359px",
+          "i": 7,
+          "imgCount": 12,
+          "linkCount": 11,
+          "title": "Leaderboards\n278K ranked\nEnds in 2d 16h\nCompete with other players and reach the"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 8,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Premium Perks"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 9,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Train your brain\n\nPuzzles and challenges that keep you thinking"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 10,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Adrenaline rush\n\nBuckle up. Pure action, reflexes, and adrenaline"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 11,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "With friends\n\nFriends welcome. Rivalry encouraged."
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 12,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "5-minute fun\n\nQuick games made for your next break"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 13,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Meme & bloxy\n\nNo rules. Just memes, obbys, 67 energy, and total chaos"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 14,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Timeless classics\n\nGet nostalgic with games everyone grew up with"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 15,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Just relax\n\nSit back and enjoy the moments where everything clicks"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02 IntentCarousel_intentCarousel__Y8kFl",
+          "height": "216.359px",
+          "i": 16,
+          "imgCount": 11,
+          "linkCount": 11,
+          "title": "Deep progress\n\nDeep games with progression you'll want to master"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 17,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Driving Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 18,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Trivia Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 19,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Sports Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 20,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Simulation Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 21,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Shooting Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 22,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Arcade Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 23,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Word Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 24,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": ".io Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 25,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Adventure Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 26,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Board Games"
+        },
+        {
+          "class": "CrazyCarousel_gamesCarouselSection__cDN02",
+          "height": "169.359px",
+          "i": 27,
+          "imgCount": 10,
+          "linkCount": 11,
+          "title": "Action Games"
+        },
+        {
+          "class": "SEOCategoriesBlock_root__hScEg",
+          "height": "218px",
+          "i": 28,
+          "imgCount": 25,
+          "linkCount": 52,
+          "title": ""
+        },
+        {
+          "class": "LazyCarouselsSection_observer__1wA_M",
+          "height": "0px",
+          "i": 29,
+          "imgCount": 0,
+          "linkCount": 0,
+          "title": ""
+        },
+        {
+          "class": "",
+          "height": "396.719px",
+          "i": 30,
+          "imgCount": 0,
+          "linkCount": 0,
+          "title": ""
+        }
+      ],
+      "sidebarItems": [
+        {
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Home.svg",
+          "label": "Home icon",
+          "tag": "DIV"
+        },
+        {
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Recent.svg",
+          "label": "Recent icon",
+          "tag": "DIV"
+        },
+        {
+          "href": "https://www.crazygames.com/new",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/New.svg",
+          "label": "New",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/hot",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Trending.svg",
+          "label": "Hot Games",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/updated",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Updated.svg",
+          "label": "Updated",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/originals",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Originals.svg",
+          "label": "Originals",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/multiplayer",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Multiplayer.svg",
+          "label": "Multiplayer",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/leaderboards",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Leaderboards.svg",
+          "label": "Leaderboards",
+          "tag": "A"
+        },
+        { "label": "", "tag": "DIV" },
+        {
+          "href": "https://www.crazygames.com/c/action",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Action.svg",
+          "label": "Action",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/adventure",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Adventure.svg",
+          "label": "Adventure",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/arcade",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Casual.svg",
+          "label": "Arcade",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/board",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Board.svg",
+          "label": "Board",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/card",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Card.svg",
+          "label": "Card",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/clicker",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Clicker.svg",
+          "label": "Clicker",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/driving",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Driving.svg",
+          "label": "Driving",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/io",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/io.svg",
+          "label": ".io",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/puzzle",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Puzzle.svg",
+          "label": "Puzzle",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/shooting",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Shooting.svg",
+          "label": "Shooting",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/sim",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Casual.svg",
+          "label": "Simulation",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/sports",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Sports.svg",
+          "label": "Sports",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/strategy",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Strategy.svg",
+          "label": "Strategy",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/trivia",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Trivia.svg",
+          "label": "Trivia",
+          "tag": "A"
+        },
+        {
+          "href": "https://www.crazygames.com/c/word",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Word.svg",
+          "label": "Word",
+          "tag": "A"
+        },
+        { "label": "", "tag": "DIV" },
+        {
+          "href": "https://www.crazygames.com/tags",
+          "img": "https://imgs.crazygames.com/icon/mono-sidebar-icons-2/Tags.svg",
+          "label": "Tags",
+          "tag": "A"
+        },
+        { "href": "https://about.crazygames.com", "label": "", "tag": "DIV" }
+      ],
+      "topBanner": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nMeme & bloxy\nTimeless classics\nJust relax\nDeep progress"
+    }
+  },
+  "error": null
+}

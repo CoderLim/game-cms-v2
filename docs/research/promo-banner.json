@@ -1,0 +1,115 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "items": [],
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "classes": "CrazyCarousel_crazyCarouselContainer__63ph_ crazy-carousel",
+                    "href": null,
+                    "images": null,
+                    "styles": {
+                      "color": "rgb(255, 255, 255)",
+                      "display": "block",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "400",
+                      "height": "120px",
+                      "overflow": "scroll hidden",
+                      "padding": "0px 8px",
+                      "position": "static",
+                      "width": "1372px"
+                    },
+                    "tag": "ul",
+                    "text": null
+                  },
+                  {
+                    "children": [],
+                    "classes": "CrazyCarousel_crazyCarouselArrow__ueMx9 CrazyCarousel_crazyCarouselArrowRight__AMSPq arrow",
+                    "href": null,
+                    "images": null,
+                    "styles": {
+                      "backgroundColor": "rgba(0, 0, 0, 0.9)",
+                      "borderRadius": "22px",
+                      "display": "block",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "13.3333px",
+                      "fontWeight": "400",
+                      "height": "60px",
+                      "overflow": "visible",
+                      "padding": "1px 6px",
+                      "position": "absolute",
+                      "width": "60px"
+                    },
+                    "tag": "button",
+                    "text": null
+                  }
+                ],
+                "classes": "CrazyCarousel_crazyCarouselRoot__l3JCg",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "color": "rgb(255, 255, 255)",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "14px",
+                  "fontWeight": "400",
+                  "height": "120px",
+                  "overflow": "hidden",
+                  "position": "relative",
+                  "width": "1372px"
+                },
+                "tag": "div",
+                "text": null
+              }
+            ],
+            "classes": "IntentCTAs_carouselContainer__huyPJ",
+            "href": null,
+            "images": null,
+            "styles": {
+              "color": "rgb(255, 255, 255)",
+              "display": "block",
+              "flexDirection": "row",
+              "fontFamily": "Nunito, \"Nunito Fallback\"",
+              "fontSize": "14px",
+              "fontWeight": "400",
+              "height": "120px",
+              "overflow": "visible",
+              "position": "static",
+              "width": "1372px"
+            },
+            "tag": "div",
+            "text": null
+          }
+        ],
+        "classes": "TopPromotionalRecentBanner_wrapper__jvvcH",
+        "href": null,
+        "images": null,
+        "styles": {
+          "color": "rgb(255, 255, 255)",
+          "display": "block",
+          "flexDirection": "row",
+          "fontFamily": "Nunito, \"Nunito Fallback\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "height": "130px",
+          "overflow": "visible",
+          "position": "static",
+          "width": "1372px"
+        },
+        "tag": "div",
+        "text": null
+      }
+    }
+  },
+  "error": null
+}

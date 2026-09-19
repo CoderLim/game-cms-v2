@@ -1,0 +1,307 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "chip": {
+        "bg": "rgba(0, 0, 0, 0.9)",
+        "br": "22px",
+        "class": "CrazyCarousel_crazyCarouselArrow__ueMx9 CrazyCarousel_crazyCarouselArrowRight__AMSPq arrow",
+        "color": "rgba(0, 0, 0, 0)",
+        "display": "block",
+        "ff": "Nunito, \"Nunito Fallback\"",
+        "flexDir": "row",
+        "fs": "13.3333px",
+        "fw": "400",
+        "gap": "normal",
+        "h": "60px",
+        "pad": "1px 6px",
+        "tag": "BUTTON",
+        "text": "",
+        "w": "60px"
+      },
+      "promo": null,
+      "tiles": [
+        {
+          "a": {
+            "bg": "rgba(255, 255, 255, 0.07)",
+            "br": "16px",
+            "class": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-thumb-test",
+            "color": "rgb(255, 255, 255)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "248.938px",
+            "pad": "0px",
+            "tag": "A",
+            "text": "",
+            "w": "440px"
+          },
+          "href": "https://www.crazygames.com/game/bloxdhop-io",
+          "img": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+            "color": "rgba(0, 0, 0, 0)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "244.938px",
+            "pad": "0px",
+            "src": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+            "tag": "IMG",
+            "text": "",
+            "w": "436px"
+          },
+          "text": ""
+        },
+        {
+          "a": {
+            "bg": "rgba(255, 255, 255, 0.07)",
+            "br": "16px",
+            "class": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-thumb-test",
+            "color": "rgb(255, 255, 255)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "122.469px",
+            "pad": "0px",
+            "tag": "A",
+            "text": "",
+            "w": "218px"
+          },
+          "href": "https://www.crazygames.com/game/polytrack",
+          "img": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+            "color": "rgba(0, 0, 0, 0)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "118.469px",
+            "pad": "0px",
+            "src": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "tag": "IMG",
+            "text": "",
+            "w": "214px"
+          },
+          "text": ""
+        },
+        {
+          "a": {
+            "bg": "rgba(255, 255, 255, 0.07)",
+            "br": "16px",
+            "class": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-thumb-test",
+            "color": "rgb(255, 255, 255)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "122.469px",
+            "pad": "0px",
+            "tag": "A",
+            "text": "",
+            "w": "218px"
+          },
+          "href": "https://www.crazygames.com/game/openfront-gsw",
+          "img": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+            "color": "rgba(0, 0, 0, 0)",
+            "display": "block",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "700",
+            "gap": "normal",
+            "h": "118.469px",
+            "pad": "0px",
+            "src": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "tag": "IMG",
+            "text": "",
+            "w": "214px"
+          },
+          "text": ""
+        }
+      ],
+      "titles": [
+        {
+          "sectionTitle": "Top games in  today",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitle__tDEqL RecommendedCarouselTitle_recommendedTitle__M_lew",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "20px",
+            "fw": "700",
+            "gap": "8px",
+            "h": "23px",
+            "pad": "0px 16px 3px 8px",
+            "tag": "DIV",
+            "text": "Top games in  today",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "Featured games",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitle__tDEqL",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "20px",
+            "fw": "700",
+            "gap": "8px",
+            "h": "23px",
+            "pad": "0px 16px 3px 4px",
+            "tag": "DIV",
+            "text": "Featured games",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "New games",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z titleContainer",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "normal",
+            "h": "21px",
+            "pad": "0px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "New games",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "CrazyGames Originals",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z titleContainer",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "normal",
+            "h": "21px",
+            "pad": "0px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "CrazyGames Originals",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "Can’t stop playing",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z titleContainer",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "normal",
+            "h": "21px",
+            "pad": "0px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "Can’t stop playing",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "Leaderboards\n278K ranked\nEnds in 2d 16h\nCompete with other players and reach the top",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z CarouselRichHeader_header__RX_gw",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "16px",
+            "h": "65px",
+            "pad": "12px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "Leaderboards\n278K ranked\nEnds in 2d 16h\nCompete with other p",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "Premium Perks",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z titleContainer",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "normal",
+            "h": "21px",
+            "pad": "0px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "Premium Perks",
+            "w": "1372px"
+          }
+        },
+        {
+          "sectionTitle": "Train your brain\n\nPuzzles and challenges that keep you thinking",
+          "titleEl": {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "class": "CarouselSectionTitle_carouselTitleContainerDiv__FW07Z CarouselRichHeader_header__RX_gw",
+            "color": "rgb(255, 255, 255)",
+            "display": "flex",
+            "ff": "Nunito, \"Nunito Fallback\"",
+            "flexDir": "row",
+            "fs": "14px",
+            "fw": "400",
+            "gap": "16px",
+            "h": "62px",
+            "pad": "12px 0px 0px 8px",
+            "tag": "DIV",
+            "text": "Train your brain\n\nPuzzles and challenges that keep you think",
+            "w": "1364px"
+          }
+        }
+      ]
+    }
+  },
+  "error": null
+}

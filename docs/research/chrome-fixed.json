@@ -1,0 +1,118 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "bodyChildren": [
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "", "tag": "LINK" },
+        { "class": "", "id": "__next", "tag": "DIV" },
+        { "class": "", "id": "__NEXT_DATA__", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "NEXT-ROUTE-ANNOUNCER" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" },
+        { "class": "", "id": "", "tag": "SCRIPT" }
+      ],
+      "bottomText": [
+        "Puzzles and challenges that keep you thinking",
+        "Buckle up. Pure action, reflexes, and adrenaline",
+        "Friends welcome. Rivalry encouraged.",
+        "Quick games made for your next break",
+        "No rules. Just memes, obbys, 67 energy, and total chaos"
+      ],
+      "fixed": [
+        {
+          "class": "Header_root__uPVep",
+          "h": "60px",
+          "id": "czyHeader",
+          "left": "0px",
+          "pos": "fixed",
+          "tag": "DIV",
+          "top": "0px",
+          "w": "1440px",
+          "z": "12"
+        },
+        {
+          "class": "CrazyModal_modalBackdrop__aVtO_ Header_headerBackdrop__poPEJ",
+          "h": "0px",
+          "id": "",
+          "left": "0px",
+          "pos": "fixed",
+          "tag": "DIV",
+          "top": "0px",
+          "w": "0px",
+          "z": "11"
+        },
+        {
+          "class": "Sidebar_main___ex0V Sidebar_isDesktop__aieVO",
+          "h": "840px",
+          "id": "mainNav",
+          "left": "0px",
+          "pos": "fixed",
+          "tag": "NAV",
+          "top": "60px",
+          "w": "60px",
+          "z": "5"
+        },
+        {
+          "class": "ControllerNotification_slidingContainer__MqCGx",
+          "h": "78px",
+          "id": "",
+          "left": "0px",
+          "pos": "fixed",
+          "tag": "DIV",
+          "top": "802px",
+          "w": "1440px",
+          "z": "9"
+        },
+        {
+          "class": "Layout_backgroundContainer__c3CyJ",
+          "h": "900px",
+          "id": "",
+          "left": "0px",
+          "pos": "fixed",
+          "tag": "DIV",
+          "top": "60px",
+          "w": "1440px",
+          "z": "-1"
+        }
+      ],
+      "footerClass": "Sidebar_footer__z3StO Sidebar_footerDesktop__SyLeL Sidebar_sidebarFooterAnchor__KadWg",
+      "footerText": "",
+      "search": {
+        "class": "TopSearch_topSearchForm__b9Z8c TopSearch_isDesktop__2eSKm",
+        "placeholder": null,
+        "tag": "FORM"
+      },
+      "seoText": ""
+    }
+  },
+  "error": null
+}

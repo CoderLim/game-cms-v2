@@ -1,0 +1,1998 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "sections": [
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/game/bloxdhop-io",
+              "img": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+              "title": "Bloxd.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/polytrack",
+              "img": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "PolyTrack"
+            },
+            {
+              "href": "https://www.crazygames.com/game/openfront-gsw",
+              "img": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Openfront"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ragdoll-archers",
+              "img": "https://imgs.crazygames.com/ragdoll-archers_16x9/20250926080758/ragdoll-archers_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ragdoll Archers"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-karts",
+              "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Karts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+              "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+              "title": "Piece of Cake: Merge and Bake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-billiards-multiplayer",
+              "img": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool Billiards Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/traffic-rider-vvq",
+              "img": "https://imgs.crazygames.com/traffic-rider-vvq_16x9/20250526021507/traffic-rider-vvq_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Traffic Rider"
+            },
+            {
+              "href": "https://www.crazygames.com/game/paint-to-hide",
+              "img": "https://imgs.crazygames.com/paint-to-hide_16x9/20260903084057/paint-to-hide_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Paint to Hide!"
+            },
+            {
+              "href": "https://www.crazygames.com/game/skillwarz",
+              "img": "https://imgs.crazygames.com/skillwarz_16x9/20260318145302/skillwarz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "SkillWarz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evowarsio",
+              "img": "https://imgs.crazygames.com/evowarsio_16x9/20251003061326/evowarsio_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+              "title": "EvoWars.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/racing-limits",
+              "img": "https://imgs.crazygames.com/racing-limits_16x9/20250711091800/racing-limits_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Racing Limits"
+            }
+          ],
+          "isHighlighted": true,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Top games in  today\nOpenfront\n.io\n11M\n130K"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/game/escape-tsunami-for-brainrots-wfe",
+              "img": "https://imgs.crazygames.com/escape-tsunami-for-brainrots-wfe_16x9/20260209084358/escape-tsunami-for-brainrots-wfe_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Escape Tsunami for Brainrots!"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hexa-stack",
+              "img": "https://imgs.crazygames.com/hexa-stack_16x9/20260914151011/hexa-stack_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hexa Stack"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mister-mine",
+              "img": "https://imgs.crazygames.com/mister-mine_16x9/20260220044353/mister-mine_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mr. Mine"
+            },
+            {
+              "href": "https://www.crazygames.com/game/park-town",
+              "img": "https://imgs.crazygames.com/park-town_16x9/20250304132211/park-town_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Park Town"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chicken-hell",
+              "img": "https://imgs.crazygames.com/chicken-hell_16x9/20260623024937/chicken-hell_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chicken Hell"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bowmasters-archery-shooting",
+              "img": "https://imgs.crazygames.com/bowmasters-archery-shooting_16x9/20260818101555/bowmasters-archery-shooting_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bowmasters: Archery Shooting"
+            },
+            {
+              "href": "https://www.crazygames.com/game/voxmaxa-com",
+              "img": "https://imgs.crazygames.com/voxmaxa-com_16x9/20260902054448/voxmaxa-com_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Voxmaxa"
+            },
+            {
+              "href": "https://www.crazygames.com/game/brainrot-arena-online",
+              "img": "https://imgs.crazygames.com/brainrot-arena-online_16x9/20260615041823/brainrot-arena-online_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Brainrot Arena Online"
+            },
+            {
+              "href": "https://www.crazygames.com/game/screw-out-bolts-and-nuts",
+              "img": "https://imgs.crazygames.com/screw-out-bolts-and-nuts_16x9/20250711094331/screw-out-bolts-and-nuts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Screw Out: Bolts and Nuts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-wyr",
+              "img": "https://imgs.crazygames.com/8-ball-pool-wyr_16x9/20251027031134/8-ball-pool-wyr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool"
+            },
+            {
+              "href": "https://www.crazygames.com/game/space-waves",
+              "img": "https://imgs.crazygames.com/space-waves_16x9/20260805094726/space-waves_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Space Waves"
+            },
+            {
+              "href": "https://www.crazygames.com/game/war-the-knights",
+              "img": "https://imgs.crazygames.com/war-the-knights_16x9/20251104084824/war-the-knights_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "War the Knights"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Featured games"
+        },
+        {
+          "games": [
+            { "href": "https://www.crazygames.com/new", "title": "New games" },
+            {
+              "href": "https://www.crazygames.com/game/looking-for-aliens",
+              "img": "https://imgs.crazygames.com/looking-for-aliens_16x9/20260713092336/looking-for-aliens_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Looking For Aliens"
+            },
+            {
+              "href": "https://www.crazygames.com/game/blocky-sword",
+              "img": "https://imgs.crazygames.com/blocky-sword_16x9/20260901073153/blocky-sword_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Blocky Sword"
+            },
+            {
+              "href": "https://www.crazygames.com/game/coin-tangle-jam",
+              "img": "https://imgs.crazygames.com/coin-tangle-jam_16x9/20260914144405/coin-tangle-jam_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Coin Tangle Jam"
+            },
+            {
+              "href": "https://www.crazygames.com/game/turbo-trail-txl",
+              "img": "https://imgs.crazygames.com/turbo-trail-txl_16x9/20260807024521/turbo-trail-txl_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Turbo Trail"
+            },
+            {
+              "href": "https://www.crazygames.com/game/guild-hop",
+              "img": "https://imgs.crazygames.com/guild-hop_16x9/20260911075747/guild-hop_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Guild Hop"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stack-city",
+              "img": "https://imgs.crazygames.com/stack-city_16x9/20260902095829/stack-city_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stack City"
+            },
+            {
+              "href": "https://www.crazygames.com/game/think-play-quiz-luh",
+              "img": "https://imgs.crazygames.com/think-play-quiz-luh_16x9/20260914144243/think-play-quiz-luh_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Think & Play Quiz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/real-war-not-fake-sno",
+              "img": "https://imgs.crazygames.com/real-war-not-fake-sno_16x9/20260813072730/real-war-not-fake-sno_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Real War: Not Fake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bowmasters-archery-shooting",
+              "img": "https://imgs.crazygames.com/bowmasters-archery-shooting_16x9/20260818101555/bowmasters-archery-shooting_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bowmasters: Archery Shooting"
+            },
+            {
+              "href": "https://www.crazygames.com/game/gyroblade",
+              "img": "https://imgs.crazygames.com/gyroblade_16x9/20260917071453/gyroblade_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "GYROBLADE"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evolution-animals-1",
+              "img": "https://imgs.crazygames.com/evolution-animals-1_16x9/20260826053204/evolution-animals-1_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Evolution Animals +1"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "New games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/originals",
+              "title": "CrazyGames Originals"
+            },
+            {
+              "href": "https://www.crazygames.com/game/racing-limits",
+              "img": "https://imgs.crazygames.com/racing-limits_2x3/20250711091800/racing-limits_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Racing Limits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tower-swap",
+              "img": "https://imgs.crazygames.com/tower-swap_2x3/20250711093921/tower-swap_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Tower Swap"
+            },
+            {
+              "href": "https://www.crazygames.com/game/cubes-2048-io",
+              "img": "https://imgs.crazygames.com/games/cubes-2048-io/cover_2x3-1693298929612.png?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Cubes 2048.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evil-tower-lli",
+              "img": "https://imgs.crazygames.com/evil-tower-lli_2x3/20260803073604/evil-tower-lli_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Evil Tower"
+            },
+            {
+              "href": "https://www.crazygames.com/game/block-puzzle-master",
+              "img": "https://imgs.crazygames.com/block-puzzle-master_2x3/20250924025352/block-puzzle-master_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Block Blaster"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ramp-car-vs-police-chase-psm",
+              "img": "https://imgs.crazygames.com/ramp-car-vs-police-chase-psm_2x3/20260603031406/ramp-car-vs-police-chase-psm_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Ramp Car VS Police: CHASE"
+            },
+            {
+              "href": "https://www.crazygames.com/game/gridpunk---3v3-battle-royale",
+              "img": "https://imgs.crazygames.com/gridpunk---3v3-battle-royale_2x3/20260126044546/gridpunk---3v3-battle-royale_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Gridpunk - 3v3 Battle Royale"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stone-grass-mowing-simulator",
+              "img": "https://imgs.crazygames.com/stone-grass-mowing-simulator_2x3/20250410062107/stone-grass-mowing-simulator_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Stone Grass: Mowing Simulator"
+            },
+            {
+              "href": "https://www.crazygames.com/game/my-clothing-store-simulator-3d",
+              "img": "https://imgs.crazygames.com/my-clothing-store-simulator-3d_2x3/20260723103516/my-clothing-store-simulator-3d_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "My Clothing Store Simulator 3D"
+            },
+            {
+              "href": "https://www.crazygames.com/game/lumber-harvest-tree-cutting-game",
+              "img": "https://imgs.crazygames.com/lumber-harvest-tree-cutting-game_2x3/20250619095414/lumber-harvest-tree-cutting-game_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Lumber Harvest: Tree Cutting Game"
+            },
+            {
+              "href": "https://www.crazygames.com/game/build-and-crush",
+              "img": "https://imgs.crazygames.com/build-and-crush_2x3/20240508095251/build-and-crush_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+              "title": "Build and Crush"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": true,
+          "title": "CrazyGames Originals"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/premium",
+              "title": "Can’t stop playing"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-karts",
+              "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Karts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+              "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Piece of Cake: Merge and Bake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/designville-merge-design",
+              "img": "https://imgs.crazygames.com/designville-merge-design_16x9/20260827034042/designville-merge-design_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Designville: Merge & Design"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mage-tower-idle-defense",
+              "img": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mage Castle Idle Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mansion-tale-merge-secrets",
+              "img": "https://imgs.crazygames.com/mansion-tale-merge-secrets_16x9/20260717040909/mansion-tale-merge-secrets_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mansion Tale: Merge Secrets"
+            },
+            {
+              "href": "https://www.crazygames.com/game/infinity-kingdom",
+              "img": "https://imgs.crazygames.com/infinity-kingdom_16x9/20250923092253/infinity-kingdom_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Infinity Kingdom"
+            },
+            {
+              "href": "https://www.crazygames.com/game/rocketgoal-io",
+              "img": "https://imgs.crazygames.com/rocketgoal-io_16x9/20260108075807/rocketgoal-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "RocketGoal.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/farm-merge-valley",
+              "img": "https://imgs.crazygames.com/farm-merge-valley_16x9/20260909072453/farm-merge-valley_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Farm Merge Valley"
+            },
+            {
+              "href": "https://www.crazygames.com/game/warfare-1942-riz",
+              "img": "https://imgs.crazygames.com/warfare-1942-riz_16x9/20260702082513/warfare-1942-riz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Warfare 1942"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bullet-force-multiplayer",
+              "img": "https://imgs.crazygames.com/bullet-force-multiplayer_16x9/20260213105606/bullet-force-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bullet Force"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Can’t stop playing"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/leaderboards",
+              "title": "Leaderboards"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-karts",
+              "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Karts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-billiards-multiplayer",
+              "img": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool Billiards Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evowarsio",
+              "img": "https://imgs.crazygames.com/evowarsio_16x9/20251003061326/evowarsio_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "EvoWars.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/space-waves",
+              "img": "https://imgs.crazygames.com/space-waves_16x9/20260805094726/space-waves_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Space Waves"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hazmob-fps-online-shooter",
+              "img": "https://imgs.crazygames.com/hazmob-fps-online-shooter_16x9/20260302022643/hazmob-fps-online-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hazmob FPS: Online Shooter"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mage-tower-idle-defense",
+              "img": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mage Castle Idle Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/sky-riders-buk",
+              "img": "https://imgs.crazygames.com/sky-riders-buk_16x9/20240206045724/sky-riders-buk_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Sky Riders"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chicken-hell",
+              "img": "https://imgs.crazygames.com/chicken-hell_16x9/20260623024937/chicken-hell_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chicken Hell"
+            },
+            {
+              "href": "https://www.crazygames.com/game/frontwars-io",
+              "img": "https://imgs.crazygames.com/frontwars-io_16x9/20251027025421/frontwars-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "FrontWars.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hexa-stack",
+              "img": "https://imgs.crazygames.com/hexa-stack_16x9/20260914151011/hexa-stack_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hexa Stack"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": true,
+          "isPortrait": false,
+          "title": "Leaderboards\n278K ranked\nEnds in 2d 16h\nCompete with other players and reach the top"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/play-and-upgrade",
+              "title": "Premium Perks"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+              "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Piece of Cake: Merge and Bake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/designville-merge-design",
+              "img": "https://imgs.crazygames.com/designville-merge-design_16x9/20260827034042/designville-merge-design_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Designville: Merge & Design"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hazmob-fps-online-shooter",
+              "img": "https://imgs.crazygames.com/hazmob-fps-online-shooter_16x9/20260302022643/hazmob-fps-online-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hazmob FPS: Online Shooter"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mage-tower-idle-defense",
+              "img": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mage Castle Idle Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mansion-tale-merge-secrets",
+              "img": "https://imgs.crazygames.com/mansion-tale-merge-secrets_16x9/20260717040909/mansion-tale-merge-secrets_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mansion Tale: Merge Secrets"
+            },
+            {
+              "href": "https://www.crazygames.com/game/infinity-kingdom",
+              "img": "https://imgs.crazygames.com/infinity-kingdom_16x9/20250923092253/infinity-kingdom_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Infinity Kingdom"
+            },
+            {
+              "href": "https://www.crazygames.com/game/farm-merge-valley",
+              "img": "https://imgs.crazygames.com/farm-merge-valley_16x9/20260909072453/farm-merge-valley_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Farm Merge Valley"
+            },
+            {
+              "href": "https://www.crazygames.com/game/warfare-1942-riz",
+              "img": "https://imgs.crazygames.com/warfare-1942-riz_16x9/20260702082513/warfare-1942-riz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Warfare 1942"
+            },
+            {
+              "href": "https://www.crazygames.com/game/open-house",
+              "img": "https://imgs.crazygames.com/open-house_16x9/20260220024829/open-house_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Open House"
+            },
+            {
+              "href": "https://www.crazygames.com/game/idle-billionaire-tycoon",
+              "img": "https://imgs.crazygames.com/idle-billionaire-tycoon_16x9/20260918072906/idle-billionaire-tycoon_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Idle Billionaire Tycoon"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Premium Perks"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/train-your-brain",
+              "title": "Train your brain"
+            },
+            {
+              "href": "https://www.crazygames.com/game/worldguessr",
+              "img": "https://imgs.crazygames.com/worldguessr_16x9/20241018082520/worldguessr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "WorldGuessr Free GeoGuessr"
+            },
+            {
+              "href": "https://www.crazygames.com/game/screw-out-bolts-and-nuts",
+              "img": "https://imgs.crazygames.com/screw-out-bolts-and-nuts_16x9/20250711094331/screw-out-bolts-and-nuts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Screw Out: Bolts and Nuts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/words-of-wonders",
+              "img": "https://imgs.crazygames.com/words-of-wonders_16x9/20231019163757/words-of-wonders_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Words of Wonders"
+            },
+            {
+              "href": "https://www.crazygames.com/game/arrow-exit-puzzle",
+              "img": "https://imgs.crazygames.com/arrow-exit-puzzle_16x9/20260115072133/arrow-exit-puzzle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Arrow Escape"
+            },
+            {
+              "href": "https://www.crazygames.com/game/cups---water-sort-puzzle",
+              "img": "https://imgs.crazygames.com/cups---water-sort-puzzle_16x9/20230829022932/cups---water-sort-puzzle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Cups - Water Sort Puzzle"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hexa-stack",
+              "img": "https://imgs.crazygames.com/hexa-stack_16x9/20260914151011/hexa-stack_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hexa Stack"
+            },
+            {
+              "href": "https://www.crazygames.com/game/what-s-the-difference-online",
+              "img": "https://imgs.crazygames.com/what-s-the-difference-online_16x9/20260521033315/what-s-the-difference-online_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "What's The Difference?"
+            },
+            {
+              "href": "https://www.crazygames.com/game/twisted-tangle-nmt",
+              "img": "https://imgs.crazygames.com/twisted-tangle-nmt_16x9/20250409111646/twisted-tangle-nmt_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Twisted Tangle"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hidden-objects",
+              "img": "https://imgs.crazygames.com/hidden-objects_16x9/20250505042911/hidden-objects_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hidden Objects"
+            },
+            {
+              "href": "https://www.crazygames.com/game/car-out-jam-parking-puzzle",
+              "img": "https://imgs.crazygames.com/car-out-jam-parking-puzzle_16x9/20260824034919/car-out-jam-parking-puzzle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Car OUT! Jam Parking Puzzle"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Train your brain\n\nPuzzles and challenges that keep you thinking"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/adrenaline",
+              "title": "Adrenaline rush"
+            },
+            {
+              "href": "https://www.crazygames.com/game/traffic-rider-vvq",
+              "img": "https://imgs.crazygames.com/traffic-rider-vvq_16x9/20250526021507/traffic-rider-vvq_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Traffic Rider"
+            },
+            {
+              "href": "https://www.crazygames.com/game/skillwarz",
+              "img": "https://imgs.crazygames.com/skillwarz_16x9/20260318145302/skillwarz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "SkillWarz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/racing-limits",
+              "img": "https://imgs.crazygames.com/racing-limits_16x9/20250711091800/racing-limits_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Racing Limits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/war-the-knights",
+              "img": "https://imgs.crazygames.com/war-the-knights_16x9/20251104084824/war-the-knights_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "War the Knights"
+            },
+            {
+              "href": "https://www.crazygames.com/game/veck-io",
+              "img": "https://imgs.crazygames.com/veck-io_16x9/20251204101357/veck-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Veck.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/rally-racer-dirt",
+              "img": "https://imgs.crazygames.com/rally-racer-dirt_16x9/20260220034629/rally-racer-dirt_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Rally Racer Dirt"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bodycamera-shooter",
+              "img": "https://imgs.crazygames.com/bodycamera-shooter_16x9/20260702042958/bodycamera-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "BodyCamera Shooter"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fragen",
+              "img": "https://imgs.crazygames.com/fragen_16x9/20251022094210/fragen_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fragen"
+            },
+            {
+              "href": "https://www.crazygames.com/game/circuit-racing",
+              "img": "https://imgs.crazygames.com/circuit-racing_16x9/20260108064855/circuit-racing_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Circuit Racing"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ramp-car-vs-police-chase-psm",
+              "img": "https://imgs.crazygames.com/ramp-car-vs-police-chase-psm_16x9/20260603031406/ramp-car-vs-police-chase-psm_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ramp Car VS Police: CHASE"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Adrenaline rush\n\nBuckle up. Pure action, reflexes, and adrenaline"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/multiplayer",
+              "title": "With friends"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bloxdhop-io",
+              "img": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bloxd.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/polytrack",
+              "img": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "PolyTrack"
+            },
+            {
+              "href": "https://www.crazygames.com/game/openfront-gsw",
+              "img": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Openfront"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-karts",
+              "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Karts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-billiards-multiplayer",
+              "img": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool Billiards Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/paint-to-hide",
+              "img": "https://imgs.crazygames.com/paint-to-hide_16x9/20260903084057/paint-to-hide_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Paint to Hide!"
+            },
+            {
+              "href": "https://www.crazygames.com/game/skillwarz",
+              "img": "https://imgs.crazygames.com/skillwarz_16x9/20260318145302/skillwarz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "SkillWarz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/racing-limits",
+              "img": "https://imgs.crazygames.com/racing-limits_16x9/20250711091800/racing-limits_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Racing Limits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/worldguessr",
+              "img": "https://imgs.crazygames.com/worldguessr_16x9/20241018082520/worldguessr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "WorldGuessr Free GeoGuessr"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-wyr",
+              "img": "https://imgs.crazygames.com/8-ball-pool-wyr_16x9/20251027031134/8-ball-pool-wyr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "With friends\n\nFriends welcome. Rivalry encouraged."
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/5-minute-fun",
+              "title": "5-minute fun"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ragdoll-archers",
+              "img": "https://imgs.crazygames.com/ragdoll-archers_16x9/20250926080758/ragdoll-archers_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ragdoll Archers"
+            },
+            {
+              "href": "https://www.crazygames.com/game/slice-master",
+              "img": "https://imgs.crazygames.com/slice-master_16x9/20240731033229/slice-master_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Slice Master"
+            },
+            {
+              "href": "https://www.crazygames.com/game/sky-riders-buk",
+              "img": "https://imgs.crazygames.com/sky-riders-buk_16x9/20240206045724/sky-riders-buk_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Sky Riders"
+            },
+            {
+              "href": "https://www.crazygames.com/game/cubes-2048-io",
+              "img": "https://imgs.crazygames.com/games/cubes-2048-io/cover_16x9-1693298929425.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Cubes 2048.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/count-masters-stickman-games",
+              "img": "https://imgs.crazygames.com/count-masters-stickman-games_16x9/20260318145715/count-masters-stickman-games_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Count Masters: Stickman Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/basket-random",
+              "img": "https://imgs.crazygames.com/basket-random_16x9/20240617090207/basket-random_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Basket Random"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stone-grass-mowing-simulator",
+              "img": "https://imgs.crazygames.com/stone-grass-mowing-simulator_16x9/20260318150935/stone-grass-mowing-simulator_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stone Grass: Mowing Simulator"
+            },
+            {
+              "href": "https://www.crazygames.com/game/holey-io-battle-royale",
+              "img": "https://imgs.crazygames.com/holey-io-battle-royale_16x9/20260220104426/holey-io-battle-royale_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Holey.io Battle Royale"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-badminton",
+              "img": "https://imgs.crazygames.com/smash-badminton_16x9/20260401070116/smash-badminton_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Badminton"
+            },
+            {
+              "href": "https://www.crazygames.com/game/paper-io-2",
+              "img": "https://imgs.crazygames.com/paper-io-2_16x9/20250214024143/paper-io-2_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Paper.io 2"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "5-minute fun\n\nQuick games made for your next break"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/meme-bloxy",
+              "title": "Meme & bloxy"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bloxdhop-io",
+              "img": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bloxd.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fortzone-battle-royale-xkd",
+              "img": "https://imgs.crazygames.com/fortzone-battle-royale-xkd_16x9/20250513044222/fortzone-battle-royale-xkd_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fortzone Battle Royale"
+            },
+            {
+              "href": "https://www.crazygames.com/game/buildnow-gg",
+              "img": "https://imgs.crazygames.com/buildnow-gg_16x9/20251229084241/buildnow-gg_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "BuildNow GG"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stickman-clash",
+              "img": "https://imgs.crazygames.com/games/stickman-clash/cover_16x9-1746127524433.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stickman Clash"
+            },
+            {
+              "href": "https://www.crazygames.com/game/meeland-io",
+              "img": "https://imgs.crazygames.com/meeland-io_16x9/20260803023537/meeland-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Meeland.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/grow-a-garden---growden-io",
+              "img": "https://imgs.crazygames.com/grow-a-garden---growden-io_16x9/20251117094451/grow-a-garden---growden-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Grow A Garden | Growden.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stickman-rebirth",
+              "img": "https://imgs.crazygames.com/stickman-rebirth_16x9/20260603022944/stickman-rebirth_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stickman Rebirth"
+            },
+            {
+              "href": "https://www.crazygames.com/game/obby-world-squid-escape",
+              "img": "https://imgs.crazygames.com/obby-world-squid-escape_16x9/20250804143608/obby-world-squid-escape_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Obby World: Squid Escape"
+            },
+            {
+              "href": "https://www.crazygames.com/game/crazy-office-slap-and-smash",
+              "img": "https://imgs.crazygames.com/crazy-office-slap-and-smash_16x9/20250425071328/crazy-office-slap-and-smash_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Crazy Office: Slap and Smash!"
+            },
+            {
+              "href": "https://www.crazygames.com/game/epic-sword-battle-fight-in-arena",
+              "img": "https://imgs.crazygames.com/epic-sword-battle-fight-in-arena_16x9/20251117160647/epic-sword-battle-fight-in-arena_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Epic Sword Battle! Fight in Arena"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Meme & bloxy\n\nNo rules. Just memes, obbys, 67 energy, and total chaos"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/timeless-classics",
+              "title": "Timeless classics"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mahjongg-solitaire",
+              "img": "https://imgs.crazygames.com/games/mahjongg-solitaire/cover_16x9-1707829450935.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mahjongg Solitaire"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-wyr",
+              "img": "https://imgs.crazygames.com/8-ball-pool-wyr_16x9/20251027031134/8-ball-pool-wyr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mini-golf-club",
+              "img": "https://imgs.crazygames.com/mini-golf-club_16x9/20260609101725/mini-golf-club_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mini Golf Club"
+            },
+            {
+              "href": "https://www.crazygames.com/game/table-tennis-world-tour",
+              "img": "https://imgs.crazygames.com/table-tennis-world-tour_16x9/20230908041108/table-tennis-world-tour_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Table Tennis World Tour"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ludo-king",
+              "img": "https://imgs.crazygames.com/ludo-king_16x9/20240229043328/ludo-king_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ludo King"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chess-free",
+              "img": "https://imgs.crazygames.com/chess-free_16x9/20260508084105/chess-free_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chess Free"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hangman-cfc",
+              "img": "https://imgs.crazygames.com/hangman-cfc_16x9/20260519090049/hangman-cfc_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hangman"
+            },
+            {
+              "href": "https://www.crazygames.com/game/4-in-a-row-connected-multiplayer-online",
+              "img": "https://imgs.crazygames.com/games/4-in-a-row-connected-multiplayer-online/cover_16x9-1739759253546.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Connect 4 Online Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bubble-trouble-cpy",
+              "img": "https://imgs.crazygames.com/bubble-trouble-cpy_16x9/20250925061651/bubble-trouble-cpy_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bubble Trouble"
+            },
+            {
+              "href": "https://www.crazygames.com/game/wordmeister",
+              "img": "https://imgs.crazygames.com/games/wordmeister/cover_16x9-1750345072824.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Wordmeister"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Timeless classics\n\nGet nostalgic with games everyone grew up with"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/match-merge",
+              "title": "Just relax"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+              "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Piece of Cake: Merge and Bake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mansion-tale-merge-secrets",
+              "img": "https://imgs.crazygames.com/mansion-tale-merge-secrets_16x9/20260717040909/mansion-tale-merge-secrets_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mansion Tale: Merge Secrets"
+            },
+            {
+              "href": "https://www.crazygames.com/game/farm-merge-valley",
+              "img": "https://imgs.crazygames.com/farm-merge-valley_16x9/20260909072453/farm-merge-valley_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Farm Merge Valley"
+            },
+            {
+              "href": "https://www.crazygames.com/game/open-house",
+              "img": "https://imgs.crazygames.com/open-house_16x9/20260220024829/open-house_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Open House"
+            },
+            {
+              "href": "https://www.crazygames.com/game/castle-craft",
+              "img": "https://imgs.crazygames.com/castle-craft_16x9/20250203045450/castle-craft_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Castle Craft"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mergest-kingdom",
+              "img": "https://imgs.crazygames.com/mergest-kingdom_16x9/20251124121228/mergest-kingdom_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mergest Kingdom"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fairyland-merge-and-magic",
+              "img": "https://imgs.crazygames.com/fairyland-merge-and-magic_16x9/20251124121235/fairyland-merge-and-magic_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fairyland Merge & Magic"
+            },
+            {
+              "href": "https://www.crazygames.com/game/matchventures",
+              "img": "https://imgs.crazygames.com/matchventures_16x9/20260831061953/matchventures_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "MatchVentures"
+            },
+            {
+              "href": "https://www.crazygames.com/game/magic-school",
+              "img": "https://imgs.crazygames.com/magic-school_16x9/20260710090838/magic-school_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Magic School"
+            },
+            {
+              "href": "https://www.crazygames.com/game/blockbuster-puzzle",
+              "img": "https://imgs.crazygames.com/blockbuster-puzzle_16x9/20241118032546/blockbuster-puzzle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "BlockBuster Puzzle"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Just relax\n\nSit back and enjoy the moments where everything clicks"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/t/deep-immersive",
+              "title": "Deep progress"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mage-tower-idle-defense",
+              "img": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mage Castle Idle Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/supermarket-simulator-cashier-game",
+              "img": "https://imgs.crazygames.com/supermarket-simulator-cashier-game_16x9/20260220060008/supermarket-simulator-cashier-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Supermarket Simulator: Store Manager"
+            },
+            {
+              "href": "https://www.crazygames.com/game/leek-factory-tycoon",
+              "img": "https://imgs.crazygames.com/leek-factory-tycoon_16x9/20260330040926/leek-factory-tycoon_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Leek Factory Tycoon"
+            },
+            {
+              "href": "https://www.crazygames.com/game/idle-zombie-wave",
+              "img": "https://imgs.crazygames.com/idle-zombie-wave_16x9/20260508072223/idle-zombie-wave_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Idle Zombie Wave: Survivors"
+            },
+            {
+              "href": "https://www.crazygames.com/game/aod---art-of-defense",
+              "img": "https://imgs.crazygames.com/aod---art-of-defense_16x9/20260714061301/aod---art-of-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "AOD - Art Of Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/battle-arena",
+              "img": "https://imgs.crazygames.com/battle-arena_16x9/20260812020919/battle-arena_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Battle Arena"
+            },
+            {
+              "href": "https://www.crazygames.com/game/dig-out-of-prison",
+              "img": "https://imgs.crazygames.com/dig-out-of-prison_16x9/20251229103900/dig-out-of-prison_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Dig out of Prison"
+            },
+            {
+              "href": "https://www.crazygames.com/game/empire-city",
+              "img": "https://imgs.crazygames.com/empire-city_16x9/20251027072318/empire-city_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Empire City"
+            },
+            {
+              "href": "https://www.crazygames.com/game/path-of-survivor",
+              "img": "https://imgs.crazygames.com/path-of-survivor_16x9/20260121061826/path-of-survivor_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Path of Survivor"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tank-stars-online",
+              "img": "https://imgs.crazygames.com/tank-stars-online_16x9/20260122111423/tank-stars-online_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Tank Stars"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": true,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "subtitle": null,
+          "title": "Deep progress\n\nDeep games with progression you'll want to master"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/driving",
+              "title": "Driving Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/polytrack",
+              "img": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "PolyTrack"
+            },
+            {
+              "href": "https://www.crazygames.com/game/traffic-rider-vvq",
+              "img": "https://imgs.crazygames.com/traffic-rider-vvq_16x9/20250526021507/traffic-rider-vvq_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Traffic Rider"
+            },
+            {
+              "href": "https://www.crazygames.com/game/racing-limits",
+              "img": "https://imgs.crazygames.com/racing-limits_16x9/20250711091800/racing-limits_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Racing Limits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/sky-riders-buk",
+              "img": "https://imgs.crazygames.com/sky-riders-buk_16x9/20240206045724/sky-riders-buk_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Sky Riders"
+            },
+            {
+              "href": "https://www.crazygames.com/game/rally-racer-dirt",
+              "img": "https://imgs.crazygames.com/rally-racer-dirt_16x9/20260220034629/rally-racer-dirt_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Rally Racer Dirt"
+            },
+            {
+              "href": "https://www.crazygames.com/game/crazy-grand-prix",
+              "img": "https://imgs.crazygames.com/games/crazy-grand-prix/cover-1669033093125.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Crazy Grand Prix"
+            },
+            {
+              "href": "https://www.crazygames.com/game/circuit-racing",
+              "img": "https://imgs.crazygames.com/circuit-racing_16x9/20260108064855/circuit-racing_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Circuit Racing"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ramp-car-vs-police-chase-psm",
+              "img": "https://imgs.crazygames.com/ramp-car-vs-police-chase-psm_16x9/20260603031406/ramp-car-vs-police-chase-psm_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ramp Car VS Police: CHASE"
+            },
+            {
+              "href": "https://www.crazygames.com/game/super-star-car",
+              "img": "https://imgs.crazygames.com/super-star-car_16x9/20260318150415/super-star-car_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Super Star Car"
+            },
+            {
+              "href": "https://www.crazygames.com/game/escape-road-3",
+              "img": "https://imgs.crazygames.com/escape-road-3_16x9/20260518071244/escape-road-3_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Escape Road 3"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Driving Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/trivia",
+              "title": "Trivia Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/worldguessr",
+              "img": "https://imgs.crazygames.com/worldguessr_16x9/20241018082520/worldguessr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "WorldGuessr Free GeoGuessr"
+            },
+            {
+              "href": "https://www.crazygames.com/game/guess-their-answer",
+              "img": "https://imgs.crazygames.com/guess-their-answer_16x9/20241122084004/guess-their-answer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Guess Their Answer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/openguessr",
+              "img": "https://imgs.crazygames.com/openguessr_16x9/20250610082759/openguessr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "OpenGuessr - Geo Guessing"
+            },
+            {
+              "href": "https://www.crazygames.com/game/paint-the-flag",
+              "img": "https://imgs.crazygames.com/paint-the-flag_16x9/20260610080333/paint-the-flag_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Paint the Flag"
+            },
+            {
+              "href": "https://www.crazygames.com/game/the-impossible-quiz",
+              "img": "https://imgs.crazygames.com/the-impossible-quiz_16x9/20260130024413/the-impossible-quiz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "The Impossible Quiz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/logo-quiz-game-world-trivia",
+              "img": "https://imgs.crazygames.com/logo-quiz-game-world-trivia_16x9/20240906023512/logo-quiz-game-world-trivia_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Logo Quiz: Game World Trivia"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tot-or-trivia",
+              "img": "https://imgs.crazygames.com/tot-or-trivia/20220617173052/tot-or-trivia-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "ToT or Trivia"
+            },
+            {
+              "href": "https://www.crazygames.com/game/world-geography-flags-and-capitals",
+              "img": "https://imgs.crazygames.com/world-geography-flags-and-capitals_16x9/20240326032156/world-geography-flags-and-capitals_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Geography Quiz: Flags and Capitals"
+            },
+            {
+              "href": "https://www.crazygames.com/game/memebattle-what-s-that-meme",
+              "img": "https://imgs.crazygames.com/memebattle-what-s-that-meme_16x9/20250207073251/memebattle-what-s-that-meme_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "MemeBattle: What's That Meme?"
+            },
+            {
+              "href": "https://www.crazygames.com/game/trivia-tec",
+              "img": "https://imgs.crazygames.com/trivia-tec_16x9/20260224094032/trivia-tec_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Trivia"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Trivia Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/sports",
+              "title": "Sports Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-billiards-multiplayer",
+              "img": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool Billiards Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-pool-wyr",
+              "img": "https://imgs.crazygames.com/8-ball-pool-wyr_16x9/20251027031134/8-ball-pool-wyr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Pool"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mini-golf-club",
+              "img": "https://imgs.crazygames.com/mini-golf-club_16x9/20260609101725/mini-golf-club_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mini Golf Club"
+            },
+            {
+              "href": "https://www.crazygames.com/game/unmatched-ego-2",
+              "img": "https://imgs.crazygames.com/unmatched-ego-2_16x9/20260721024839/unmatched-ego-2_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Unmatched Ego 2"
+            },
+            {
+              "href": "https://www.crazygames.com/game/table-tennis-world-tour",
+              "img": "https://imgs.crazygames.com/table-tennis-world-tour_16x9/20230908041108/table-tennis-world-tour_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Table Tennis World Tour"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tap-tap-shots",
+              "img": "https://imgs.crazygames.com/games/tap-tap-shots/cover-1655202548222.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Tap-Tap Shots"
+            },
+            {
+              "href": "https://www.crazygames.com/game/basket-random",
+              "img": "https://imgs.crazygames.com/basket-random_16x9/20240617090207/basket-random_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Basket Random"
+            },
+            {
+              "href": "https://www.crazygames.com/game/8-ball-billiards-classic",
+              "img": "https://imgs.crazygames.com/8-ball-billiards-classic_16x9/20231108025958/8-ball-billiards-classic_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "8 Ball Billiards Classic"
+            },
+            {
+              "href": "https://www.crazygames.com/game/basketball-stars-2019",
+              "img": "https://imgs.crazygames.com/games/basketball-stars-2019/cover-1583231506155.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Basketball Stars"
+            },
+            {
+              "href": "https://www.crazygames.com/game/snooker",
+              "img": "https://imgs.crazygames.com/snooker_16x9/20260130080858/snooker_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Snooker"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Sports Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/sim",
+              "title": "Simulation Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/supermarket-simulator-cashier-game",
+              "img": "https://imgs.crazygames.com/supermarket-simulator-cashier-game_16x9/20260220060008/supermarket-simulator-cashier-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Supermarket Simulator: Store Manager"
+            },
+            {
+              "href": "https://www.crazygames.com/game/idle-billionaire-tycoon",
+              "img": "https://imgs.crazygames.com/idle-billionaire-tycoon_16x9/20260918072906/idle-billionaire-tycoon_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Idle Billionaire Tycoon"
+            },
+            {
+              "href": "https://www.crazygames.com/game/country-life-meadows",
+              "img": "https://imgs.crazygames.com/country-life-meadows_16x9/20260109021323/country-life-meadows_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Country Life Meadows"
+            },
+            {
+              "href": "https://www.crazygames.com/game/papas-sushiria",
+              "img": "https://imgs.crazygames.com/games/papas-sushiria/cover-1684263794296.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Papa's Sushiria"
+            },
+            {
+              "href": "https://www.crazygames.com/game/grow-a-garden---growden-io",
+              "img": "https://imgs.crazygames.com/grow-a-garden---growden-io_16x9/20251117094451/grow-a-garden---growden-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Grow A Garden | Growden.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/life-simulator-road-to-riches",
+              "img": "https://imgs.crazygames.com/life-simulator-road-to-riches_16x9/20260520062637/life-simulator-road-to-riches_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Life Simulator: Road to Riches"
+            },
+            {
+              "href": "https://www.crazygames.com/game/build-a-plane-xea",
+              "img": "https://imgs.crazygames.com/build-a-plane-xea_16x9/20260625073635/build-a-plane-xea_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Build A Plane"
+            },
+            {
+              "href": "https://www.crazygames.com/game/truck-simulator-european-roads",
+              "img": "https://imgs.crazygames.com/truck-simulator-european-roads_16x9/20260406091753/truck-simulator-european-roads_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Truck Simulator: European Roads"
+            },
+            {
+              "href": "https://www.crazygames.com/game/papa-s-scooperia",
+              "img": "https://imgs.crazygames.com/games/papa-s-scooperia/cover-1684319599907.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Papa's Scooperia"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bus-simulator-evo",
+              "img": "https://imgs.crazygames.com/bus-simulator-evo_16x9/20260317031203/bus-simulator-evo_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bus Simulator: EVO"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Simulation Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/shooting",
+              "title": "Shooting Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/skillwarz",
+              "img": "https://imgs.crazygames.com/skillwarz_16x9/20260318145302/skillwarz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "SkillWarz"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hazmob-fps-online-shooter",
+              "img": "https://imgs.crazygames.com/hazmob-fps-online-shooter_16x9/20260302022643/hazmob-fps-online-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hazmob FPS: Online Shooter"
+            },
+            {
+              "href": "https://www.crazygames.com/game/buildnow-gg",
+              "img": "https://imgs.crazygames.com/buildnow-gg_16x9/20251229084241/buildnow-gg_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "BuildNow GG"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bullet-force-multiplayer",
+              "img": "https://imgs.crazygames.com/bullet-force-multiplayer_16x9/20260213105606/bullet-force-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bullet Force"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bodycamera-shooter",
+              "img": "https://imgs.crazygames.com/bodycamera-shooter_16x9/20260702042958/bodycamera-shooter_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "BodyCamera Shooter"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fragen",
+              "img": "https://imgs.crazygames.com/fragen_16x9/20251022094210/fragen_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fragen"
+            },
+            {
+              "href": "https://www.crazygames.com/game/gridpunk---3v3-battle-royale",
+              "img": "https://imgs.crazygames.com/gridpunk---3v3-battle-royale_16x9/20260126044546/gridpunk---3v3-battle-royale_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Gridpunk - 3v3 Battle Royale"
+            },
+            {
+              "href": "https://www.crazygames.com/game/redcoats-io-rcr",
+              "img": "https://imgs.crazygames.com/redcoats-io-rcr_16x9/20260507065117/redcoats-io-rcr_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Redcoats.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/forward-assault",
+              "img": "https://imgs.crazygames.com/forward-assault_16x9/20260210230614/forward-assault_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Forward Assault Remix"
+            },
+            {
+              "href": "https://www.crazygames.com/game/take-actions",
+              "img": "https://imgs.crazygames.com/take-actions_16x9/20251104044514/take-actions_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Take Actions"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Shooting Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/arcade",
+              "title": "Arcade Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ragdoll-archers",
+              "img": "https://imgs.crazygames.com/ragdoll-archers_16x9/20250926080758/ragdoll-archers_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ragdoll Archers"
+            },
+            {
+              "href": "https://www.crazygames.com/game/space-waves",
+              "img": "https://imgs.crazygames.com/space-waves_16x9/20260805094726/space-waves_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Space Waves"
+            },
+            {
+              "href": "https://www.crazygames.com/game/downhill-racer-bvk",
+              "img": "https://imgs.crazygames.com/downhill-racer-bvk_16x9/20260702100727/downhill-racer-bvk_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Downhill Racer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/slice-master",
+              "img": "https://imgs.crazygames.com/slice-master_16x9/20240731033229/slice-master_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Slice Master"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chicken-hell",
+              "img": "https://imgs.crazygames.com/chicken-hell_16x9/20260623024937/chicken-hell_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chicken Hell"
+            },
+            {
+              "href": "https://www.crazygames.com/game/count-masters-stickman-games",
+              "img": "https://imgs.crazygames.com/count-masters-stickman-games_16x9/20260318145715/count-masters-stickman-games_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Count Masters: Stickman Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/kick-the-buddy-yxa",
+              "img": "https://imgs.crazygames.com/kick-the-buddy-yxa_16x9/20260605111008/kick-the-buddy-yxa_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Kick the Buddy"
+            },
+            {
+              "href": "https://www.crazygames.com/game/bowmasters-archery-shooting",
+              "img": "https://imgs.crazygames.com/bowmasters-archery-shooting_16x9/20260818101555/bowmasters-archery-shooting_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bowmasters: Archery Shooting"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stone-grass-mowing-simulator",
+              "img": "https://imgs.crazygames.com/stone-grass-mowing-simulator_16x9/20260318150935/stone-grass-mowing-simulator_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stone Grass: Mowing Simulator"
+            },
+            {
+              "href": "https://www.crazygames.com/game/gun-hero-cat-survival",
+              "img": "https://imgs.crazygames.com/gun-hero-cat-survival_16x9/20260720043529/gun-hero-cat-survival_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Gun Hero: Cat Survival"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Arcade Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/word",
+              "title": "Word Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/words-of-wonders",
+              "img": "https://imgs.crazygames.com/words-of-wonders_16x9/20231019163757/words-of-wonders_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Words of Wonders"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hangman-cfc",
+              "img": "https://imgs.crazygames.com/hangman-cfc_16x9/20260519090049/hangman-cfc_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hangman"
+            },
+            {
+              "href": "https://www.crazygames.com/game/word-wipe",
+              "img": "https://imgs.crazygames.com/games/word-wipe/cover_16x9-1707829913887.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Word Wipe"
+            },
+            {
+              "href": "https://www.crazygames.com/game/wordmeister",
+              "img": "https://imgs.crazygames.com/games/wordmeister/cover_16x9-1750345072824.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Wordmeister"
+            },
+            {
+              "href": "https://www.crazygames.com/game/word-search-lyg",
+              "img": "https://imgs.crazygames.com/word-search-lyg_16x9/20240306053554/word-search-lyg_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Daily Word Search"
+            },
+            {
+              "href": "https://www.crazygames.com/game/card-solitaire-word-game",
+              "img": "https://imgs.crazygames.com/card-solitaire-word-game_16x9/20251202095711/card-solitaire-word-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Card Solitaire: Word Game"
+            },
+            {
+              "href": "https://www.crazygames.com/game/waffle-words",
+              "img": "https://imgs.crazygames.com/wafflewords.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Waffle Words"
+            },
+            {
+              "href": "https://www.crazygames.com/game/associations---word-connect",
+              "img": "https://imgs.crazygames.com/associations---word-connect_16x9/20251104050713/associations---word-connect_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Associations - Word Connect"
+            },
+            {
+              "href": "https://www.crazygames.com/game/word-sauce",
+              "img": "https://imgs.crazygames.com/word-sauce_16x9/20260817073522/word-sauce_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Word Sauce"
+            },
+            {
+              "href": "https://www.crazygames.com/game/wordler",
+              "img": "https://imgs.crazygames.com/wordler_16x9/20241122084206/wordler_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Wordler"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Word Games"
+        },
+        {
+          "games": [
+            { "href": "https://www.crazygames.com/c/io", "title": ".io Games" },
+            {
+              "href": "https://www.crazygames.com/game/bloxdhop-io",
+              "img": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Bloxd.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/openfront-gsw",
+              "img": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Openfront"
+            },
+            {
+              "href": "https://www.crazygames.com/game/smash-karts",
+              "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Smash Karts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/paint-to-hide",
+              "img": "https://imgs.crazygames.com/paint-to-hide_16x9/20260903084057/paint-to-hide_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Paint to Hide!"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evowarsio",
+              "img": "https://imgs.crazygames.com/evowarsio_16x9/20251003061326/evowarsio_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "EvoWars.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/veck-io",
+              "img": "https://imgs.crazygames.com/veck-io_16x9/20251204101357/veck-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Veck.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/rocketgoal-io",
+              "img": "https://imgs.crazygames.com/rocketgoal-io_16x9/20260108075807/rocketgoal-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "RocketGoal.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/frontwars-io",
+              "img": "https://imgs.crazygames.com/frontwars-io_16x9/20251027025421/frontwars-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "FrontWars.io"
+            },
+            {
+              "href": "https://www.crazygames.com/game/miniblox",
+              "img": "https://imgs.crazygames.com/miniblox_16x9/20240617083401/miniblox_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Miniblox"
+            },
+            {
+              "href": "https://www.crazygames.com/game/cubes-2048-io",
+              "img": "https://imgs.crazygames.com/games/cubes-2048-io/cover_16x9-1693298929425.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Cubes 2048.io"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": ".io Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/adventure",
+              "title": "Adventure Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/all-out-nju",
+              "img": "https://imgs.crazygames.com/all-out-nju_16x9/20260827054800/all-out-nju_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "All Out"
+            },
+            {
+              "href": "https://www.crazygames.com/game/firestone-idle-rpg",
+              "img": "https://imgs.crazygames.com/firestone-idle-rpg_16x9/20260902054119/firestone-idle-rpg_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Firestone – Idle Clicker Online RPG"
+            },
+            {
+              "href": "https://www.crazygames.com/game/dig-out-of-prison",
+              "img": "https://imgs.crazygames.com/dig-out-of-prison_16x9/20251229103900/dig-out-of-prison_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Dig out of Prison"
+            },
+            {
+              "href": "https://www.crazygames.com/game/rumble-heroes",
+              "img": "https://imgs.crazygames.com/rumble-heroes_16x9/20260918114529/rumble-heroes_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Rumble Heroes"
+            },
+            {
+              "href": "https://www.crazygames.com/game/heroes-assemble",
+              "img": "https://imgs.crazygames.com/heroes-assemble_16x9/20260914160016/heroes-assemble_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Heroes Assemble"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fantasy-online-2",
+              "img": "https://imgs.crazygames.com/fantasy-online-2_16x9/20260612020512/fantasy-online-2_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fantasy Online 2"
+            },
+            {
+              "href": "https://www.crazygames.com/game/project-gatherwood-gou",
+              "img": "https://imgs.crazygames.com/project-gatherwood-gou_16x9/20260917070835/project-gatherwood-gou_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Project Gatherwood"
+            },
+            {
+              "href": "https://www.crazygames.com/game/dead-land-survival",
+              "img": "https://imgs.crazygames.com/dead-land-survival_16x9/20250522020745/dead-land-survival_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Dead Land: Survival"
+            },
+            {
+              "href": "https://www.crazygames.com/game/immortals-revenge",
+              "img": "https://imgs.crazygames.com/immortals-revenge_16x9/20260810032741/immortals-revenge_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Immortals Revenge"
+            },
+            {
+              "href": "https://www.crazygames.com/game/duo-kjn",
+              "img": "https://imgs.crazygames.com/duo-kjn_16x9/20250530054118/duo-kjn_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Duo"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Adventure Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/board",
+              "title": "Board Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ludo-king",
+              "img": "https://imgs.crazygames.com/ludo-king_16x9/20240229043328/ludo-king_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ludo King"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chess-free",
+              "img": "https://imgs.crazygames.com/chess-free_16x9/20260508084105/chess-free_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chess Free"
+            },
+            {
+              "href": "https://www.crazygames.com/game/sweety-ludo",
+              "img": "https://imgs.crazygames.com/sweety-ludo_16x9/20260225025841/sweety-ludo_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Sweety Ludo"
+            },
+            {
+              "href": "https://www.crazygames.com/game/ludo-club---fun-dice-game",
+              "img": "https://imgs.crazygames.com/ludo-club---fun-dice-game_16x9/20240117055243/ludo-club---fun-dice-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Ludo Club"
+            },
+            {
+              "href": "https://www.crazygames.com/game/4-in-a-row-connected-multiplayer-online",
+              "img": "https://imgs.crazygames.com/games/4-in-a-row-connected-multiplayer-online/cover_16x9-1739759253546.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Connect 4 Online Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/chess-online-multiplayer-game",
+              "img": "https://imgs.crazygames.com/chess-online-multiplayer-game_16x9/20260521033259/chess-online-multiplayer-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Chess Online Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/classic-backgammon",
+              "img": "https://imgs.crazygames.com/games/classic-backgammon/cover_16x9-1707829263148.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Backgammon Online"
+            },
+            {
+              "href": "https://www.crazygames.com/game/master-chess",
+              "img": "https://imgs.crazygames.com/games/master-chess/cover-1624894080822.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Master Chess"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mancala-classic",
+              "img": "https://imgs.crazygames.com/mancala-classic_16x9/20240419092652/mancala-classic_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mancala Classic"
+            },
+            {
+              "href": "https://www.crazygames.com/game/snakes-and-ladders",
+              "img": "https://imgs.crazygames.com/snakes-and-ladders_16x9/20260506080214/snakes-and-ladders_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Snakes and Ladders"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Board Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/action",
+              "title": "Action Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/war-the-knights",
+              "img": "https://imgs.crazygames.com/war-the-knights_16x9/20251104084824/war-the-knights_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "War the Knights"
+            },
+            {
+              "href": "https://www.crazygames.com/game/real-war-not-fake-sno",
+              "img": "https://imgs.crazygames.com/real-war-not-fake-sno_16x9/20260813072730/real-war-not-fake-sno_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Real War: Not Fake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/fortzone-battle-royale-xkd",
+              "img": "https://imgs.crazygames.com/fortzone-battle-royale-xkd_16x9/20250513044222/fortzone-battle-royale-xkd_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Fortzone Battle Royale"
+            },
+            {
+              "href": "https://www.crazygames.com/game/crazy-chameleon",
+              "img": "https://imgs.crazygames.com/crazy-chameleon_16x9/20260831063015/crazy-chameleon_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Crazy Chameleon"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stickman-clash",
+              "img": "https://imgs.crazygames.com/games/stickman-clash/cover_16x9-1746127524433.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stickman Clash"
+            },
+            {
+              "href": "https://www.crazygames.com/game/warfare-1942-riz",
+              "img": "https://imgs.crazygames.com/warfare-1942-riz_16x9/20260702082513/warfare-1942-riz_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Warfare 1942"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evolution-animals-1",
+              "img": "https://imgs.crazygames.com/evolution-animals-1_16x9/20260826053204/evolution-animals-1_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Evolution Animals +1"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mechangelion---robot-fighting",
+              "img": "https://imgs.crazygames.com/mechangelion---robot-fighting_16x9/20260908083623/mechangelion---robot-fighting_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mechangelion - Robot Fighting"
+            },
+            {
+              "href": "https://www.crazygames.com/game/stickman-kombat-2d",
+              "img": "https://imgs.crazygames.com/stickman-kombat-2d_16x9/20250826034901/stickman-kombat-2d_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Stickman Kombat 2D"
+            },
+            {
+              "href": "https://www.crazygames.com/game/99-nights-bloxd-io",
+              "img": "https://imgs.crazygames.com/99-nights-bloxd-io_16x9/20260319034044/99-nights-bloxd-io_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "99 Nights (Bloxd.io)"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Action Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/card",
+              "title": "Card Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/spider-solitaire-fuw",
+              "img": "https://imgs.crazygames.com/spider-solitaire-fuw_16x9/20251008073941/spider-solitaire-fuw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Spider Solitaire"
+            },
+            {
+              "href": "https://www.crazygames.com/game/spider-solitaire-2-suits",
+              "img": "https://imgs.crazygames.com/games/spider-solitaire-2-suits/thumb-1580242511840.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Spider Solitaire 2 Suits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/gin-rummy-zal",
+              "img": "https://imgs.crazygames.com/gin-rummy-zal_16x9/20260429060339/gin-rummy-zal_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Gin Rummy Mania"
+            },
+            {
+              "href": "https://www.crazygames.com/game/duo-with-friends",
+              "img": "https://imgs.crazygames.com/duo-with-friends_16x9/20260407080722/duo-with-friends_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "DUO With Friends"
+            },
+            {
+              "href": "https://www.crazygames.com/game/las-vegas-poker",
+              "img": "https://imgs.crazygames.com/las-vegas-poker_16x9/20260105082743/las-vegas-poker_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Las Vegas Poker"
+            },
+            {
+              "href": "https://www.crazygames.com/game/solitaire-home-story",
+              "img": "https://imgs.crazygames.com/solitaire-home-story_16x9/20260513035521/solitaire-home-story_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Solitaire Home Story"
+            },
+            {
+              "href": "https://www.crazygames.com/game/daily-solitaire-challenge",
+              "img": "https://imgs.crazygames.com/daily-solitaire-challenge_16x9/20260218081802/daily-solitaire-challenge_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Daily Solitaire Challenge"
+            },
+            {
+              "href": "https://www.crazygames.com/game/foono-online-multiplayer-card-game",
+              "img": "https://imgs.crazygames.com/foono-online-multiplayer-card-game_16x9/20231002101605/foono-online-multiplayer-card-game_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Foono Online Multiplayer"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tongits",
+              "img": "https://imgs.crazygames.com/tongits_16x9/20231219144615/tongits_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Tongits"
+            },
+            {
+              "href": "https://www.crazygames.com/game/algerian-solitaire",
+              "img": "https://imgs.crazygames.com/algeriansolitaire.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Algerian Solitaire"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Card Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/clicker",
+              "title": "Clicker Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/leek-factory-tycoon",
+              "img": "https://imgs.crazygames.com/leek-factory-tycoon_16x9/20260330040926/leek-factory-tycoon_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Leek Factory Tycoon"
+            },
+            {
+              "href": "https://www.crazygames.com/game/the-machinegg",
+              "img": "https://imgs.crazygames.com/the-machinegg_16x9/20260722071824/the-machinegg_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "The MachinEGG"
+            },
+            {
+              "href": "https://www.crazygames.com/game/babel-tower",
+              "img": "https://imgs.crazygames.com/babel-tower_16x9/20241216072840/babel-tower_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Babel Tower"
+            },
+            {
+              "href": "https://www.crazygames.com/game/incremental-epic-hero-2",
+              "img": "https://imgs.crazygames.com/incremental-epic-hero-2/20220901173848/incremental-epic-hero-2-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Incremental Epic Hero 2"
+            },
+            {
+              "href": "https://www.crazygames.com/game/train-miner",
+              "img": "https://imgs.crazygames.com/train-miner_16x9/20260604084231/train-miner_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Train Miner"
+            },
+            {
+              "href": "https://www.crazygames.com/game/farm-ring-idle",
+              "img": "https://imgs.crazygames.com/farm-ring-idle_16x9/20260429163527/farm-ring-idle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Farm Ring Idle"
+            },
+            {
+              "href": "https://www.crazygames.com/game/capybara-clicker",
+              "img": "https://imgs.crazygames.com/games/capybara-clicker/cover-1678290947532.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Capybara Clicker"
+            },
+            {
+              "href": "https://www.crazygames.com/game/crusher-clicker",
+              "img": "https://imgs.crazygames.com/crusher-clicker_16x9/20260220025527/crusher-clicker_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Crusher Clicker"
+            },
+            {
+              "href": "https://www.crazygames.com/game/idle-inventor",
+              "img": "https://imgs.crazygames.com/idle-inventor_16x9/20230925161528/idle-inventor_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Idle Inventor"
+            },
+            {
+              "href": "https://www.crazygames.com/game/your-chronicle",
+              "img": "https://imgs.crazygames.com/your-chronicle_16x9/20250924075547/your-chronicle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Your Chronicle"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Clicker Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/puzzle",
+              "title": "Puzzle Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+              "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Piece of Cake: Merge and Bake"
+            },
+            {
+              "href": "https://www.crazygames.com/game/designville-merge-design",
+              "img": "https://imgs.crazygames.com/designville-merge-design_16x9/20260827034042/designville-merge-design_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Designville: Merge & Design"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mahjongg-solitaire",
+              "img": "https://imgs.crazygames.com/games/mahjongg-solitaire/cover_16x9-1707829450935.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mahjongg Solitaire"
+            },
+            {
+              "href": "https://www.crazygames.com/game/screw-out-bolts-and-nuts",
+              "img": "https://imgs.crazygames.com/screw-out-bolts-and-nuts_16x9/20250711094331/screw-out-bolts-and-nuts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Screw Out: Bolts and Nuts"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mansion-tale-merge-secrets",
+              "img": "https://imgs.crazygames.com/mansion-tale-merge-secrets_16x9/20260717040909/mansion-tale-merge-secrets_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mansion Tale: Merge Secrets"
+            },
+            {
+              "href": "https://www.crazygames.com/game/arrow-exit-puzzle",
+              "img": "https://imgs.crazygames.com/arrow-exit-puzzle_16x9/20260115072133/arrow-exit-puzzle_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Arrow Escape"
+            },
+            {
+              "href": "https://www.crazygames.com/game/farm-merge-valley",
+              "img": "https://imgs.crazygames.com/farm-merge-valley_16x9/20260909072453/farm-merge-valley_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Farm Merge Valley"
+            },
+            {
+              "href": "https://www.crazygames.com/game/piles-of-mahjong-jhb",
+              "img": "https://imgs.crazygames.com/piles-of-mahjong-jhb_16x9/20250203080756/piles-of-mahjong-jhb_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Piles of Mahjong"
+            },
+            {
+              "href": "https://www.crazygames.com/game/open-house",
+              "img": "https://imgs.crazygames.com/open-house_16x9/20260220024829/open-house_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Open House"
+            },
+            {
+              "href": "https://www.crazygames.com/game/hexa-sort",
+              "img": "https://imgs.crazygames.com/hexa-sort_16x9/20250219102231/hexa-sort_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Hexa Sort"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Puzzle Games"
+        },
+        {
+          "games": [
+            {
+              "href": "https://www.crazygames.com/c/strategy",
+              "title": "Strategy Games"
+            },
+            {
+              "href": "https://www.crazygames.com/game/mage-tower-idle-defense",
+              "img": "https://imgs.crazygames.com/mage-tower-idle-defense_16x9/20260708102031/mage-tower-idle-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Mage Castle Idle Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/infinity-kingdom",
+              "img": "https://imgs.crazygames.com/infinity-kingdom_16x9/20250923092253/infinity-kingdom_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Infinity Kingdom"
+            },
+            {
+              "href": "https://www.crazygames.com/game/tower-swap",
+              "img": "https://imgs.crazygames.com/tower-swap_16x9/20250711093920/tower-swap_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Tower Swap"
+            },
+            {
+              "href": "https://www.crazygames.com/game/evil-tower-lli",
+              "img": "https://imgs.crazygames.com/evil-tower-lli_16x9/20260803073604/evil-tower-lli_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Evil Tower"
+            },
+            {
+              "href": "https://www.crazygames.com/game/idle-zombie-wave",
+              "img": "https://imgs.crazygames.com/idle-zombie-wave_16x9/20260508072223/idle-zombie-wave_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Idle Zombie Wave: Survivors"
+            },
+            {
+              "href": "https://www.crazygames.com/game/aod---art-of-defense",
+              "img": "https://imgs.crazygames.com/aod---art-of-defense_16x9/20260714061301/aod---art-of-defense_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "AOD - Art Of Defense"
+            },
+            {
+              "href": "https://www.crazygames.com/game/battle-arena",
+              "img": "https://imgs.crazygames.com/battle-arena_16x9/20260812020919/battle-arena_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Battle Arena"
+            },
+            {
+              "href": "https://www.crazygames.com/game/world-conquest",
+              "img": "https://imgs.crazygames.com/world-conquest_16x9/20260806091226/world-conquest_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "World Conquest"
+            },
+            {
+              "href": "https://www.crazygames.com/game/base-defence",
+              "img": "https://imgs.crazygames.com/base-defence_16x9/20260513094353/base-defence_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Base Defence"
+            },
+            {
+              "href": "https://www.crazygames.com/game/kingdom-rush",
+              "img": "https://imgs.crazygames.com/games/kingdom-rush/cover-1687954641924.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+              "title": "Kingdom Rush"
+            }
+          ],
+          "isHighlighted": false,
+          "isIntent": false,
+          "isLeaderboard": false,
+          "isPortrait": false,
+          "title": "Strategy Games"
+        }
+      ],
+      "tiles": [
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain3.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #47d7ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #154a6f 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Train your brain\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain3.png?metadata=none&amp;quality=8",
+          "title": "Train your brain",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/adrenaline3.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #f154ac; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #68294d 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Adrenaline rush\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/adrenaline3.png?metadata=none&amp;quali",
+          "title": "Adrenaline rush",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/friends1.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #86ffcf; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #1f645c 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"With friends\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/friends1.png?metadata=none&amp;quality=85&",
+          "title": "With friends",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/5minutes2.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #ffdf40; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #58522c 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"5-minute fun\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/5minutes2.png?metadata=none&amp;quality=85",
+          "title": "5-minute fun",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain2.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #b4f54e; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #2e6136 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Meme &amp; bloxy\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain2.png?metadata=none&amp;quality=8",
+          "title": "Meme & bloxy",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/magnific2.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #b464ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #3d2f73 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Timeless classics\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/magnific2.png?metadata=none&amp;quali",
+          "title": "Timeless classics",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/merge3.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #5cffab; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #1d5657 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Just relax\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/merge3.png?metadata=none&amp;quality=85&amp;",
+          "title": "Just relax",
+          "w": "230px"
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "120px",
+          "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/deep3.png?metadata=none&quality=85&width=60&dpr=1",
+          "innerHTML": "<div class=\"IntentCTAs_intentCTASlide__75Ngj\" role=\"option\" aria-selected=\"false\" tabindex=\"0\" style=\"--intent-accent: #5f97ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #191e5d 100%);\"><img class=\"IntentCTAs_intentCTASlideGraphic___V1vV\" alt=\"Deep progress\" srcset=\"https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/deep3.png?metadata=none&amp;quality=85&am",
+          "title": "Deep progress",
+          "w": "230px"
+        }
+      ]
+    }
+  },
+  "error": null
+}

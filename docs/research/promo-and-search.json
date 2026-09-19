@@ -1,0 +1,243 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "login": {
+        "styles": {
+          "bg": "rgb(104, 66, 255)",
+          "br": "30px",
+          "color": "rgb(249, 250, 255)",
+          "fs": "16px",
+          "fw": "800",
+          "h": "40px",
+          "pad": "8px 16px",
+          "w": "78.625px"
+        },
+        "text": "Log in"
+      },
+      "promo": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "childCount": 1,
+        "children": [
+          {
+            "bg": "rgba(0, 0, 0, 0)",
+            "br": "0px",
+            "childCount": 1,
+            "children": [
+              {
+                "bg": "rgba(0, 0, 0, 0)",
+                "br": "0px",
+                "childCount": 2,
+                "children": [
+                  {
+                    "bg": "rgba(0, 0, 0, 0)",
+                    "br": "0px",
+                    "childCount": 8,
+                    "children": [
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Train your brain",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Adrenaline rush",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "With friends",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "5-minute fun",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Meme & bloxy",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Timeless classics",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Just relax",
+                        "w": "230px"
+                      },
+                      {
+                        "bg": "rgba(0, 0, 0, 0)",
+                        "br": "0px",
+                        "childCount": 1,
+                        "children": [null],
+                        "class": "",
+                        "display": "inline-block",
+                        "gap": "normal",
+                        "h": "120px",
+                        "pad": "0px",
+                        "role": null,
+                        "tag": "li",
+                        "text": "Deep progress",
+                        "w": "230px"
+                      }
+                    ],
+                    "class": "CrazyCarousel_crazyCarouselContainer__63ph_ crazy-carousel",
+                    "display": "block",
+                    "gap": "normal",
+                    "h": "120px",
+                    "pad": "0px 8px",
+                    "role": null,
+                    "tag": "ul",
+                    "text": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nM",
+                    "w": "1372px"
+                  },
+                  {
+                    "bg": "rgba(0, 0, 0, 0.9)",
+                    "bgImg": "url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNyIgdmlld",
+                    "br": "22px",
+                    "childCount": 0,
+                    "children": [],
+                    "class": "CrazyCarousel_crazyCarouselArrow__ueMx9 CrazyCarousel_crazyCarouselArrowRight__AMSPq arrow",
+                    "display": "block",
+                    "gap": "normal",
+                    "h": "60px",
+                    "pad": "1px 6px",
+                    "role": null,
+                    "tag": "button",
+                    "text": "",
+                    "w": "60px"
+                  }
+                ],
+                "class": "CrazyCarousel_crazyCarouselRoot__l3JCg",
+                "display": "block",
+                "gap": "normal",
+                "h": "120px",
+                "pad": "0px",
+                "role": null,
+                "tag": "div",
+                "text": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nM",
+                "w": "1372px"
+              }
+            ],
+            "class": "IntentCTAs_carouselContainer__huyPJ",
+            "display": "block",
+            "gap": "normal",
+            "h": "120px",
+            "pad": "0px",
+            "role": null,
+            "tag": "div",
+            "text": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nM",
+            "w": "1372px"
+          }
+        ],
+        "class": "TopPromotionalRecentBanner_wrapper__jvvcH",
+        "display": "block",
+        "gap": "normal",
+        "h": "130px",
+        "pad": "0px",
+        "role": null,
+        "tag": "div",
+        "text": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nM",
+        "w": "1372px"
+      },
+      "search": {
+        "placeholder": "Search games and categories",
+        "styles": {
+          "bg": "rgb(55, 57, 82)",
+          "br": "30px",
+          "color": "rgb(170, 173, 190)",
+          "fs": "16px",
+          "h": "40px",
+          "pad": "1px 16px",
+          "w": "460px"
+        }
+      },
+      "searchWrap": {
+        "class": "TopSearch_topSearchForm__b9Z8c TopSearch_isDesktop__2eSKm",
+        "styles": {
+          "bg": "rgba(0, 0, 0, 0)",
+          "br": "0px",
+          "h": "40px",
+          "w": "460px"
+        }
+      },
+      "sidebarCollapsed": "60px"
+    }
+  },
+  "error": null
+}

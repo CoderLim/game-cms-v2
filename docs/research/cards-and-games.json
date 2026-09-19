@@ -1,0 +1,738 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "highlightedCard": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "classes": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+                    "href": null,
+                    "images": {
+                      "alt": "",
+                      "nh": 379,
+                      "nw": 675,
+                      "src": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1"
+                    },
+                    "styles": {
+                      "border": "0px none rgba(0, 0, 0, 0)",
+                      "cursor": "pointer",
+                      "display": "block",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "700",
+                      "height": "244.938px",
+                      "objectFit": "cover",
+                      "overflow": "clip",
+                      "position": "absolute",
+                      "transition": "all",
+                      "width": "436px"
+                    },
+                    "tag": "img",
+                    "text": null
+                  }
+                ],
+                "classes": "GameThumbDesktop_gameThumbMedia__L7si1",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "border": "0px none rgb(255, 255, 255)",
+                  "borderRadius": "16px",
+                  "color": "rgb(255, 255, 255)",
+                  "cursor": "pointer",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "14px",
+                  "fontWeight": "700",
+                  "height": "244.938px",
+                  "objectFit": "fill",
+                  "overflow": "hidden",
+                  "position": "absolute",
+                  "transition": "transform 0.2s ease-out",
+                  "width": "436px"
+                },
+                "tag": "div",
+                "text": null
+              }
+            ],
+            "classes": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-thumb-test-class",
+            "href": "https://www.crazygames.com/game/bloxdhop-io",
+            "images": null,
+            "styles": {
+              "backgroundColor": "rgba(255, 255, 255, 0.07)",
+              "border": "2px solid rgba(0, 0, 0, 0)",
+              "borderRadius": "16px",
+              "color": "rgb(255, 255, 255)",
+              "cursor": "pointer",
+              "display": "block",
+              "flexDirection": "row",
+              "fontFamily": "Nunito, \"Nunito Fallback\"",
+              "fontSize": "14px",
+              "fontWeight": "700",
+              "height": "248.938px",
+              "objectFit": "fill",
+              "overflow": "visible",
+              "position": "relative",
+              "transition": "all",
+              "width": "440px"
+            },
+            "tag": "a",
+            "text": null
+          }
+        ],
+        "classes": "",
+        "href": null,
+        "images": null,
+        "styles": {
+          "border": "0px none rgb(255, 255, 255)",
+          "color": "rgb(255, 255, 255)",
+          "display": "inline-block",
+          "flexDirection": "row",
+          "fontFamily": "Nunito, \"Nunito Fallback\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "height": "248.938px",
+          "objectFit": "fill",
+          "overflow": "visible",
+          "position": "relative",
+          "transition": "all",
+          "width": "440px"
+        },
+        "tag": "li",
+        "text": null
+      },
+      "intentCard": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "classes": "Icon_icon__OracF Icon_icon-chevron-right__deyMH Icon_size20__yF8AY",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "backgroundColor": "rgb(71, 215, 255)",
+                  "border": "0px none rgb(71, 215, 255)",
+                  "color": "rgb(71, 215, 255)",
+                  "cursor": "pointer",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "20px",
+                  "fontWeight": "700",
+                  "height": "20px",
+                  "lineHeight": "20px",
+                  "objectFit": "fill",
+                  "overflow": "visible",
+                  "position": "static",
+                  "transition": "all",
+                  "width": "20px"
+                },
+                "tag": "span",
+                "text": null
+              }
+            ],
+            "classes": "CarouselSectionTitle_carouselTitle__tDEqL CarouselRichHeader_richTitle___ge2h IntentCarousel_title__FoQk3",
+            "href": null,
+            "images": null,
+            "styles": {
+              "alignItems": "center",
+              "border": "0px none rgb(71, 215, 255)",
+              "color": "rgb(71, 215, 255)",
+              "cursor": "pointer",
+              "display": "flex",
+              "flexDirection": "row",
+              "fontFamily": "Nunito, \"Nunito Fallback\"",
+              "fontSize": "20px",
+              "fontWeight": "700",
+              "gap": "8px",
+              "height": "23px",
+              "lineHeight": "20px",
+              "objectFit": "fill",
+              "overflow": "visible",
+              "padding": "0px 16px 3px 0px",
+              "position": "static",
+              "transition": "all",
+              "width": "189.922px"
+            },
+            "tag": "div",
+            "text": "Train your brain"
+          }
+        ],
+        "classes": "CarouselSectionTitle_carouselTitleLink__fnqYm",
+        "href": "https://www.crazygames.com/t/train-your-brain",
+        "images": null,
+        "styles": {
+          "border": "0px none rgb(164, 142, 255)",
+          "color": "rgb(164, 142, 255)",
+          "cursor": "pointer",
+          "display": "block",
+          "flexDirection": "row",
+          "fontFamily": "Nunito, \"Nunito Fallback\"",
+          "fontSize": "12px",
+          "fontWeight": "700",
+          "height": "23px",
+          "lineHeight": "12px",
+          "objectFit": "fill",
+          "overflow": "visible",
+          "position": "static",
+          "transition": "all",
+          "width": "189.922px"
+        },
+        "tag": "a",
+        "text": null
+      },
+      "normalCard": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "classes": "Icon_icon__OracF Icon_icon-originals6__wBxi4 Icon_size20__yF8AY",
+                        "href": null,
+                        "images": null,
+                        "styles": {
+                          "backgroundColor": "rgb(104, 66, 255)",
+                          "border": "0px none rgb(104, 66, 255)",
+                          "color": "rgb(104, 66, 255)",
+                          "cursor": "pointer",
+                          "display": "block",
+                          "flexDirection": "row",
+                          "fontFamily": "Nunito, \"Nunito Fallback\"",
+                          "fontSize": "14px",
+                          "fontWeight": "700",
+                          "height": "20px",
+                          "objectFit": "fill",
+                          "overflow": "visible",
+                          "position": "static",
+                          "transition": "all",
+                          "width": "20px"
+                        },
+                        "tag": "span",
+                        "text": null
+                      }
+                    ],
+                    "classes": "GameThumbLabel_label__dz3yR GameThumbLabel_withOriginals__7mhGw GameThumbLabel_originals__dbBXE",
+                    "href": null,
+                    "images": null,
+                    "styles": {
+                      "alignItems": "center",
+                      "backgroundColor": "rgb(255, 255, 255)",
+                      "border": "0px none rgb(104, 66, 255)",
+                      "borderRadius": "8px",
+                      "boxShadow": "rgba(0, 0, 0, 0.5) 4px 4px 20px 0px",
+                      "color": "rgb(104, 66, 255)",
+                      "cursor": "pointer",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "700",
+                      "height": "24px",
+                      "justifyContent": "center",
+                      "objectFit": "fill",
+                      "overflow": "visible",
+                      "padding": "2px 3px",
+                      "position": "relative",
+                      "transition": "opacity 0.2s linear",
+                      "width": "26px"
+                    },
+                    "tag": "div",
+                    "text": null
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "classes": "Icon_icon__OracF Icon_icon-hot__Tir31 Icon_size20__yF8AY",
+                        "href": null,
+                        "images": null,
+                        "styles": {
+                          "backgroundColor": "rgb(255, 255, 255)",
+                          "border": "0px none rgb(255, 255, 255)",
+                          "color": "rgb(255, 255, 255)",
+                          "cursor": "pointer",
+                          "display": "block",
+                          "flexDirection": "row",
+                          "fontFamily": "Nunito, \"Nunito Fallback\"",
+                          "fontSize": "14px",
+                          "fontWeight": "700",
+                          "height": "16px",
+                          "objectFit": "fill",
+                          "overflow": "visible",
+                          "position": "static",
+                          "transition": "all",
+                          "width": "16px"
+                        },
+                        "tag": "span",
+                        "text": null
+                      }
+                    ],
+                    "classes": "GameThumbLabel_label__dz3yR GameThumbLabel_withOriginals__7mhGw GameThumbLabel_hot__CWhxn",
+                    "href": null,
+                    "images": null,
+                    "styles": {
+                      "alignItems": "center",
+                      "border": "0px none rgb(255, 255, 255)",
+                      "borderRadius": "8px",
+                      "boxShadow": "rgba(0, 0, 0, 0.5) 4px 4px 20px 0px",
+                      "color": "rgb(255, 255, 255)",
+                      "cursor": "pointer",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "700",
+                      "height": "24px",
+                      "justifyContent": "center",
+                      "objectFit": "fill",
+                      "overflow": "visible",
+                      "padding": "2px 3px",
+                      "position": "relative",
+                      "transition": "opacity 0.2s linear",
+                      "width": "22px"
+                    },
+                    "tag": "div",
+                    "text": null
+                  }
+                ],
+                "classes": "GameThumbLabel_multipleLabelsContainer__eEBwr",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "border": "0px none rgb(255, 255, 255)",
+                  "color": "rgb(255, 255, 255)",
+                  "cursor": "pointer",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "14px",
+                  "fontWeight": "700",
+                  "gap": "4px",
+                  "height": "24px",
+                  "objectFit": "fill",
+                  "overflow": "visible",
+                  "position": "absolute",
+                  "transition": "all",
+                  "width": "52px"
+                },
+                "tag": "div",
+                "text": null
+              },
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "classes": "GameThumbShared_gameThumbImage__7EHHi GameThumbShared_gameThumbImagePositioned__LJJut",
+                    "href": null,
+                    "images": {
+                      "alt": "",
+                      "nh": 153,
+                      "nw": 273,
+                      "src": "https://imgs.crazygames.com/escape-tsunami-for-brainrots-wfe_16x9/20260209084358/escape-tsunami-for-brainrots-wfe_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1"
+                    },
+                    "styles": {
+                      "border": "0px none rgba(0, 0, 0, 0)",
+                      "cursor": "pointer",
+                      "display": "block",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "700",
+                      "height": "120.359px",
+                      "objectFit": "cover",
+                      "overflow": "clip",
+                      "position": "absolute",
+                      "transition": "all",
+                      "width": "214.234px"
+                    },
+                    "tag": "img",
+                    "text": null
+                  }
+                ],
+                "classes": "GameThumbDesktop_gameThumbMedia__L7si1",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "border": "0px none rgb(255, 255, 255)",
+                  "borderRadius": "16px",
+                  "color": "rgb(255, 255, 255)",
+                  "cursor": "pointer",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "14px",
+                  "fontWeight": "700",
+                  "height": "120.359px",
+                  "objectFit": "fill",
+                  "overflow": "hidden",
+                  "position": "absolute",
+                  "transition": "transform 0.2s ease-out",
+                  "width": "214.234px"
+                },
+                "tag": "div",
+                "text": null
+              }
+            ],
+            "classes": "GameThumbDesktop_gameThumbLinkDesktop__LS_Bs GameThumbDesktop_hasHoverOverlay__qNdmo game-thumb-test-class",
+            "href": "https://www.crazygames.com/game/escape-tsunami-for-brainrots-wfe",
+            "images": null,
+            "styles": {
+              "backgroundColor": "rgba(255, 255, 255, 0.07)",
+              "border": "2px solid rgba(0, 0, 0, 0)",
+              "borderRadius": "16px",
+              "color": "rgb(255, 255, 255)",
+              "cursor": "pointer",
+              "display": "block",
+              "flexDirection": "row",
+              "fontFamily": "Nunito, \"Nunito Fallback\"",
+              "fontSize": "14px",
+              "fontWeight": "700",
+              "height": "124.359px",
+              "objectFit": "fill",
+              "overflow": "visible",
+              "position": "relative",
+              "transition": "all",
+              "width": "218.234px"
+            },
+            "tag": "a",
+            "text": null
+          }
+        ],
+        "classes": "",
+        "href": null,
+        "images": null,
+        "styles": {
+          "border": "0px none rgb(255, 255, 255)",
+          "color": "rgb(255, 255, 255)",
+          "display": "inline-block",
+          "flexDirection": "row",
+          "fontFamily": "Nunito, \"Nunito Fallback\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "height": "124.359px",
+          "objectFit": "fill",
+          "overflow": "visible",
+          "position": "relative",
+          "transition": "all",
+          "width": "218.234px"
+        },
+        "tag": "li",
+        "text": null
+      },
+      "portraitCard": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "classes": "",
+                    "href": null,
+                    "images": {
+                      "alt": "Racing Limits",
+                      "nh": 410,
+                      "nw": 273,
+                      "src": "https://imgs.crazygames.com/racing-limits_2x3/20250711091800/racing-limits_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1"
+                    },
+                    "styles": {
+                      "border": "0px none rgb(255, 255, 255)",
+                      "color": "rgb(255, 255, 255)",
+                      "cursor": "pointer",
+                      "display": "block",
+                      "flexDirection": "row",
+                      "fontFamily": "Nunito, \"Nunito Fallback\"",
+                      "fontSize": "14px",
+                      "fontWeight": "700",
+                      "height": "321.359px",
+                      "objectFit": "cover",
+                      "overflow": "clip",
+                      "position": "absolute",
+                      "transition": "all",
+                      "width": "214.234px"
+                    },
+                    "tag": "img",
+                    "text": null
+                  }
+                ],
+                "classes": "OriginalsGameThumb_gameThumbMedia__iklFc",
+                "href": null,
+                "images": null,
+                "styles": {
+                  "border": "0px none rgb(255, 255, 255)",
+                  "borderRadius": "16px",
+                  "color": "rgb(255, 255, 255)",
+                  "cursor": "pointer",
+                  "display": "block",
+                  "flexDirection": "row",
+                  "fontFamily": "Nunito, \"Nunito Fallback\"",
+                  "fontSize": "14px",
+                  "fontWeight": "700",
+                  "height": "321.359px",
+                  "objectFit": "fill",
+                  "overflow": "hidden",
+                  "position": "absolute",
+                  "transition": "transform 0.2s ease-out",
+                  "width": "214.234px"
+                },
+                "tag": "div",
+                "text": null
+              }
+            ],
+            "classes": "OriginalsGameThumb_originalsGameLink__XH7NN OriginalsGameThumb_portrait__BB_uz OriginalsGameThumb_isResponsive__pDvtH OriginalsGameThumb_hasHoverOverlay__p0KlY game-thumb-test-class",
+            "href": "https://www.crazygames.com/game/racing-limits",
+            "images": null,
+            "styles": {
+              "backgroundColor": "rgba(255, 255, 255, 0.07)",
+              "border": "2px solid rgba(0, 0, 0, 0)",
+              "borderRadius": "16px",
+              "color": "rgb(255, 255, 255)",
+              "cursor": "pointer",
+              "display": "block",
+              "flexDirection": "row",
+              "fontFamily": "Nunito, \"Nunito Fallback\"",
+              "fontSize": "14px",
+              "fontWeight": "700",
+              "height": "325.359px",
+              "objectFit": "fill",
+              "overflow": "hidden",
+              "position": "relative",
+              "transition": "opacity 0.6s cubic-bezier(0.5, 0, 0.1, 1)",
+              "width": "218.234px"
+            },
+            "tag": "a",
+            "text": null
+          }
+        ],
+        "classes": "",
+        "href": null,
+        "images": null,
+        "styles": {
+          "border": "0px none rgb(255, 255, 255)",
+          "color": "rgb(255, 255, 255)",
+          "display": "inline-block",
+          "flexDirection": "row",
+          "fontFamily": "Nunito, \"Nunito Fallback\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "height": "325.359px",
+          "objectFit": "fill",
+          "overflow": "visible",
+          "position": "relative",
+          "transition": "all",
+          "width": "218.234px"
+        },
+        "tag": "li",
+        "text": null
+      },
+      "promoCards": [],
+      "sampleGames": {
+        "featured": [
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/escape-tsunami-for-brainrots-wfe",
+            "img": "https://imgs.crazygames.com/escape-tsunami-for-brainrots-wfe_16x9/20260209084358/escape-tsunami-for-brainrots-wfe_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Escape Tsunami for Brainrots!"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/hexa-stack",
+            "img": "https://imgs.crazygames.com/hexa-stack_16x9/20260914151011/hexa-stack_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Hexa Stack"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/mister-mine",
+            "img": "https://imgs.crazygames.com/mister-mine_16x9/20260220044353/mister-mine_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Mr. Mine"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/park-town",
+            "img": "https://imgs.crazygames.com/park-town_16x9/20250304132211/park-town_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Park Town"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/chicken-hell",
+            "img": "https://imgs.crazygames.com/chicken-hell_16x9/20260623024937/chicken-hell_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Chicken Hell"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/bowmasters-archery-shooting",
+            "img": "https://imgs.crazygames.com/bowmasters-archery-shooting_16x9/20260818101555/bowmasters-archery-shooting_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Bowmasters: Archery Shooting"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/voxmaxa-com",
+            "img": "https://imgs.crazygames.com/voxmaxa-com_16x9/20260902054448/voxmaxa-com_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Voxmaxa"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/brainrot-arena-online",
+            "img": "https://imgs.crazygames.com/brainrot-arena-online_16x9/20260615041823/brainrot-arena-online_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Brainrot Arena Online"
+          }
+        ],
+        "new": [
+          { "href": "https://www.crazygames.com/new", "title": "New games" },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/looking-for-aliens",
+            "img": "https://imgs.crazygames.com/looking-for-aliens_16x9/20260713092336/looking-for-aliens_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Looking For Aliens"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/blocky-sword",
+            "img": "https://imgs.crazygames.com/blocky-sword_16x9/20260901073153/blocky-sword_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Blocky Sword"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/coin-tangle-jam",
+            "img": "https://imgs.crazygames.com/coin-tangle-jam_16x9/20260914144405/coin-tangle-jam_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Coin Tangle Jam"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/turbo-trail-txl",
+            "img": "https://imgs.crazygames.com/turbo-trail-txl_16x9/20260807024521/turbo-trail-txl_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Turbo Trail"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/guild-hop",
+            "img": "https://imgs.crazygames.com/guild-hop_16x9/20260911075747/guild-hop_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Guild Hop"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/stack-city",
+            "img": "https://imgs.crazygames.com/stack-city_16x9/20260902095829/stack-city_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Stack City"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/think-play-quiz-luh",
+            "img": "https://imgs.crazygames.com/think-play-quiz-luh_16x9/20260914144243/think-play-quiz-luh_16x9-cover.png?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Think & Play Quiz"
+          }
+        ],
+        "originals": [
+          {
+            "href": "https://www.crazygames.com/originals",
+            "title": "CrazyGames Originals"
+          },
+          {
+            "alt": "Racing Limits",
+            "href": "https://www.crazygames.com/game/racing-limits",
+            "img": "https://imgs.crazygames.com/racing-limits_2x3/20250711091800/racing-limits_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Tower Swap",
+            "href": "https://www.crazygames.com/game/tower-swap",
+            "img": "https://imgs.crazygames.com/tower-swap_2x3/20250711093921/tower-swap_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Cubes 2048.io",
+            "href": "https://www.crazygames.com/game/cubes-2048-io",
+            "img": "https://imgs.crazygames.com/games/cubes-2048-io/cover_2x3-1693298929612.png?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Evil Tower",
+            "href": "https://www.crazygames.com/game/evil-tower-lli",
+            "img": "https://imgs.crazygames.com/evil-tower-lli_2x3/20260803073604/evil-tower-lli_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Block Blaster",
+            "href": "https://www.crazygames.com/game/block-puzzle-master",
+            "img": "https://imgs.crazygames.com/block-puzzle-master_2x3/20250924025352/block-puzzle-master_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Ramp Car VS Police: CHASE",
+            "href": "https://www.crazygames.com/game/ramp-car-vs-police-chase-psm",
+            "img": "https://imgs.crazygames.com/ramp-car-vs-police-chase-psm_2x3/20260603031406/ramp-car-vs-police-chase-psm_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          },
+          {
+            "alt": "Gridpunk - 3v3 Battle Royale",
+            "href": "https://www.crazygames.com/game/gridpunk---3v3-battle-royale",
+            "img": "https://imgs.crazygames.com/gridpunk---3v3-battle-royale_2x3/20260126044546/gridpunk---3v3-battle-royale_2x3-cover?metadata=none&quality=85&width=273&height=409.5&fit=crop&dpr=1",
+            "title": ""
+          }
+        ],
+        "top": [
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/bloxdhop-io",
+            "img": "https://imgs.crazygames.com/bloxdhop-io_16x9/20260907141432/bloxdhop-io_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+            "title": "Bloxd.io"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/polytrack",
+            "img": "https://imgs.crazygames.com/polytrack_16x9/20260310095956/polytrack_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "PolyTrack"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/openfront-gsw",
+            "img": "https://imgs.crazygames.com/openfront-gsw_16x9/20260515051210/openfront-gsw_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Openfront"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/ragdoll-archers",
+            "img": "https://imgs.crazygames.com/ragdoll-archers_16x9/20250926080758/ragdoll-archers_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Ragdoll Archers"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/smash-karts",
+            "img": "https://imgs.crazygames.com/smash-karts_16x9/20260210123937/smash-karts_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Smash Karts"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/piece-of-cake-merge-and-bake",
+            "img": "https://imgs.crazygames.com/piece-of-cake-merge-and-bake_16x9/20260812042932/piece-of-cake-merge-and-bake_16x9-cover?metadata=none&quality=85&width=675&fit=crop&dpr=1",
+            "title": "Piece of Cake: Merge and Bake"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/8-ball-pool-billiards-multiplayer",
+            "img": "https://imgs.crazygames.com/8-ball-pool-billiards-multiplayer_16x9/20260722044342/8-ball-pool-billiards-multiplayer_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "8 Ball Pool Billiards Multiplayer"
+          },
+          {
+            "alt": "",
+            "href": "https://www.crazygames.com/game/traffic-rider-vvq",
+            "img": "https://imgs.crazygames.com/traffic-rider-vvq_16x9/20250526021507/traffic-rider-vvq_16x9-cover?metadata=none&quality=85&width=273&fit=crop&dpr=1",
+            "title": "Traffic Rider"
+          }
+        ]
+      }
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,292 @@
+{
+  "success": true,
+  "data": {
+    "result": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain3.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "static",
+        "style": "",
+        "title": "Train your brain\nAdrenaline rush\nWith friends\n5-minute fun\nMeme & bloxy\nTimeless classics\nJust relax\nDeep progress",
+        "w": "1372px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain3.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #47d7ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #154a6f 100%);",
+        "title": "Train your brain",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Train your brain",
+        "w": "116.75px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/adrenaline3.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #f154ac; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #68294d 100%);",
+        "title": "Adrenaline rush",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Adrenaline rush",
+        "w": "118.609px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/friends1.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #86ffcf; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #1f645c 100%);",
+        "title": "With friends",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "With friends",
+        "w": "94.3594px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/5minutes2.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #ffdf40; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #58522c 100%);",
+        "title": "5-minute fun",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "5-minute fun",
+        "w": "96.8125px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/brain2.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #b4f54e; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #2e6136 100%);",
+        "title": "Meme & bloxy",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Meme & bloxy",
+        "w": "106.188px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/magnific2.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #b464ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #3d2f73 100%);",
+        "title": "Timeless classics",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Timeless classics",
+        "w": "127.719px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/merge3.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #5cffab; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #1d5657 100%);",
+        "title": "Just relax",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Just relax",
+        "w": "70.5469px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "16px",
+        "display": "block",
+        "h": "120px",
+        "img": "https://imgs.crazygames.com/assets/PNG/intent-cta/square-icons/custom/deep3.png?metadata=none&quality=85&width=60&dpr=1",
+        "pad": "0px",
+        "position": "relative",
+        "style": "--intent-accent: #5f97ff; --intent-background-image: linear-gradient(285deg, #171d2e 20%, #191e5d 100%);",
+        "title": "Deep progress",
+        "w": "230px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "60px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "",
+        "w": "60px"
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "br": "0px",
+        "display": "block",
+        "h": "17.5938px",
+        "pad": "0px",
+        "position": "absolute",
+        "style": "",
+        "title": "Deep progress",
+        "w": "108.531px"
+      }
+    ]
+  },
+  "error": null
+}

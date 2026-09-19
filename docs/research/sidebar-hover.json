@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "containerW": "199px",
+      "labelDisplay": "block",
+      "labelOpacity": "1",
+      "navClass": "Sidebar_main___ex0V Sidebar_isDesktop__aieVO",
+      "navW": "200px",
+      "visibleLabels": [
+        { "opacity": "1", "text": "Home", "w": "41.0156px" },
+        { "opacity": "1", "text": "Recently played", "w": "109.359px" },
+        { "opacity": "1", "text": "New", "w": "31.7969px" },
+        { "opacity": "1", "text": "Hot Games", "w": "76.6719px" },
+        { "opacity": "1", "text": "Updated", "w": "59.0938px" }
+      ]
+    }
+  },
+  "error": null
+}

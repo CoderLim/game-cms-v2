@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "data": {
+    "result": {
+      "html": "<div class=\"Header_leftSection__iw1d6\"><!--$--><button type=\"button\" class=\"IconButton_czyIconButton__tuAnP IconButton_czyIconButton--link--white__8RW6p HeaderSidebarButton_root__Iij7Q HeaderSidebarButton_hideWhenDesktopDevice__x0piq\" aria-label=\"Open/Close sidebar\"><span role=\"img\" aria-hidden=\"true\" class=\"Icon_icon__OracF Icon_icon-close-nav__erocV Icon_size20__yF8AY\"></span></button><a href=\"https://www.crazygames.com/\"><img class=\"LogoImage_logoImage__QD3zH\" src=\"/images/logo/master/logo-master-white.svg\" alt=\"CrazyGames\" id=\"logo\"></a><!--/$--></div><form class=\"TopSearch_topSearchForm__b9Z8c TopSearch_isDesktop__2eSKm\" autocomplete=\"off\"><div class=\"TopSearch_inputWrapper__QI6kt\"><input class=\"TopSearch_searchInput__Nbapa TopSearch_topSearchInput__mCCPQ TopSearch_isDesktop__2eSKm\" id=\"search-input\" placeholder=\"Search games and categories\" readonly=\"\" type=\"text\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" data-lpignore=\"true\" data-form-type=\"other\" data-1p-ignore=\"true\" data-bwignore=\"true\" data-form=\"false\" aria-autocomplete=\"none\" style=\"\"><div class=\"QuickSearchIcon_iconButton__t8cVX TopSearch_quickSearchIconDesktop__hbiT5\"><span role=\"img\" aria-hidden=\"true\" class=\"Icon_icon__OracF Icon_icon-search___meL2 Icon_size20__yF8AY\"></span></div></div></form><div class=\"Header_rightSection__fcQ4k\"><div class=\"UserPortalIcons_rootWrapper__quVAi\" data-testid=\"header-friends-button\"><button aria-label=\"Friends\" class=\"Button_czyButton__y8IRs Button_czyButton--contained--grey__sz05o Button_czyButton--headerIcon__aK8wL Button_czyButton--headerIcon--desktop___7kXV Button_czyButton--headerIcon--withLabel__dlMdE\"><span role=\"img\" aria-hidden=\"true\" class=\"Icon_icon__OracF Icon_icon-friends__ZhHP4 Icon_size20__yF8AY\"></span><span>Friends</span></button></div><button aria-label=\"My Games\" class=\"Button_czyButton__y8IRs Button_czyButton--contained--grey__sz05o Button_czyButton--headerIcon__aK8wL Button_czyButton--headerIcon--desktop___7kXV Button_czyButton--headerIcon--withLabel__dlMdE\"><span role=\"img\" aria-hidden=\"true\" class=\"Icon_icon__OracF Icon_icon-bookmark___2_D_ Icon_size20__yF8AY\"></span><span>My games</span></button><div data-testid=\"header-notifications-button\" style=\"position: relative;\"><div class=\"UserPortalIcons_notificationBubble__MsCpW\">1</div><button aria-label=\"Notifications\" class=\"Button_czyButton__y8IRs Button_czyButton--link--white__MRtJy Button_czyButton--headerIcon__aK8wL Button_czyButton--headerIcon--desktop___7kXV\"><span role=\"img\" aria-hidden=\"true\" class=\"Icon_icon__OracF Icon_icon-bell__NVKdf Icon_size20__yF8AY\"></span></button></div><div class=\"UserPortalIcons_userIconContainer__bBRRX\"><div class=\"UserPortalIcons_headerLoginButton__tncI3\"><button id=\"header-login-button\" aria-label=\"Log in\" class=\"Button_czyButton__y8IRs Button_czyButton--contained--purple__OBSeL\">Log in</button></div></div></div>",
+      "styles": {
+        "backdrop": "none",
+        "bg": "rgb(26, 27, 40)",
+        "border": "1px solid rgb(26, 27, 40)",
+        "display": "flex",
+        "h": "60px",
+        "pad": "0px",
+        "w": "1440px",
+        "z": "12"
+      },
+      "text": "1\nLog in"
+    }
+  },
+  "error": null
+}
