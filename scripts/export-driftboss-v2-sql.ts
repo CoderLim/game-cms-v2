@@ -84,6 +84,19 @@ function portableAssetPath(value: unknown) {
   return raw;
 }
 
+function portableAssetReferences(value: unknown) {
+  if (value === null || value === undefined) return value;
+
+  let text = String(value);
+  for (const origin of [
+    legacyStaticOrigin,
+    legacyStaticOrigin.replace(/^https:/i, 'http:'),
+  ]) {
+    text = text.replaceAll(origin, '');
+  }
+  return text;
+}
+
 function normalizeDomain(value: string) {
   return value
     .trim()
@@ -299,7 +312,7 @@ try {
       sqlInsert(
         'site_game_locale',
         ['id', 'site_id', 'site_game_id', 'locale', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'content', 'created_at', 'updated_at'],
-        [id('site-game-locale', `${domain}:${gameKey}:${locale}`), siteId, siteGameId, locale, slug, 'published', row.title || gameRow.title || gameKey, row.meta_title || null, row.meta_desc || null, gameRow.description || null, row.seo_content || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        [id('site-game-locale', `${domain}:${gameKey}:${locale}`), siteId, siteGameId, locale, slug, 'published', row.title || gameRow.title || gameKey, row.meta_title || null, row.meta_desc || null, gameRow.description || null, portableAssetReferences(row.seo_content) || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(site_game_id, locale)',
         ['site_id', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'content', 'updated_at']
       )
@@ -327,7 +340,7 @@ try {
       sqlInsert(
         'site_category_locale',
         ['id', 'site_id', 'site_category_id', 'locale', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'content', 'created_at', 'updated_at'],
-        [id('site-category-locale', `${domain}:${categoryKey}:${locale}`), siteId, siteCategoryId, locale, String(row.slug || slugify(categoryKey)), 'published', row.title || categoryRow.title || categoryKey, row.meta_title || null, row.meta_desc || null, categoryRow.description || null, row.seo_content || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        [id('site-category-locale', `${domain}:${categoryKey}:${locale}`), siteId, siteCategoryId, locale, String(row.slug || slugify(categoryKey)), 'published', row.title || categoryRow.title || categoryKey, row.meta_title || null, row.meta_desc || null, categoryRow.description || null, portableAssetReferences(row.seo_content) || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(site_category_id, locale)',
         ['site_id', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'content', 'updated_at']
       )
@@ -373,7 +386,7 @@ try {
       sqlInsert(
         'site_post_locale',
         ['id', 'site_id', 'site_post_id', 'locale', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'image_url', 'content', 'created_at', 'updated_at'],
-        [id('site-post-locale', `${domain}:${slug}:${locale}`), id('site', domain), postId, locale, slug, published ? 'published' : 'draft', row.title || slug, row.meta_title || null, row.meta_description || null, row.summary || null, portableAssetPath(row.cover_image) || null, row.content || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        [id('site-post-locale', `${domain}:${slug}:${locale}`), id('site', domain), postId, locale, slug, published ? 'published' : 'draft', row.title || slug, row.meta_title || null, row.meta_description || null, row.summary || null, portableAssetPath(row.cover_image) || null, portableAssetReferences(row.content) || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(site_post_id, locale)',
         ['site_id', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'image_url', 'content', 'updated_at']
       )
