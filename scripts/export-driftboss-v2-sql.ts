@@ -330,10 +330,10 @@ try {
     output.push(
       sqlInsert(
         'site_category',
-        ['id', 'site_id', 'category_id', 'status', 'indexable', 'sort_weight', 'created_at', 'updated_at'],
-        [siteCategoryId, siteId, id('category', categoryKey), 'published', 1, 0, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        ['id', 'site_id', 'category_id', 'image_url', 'status', 'indexable', 'sort_weight', 'created_at', 'updated_at'],
+        [siteCategoryId, siteId, id('category', categoryKey), portableAssetPath(categoryRow.image_url), 'published', 1, 0, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(id)',
-        ['status', 'indexable', 'updated_at']
+        ['image_url', 'status', 'indexable', 'updated_at']
       )
     );
     output.push(
