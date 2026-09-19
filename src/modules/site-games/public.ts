@@ -7,6 +7,7 @@ import {
   siteGameLocale,
 } from '@/config/db/game-schema';
 import { db } from '@/core/db';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 import { GameStatus } from '@/modules/games/service';
 
 import { SiteContentStatus, SiteGameStatus } from './service';
@@ -34,6 +35,13 @@ const cardSelection = {
   sortWeight: siteGame.sortWeight,
 };
 
+function withResolvedImage<T extends { imageUrl: string | null }>(row: T): T {
+  return {
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+  };
+}
+
 export async function getFeatured(input: {
   siteId: string;
   locale: string;
@@ -52,7 +60,7 @@ export async function getFeatured(input: {
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.publishedAt))
     .limit(1);
 
-  return row;
+  return row ? withResolvedImage(row) : undefined;
 }
 
 export async function listHot(input: {
@@ -62,7 +70,7 @@ export async function listHot(input: {
 }) {
   const limit = Math.min(Math.max(input.limit || 12, 1), 50);
 
-  return db()
+  const rows = await db()
     .select(cardSelection)
     .from(siteGame)
     .innerJoin(game, eq(game.id, siteGame.gameId))
@@ -72,6 +80,8 @@ export async function listHot(input: {
     )
     .orderBy(desc(siteGame.sortWeight), desc(siteGame.viewCount))
     .limit(limit);
+
+  return rows.map(withResolvedImage);
 }
 
 export async function listSimilar(input: {
@@ -88,7 +98,7 @@ export async function listSimilar(input: {
   const categoryIds = categoryRows.map((row) => row.siteCategoryId);
 
   if (categoryIds.length === 0) {
-    return db()
+    const rows = await db()
       .select(cardSelection)
       .from(siteGame)
       .innerJoin(game, eq(game.id, siteGame.gameId))
@@ -99,11 +109,17 @@ export async function listSimilar(input: {
           ne(siteGame.id, input.siteGameId)
         )
       )
-      .orderBy(desc(siteGame.hot), desc(siteGame.viewCount), desc(siteGame.sortWeight))
+      .orderBy(
+        desc(siteGame.hot),
+        desc(siteGame.viewCount),
+        desc(siteGame.sortWeight)
+      )
       .limit(limit);
+
+    return rows.map(withResolvedImage);
   }
 
-  return db()
+  const rows = await db()
     .selectDistinct(cardSelection)
     .from(siteGameCategory)
     .innerJoin(siteGame, eq(siteGame.id, siteGameCategory.siteGameId))
@@ -116,8 +132,14 @@ export async function listSimilar(input: {
         ne(siteGame.id, input.siteGameId)
       )
     )
-    .orderBy(desc(siteGame.hot), desc(siteGame.viewCount), desc(siteGame.sortWeight))
+    .orderBy(
+      desc(siteGame.hot),
+      desc(siteGame.viewCount),
+      desc(siteGame.sortWeight)
+    )
     .limit(limit);
+
+  return rows.map(withResolvedImage);
 }
 
 export async function listIndexable(input: {
