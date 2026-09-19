@@ -55,6 +55,16 @@ if (!/^https?:\/\//i.test(appUrl)) {
 }
 const workerName = (args.get('worker') || siteKey).trim().toLowerCase();
 const siteName = (args.get('site-name') || siteKey).trim();
+const staticAssetOrigin = String(
+  args.get('static-asset-origin') ||
+    process.env.VITE_STATIC_ASSET_ORIGIN ||
+    'https://static.klotski.org'
+)
+  .trim()
+  .replace(/\/$/, '');
+if (staticAssetOrigin && !/^https?:\/\//i.test(staticAssetOrigin)) {
+  throw new Error('--static-asset-origin must be an absolute http(s) URL');
+}
 const databaseId = required('database-id');
 const databaseName = (args.get('database-name') || 'game-site-engine-db').trim();
 const deployEnv = (args.get('deploy-env') || 'preview').trim().toLowerCase();
@@ -118,6 +128,11 @@ replaceOnce(
   'VITE_APP_NAME'
 );
 replaceOnce(
+  /"VITE_STATIC_ASSET_ORIGIN"\s*:\s*"https:\/\/static\.klotski\.org"/,
+  `"VITE_STATIC_ASSET_ORIGIN": ${jsonString(staticAssetOrigin)}`,
+  'VITE_STATIC_ASSET_ORIGIN'
+);
+replaceOnce(
   /"database_name"\s*:\s*"game-site-engine-db"/,
   `"database_name": ${jsonString(databaseName)}`,
   'D1 database_name'
@@ -135,6 +150,7 @@ console.log(`Worker: ${workerName}`);
 console.log(`SITE_KEY: ${siteKey}`);
 console.log(`Canonical domain: https://${domain}`);
 console.log(`Runtime app URL: ${appUrl}`);
+console.log(`Static asset origin: ${staticAssetOrigin || '(same-origin)'}`);
 console.log(`Deploy env: ${deployEnv}`);
 console.log(`D1: ${databaseName} (${databaseId})`);
 console.log('No deployment was performed.');
