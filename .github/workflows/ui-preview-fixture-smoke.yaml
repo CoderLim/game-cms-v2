@@ -18,6 +18,7 @@ jobs:
       VITE_APP_URL: http://localhost:3000
       VITE_APP_NAME: Drift Boss UI Preview
       VITE_DEFAULT_LOCALE: en
+      VITE_STATIC_ASSET_ORIGIN: https://static.klotski.org
       AUTH_SECRET: ui-preview-ci-only-secret
     steps:
       - name: Checkout repository
@@ -62,6 +63,21 @@ jobs:
           });
           if (site.rows.length !== 1) throw new Error('Expected driftbossgame site');
           const siteId = String(site.rows[0].id);
+
+          const storedImage = await client.execute({
+            sql: `SELECT g.image_url
+                    FROM site_game sg
+                    JOIN game_catalog g ON g.id = sg.game_id
+                    WHERE sg.site_id = ? AND g.key = 'drift-boss'`,
+            args: [siteId],
+          });
+          const imageUrl = String(storedImage.rows[0]?.image_url || '');
+          if (!imageUrl.startsWith('/games/')) {
+            throw new Error(`Expected relative /games asset path, got ${imageUrl}`);
+          }
+          if (imageUrl.includes('static.driftbossgame.org')) {
+            throw new Error('Legacy static domain must not be stored in V2 data');
+          }
 
           const gameCount = await value(
             'SELECT COUNT(*) AS value FROM site_game WHERE site_id = ?',
