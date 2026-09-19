@@ -406,7 +406,7 @@ function SiteGamesPage() {
               ['controls', 'Controls'],
               ['features', 'Features'],
               ['faq', 'FAQ'],
-              ['content', 'Long content'],
+              ['content', 'SEO content (Markdown)'],
             ].map(([key, label]) => (
               <label key={key} className="space-y-1.5 text-sm">
                 <span className="font-medium">{label}</span>
