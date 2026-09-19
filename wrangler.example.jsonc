@@ -21,6 +21,7 @@
     // sync with .env.production (better-auth trustedOrigins, payment callbacks).
     "VITE_APP_URL": "https://example.com",
     "VITE_APP_NAME": "Game Site",
+    "VITE_STATIC_ASSET_ORIGIN": "https://static.klotski.org",
   },
   "d1_databases": [
     {
