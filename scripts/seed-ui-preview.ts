@@ -602,11 +602,11 @@ async function main() {
         id: id('site-setting', `${fixture.site.domain}:social_links`),
         siteId,
         key: 'social_links',
-        value: JSON.stringify(fixture.socialLinks),
+        value: JSON.stringify(\n          fixture.socialLinks.map((item) => ({\n            displayName: item.display_name,\n            url: item.url,\n          }))\n        ),
       })
       .onConflictDoUpdate({
         target: [domain.siteSetting.siteId, domain.siteSetting.key],
-        set: { value: JSON.stringify(fixture.socialLinks) },
+        set: {\n          value: JSON.stringify(\n            fixture.socialLinks.map((item) => ({\n              displayName: item.display_name,\n              url: item.url,\n            }))\n          ),\n        },
       });
 
     console.log('UI preview fixture imported successfully.');
