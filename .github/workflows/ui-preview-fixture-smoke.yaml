@@ -79,6 +79,41 @@ jobs:
             throw new Error('Legacy static domain must not be stored in V2 data');
           }
 
+          const klotskiEmbed = await client.execute({
+            sql: `SELECT g.embed_url
+                    FROM site_game sg
+                    JOIN game_catalog g ON g.id = sg.game_id
+                    WHERE sg.site_id = ? AND g.key = 'klotski'`,
+            args: [siteId],
+          });
+          const embedUrl = String(klotskiEmbed.rows[0]?.embed_url || '');
+          if (!embedUrl.startsWith('/game-play/')) {
+            throw new Error(`Expected relative /game-play asset path, got ${embedUrl}`);
+          }
+
+          const legacyAssetRefs = await value(
+            `SELECT (
+               SELECT COUNT(*) FROM game_catalog
+               WHERE COALESCE(image_url, '') LIKE '%static.driftbossgame.org%'
+                  OR COALESCE(embed_url, '') LIKE '%static.driftbossgame.org%'
+             ) + (
+               SELECT COUNT(*) FROM site_game_locale
+               WHERE COALESCE(content, '') LIKE '%static.driftbossgame.org%'
+             ) + (
+               SELECT COUNT(*) FROM site_locale
+               WHERE COALESCE(content, '') LIKE '%static.driftbossgame.org%'
+             ) + (
+               SELECT COUNT(*) FROM site_post_locale
+               WHERE COALESCE(image_url, '') LIKE '%static.driftbossgame.org%'
+                  OR COALESCE(content, '') LIKE '%static.driftbossgame.org%'
+             ) AS value`
+          );
+          if (legacyAssetRefs !== 0) {
+            throw new Error(
+              `Expected zero legacy static asset references, got ${legacyAssetRefs}`
+            );
+          }
+
           const gameCount = await value(
             'SELECT COUNT(*) AS value FROM site_game WHERE site_id = ?',
             [siteId]
