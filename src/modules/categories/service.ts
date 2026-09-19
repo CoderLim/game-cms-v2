@@ -261,6 +261,7 @@ export async function listForGame(input: {
       title: siteCategoryLocale.title,
     })
     .from(siteGameCategory)
+    .innerJoin(siteGame, eq(siteGame.id, siteGameCategory.siteGameId))
     .innerJoin(
       siteCategory,
       eq(siteCategory.id, siteGameCategory.siteCategoryId)
@@ -277,6 +278,8 @@ export async function listForGame(input: {
     .where(
       and(
         eq(siteGameCategory.siteGameId, input.siteGameId),
+        eq(siteGame.siteId, input.siteId),
+        eq(siteGame.status, SiteGameStatus.PUBLISHED),
         eq(siteCategory.siteId, input.siteId),
         eq(siteCategory.status, SiteCategoryStatus.PUBLISHED),
         eq(siteCategoryLocale.status, SiteContentStatus.PUBLISHED)
