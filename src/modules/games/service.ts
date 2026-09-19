@@ -1,6 +1,6 @@
 import { and, count, desc, eq, like, or, type SQL } from 'drizzle-orm';
 
-import { game } from '@/config/db/game-schema';
+import { game, siteGame } from '@/config/db/game-schema';
 import { db } from '@/core/db';
 import { getUuid } from '@/lib/hash';
 
@@ -131,5 +131,22 @@ export async function update(
     .set(values)
     .where(eq(game.id, id))
     .returning();
+  return row;
+}
+
+export async function remove(id: string) {
+  const [usage] = await db()
+    .select({ count: count() })
+    .from(siteGame)
+    .where(eq(siteGame.gameId, id));
+
+  if (Number(usage?.count || 0) > 0) {
+    throw new Error(
+      'Game is attached to one or more sites. Archive it or detach it before deleting.'
+    );
+  }
+
+  const [row] = await db().delete(game).where(eq(game.id, id)).returning();
+  if (!row) throw new Error('Game not found');
   return row;
 }
