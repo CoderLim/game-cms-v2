@@ -45,6 +45,7 @@ export async function createCategory(input: { key: string }) {
 export async function attachCategory(input: {
   siteId: string;
   categoryId: string;
+  imageUrl?: string | null;
   status?: SiteCategoryStatus;
   indexable?: boolean;
   sortWeight?: number;
@@ -53,6 +54,7 @@ export async function attachCategory(input: {
     id: getUuid(),
     siteId: input.siteId,
     categoryId: input.categoryId,
+    imageUrl: input.imageUrl ?? null,
     status: input.status || SiteCategoryStatus.DRAFT,
     indexable: input.indexable ?? false,
     sortWeight: input.sortWeight ?? 0,
@@ -185,6 +187,7 @@ export async function getPublishedBySlug(input: {
       siteCategoryId: siteCategory.id,
       categoryId: gameCategory.id,
       categoryKey: gameCategory.key,
+      imageUrl: siteCategory.imageUrl,
       slug: siteCategoryLocale.slug,
       title: siteCategoryLocale.title,
       metaTitle: siteCategoryLocale.metaTitle,
@@ -211,7 +214,12 @@ export async function getPublishedBySlug(input: {
     )
     .limit(1);
 
-  return row;
+  return row
+    ? {
+        ...row,
+        imageUrl: resolveStaticAssetUrl(row.imageUrl),
+      }
+    : undefined;
 }
 
 export async function listPublished(input: {
@@ -230,10 +238,11 @@ export async function listPublished(input: {
 
   if (input.indexableOnly) filters.push(eq(siteCategory.indexable, true));
 
-  return db()
+  const rows = await db()
     .select({
       siteCategoryId: siteCategory.id,
       categoryKey: gameCategory.key,
+      imageUrl: siteCategory.imageUrl,
       slug: siteCategoryLocale.slug,
       title: siteCategoryLocale.title,
       description: siteCategoryLocale.description,
@@ -248,6 +257,11 @@ export async function listPublished(input: {
     .where(and(...filters))
     .orderBy(desc(siteCategory.sortWeight), siteCategoryLocale.title)
     .limit(limit);
+
+  return rows.map((row) => ({
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+  }));
 }
 
 export async function listForGame(input: {
@@ -255,10 +269,11 @@ export async function listForGame(input: {
   siteGameId: string;
   locale: string;
 }) {
-  return db()
+  const rows = await db()
     .select({
       siteCategoryId: siteCategory.id,
       categoryKey: gameCategory.key,
+      imageUrl: siteCategory.imageUrl,
       slug: siteCategoryLocale.slug,
       title: siteCategoryLocale.title,
     })
@@ -288,6 +303,11 @@ export async function listForGame(input: {
       )
     )
     .orderBy(desc(siteCategory.sortWeight), siteCategoryLocale.title);
+
+  return rows.map((row) => ({
+    ...row,
+    imageUrl: resolveStaticAssetUrl(row.imageUrl),
+  }));
 }
 
 export async function listGames(input: {
