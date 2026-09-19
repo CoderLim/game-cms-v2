@@ -1,9 +1,10 @@
-import { and, desc, eq } from 'drizzle-orm';
+import { and, count, desc, eq } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import {
   game,
   gameCategory,
+  gameCategoryMap,
   siteCategory,
   siteCategoryLocale,
   siteGame,
@@ -39,6 +40,41 @@ export async function createCategory(input: { key: string }) {
   };
 
   const [row] = await db().insert(gameCategory).values(values).returning();
+  return row;
+}
+
+export async function updateCategory(id: string, input: { key: string }) {
+  const [row] = await db()
+    .update(gameCategory)
+    .set({ key: normalizeKey(input.key) })
+    .where(eq(gameCategory.id, id))
+    .returning();
+
+  if (!row) throw new Error('Category not found');
+  return row;
+}
+
+export async function removeCategory(id: string) {
+  const [siteUsage] = await db()
+    .select({ count: count() })
+    .from(siteCategory)
+    .where(eq(siteCategory.categoryId, id));
+  const [gameUsage] = await db()
+    .select({ count: count() })
+    .from(gameCategoryMap)
+    .where(eq(gameCategoryMap.categoryId, id));
+
+  if (Number(siteUsage?.count || 0) > 0 || Number(gameUsage?.count || 0) > 0) {
+    throw new Error(
+      'Category is still in use. Remove its site/game assignments before deleting.'
+    );
+  }
+
+  const [row] = await db()
+    .delete(gameCategory)
+    .where(eq(gameCategory.id, id))
+    .returning();
+  if (!row) throw new Error('Category not found');
   return row;
 }
 
