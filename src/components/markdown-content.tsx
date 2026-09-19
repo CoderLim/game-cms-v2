@@ -3,6 +3,7 @@
 // wrapper classes below mirror those styles so both sources look alike.
 import MarkdownIt from 'markdown-it';
 
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 import { cn } from '@/lib/utils';
 
 function generateHeadingId(text: string): string {
@@ -28,6 +29,18 @@ md.renderer.rules.heading_open = function (tokens, idx) {
     return `<h${level} id="${generateHeadingId(nextToken.content)}">`;
   }
   return `<h${level}>`;
+};
+
+// Relative Markdown images are portable DB asset paths. Resolve them through
+// the deployment-level static asset origin instead of the current site host.
+md.renderer.rules.image = function (tokens, idx, options, env, renderer) {
+  const token = tokens[idx];
+  const src = token.attrGet('src');
+  if (src) {
+    const resolved = resolveStaticAssetUrl(src);
+    if (resolved) token.attrSet('src', resolved);
+  }
+  return renderer.renderToken(tokens, idx, options);
 };
 
 // External links open in a new tab with nofollow
