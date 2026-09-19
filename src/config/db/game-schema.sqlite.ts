@@ -195,6 +195,7 @@ export const siteCategory = table(
     categoryId: text('category_id')
       .notNull()
       .references(() => gameCategory.id, { onDelete: 'cascade' }),
+    imageUrl: text('image_url'),
     status: text('status').notNull().default('draft'),
     indexable: integer('indexable', { mode: 'boolean' })
       .notNull()
