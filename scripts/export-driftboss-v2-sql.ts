@@ -58,6 +58,32 @@ const featuredPairs = new Set(
     .filter(Boolean)
 );
 
+const legacyStaticOrigin = (
+  args.get('legacy-static-origin') ||
+  process.env.LEGACY_STATIC_ASSET_ORIGIN ||
+  'https://static.driftbossgame.org'
+).replace(/\/$/, '');
+
+function portableAssetPath(value: unknown) {
+  if (value === null || value === undefined) return value;
+  const raw = String(value).trim();
+  if (!raw) return raw;
+
+  const originVariants = [
+    legacyStaticOrigin,
+    legacyStaticOrigin.replace(/^https:/i, 'http:'),
+  ];
+
+  for (const origin of originVariants) {
+    if (raw === origin) return '/';
+    if (raw.startsWith(`${origin}/`)) {
+      return raw.slice(origin.length);
+    }
+  }
+
+  return raw;
+}
+
 function normalizeDomain(value: string) {
   return value
     .trim()
@@ -209,7 +235,7 @@ try {
       sqlInsert(
         'game_site',
         ['id', 'key', 'domain', 'name', 'status', 'default_locale', 'enabled_locales', 'logo_url', 'favicon_url', 'created_at', 'updated_at'],
-        [siteId, siteKey(domain), domain, row.site_name || domain, 'active', 'en', JSON.stringify([...locales]), row.logo_url, row.favicon_url, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        [siteId, siteKey(domain), domain, row.site_name || domain, 'active', 'en', JSON.stringify([...locales]), portableAssetPath(row.logo_url), portableAssetPath(row.favicon_url), timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(id)',
         ['key', 'domain', 'name', 'status', 'default_locale', 'enabled_locales', 'logo_url', 'favicon_url', 'updated_at']
       )
@@ -224,7 +250,7 @@ try {
       sqlInsert(
         'game_catalog',
         ['id', 'key', 'title', 'description', 'embed_url', 'source_url', 'image_url', 'provider', 'embed_type', 'status', 'created_at', 'updated_at'],
-        [id('game', key), key, row.title || key, row.description, row.url, row.url, row.image, 'legacy', 'iframe', 'active', timestamp(row.created_at), timestamp(row.created_at)],
+        [id('game', key), key, row.title || key, row.description, row.url, row.url, portableAssetPath(row.image), 'legacy', 'iframe', 'active', timestamp(row.created_at), timestamp(row.created_at)],
         '(id)',
         ['key', 'title', 'description', 'embed_url', 'source_url', 'image_url', 'provider', 'embed_type', 'status', 'updated_at']
       )
@@ -347,7 +373,7 @@ try {
       sqlInsert(
         'site_post_locale',
         ['id', 'site_id', 'site_post_id', 'locale', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'image_url', 'content', 'created_at', 'updated_at'],
-        [id('site-post-locale', `${domain}:${slug}:${locale}`), id('site', domain), postId, locale, slug, published ? 'published' : 'draft', row.title || slug, row.meta_title || null, row.meta_description || null, row.summary || null, row.cover_image || null, row.content || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
+        [id('site-post-locale', `${domain}:${slug}:${locale}`), id('site', domain), postId, locale, slug, published ? 'published' : 'draft', row.title || slug, row.meta_title || null, row.meta_description || null, row.summary || null, portableAssetPath(row.cover_image) || null, row.content || null, timestamp(row.created_at), timestamp(row.updated_at || row.created_at)],
         '(site_post_id, locale)',
         ['site_id', 'slug', 'status', 'title', 'meta_title', 'meta_description', 'description', 'image_url', 'content', 'updated_at']
       )
