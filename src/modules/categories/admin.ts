@@ -80,6 +80,7 @@ export async function listSiteCategories(input: {
       siteId: siteCategory.siteId,
       categoryId: siteCategory.categoryId,
       categoryKey: gameCategory.key,
+      imageUrl: siteCategory.imageUrl,
       status: siteCategory.status,
       indexable: siteCategory.indexable,
       sortWeight: siteCategory.sortWeight,

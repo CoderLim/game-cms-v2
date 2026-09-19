@@ -8,11 +8,13 @@ import { SiteCategoryStatus } from './service';
 export async function updateSiteCategory(input: {
   siteId: string;
   siteCategoryId: string;
+  imageUrl?: string | null;
   status?: SiteCategoryStatus;
   indexable?: boolean;
   sortWeight?: number;
 }) {
   const values: Record<string, unknown> = {};
+  if (input.imageUrl !== undefined) values.imageUrl = input.imageUrl;
   if (input.status !== undefined) values.status = input.status;
   if (input.indexable !== undefined) values.indexable = input.indexable;
   if (input.sortWeight !== undefined) values.sortWeight = input.sortWeight;

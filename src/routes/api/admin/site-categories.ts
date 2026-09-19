@@ -50,6 +50,7 @@ async function POST({ request }: { request: Request }) {
     const row = await attachCategory({
       siteId: body.siteId,
       categoryId: body.categoryId,
+      imageUrl: body.imageUrl,
       status: body.status as SiteCategoryStatus | undefined,
       indexable: body.indexable,
       sortWeight: body.sortWeight,
@@ -68,6 +69,7 @@ async function PUT({ request }: { request: Request }) {
     const row = await updateSiteCategory({
       siteId: body.siteId,
       siteCategoryId: body.id,
+      imageUrl: body.imageUrl,
       status: body.status as SiteCategoryStatus | undefined,
       indexable: body.indexable,
       sortWeight: body.sortWeight,

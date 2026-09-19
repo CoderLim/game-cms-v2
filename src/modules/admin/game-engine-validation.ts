@@ -74,6 +74,10 @@ export const createGameSchema = z.object({
 export const updateGameSchema = createGameSchema.partial().extend({ id: identifier });
 
 export const createGameCategorySchema = z.object({ key });
+export const updateGameCategorySchema = z.object({
+  id: identifier,
+  key,
+});
 
 export const attachSiteGameSchema = z.object({
   siteId: identifier,
@@ -111,6 +115,7 @@ export const siteGameContentSchema = z.object({
 export const attachSiteCategorySchema = z.object({
   siteId: identifier,
   categoryId: identifier,
+  imageUrl: optionalUrl,
   status: publishStatusSchema.optional(),
   indexable: z.boolean().optional(),
   sortWeight: z.number().int().min(-1_000_000).max(1_000_000).optional(),

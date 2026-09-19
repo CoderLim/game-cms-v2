@@ -5,9 +5,14 @@ import { requireAdmin } from '@/modules/admin/guard';
 import {
   createGameCategorySchema,
   parseBody,
+  updateGameCategorySchema,
 } from '@/modules/admin/game-engine-validation';
 import { listCategoryCatalog } from '@/modules/categories/admin';
-import { createCategory } from '@/modules/categories/service';
+import {
+  createCategory,
+  removeCategory,
+  updateCategory,
+} from '@/modules/categories/service';
 
 async function GET({ request }: { request: Request }) {
   try {
@@ -37,6 +42,27 @@ async function POST({ request }: { request: Request }) {
   }
 }
 
+async function PUT({ request }: { request: Request }) {
+  try {
+    await requireAdmin(request);
+    const body = parseBody(updateGameCategorySchema, await request.json());
+    return respData(await updateCategory(body.id, { key: body.key }));
+  } catch (error: any) {
+    return respErr(error.message || 'Failed to update game category');
+  }
+}
+
+async function DELETE({ request }: { request: Request }) {
+  try {
+    await requireAdmin(request);
+    const id = new URL(request.url).searchParams.get('id') || '';
+    if (!id) return respErr('id is required');
+    return respData(await removeCategory(id));
+  } catch (error: any) {
+    return respErr(error.message || 'Failed to delete game category');
+  }
+}
+
 export const Route = createFileRoute('/api/admin/game-categories')({
-  server: { handlers: { GET, POST } },
+  server: { handlers: { GET, POST, PUT, DELETE } },
 });

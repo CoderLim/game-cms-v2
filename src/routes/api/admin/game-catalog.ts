@@ -79,6 +79,18 @@ async function PUT({ request }: { request: Request }) {
   }
 }
 
+async function DELETE({ request }: { request: Request }) {
+  try {
+    await requireAdmin(request);
+    const id = new URL(request.url).searchParams.get('id') || '';
+    if (!id) return respErr('id is required');
+
+    return respData(await gameService.remove(id));
+  } catch (error: any) {
+    return respErr(error.message || 'Failed to delete game');
+  }
+}
+
 export const Route = createFileRoute('/api/admin/game-catalog')({
-  server: { handlers: { GET, POST, PUT } },
+  server: { handlers: { GET, POST, PUT, DELETE } },
 });

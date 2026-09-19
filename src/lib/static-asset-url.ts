@@ -25,3 +25,20 @@ export function resolveStaticAssetUrl(
   const path = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
   return `${origin}${path}`;
 }
+
+
+export function toStoredStaticAssetPath(
+  value: string | null | undefined
+): string {
+  if (!value) return '';
+
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+
+  const origin = envConfigs.static_asset_origin;
+  if (origin && trimmed.startsWith(`${origin}/`)) {
+    return trimmed.slice(origin.length);
+  }
+
+  return trimmed;
+}
