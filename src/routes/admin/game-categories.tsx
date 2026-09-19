@@ -3,7 +3,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { toast } from 'sonner';
 
-import { apiGet, apiPost, apiPut, type PageResult } from '@/lib/api-client';
+import { ImageUploadField } from '@/components/admin/image-upload-field';
+import {
+  apiDelete,
+  apiGet,
+  apiPost,
+  apiPut,
+  type PageResult,
+} from '@/lib/api-client';
 
 interface SiteRow {
   id: string;
@@ -22,6 +29,7 @@ interface SiteCategoryRow {
   id: string;
   categoryId: string;
   categoryKey: string;
+  imageUrl: string | null;
   status: string;
   indexable: boolean;
   sortWeight: number;
@@ -65,10 +73,14 @@ export const Route = createFileRoute('/admin/game-categories')({
 function GameCategoriesPage() {
   const queryClient = useQueryClient();
   const [newKey, setNewKey] = useState('');
+  const [editingCatalogId, setEditingCatalogId] = useState<string | null>(null);
+  const [editingCatalogKey, setEditingCatalogKey] = useState('');
   const [siteId, setSiteId] = useState('');
   const [locale, setLocale] = useState('en');
   const [categoryId, setCategoryId] = useState('');
   const [editing, setEditing] = useState<SiteCategoryRow | null>(null);
+  const [categoryImageUrl, setCategoryImageUrl] = useState('');
+  const [sortWeight, setSortWeight] = useState(0);
   const [content, setContent] = useState<CategoryContent>(emptyContent('en'));
   const [assignSiteGameId, setAssignSiteGameId] = useState('');
 
@@ -77,10 +89,13 @@ function GameCategoriesPage() {
     queryFn: () =>
       apiGet<PageResult<SiteRow>>('/api/admin/game-sites?page=1&pageSize=100'),
   });
+
   const catalog = useQuery({
     queryKey: ['admin-game-categories'],
     queryFn: () =>
-      apiGet<PageResult<CategoryRow>>('/api/admin/game-categories?page=1&pageSize=100'),
+      apiGet<PageResult<CategoryRow>>(
+        '/api/admin/game-categories?page=1&pageSize=100'
+      ),
   });
 
   useEffect(() => {
@@ -119,6 +134,12 @@ function GameCategoriesPage() {
 
   useEffect(() => {
     if (!editing) return;
+    setCategoryImageUrl(editing.imageUrl || '');
+    setSortWeight(editing.sortWeight || 0);
+  }, [editing]);
+
+  useEffect(() => {
+    if (!editing) return;
     if (contentQuery.data) {
       setContent({ ...emptyContent(locale), ...contentQuery.data, locale });
     } else if (contentQuery.isSuccess) {
@@ -135,6 +156,34 @@ function GameCategoriesPage() {
     onSuccess: () => {
       toast.success('Category created');
       setNewKey('');
+      queryClient.invalidateQueries({ queryKey: ['admin-game-categories'] });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const updateCatalogCategory = useMutation({
+    mutationFn: () => {
+      if (!editingCatalogId) throw new Error('No category selected');
+      return apiPut('/api/admin/game-categories', {
+        id: editingCatalogId,
+        key: editingCatalogKey,
+      });
+    },
+    onSuccess: () => {
+      toast.success('Category updated');
+      setEditingCatalogId(null);
+      setEditingCatalogKey('');
+      queryClient.invalidateQueries({ queryKey: ['admin-game-categories'] });
+      queryClient.invalidateQueries({ queryKey: ['admin-site-categories'] });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const deleteCatalogCategory = useMutation({
+    mutationFn: (id: string) =>
+      apiDelete(`/api/admin/game-categories?id=${encodeURIComponent(id)}`),
+    onSuccess: () => {
+      toast.success('Category deleted');
       queryClient.invalidateQueries({ queryKey: ['admin-game-categories'] });
     },
     onError: (error: Error) => toast.error(error.message),
@@ -164,8 +213,16 @@ function GameCategoriesPage() {
   });
 
   const saveContent = useMutation({
-    mutationFn: () => {
+    mutationFn: async () => {
       if (!editing) throw new Error('No category selected');
+
+      await apiPut('/api/admin/site-categories', {
+        siteId,
+        id: editing.id,
+        imageUrl: categoryImageUrl || null,
+        sortWeight,
+      });
+
       return apiPut('/api/admin/site-category-content', {
         siteId,
         siteCategoryId: editing.id,
@@ -173,9 +230,11 @@ function GameCategoriesPage() {
       });
     },
     onSuccess: () => {
-      toast.success('Category content saved');
+      toast.success('Category saved');
       queryClient.invalidateQueries({ queryKey: ['admin-site-categories'] });
-      queryClient.invalidateQueries({ queryKey: ['admin-site-category-content'] });
+      queryClient.invalidateQueries({
+        queryKey: ['admin-site-category-content'],
+      });
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -201,7 +260,8 @@ function GameCategoriesPage() {
       <div>
         <h1 className="text-2xl font-semibold">Game Categories</h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          Global category keys are reusable; titles, slugs and SEO are isolated per site and locale.
+          Manage reusable category keys, then configure image, slug, SEO
+          Markdown and publish state per site.
         </p>
       </div>
 
@@ -223,12 +283,94 @@ function GameCategoriesPage() {
             Add category
           </button>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {(catalog.data?.items || []).map((item) => (
-            <span key={item.id} className="bg-muted rounded-md px-2.5 py-1 text-xs font-mono">
-              {item.key}
-            </span>
-          ))}
+
+        <div className="border-border mt-5 overflow-x-auto rounded-lg border">
+          <table className="w-full text-sm">
+            <thead className="bg-muted/50 text-left">
+              <tr>
+                <th className="px-4 py-3">Key</th>
+                <th className="px-4 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(catalog.data?.items || []).map((item) => (
+                <tr key={item.id} className="border-border border-t">
+                  <td className="px-4 py-3">
+                    {editingCatalogId === item.id ? (
+                      <input
+                        autoFocus
+                        className="border-input bg-background h-9 w-full max-w-sm rounded-md border px-3 font-mono text-xs"
+                        value={editingCatalogKey}
+                        onChange={(event) =>
+                          setEditingCatalogKey(event.target.value)
+                        }
+                      />
+                    ) : (
+                      <span className="font-mono text-xs">{item.key}</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex gap-2">
+                      {editingCatalogId === item.id ? (
+                        <>
+                          <button
+                            type="button"
+                            disabled={
+                              !editingCatalogKey ||
+                              updateCatalogCategory.isPending
+                            }
+                            onClick={() => updateCatalogCategory.mutate()}
+                            className="bg-primary text-primary-foreground rounded-md px-2.5 py-1.5 text-xs disabled:opacity-50"
+                          >
+                            Save
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingCatalogId(null);
+                              setEditingCatalogKey('');
+                            }}
+                            className="border-border rounded-md border px-2.5 py-1.5 text-xs"
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingCatalogId(item.id);
+                              setEditingCatalogKey(item.key);
+                            }}
+                            className="border-border rounded-md border px-2.5 py-1.5 text-xs"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            disabled={deleteCatalogCategory.isPending}
+                            onClick={() => {
+                              if (
+                                window.confirm(
+                                  `Delete category "${item.key}"? This only succeeds when it has no site/game assignments.`
+                                )
+                              ) {
+                                deleteCatalogCategory.mutate(item.id);
+                              }
+                            }}
+                            className="border-destructive/50 text-destructive rounded-md border px-2.5 py-1.5 text-xs"
+                          >
+                            Delete
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -254,6 +396,7 @@ function GameCategoriesPage() {
             ))}
           </select>
         </label>
+
         <label className="space-y-1.5 text-sm">
           <span className="font-medium">Locale</span>
           <input
@@ -265,6 +408,7 @@ function GameCategoriesPage() {
             }}
           />
         </label>
+
         <label className="space-y-1.5 text-sm">
           <span className="font-medium">Attach global category</span>
           <div className="flex gap-2">
@@ -305,13 +449,33 @@ function GameCategoriesPage() {
           <tbody>
             {(siteCategories.data?.items || []).map((row) => (
               <tr key={row.id} className="border-border border-t">
-                <td className="px-4 py-3 font-mono text-xs">{row.categoryKey}</td>
                 <td className="px-4 py-3">
-                  <div>{row.localizedTitle || row.slug || 'No locale content'}</div>
-                  <div className="text-muted-foreground text-xs">{row.contentStatus || 'missing'}</div>
+                  <div className="flex items-center gap-3">
+                    {row.imageUrl ? (
+                      <img
+                        src={row.imageUrl}
+                        alt=""
+                        className="size-10 rounded-md object-cover"
+                      />
+                    ) : (
+                      <div className="bg-muted size-10 rounded-md" />
+                    )}
+                    <span className="font-mono text-xs">
+                      {row.categoryKey}
+                    </span>
+                  </div>
                 </td>
                 <td className="px-4 py-3">
-                  {row.status} {row.indexable ? '· index' : ''}
+                  <div>
+                    {row.localizedTitle || row.slug || 'No locale content'}
+                  </div>
+                  <div className="text-muted-foreground text-xs">
+                    {row.contentStatus || 'missing'}
+                  </div>
+                </td>
+                <td className="px-4 py-3">
+                  {row.status} {row.indexable ? '· index' : ''} · weight{' '}
+                  {row.sortWeight}
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex flex-wrap gap-2">
@@ -320,14 +484,17 @@ function GameCategoriesPage() {
                       onClick={() => setEditing(row)}
                       className="border-border rounded-md border px-2.5 py-1.5 text-xs"
                     >
-                      Content
+                      Edit
                     </button>
                     <button
                       type="button"
                       onClick={() =>
                         updatePlacement.mutate({
                           id: row.id,
-                          status: row.status === 'published' ? 'draft' : 'published',
+                          status:
+                            row.status === 'published'
+                              ? 'draft'
+                              : 'published',
                         })
                       }
                       className="border-border rounded-md border px-2.5 py-1.5 text-xs"
@@ -337,7 +504,10 @@ function GameCategoriesPage() {
                     <button
                       type="button"
                       onClick={() =>
-                        updatePlacement.mutate({ id: row.id, indexable: !row.indexable })
+                        updatePlacement.mutate({
+                          id: row.id,
+                          indexable: !row.indexable,
+                        })
                       }
                       className="border-border rounded-md border px-2.5 py-1.5 text-xs"
                     >
@@ -349,9 +519,12 @@ function GameCategoriesPage() {
             ))}
           </tbody>
         </table>
+
         {!siteCategories.isLoading && !siteCategories.data?.items.length ? (
           <div className="text-muted-foreground p-8 text-center text-sm">
-            {siteId ? 'No categories attached to this site.' : 'Select a site.'}
+            {siteId
+              ? 'No categories attached to this site.'
+              : 'Select a site.'}
           </div>
         ) : null}
       </div>
@@ -360,100 +533,162 @@ function GameCategoriesPage() {
         <section className="bg-card border-border rounded-xl border p-5">
           <div className="mb-5 flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-lg font-semibold">Category content · {editing.categoryKey}</h2>
-              <p className="text-muted-foreground text-sm">{locale} · unique to this site</p>
+              <h2 className="text-lg font-semibold">
+                Category · {editing.categoryKey}
+              </h2>
+              <p className="text-muted-foreground text-sm">
+                {locale} · image, SEO and content are unique to this site
+              </p>
             </div>
-            <button type="button" onClick={() => setEditing(null)} className="text-muted-foreground text-sm">
+            <button
+              type="button"
+              onClick={() => setEditing(null)}
+              className="text-muted-foreground text-sm"
+            >
               Close
             </button>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {[
-              ['slug', 'Slug'],
-              ['title', 'Title'],
-              ['metaTitle', 'Meta title'],
-              ['metaDescription', 'Meta description'],
-            ].map(([key, label]) => (
-              <label key={key} className="space-y-1.5 text-sm">
-                <span className="font-medium">{label}</span>
-                <input
-                  className="border-input bg-background h-10 w-full rounded-md border px-3"
-                  value={(content[key as keyof CategoryContent] as string | null) || ''}
-                  onChange={(event) =>
-                    setContent((current) => ({ ...current, [key]: event.target.value }))
-                  }
-                />
-              </label>
-            ))}
-            <label className="space-y-1.5 text-sm">
-              <span className="font-medium">Content status</span>
-              <select
-                className="border-input bg-background h-10 w-full rounded-md border px-3"
-                value={content.status}
-                onChange={(event) =>
-                  setContent((current) => ({ ...current, status: event.target.value }))
-                }
-              >
-                <option value="draft">draft</option>
-                <option value="published">published</option>
-                <option value="archived">archived</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {[
-              ['description', 'Description'],
-              ['content', 'Long content'],
-            ].map(([key, label]) => (
-              <label key={key} className="space-y-1.5 text-sm">
-                <span className="font-medium">{label}</span>
-                <textarea
-                  rows={key === 'content' ? 12 : 6}
-                  className="border-input bg-background w-full rounded-md border p-3 font-mono text-sm"
-                  value={(content[key as keyof CategoryContent] as string | null) || ''}
-                  onChange={(event) =>
-                    setContent((current) => ({ ...current, [key]: event.target.value }))
-                  }
-                />
-              </label>
-            ))}
-          </div>
-
-          <div className="mt-5 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
-            <label className="space-y-1.5 text-sm">
-              <span className="font-medium">Assign a site game to this category</span>
-              <select
-                className="border-input bg-background h-10 w-full rounded-md border px-3"
-                value={assignSiteGameId}
-                onChange={(event) => setAssignSiteGameId(event.target.value)}
-              >
-                <option value="">Select game</option>
-                {(siteGames.data?.items || []).map((game) => (
-                  <option key={game.id} value={game.id}>
-                    {game.localizedTitle || game.catalogTitle}
-                  </option>
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
+            <div className="space-y-4">
+              <div className="grid gap-4 md:grid-cols-2">
+                {[
+                  ['slug', 'Slug'],
+                  ['title', 'Title / H1'],
+                  ['metaTitle', 'Meta title'],
+                  ['metaDescription', 'Meta description'],
+                ].map(([key, label]) => (
+                  <label key={key} className="space-y-1.5 text-sm">
+                    <span className="font-medium">{label}</span>
+                    <input
+                      className="border-input bg-background h-10 w-full rounded-md border px-3"
+                      value={
+                        (content[
+                          key as keyof CategoryContent
+                        ] as string | null) || ''
+                      }
+                      onChange={(event) =>
+                        setContent((current) => ({
+                          ...current,
+                          [key]: event.target.value,
+                        }))
+                      }
+                    />
+                  </label>
                 ))}
-              </select>
-            </label>
-            <button
-              type="button"
-              disabled={!assignSiteGameId || assignGame.isPending}
-              onClick={() => assignGame.mutate()}
-              className="border-border h-10 rounded-md border px-4 text-sm font-medium disabled:opacity-50"
-            >
-              Assign game
-            </button>
+
+                <label className="space-y-1.5 text-sm">
+                  <span className="font-medium">Content status</span>
+                  <select
+                    className="border-input bg-background h-10 w-full rounded-md border px-3"
+                    value={content.status}
+                    onChange={(event) =>
+                      setContent((current) => ({
+                        ...current,
+                        status: event.target.value,
+                      }))
+                    }
+                  >
+                    <option value="draft">draft</option>
+                    <option value="published">published</option>
+                    <option value="archived">archived</option>
+                  </select>
+                </label>
+
+                <label className="space-y-1.5 text-sm">
+                  <span className="font-medium">Sort weight</span>
+                  <input
+                    type="number"
+                    className="border-input bg-background h-10 w-full rounded-md border px-3"
+                    value={sortWeight}
+                    onChange={(event) =>
+                      setSortWeight(Number(event.target.value) || 0)
+                    }
+                  />
+                </label>
+              </div>
+
+              <label className="block space-y-1.5 text-sm">
+                <span className="font-medium">Description</span>
+                <textarea
+                  rows={5}
+                  className="border-input bg-background w-full rounded-md border p-3 text-sm"
+                  value={content.description || ''}
+                  onChange={(event) =>
+                    setContent((current) => ({
+                      ...current,
+                      description: event.target.value,
+                    }))
+                  }
+                />
+              </label>
+
+              <label className="block space-y-1.5 text-sm">
+                <span className="font-medium">SEO content (Markdown)</span>
+                <textarea
+                  rows={14}
+                  className="border-input bg-background w-full rounded-md border p-3 font-mono text-sm"
+                  value={content.content || ''}
+                  onChange={(event) =>
+                    setContent((current) => ({
+                      ...current,
+                      content: event.target.value,
+                    }))
+                  }
+                />
+                <span className="text-muted-foreground block text-xs">
+                  Markdown is stored as source and rendered by the public
+                  category page.
+                </span>
+              </label>
+            </div>
+
+            <div className="space-y-5">
+              <ImageUploadField
+                label="Category image"
+                value={categoryImageUrl}
+                onChange={setCategoryImageUrl}
+                help="Use an uploaded asset or a stable relative path such as /categories/racing.png."
+              />
+
+              <label className="space-y-1.5 text-sm">
+                <span className="font-medium">Assign a site game</span>
+                <select
+                  className="border-input bg-background h-10 w-full rounded-md border px-3"
+                  value={assignSiteGameId}
+                  onChange={(event) =>
+                    setAssignSiteGameId(event.target.value)
+                  }
+                >
+                  <option value="">Select game</option>
+                  {(siteGames.data?.items || []).map((game) => (
+                    <option key={game.id} value={game.id}>
+                      {game.localizedTitle || game.catalogTitle}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <button
+                type="button"
+                disabled={!assignSiteGameId || assignGame.isPending}
+                onClick={() => assignGame.mutate()}
+                className="border-border h-10 w-full rounded-md border px-4 text-sm font-medium disabled:opacity-50"
+              >
+                Assign game
+              </button>
+            </div>
           </div>
 
           <button
             type="button"
-            disabled={!content.slug || !content.title || saveContent.isPending}
+            disabled={
+              !content.slug || !content.title || saveContent.isPending
+            }
             onClick={() => saveContent.mutate()}
             className="bg-primary text-primary-foreground mt-5 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
           >
-            {saveContent.isPending ? 'Saving…' : 'Save category content'}
+            {saveContent.isPending ? 'Saving…' : 'Save category'}
           </button>
         </section>
       ) : null}
