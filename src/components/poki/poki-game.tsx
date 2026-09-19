@@ -451,6 +451,7 @@ export function PokiGamePage({
             </p>
           ) : game.description ? (
             <MarkdownContent
+                        variant="game-site"
               content={game.description}
               className="mt-4 max-w-[784px] text-[#002b50]"
             />
@@ -470,6 +471,7 @@ export function PokiGamePage({
                   {showDescriptionInDetails ? (
                     <section>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.description || ''}
                         className="text-[#002b50]"
                       />
@@ -480,6 +482,7 @@ export function PokiGamePage({
                     <section>
                       <h2 className="mb-3 text-2xl font-bold">How to Play</h2>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.howToPlay}
                         className="text-[#002b50]"
                       />
@@ -490,6 +493,7 @@ export function PokiGamePage({
                     <section>
                       <h2 className="mb-3 text-2xl font-bold">Controls</h2>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.controls}
                         className="text-[#002b50]"
                       />
@@ -500,6 +504,7 @@ export function PokiGamePage({
                     <section>
                       <h2 className="mb-3 text-2xl font-bold">Features</h2>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.features}
                         className="text-[#002b50]"
                       />
@@ -510,6 +515,7 @@ export function PokiGamePage({
                     <section>
                       <h2 className="mb-3 text-2xl font-bold">FAQ</h2>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.faq}
                         className="text-[#002b50]"
                       />
@@ -519,6 +525,7 @@ export function PokiGamePage({
                   {game.content ? (
                     <section>
                       <MarkdownContent
+                        variant="game-site"
                         content={game.content}
                         className="text-[#002b50]"
                       />
