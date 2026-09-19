@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { apiUpload } from '@/lib/api-client';
+import {
+  resolveStaticAssetUrl,
+  toStoredStaticAssetPath,
+} from '@/lib/static-asset-url';
 
 interface UploadImageResult {
   urls: string[];
@@ -38,7 +42,7 @@ export function ImageUploadField({
       );
       const url = result.urls?.[0];
       if (!url) throw new Error('Upload completed without an image URL');
-      onChange(url);
+      onChange(toStoredStaticAssetPath(url));
       toast.success(
         result.results?.[0]?.deduped ? 'Image already existed' : 'Image uploaded'
       );
@@ -55,7 +59,11 @@ export function ImageUploadField({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
         <div className="border-border bg-muted/30 flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-lg border">
           {value ? (
-            <img src={value} alt="" className="size-full object-cover" />
+            <img
+              src={resolveStaticAssetUrl(value) || value}
+              alt=""
+              className="size-full object-cover"
+            />
           ) : (
             <span className="text-muted-foreground px-2 text-center text-xs">
               No image
@@ -66,7 +74,9 @@ export function ImageUploadField({
           <input
             className="border-input bg-background h-10 w-full rounded-md border px-3 text-sm"
             value={value}
-            onChange={(event) => onChange(event.target.value)}
+            onChange={(event) =>
+              onChange(toStoredStaticAssetPath(event.target.value))
+            }
             placeholder="/games/example.png or https://..."
           />
           <input
