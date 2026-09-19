@@ -36,6 +36,25 @@ const outputPath = resolve(
 );
 const onlyDomain = normalizeDomain(args.get('domain') || '');
 
+const legacyStaticOrigin = (
+  args.get('legacy-static-origin') ||
+  process.env.LEGACY_STATIC_ASSET_ORIGIN ||
+  'https://static.driftbossgame.org'
+).replace(/\/$/, '');
+
+function portableAssetReferences(value: unknown) {
+  if (value === null || value === undefined) return value;
+
+  let text = String(value);
+  for (const origin of [
+    legacyStaticOrigin,
+    legacyStaticOrigin.replace(/^https:/i, 'http:'),
+  ]) {
+    text = text.replaceAll(origin, '');
+  }
+  return text;
+}
+
 function normalizeDomain(value: string) {
   return value
     .trim()
@@ -150,7 +169,7 @@ try {
           row.meta_title || null,
           row.meta_desc || null,
           null,
-          row.seo_content || null,
+          portableAssetReferences(row.seo_content) || null,
           createdAt,
           updatedAt,
         ],
@@ -233,7 +252,7 @@ try {
             null,
             null,
             null,
-            content,
+            portableAssetReferences(content),
             createdAt,
             updatedAt,
           ],
