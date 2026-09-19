@@ -1,17 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router';
-
-import { PokiGamePage } from '@/components/poki/poki-game';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/en/g/pool-club')({
-  head: () => ({
-    meta: [
-      { title: 'Pool Club - Play Online for Free! | Poki' },
-      {
-        name: 'description',
-        content:
-          'Line up your shot, apply spin and pot balls through a range of pool challenges and modes.',
-      },
-    ],
-  }),
-  component: PokiGamePage,
+  loader: () => {
+    throw redirect({ to: '/game/pool-club' });
+  },
 });
