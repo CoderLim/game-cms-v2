@@ -110,7 +110,29 @@ dislike_count = 0
 
 for the migrated site's `site_game` rows. Real V2 counters start accumulating after cutover.
 
-## 7. Review generated SQL before applying
+## 7. Static asset portability
+
+The legacy CDN host is not persisted into V2 content. During export:
+
+```text
+https://static.driftbossgame.org/games/foo.png
+→ /games/foo.png
+
+https://static.driftbossgame.org/game-play/foo/index.html
+→ /game-play/foo/index.html
+```
+
+The public runtime resolves relative resource paths through:
+
+```env
+VITE_STATIC_ASSET_ORIGIN=https://static.klotski.org
+```
+
+External absolute URLs are preserved. This allows the CDN/static host to change without rewriting database rows. Legacy static references embedded inside migrated Markdown/content are also converted to relative paths.
+
+The exporter defaults the legacy origin to `https://static.driftbossgame.org`. If auditing another historical host, override it with `LEGACY_STATIC_ASSET_ORIGIN` or `--legacy-static-origin=...`.
+
+## 8. Review generated SQL before applying
 
 At minimum inspect:
 
@@ -131,7 +153,7 @@ Check that:
 - URLs/slugs match the legacy public URLs you need to preserve;
 - no unrelated game's `site_game` row appears for this site.
 
-## 8. Test against local SQLite first
+## 9. Test against local SQLite first
 
 Create a fresh local DB:
 
@@ -170,7 +192,7 @@ SELECT type, status, indexable
 FROM site_post;
 ```
 
-## 9. Apply to D1
+## 10. Apply to D1
 
 First make sure V2 schema migrations have already been applied to the target D1.
 
@@ -189,7 +211,7 @@ npx wrangler d1 execute <DB_NAME> --remote \
 
 The generated SQL is idempotent, but still back up the D1 database before production migration.
 
-## 10. Deploy a preview Worker before DNS cutover
+## 11. Deploy a preview Worker before DNS cutover
 
 Use the same production `SITE_KEY`, but deploy to a preview Worker/domain first.
 
@@ -205,7 +227,7 @@ The site row still contains the canonical production domain `driftbossgame.org`.
 
 Preview `robots.txt` must remain `Disallow: /`.
 
-## 11. Run the cutover audit
+## 12. Run the cutover audit
 
 Example:
 
@@ -233,7 +255,7 @@ The audit checks:
 
 The `--not-found` checks are especially important: they are a direct regression test for the old architecture's shared-catalog exposure problem.
 
-## 12. Production cutover
+## 13. Production cutover
 
 Only after preview audit passes:
 
@@ -244,7 +266,7 @@ Only after preview audit passes:
 5. verify `/robots.txt` and `/sitemap.xml` manually;
 6. check Google Search Console for 404/canonical/indexing regressions.
 
-## 13. Do not delete the legacy database immediately
+## 14. Do not delete the legacy database immediately
 
 Keep the old database read-only for at least one rollback window after cutover.
 
@@ -266,7 +288,7 @@ legacy becomes read-only rollback source
 retire later
 ```
 
-## 14. Migration acceptance criteria
+## 15. Migration acceptance criteria
 
 A site is ready to cut over only when all are true:
 
