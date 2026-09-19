@@ -163,19 +163,23 @@ const games = uniqueBySiteGameId([
 
 分类数据来自 `categories/service.listPublished`。
 
-图片仍复用现有静态分类素材，但图片匹配使用稳定的 `categoryKey`，不能使用 localized slug：
+分类封面来自 `site_category.image_url`，不再使用 `/poki/categories/*` 静态映射。
+
+legacy `categories.image_url` 在迁移时写入 `site_category.image_url`，并遵循静态资源可移植规则，例如：
 
 ```text
-/public/poki/categories/{categoryKey}.png
+https://static.driftbossgame.org/games/foo.png
+→ /games/foo.png
+→ https://static.klotski.org/games/foo.png
 ```
 
-链接使用真实 localized slug：
+链接仍使用真实 localized slug：
 
 ```text
 /category/{slug}
 ```
 
-没有对应静态图片时显示分类标题，不显示破图。
+没有图片时显示分类标题，不显示破图。
 
 ### 4. 搜索
 
