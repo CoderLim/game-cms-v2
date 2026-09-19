@@ -18,6 +18,35 @@ function siteOrigin(domain: string) {
   return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
 }
 
+const detailLayout = {
+  background: pageLayout.background,
+  stageWidth: pageLayout.stageWidth,
+  stageHeight: pageLayout.stageHeight,
+  player: {
+    x: pageLayout.player.x,
+    y: pageLayout.player.y,
+    w: pageLayout.player.w,
+    h: pageLayout.player.h,
+    barH: pageLayout.player.barH,
+  },
+  ad: {
+    x: pageLayout.ad.x,
+    y: pageLayout.ad.y,
+    w: pageLayout.ad.w,
+    h: pageLayout.ad.h,
+  },
+  ...(pageLayout.bannerAd
+    ? {
+        bannerAd: {
+          x: pageLayout.bannerAd.x,
+          y: pageLayout.bannerAd.y,
+          w: pageLayout.bannerAd.w,
+          h: pageLayout.bannerAd.h,
+        },
+      }
+    : {}),
+};
+
 function mapRecommendationTiles(
   games: Array<{
     siteGameId: string;
@@ -183,7 +212,7 @@ function GamePage() {
     <>
       <StructuredData data={structuredData} />
       <PokiGamePage
-        layout={pageLayout}
+        layout={detailLayout}
         siteName={site.name}
         game={game}
         categories={categories}
