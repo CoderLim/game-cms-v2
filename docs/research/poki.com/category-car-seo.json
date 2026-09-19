@@ -1,0 +1,517 @@
+{
+  "gridInfo": {
+    "tag": "ARTICLE",
+    "classes": "npmo3Vk8vdpOrUnRlo4K",
+    "x": 68,
+    "y": 2004,
+    "w": 1304,
+    "h": 1857,
+    "childCount": 3,
+    "textHead": "GAMES\nCAR GAMES\nCar Games\n\nCar games are all about driving fast and keeping your",
+    "children": [
+      {
+        "tag": "DIV",
+        "classes": "ag25MXv4yZahCGrJMxIn",
+        "x": 92,
+        "y": 2028,
+        "w": 926,
+        "h": 92,
+        "childCount": 2,
+        "textHead": "GAMES\nCAR GAMES\nCar Games",
+        "children": [
+          {
+            "tag": "NAV",
+            "classes": "kd9Is9cTBZ_vuww2pWiX ODY4N8qthtyZR7ueRm8t",
+            "x": 92,
+            "y": 2028,
+            "w": 926,
+            "h": 36,
+            "childCount": 1,
+            "textHead": "GAMES\nCAR GAMES",
+            "children": [
+              {
+                "tag": "DIV",
+                "classes": "wpZ3GoxLQVMZwH0a4VbJ",
+                "x": 92,
+                "y": 2036,
+                "w": 926,
+                "h": 16,
+                "childCount": 2,
+                "textHead": "GAMES\nCAR GAMES",
+                "children": [null, null]
+              }
+            ]
+          },
+          {
+            "tag": "HEADER",
+            "classes": "i3QPWr3keV_hOpU2xsic",
+            "x": 92,
+            "y": 2064,
+            "w": 926,
+            "h": 40,
+            "childCount": 1,
+            "textHead": "Car Games",
+            "children": [
+              {
+                "tag": "H2",
+                "classes": "Wa2Xpu5vfbxVCjRv2Gv_",
+                "x": 92,
+                "y": 2064,
+                "w": 926,
+                "h": 40,
+                "childCount": 0,
+                "textHead": "Car Games",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "classes": "ExURFs1eybHeBRR0Ay6d",
+        "x": 92,
+        "y": 2120,
+        "w": 926,
+        "h": 1717,
+        "childCount": 5,
+        "textHead": "Car games are all about driving fast and keeping your car steady when the track ",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "U5UHxulLIj1mqRNKVoIl",
+            "x": 92,
+            "y": 2136,
+            "w": 926,
+            "h": 1295,
+            "childCount": 24,
+            "textHead": "Car games are all about driving fast and keeping your car steady when the track ",
+            "children": [
+              {
+                "tag": "P",
+                "classes": "",
+                "x": 92,
+                "y": 2136,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Car games are all about driving fast and keeping your car steady when the track ",
+                "children": []
+              },
+              {
+                "tag": "P",
+                "classes": "",
+                "x": 92,
+                "y": 2176,
+                "w": 926,
+                "h": 24,
+                "childCount": 1,
+                "textHead": "On Poki, you'll find 160+ free car games that let you drive anything from a beat",
+                "children": [null]
+              },
+              {
+                "tag": "P",
+                "classes": "",
+                "x": 92,
+                "y": 2216,
+                "w": 926,
+                "h": 48,
+                "childCount": 0,
+                "textHead": "Race through tight city streets, drift corners, avoid obstacles or send your car",
+                "children": []
+              },
+              {
+                "tag": "H2",
+                "classes": "",
+                "x": 92,
+                "y": 2280,
+                "w": 926,
+                "h": 29,
+                "childCount": 0,
+                "textHead": "Most popular car games",
+                "children": []
+              },
+              {
+                "tag": "P",
+                "classes": "",
+                "x": 92,
+                "y": 2325,
+                "w": 926,
+                "h": 24,
+                "childCount": 1,
+                "textHead": "These are the 5 most popular car games players keep coming back to.",
+                "children": [null]
+              },
+              {
+                "tag": "UL",
+                "classes": "",
+                "x": 92,
+                "y": 2365,
+                "w": 926,
+                "h": 184,
+                "childCount": 5,
+                "textHead": "Drift Boss - 4.5⭐\nSmash Karts - 4.4⭐\nPolyTrack - 4.4⭐\nDrive Mad - 4.4⭐\nEggy Car ",
+                "children": [null, null, null, null, null]
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "classes": "uSPpW2ZYe05PNcSmK0FP",
+            "x": 92,
+            "y": 3450,
+            "w": 926,
+            "h": 67,
+            "childCount": 2,
+            "textHead": "What are car games?\nCar games are driving games where you race, drift, balance o",
+            "children": [
+              {
+                "tag": "H3",
+                "classes": "",
+                "x": 92,
+                "y": 3450,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "What are car games?",
+                "children": []
+              },
+              {
+                "tag": "DIV",
+                "classes": "",
+                "x": 92,
+                "y": 3492,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Car games are driving games where you race, drift, balance on narrow tracks, or ",
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "classes": "uSPpW2ZYe05PNcSmK0FP",
+            "x": 92,
+            "y": 3540,
+            "w": 926,
+            "h": 67,
+            "childCount": 2,
+            "textHead": "Can I play car games for free?\nYes. Every online car game on Poki is free to pla",
+            "children": [
+              {
+                "tag": "H3",
+                "classes": "",
+                "x": 92,
+                "y": 3540,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Can I play car games for free?",
+                "children": []
+              },
+              {
+                "tag": "DIV",
+                "classes": "",
+                "x": 92,
+                "y": 3583,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Yes. Every online car game on Poki is free to play in your browser with no downl",
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "classes": "uSPpW2ZYe05PNcSmK0FP",
+            "x": 92,
+            "y": 3631,
+            "w": 926,
+            "h": 67,
+            "childCount": 2,
+            "textHead": "Can I play car games on mobile?\nYes. Car games on Poki work on mobile browsers. ",
+            "children": [
+              {
+                "tag": "H3",
+                "classes": "",
+                "x": 92,
+                "y": 3631,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Can I play car games on mobile?",
+                "children": []
+              },
+              {
+                "tag": "DIV",
+                "classes": "",
+                "x": 92,
+                "y": 3674,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Yes. Car games on Poki work on mobile browsers. On mobile, use the on-screen arr",
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "classes": "uSPpW2ZYe05PNcSmK0FP",
+            "x": 92,
+            "y": 3722,
+            "w": 926,
+            "h": 91,
+            "childCount": 2,
+            "textHead": "Are there 2 player car games?\nYes. Several car games on Poki support 2 players o",
+            "children": [
+              {
+                "tag": "H3",
+                "classes": "",
+                "x": 92,
+                "y": 3722,
+                "w": 926,
+                "h": 24,
+                "childCount": 0,
+                "textHead": "Are there 2 player car games?",
+                "children": []
+              },
+              {
+                "tag": "DIV",
+                "classes": "",
+                "x": 92,
+                "y": 3765,
+                "w": 926,
+                "h": 48,
+                "childCount": 0,
+                "textHead": "Yes. Several car games on Poki support 2 players on the same keyboard. Blacktop ",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "classes": "v8TUHvsE2V93jQeU1nvV",
+        "x": 1018,
+        "y": 2028,
+        "w": 330,
+        "h": 321,
+        "childCount": 1,
+        "textHead": "",
+        "children": [
+          {
+            "tag": "PICTURE",
+            "classes": "wIGewHYOM_yiDgJbC_XN",
+            "x": 1034,
+            "y": 2329,
+            "w": 314,
+            "h": 16,
+            "childCount": 2,
+            "textHead": "",
+            "children": [
+              {
+                "tag": "SOURCE",
+                "classes": "bfq4PKbgNwePswLuaSwZ",
+                "x": 1034,
+                "y": 2329,
+                "w": 0,
+                "h": 16,
+                "childCount": 0,
+                "textHead": "",
+                "children": []
+              },
+              {
+                "tag": "IMG",
+                "classes": "bfq4PKbgNwePswLuaSwZ",
+                "x": 1034,
+                "y": 2028,
+                "w": 314,
+                "h": 314,
+                "childCount": 0,
+                "textHead": "",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "styles": {
+    "h2": {
+      "fs": "24px",
+      "fw": "700",
+      "lh": "normal",
+      "mb": "16px",
+      "mt": "16px"
+    },
+    "h3": {
+      "fs": "18.72px",
+      "fw": "700",
+      "lh": "24px",
+      "mb": "16px",
+      "mt": "16px"
+    },
+    "p": {
+      "fs": "16px",
+      "fw": "400",
+      "lh": "24px",
+      "mb": "16px",
+      "color": "rgb(0, 43, 80)"
+    }
+  },
+  "crumbStyles": {
+    "fs": "16px",
+    "text": "GAMES\nCAR GAMES\nCar Games",
+    "h2": {
+      "fs": "36px",
+      "fw": "700",
+      "lh": "40px"
+    }
+  },
+  "blocks": [
+    {
+      "tag": "p",
+      "text": "Car games are all about driving fast and keeping your car steady when the track gets hard and things start going wrong."
+    },
+    {
+      "tag": "p",
+      "text": "On Poki, you'll find 160+ free car games that let you drive anything from a beat-up banger to a supercharged sports car."
+    },
+    {
+      "tag": "p",
+      "text": "Race through tight city streets, drift corners, avoid obstacles or send your car flying off a ramp just to see if you land it or crash. Jump in and start driving!"
+    },
+    {
+      "tag": "h2",
+      "text": "Most popular car games"
+    },
+    {
+      "tag": "p",
+      "text": "These are the 5 most popular car games players keep coming back to."
+    },
+    {
+      "tag": "ul",
+      "text": "Drift Boss - 4.5⭐\nSmash Karts - 4.4⭐\nPolyTrack - 4.4⭐\nDrive Mad - 4.4⭐\nEggy Car - 4.0⭐"
+    },
+    {
+      "tag": "li",
+      "text": "Drift Boss - 4.5⭐"
+    },
+    {
+      "tag": "li",
+      "text": "Smash Karts - 4.4⭐"
+    },
+    {
+      "tag": "li",
+      "text": "PolyTrack - 4.4⭐"
+    },
+    {
+      "tag": "li",
+      "text": "Drive Mad - 4.4⭐"
+    },
+    {
+      "tag": "li",
+      "text": "Eggy Car - 4.0⭐"
+    },
+    {
+      "tag": "h2",
+      "text": "Types of car games"
+    },
+    {
+      "tag": "p",
+      "text": "Not every car game plays the same. Some test your speed. Others test your control. Here are the 5 main types you can play on Poki."
+    },
+    {
+      "tag": "h3",
+      "text": "Racing games"
+    },
+    {
+      "tag": "p",
+      "text": "In racing games, you race against other drivers to cross the finish line first. Dodge traffic, skid around corners and speed up when the road is straight. You can even try to make the other drivers crash. Do what it takes to finish first!"
+    },
+    {
+      "tag": "p",
+      "text": "Top games: Grand Prix Hero, Cyber Cars Punk Racing"
+    },
+    {
+      "tag": "h3",
+      "text": "Obbies"
+    },
+    {
+      "tag": "p",
+      "text": "Stay on the track. One mistake and it's game over. These games are less about speed and more about control. You'll drive on narrow platforms barely wider than your car or avoid moving obstacles like swinging spikes or lasers."
+    },
+    {
+      "tag": "p",
+      "text": "Top games: Drive Mad, Monster Tracks"
+    },
+    {
+      "tag": "h3",
+      "text": "Drifting games"
+    },
+    {
+      "tag": "p",
+      "text": "In drifting games, your car slides instead of turning normally. You'll drift through corners by timing each turn. Drifting games are all about timing. Tap too early and you spin out. Too late and you miss the turn completely."
+    },
+    {
+      "tag": "p",
+      "text": "Top games: Drift Boss, Sling Drift"
+    },
+    {
+      "tag": "h3",
+      "text": "Open world car games"
+    },
+    {
+      "tag": "p",
+      "text": "Drive anywhere and explore what's around the map. There's no finish line here. You can drive around cities and see if your car lands when you hit ramps and jumps. Crashes don't end your run either, so you can try the craziest stunts you can."
+    },
+    {
+      "tag": "p",
+      "text": "Top games: Crazy Cars, City Rider"
+    },
+    {
+      "tag": "h3",
+      "text": "Car battle games"
+    },
+    {
+      "tag": "p",
+      "text": "Enter an arena and take out other players before they take you out. Your car is your weapon. If you stop attacking, you lose. Hit other cars and take them out to win."
+    },
+    {
+      "tag": "p",
+      "text": "Top games: Smash Karts, Demolition Derby Crash Racing"
+    },
+    {
+      "tag": "h2",
+      "text": "FAQ"
+    },
+    {
+      "tag": "h3",
+      "text": "What are car games?"
+    },
+    {
+      "tag": "h3",
+      "text": "Can I play car games for free?"
+    },
+    {
+      "tag": "h3",
+      "text": "Can I play car games on mobile?"
+    },
+    {
+      "tag": "h3",
+      "text": "Are there 2 player car games?"
+    }
+  ],
+  "ad": {
+    "x": 1018,
+    "y": 2028,
+    "w": 330,
+    "h": 321
+  },
+  "articleText": "Car games are all about driving fast and keeping your car steady when the track gets hard and things start going wrong.\n\nOn Poki, you'll find 160+ free car games that let you drive anything from a beat-up banger to a supercharged sports car.\n\nRace through tight city streets, drift corners, avoid obstacles or send your car flying off a ramp just to see if you land it or crash. Jump in and start driving!\n\nMost popular car games\n\nThese are the 5 most popular car games players keep coming back to.\n\nDrift Boss - 4.5⭐\nSmash Karts - 4.4⭐\nPolyTrack - 4.4⭐\nDrive Mad - 4.4⭐\nEggy Car - 4.0⭐\nTypes of car games\n\nNot every car game plays the same. Some test your speed. Others test your control. Here are the 5 main types you can play on Poki.\n\nRacing games\n\nIn racing games, you race against other drivers to cross the finish line first. Dodge traffic, skid around corners and speed up when the road is straight. You can even try to make the other drivers crash. Do what it takes to finish first!\n\nTop games: Grand Prix Hero, Cyber Cars Punk Racing\n\nObbies\n\nStay on the track. One mistake and it's game over. These games are less about speed and more about control. You'll drive on narrow platforms barely wider than your car or avoid moving obstacles like swinging spikes or lasers.\n\nTop games: Drive Mad, Monster Tracks\n\nDrifting games\n\nIn drifting games, your car slides instead of turning normally. You'll drift through corners by timing each turn. Drifting games are all about timing. Tap too early and you spin out. Too late and you miss the turn completely.\n\nTop games: Drift Boss, Sling Drift\n\nOpen world car games\n\nDrive anywhere and explore what's around the map. There's no finish line here. You can drive around cities and see if your car lands when you hit ramps and jumps. Crashes don't end your run either, so you can try the craziest stunts you can.\n\nTop games: Crazy Cars, City Rider\n\nCar battle games\n\nEnter an arena and take out other players before they take you out. Your car is your weapon. If you stop attacking, you lose. Hit other cars and take them out to win.\n\nTop games: Smash Karts, Demolition Derby Crash Racing\n\nFAQ\nWhat are car games?\nCar games are driving games where you race, drift, balance on narrow tracks, or explore open roads.\nCan I play car games for free?\nYes. Every online car game on Poki is free to play in your browser with no download or account needed.\nCan I play car games on mobile?\nYes. Car games on Poki work on mobile browsers. On mobile, use the on-screen arrows to control your car.\nAre there 2 player car games?\nYes. Several car games on Poki support 2 players on the same keyboard. Blacktop Police Chase and Crazy Cars are two of the most played options."
+}

@@ -1,0 +1,106 @@
+{
+  "link": {
+    "w": 204,
+    "h": 94,
+    "bg": "rgb(255, 255, 255)",
+    "br": "16px",
+    "display": "flex",
+    "overflow": "hidden",
+    "shadow": "rgba(93, 107, 132, 0.3) 0px 7px 10px 4px"
+  },
+  "tree": {
+    "tag": "A",
+    "classes": "DIxbY_Wd8M99mMzbD9Jz Ll7V72dm63WTr1buD4lg",
+    "text": null,
+    "styles": {
+      "display": "flex",
+      "flexDirection": "row",
+      "alignItems": "center",
+      "gap": "normal",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "color": "rgb(0, 156, 255)",
+      "textTransform": "none",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "16px",
+      "padding": "0px",
+      "width": 204,
+      "height": 94
+    },
+    "children": [
+      {
+        "tag": "IMG",
+        "classes": "VrWOfVJtTjn2FNJx0TFc",
+        "text": null,
+        "styles": {
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "gap": "normal",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "color": "rgba(0, 0, 0, 0)",
+          "textTransform": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "16px 0px 0px 16px",
+          "padding": "0px",
+          "width": 94,
+          "height": 94
+        },
+        "children": []
+      },
+      {
+        "tag": "SPAN",
+        "classes": "QGnVckPD11ZTkQr8o8ci",
+        "text": "Driving Games",
+        "styles": {
+          "display": "block",
+          "flexDirection": "row",
+          "alignItems": "normal",
+          "gap": "normal",
+          "fontSize": "12px",
+          "fontWeight": "700",
+          "color": "rgb(0, 43, 80)",
+          "textTransform": "uppercase",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "padding": "0px 8px",
+          "width": 110,
+          "height": 40
+        },
+        "children": []
+      }
+    ]
+  },
+  "kids": [
+    {
+      "tag": "IMG",
+      "classes": "VrWOfVJtTjn2FNJx0TFc",
+      "x": 0,
+      "y": 0,
+      "w": 94,
+      "h": 94,
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgba(0, 0, 0, 0)",
+      "fs": "16px",
+      "fw": "400",
+      "display": "block",
+      "text": "",
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/625bc0ccac4d289678996e339255b066/driving-logo.png"
+    },
+    {
+      "tag": "SPAN",
+      "classes": "QGnVckPD11ZTkQr8o8ci",
+      "x": 94,
+      "y": 27,
+      "w": 110,
+      "h": 40,
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(0, 43, 80)",
+      "fs": "12px",
+      "fw": "700",
+      "display": "block",
+      "text": "Driving Games"
+    }
+  ]
+}

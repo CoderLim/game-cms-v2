@@ -1,5 +1,6 @@
 import { and, desc, eq } from 'drizzle-orm';
 
+import { db } from '@/core/db';
 import {
   game,
   gameCategory,
@@ -9,15 +10,13 @@ import {
   siteGameCategory,
   siteGameLocale,
 } from '@/config/db/game-schema';
-import { db } from '@/core/db';
-import { getUuid } from '@/lib/hash';
-import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
-
 import { GameStatus } from '@/modules/games/service';
 import {
   SiteContentStatus,
   SiteGameStatus,
 } from '@/modules/site-games/service';
+import { getUuid } from '@/lib/hash';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
 export enum SiteCategoryStatus {
   DRAFT = 'draft',
@@ -154,7 +153,9 @@ export async function assignGame(input: {
     .limit(1);
 
   if (!gameParent || !categoryParent) {
-    throw new Error('site_game and site_category must belong to the supplied site');
+    throw new Error(
+      'site_game and site_category must belong to the supplied site'
+    );
   }
 
   const values = {
@@ -295,7 +296,7 @@ export async function listGames(input: {
   locale: string;
   limit?: number;
 }) {
-  const limit = Math.min(Math.max(input.limit || 24, 1), 100);
+  const limit = Math.min(Math.max(input.limit || 24, 1), 200);
 
   const rows = await db()
     .select({

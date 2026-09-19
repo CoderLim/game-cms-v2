@@ -1,0 +1,118 @@
+{
+  "proseLen": 25,
+  "prose": "GAMES\nCAR GAMES\nCar Games",
+  "footerText": "Let the world play\nEnglish\nPOPULAR\nCar Games\n.io Games\n2 Player Games\nPuzzle Games\nDress Up Games\nAll Games\nHELP AND SUPPORT\nFAQ\nContact\nPrivacy Center\nGET TO KNOW US\nAbout\nPoki for Developers\nPoki Kids\nBlog\nJobs",
+  "relatedCats": [
+    {
+      "href": "/en/driving",
+      "text": "Driving Games",
+      "x": 1058,
+      "y": 16,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/625bc0ccac4d289678996e339255b066/driving-logo.png"
+    },
+    {
+      "href": "/en/drifting",
+      "text": "Drifting Games",
+      "x": 1168,
+      "y": 126,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/d1ca4bd7c3179e4c44e3bd78384e2fa1/drifting-logo.png"
+    },
+    {
+      "href": "/en/truck",
+      "text": "Truck Games",
+      "x": 1168,
+      "y": 236,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/cf4df6cf13ba47794161bb7010bb419f/truck-logo.png"
+    },
+    {
+      "href": "/en/racing",
+      "text": "Racing Games",
+      "x": 1168,
+      "y": 346,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/88d9eddf24bfe24a7359a2f43ed91d11/racing-logo.png"
+    },
+    {
+      "href": "/en/3d",
+      "text": "3D Games",
+      "x": 948,
+      "y": 1776,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/f71608f9a4ead92b0e67ae9811712046/3d-logo.png"
+    },
+    {
+      "href": "/en/action",
+      "text": "Action Games",
+      "x": 68,
+      "y": 1886,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/dbc7dd98491c7e43362d9ad7b5afbec2/action-logo.png"
+    },
+    {
+      "href": "/en/monster-truck",
+      "text": "Monster Truck Games",
+      "x": 288,
+      "y": 1886,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/3bb6a301105c94fcfe6d8db23b5714ae/monster-truck-logo.png"
+    },
+    {
+      "href": "/en/parking",
+      "text": "Parking Games",
+      "x": 508,
+      "y": 1886,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/851d261c3fd63e5d01d58e8471905e09/parking-logo.png"
+    },
+    {
+      "href": "/en/skill",
+      "text": "Skill Games",
+      "x": 728,
+      "y": 1886,
+      "w": 204,
+      "h": 94,
+      "img": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=94,height=94,fit=cover,f=auto/3ef233cfb9ca304e6614a2a2705cc7aa/skill-logo.png"
+    }
+  ],
+  "navButtons": [
+    {
+      "tag": "A",
+      "href": "/",
+      "aria": "Poki",
+      "x": 85,
+      "y": 31,
+      "w": 60,
+      "h": 28
+    },
+    {
+      "tag": "BUTTON",
+      "href": null,
+      "aria": "Profile",
+      "x": 68,
+      "y": 72,
+      "w": 46,
+      "h": 38
+    },
+    {
+      "tag": "BUTTON",
+      "href": null,
+      "aria": "Search",
+      "x": 115,
+      "y": 72,
+      "w": 47,
+      "h": 38
+    }
+  ],
+  "scrollHeight": 4287
+}
