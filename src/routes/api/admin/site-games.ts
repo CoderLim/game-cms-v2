@@ -86,6 +86,20 @@ async function PUT({ request }: { request: Request }) {
   }
 }
 
+async function DELETE({ request }: { request: Request }) {
+  try {
+    await requireAdmin(request);
+    const { searchParams } = new URL(request.url);
+    const siteId = searchParams.get('siteId') || '';
+    const id = searchParams.get('id') || '';
+    if (!siteId || !id) return respErr('siteId and id are required');
+
+    return respData(await siteGameService.removeSiteGame(siteId, id));
+  } catch (error: any) {
+    return respErr(error.message || 'Failed to remove site game');
+  }
+}
+
 export const Route = createFileRoute('/api/admin/site-games')({
-  server: { handlers: { GET, POST, PUT } },
+  server: { handlers: { GET, POST, PUT, DELETE } },
 });
