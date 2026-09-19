@@ -8,6 +8,13 @@
       "when": 1789636663507,
       "tag": "0000_chubby_fixer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789800000000,
+      "tag": "0001_category_image",
+      "breakpoints": true
     }
   ]
 }
