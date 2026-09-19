@@ -213,6 +213,19 @@ function GameCategoriesPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
+  const removeFromSite = useMutation({
+    mutationFn: (id: string) =>
+      apiDelete(
+        `/api/admin/site-categories?siteId=${encodeURIComponent(siteId)}&id=${encodeURIComponent(id)}`
+      ),
+    onSuccess: () => {
+      toast.success('Category removed from site');
+      setEditing(null);
+      queryClient.invalidateQueries({ queryKey: ['admin-site-categories'] });
+    },
+    onError: (error: Error) => toast.error(error.message),
+  });
+
   const saveContent = useMutation({
     mutationFn: async () => {
       if (!editing) throw new Error('No category selected');
