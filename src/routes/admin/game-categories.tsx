@@ -11,6 +11,7 @@ import {
   apiPut,
   type PageResult,
 } from '@/lib/api-client';
+import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
 interface SiteRow {
   id: string;
@@ -453,7 +454,7 @@ function GameCategoriesPage() {
                   <div className="flex items-center gap-3">
                     {row.imageUrl ? (
                       <img
-                        src={row.imageUrl}
+                        src={resolveStaticAssetUrl(row.imageUrl) || row.imageUrl}
                         alt=""
                         className="size-10 rounded-md object-cover"
                       />
