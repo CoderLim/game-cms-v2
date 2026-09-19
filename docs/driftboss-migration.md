@@ -103,7 +103,17 @@ Multiple featured game pairs can be comma-separated in `--featured`.
 
 Both exporters are read-only against the legacy database and generate deterministic UUIDv5 + idempotent UPSERT SQL.
 
-## 4. Inspect the generated SQL
+## 4. Static asset portability
+
+Legacy resources hosted on `static.driftbossgame.org` are exported as relative paths rather than binding V2 data to that dead CDN hostname. At runtime, configure:
+
+```env
+VITE_STATIC_ASSET_ORIGIN=https://static.klotski.org
+```
+
+For example, `https://static.driftbossgame.org/games/foo.png` is stored as `/games/foo.png`. Legacy `/game-play/` URLs receive the same treatment. Third-party absolute URLs remain unchanged.
+
+## 5. Inspect the generated SQL
 
 Before applying it, check the exporter summaries and inspect both SQL files.
 
@@ -121,7 +131,7 @@ Expected properties:
 
 Historical databases may contain runtime columns absent from the checked-in old `schema.sql` (for example `locale`, `meta_title`, or `slug`). The exporter reads `SELECT *` and consumes those fields when present.
 
-## 5. Validate in local SQLite first
+## 6. Validate in local SQLite first
 
 Create a clean local database. Never use your normal development database for the migration dry-run.
 
@@ -183,7 +193,7 @@ temporary legacy PostgreSQL
 
 Its fixture deliberately puts the same `drift-boss` global game on two sites with different slugs and SEO content, so a regression that merges/cross-falls-back content fails CI.
 
-## 6. Import to D1
+## 7. Import to D1
 
 After local validation, apply V2 schema migrations to the target D1 first:
 
@@ -207,7 +217,7 @@ npx wrangler d1 execute <database-name> \
 
 The order matters: extras reference `game_site` rows created by the main import.
 
-## 7. Configure the Worker
+## 8. Configure the Worker
 
 For the DriftBoss Worker:
 
@@ -227,7 +237,7 @@ For the DriftBoss Worker:
 
 Keep `DEPLOY_ENV=preview` while validating so robots blocks indexing before cutover.
 
-## 8. URL/SEO acceptance checks
+## 9. URL/SEO acceptance checks
 
 Deploy a preview Worker and run the reusable audit while its canonical still points at the intended production domain:
 
@@ -271,7 +281,7 @@ Also manually compare the old production site and V2 for important:
 
 Existing indexed URLs should be preserved whenever possible. Any intentionally changed URL requires a permanent redirect.
 
-## 9. Production cutover
+## 10. Production cutover
 
 Recommended order:
 
@@ -292,7 +302,7 @@ Recommended order:
 
 Keep the legacy production application/database intact until rollback is no longer needed.
 
-## 10. What is not migrated automatically
+## 11. What is not migrated automatically
 
 The exporters deliberately do not guess ambiguous business intent:
 
