@@ -95,6 +95,19 @@ function portableAssetPath(value: string | null | undefined) {
   return raw;
 }
 
+function portableAssetReferences(value: string | null | undefined) {
+  if (!value) return value ?? null;
+
+  let text = value;
+  for (const origin of [
+    LEGACY_STATIC_ORIGIN,
+    LEGACY_STATIC_ORIGIN.replace(/^https:/i, 'http:'),
+  ]) {
+    text = text.replaceAll(origin, '');
+  }
+  return text;
+}
+
 function id(scope: string, value: string) {
   return uuidv5(`${scope}:${value}`, NAMESPACE);
 }
@@ -193,7 +206,7 @@ async function main() {
         title: fixture.site.site_name || 'Drift Boss',
         metaTitle: fixture.site.meta_title,
         metaDescription: fixture.site.meta_desc,
-        content: fixture.site.seo_content,
+        content: portableAssetReferences(fixture.site.seo_content),
         createdAt: asDate(fixture.site.created_at),
         updatedAt: asDate(fixture.site.updated_at || fixture.site.created_at),
       })
@@ -207,7 +220,7 @@ async function main() {
           title: fixture.site.site_name || 'Drift Boss',
           metaTitle: fixture.site.meta_title,
           metaDescription: fixture.site.meta_desc,
-          content: fixture.site.seo_content,
+          content: portableAssetReferences(fixture.site.seo_content),
           updatedAt: asDate(fixture.site.updated_at || fixture.site.created_at),
         },
       });
@@ -274,7 +287,7 @@ async function main() {
           slug: page.slug,
           status: 'published',
           title: page.title,
-          content: pageContent,
+          content: portableAssetReferences(pageContent),
           createdAt: asDate(fixture.site.created_at),
           updatedAt: asDate(
             fixture.site.updated_at || fixture.site.created_at
@@ -290,7 +303,7 @@ async function main() {
             slug: page.slug,
             status: 'published',
             title: page.title,
-            content: pageContent,
+            content: portableAssetReferences(pageContent),
             updatedAt: asDate(
               fixture.site.updated_at || fixture.site.created_at
             ),
@@ -391,7 +404,7 @@ async function main() {
             metaDescription: seo?.meta_desc || null,
             description:
               locale === 'en' ? category.description || null : null,
-            content: seo?.seo_content || null,
+            content: portableAssetReferences(seo?.seo_content) || null,
             createdAt: asDate(seo?.created_at || category.created_at),
             updatedAt: asDate(seo?.created_at || category.created_at),
           })
@@ -409,7 +422,7 @@ async function main() {
               metaDescription: seo?.meta_desc || null,
               description:
                 locale === 'en' ? category.description || null : null,
-              content: seo?.seo_content || null,
+              content: portableAssetReferences(seo?.seo_content) || null,
             },
           });
       }
@@ -545,7 +558,7 @@ async function main() {
             metaDescription: localeRow.meta_desc,
             description:
               localeRow.locale === 'en' ? game.description : null,
-            content: localeRow.seo_content,
+            content: portableAssetReferences(localeRow.seo_content),
             createdAt: asDate(localeRow.created_at || game.created_at),
             updatedAt: asDate(localeRow.created_at || game.created_at),
           })
@@ -563,7 +576,7 @@ async function main() {
               metaDescription: localeRow.meta_desc,
               description:
                 localeRow.locale === 'en' ? game.description : null,
-              content: localeRow.seo_content,
+              content: portableAssetReferences(localeRow.seo_content),
             },
           });
       }
