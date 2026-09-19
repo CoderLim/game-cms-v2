@@ -4,6 +4,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { toast } from 'sonner';
 
 import {
+  apiDelete,
   apiGet,
   apiPost,
   apiPut,
@@ -159,6 +160,19 @@ function SiteGamesPage() {
       apiPut('/api/admin/site-games', payload),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ['admin-site-games'] }),
+    onError: (error: Error) => toast.error(error.message),
+  });
+
+  const removeFromSite = useMutation({
+    mutationFn: (id: string) =>
+      apiDelete(
+        `/api/admin/site-games?siteId=${encodeURIComponent(siteId)}&id=${encodeURIComponent(id)}`
+      ),
+    onSuccess: () => {
+      toast.success('Game removed from site');
+      setEditing(null);
+      queryClient.invalidateQueries({ queryKey: ['admin-site-games'] });
+    },
     onError: (error: Error) => toast.error(error.message),
   });
 
@@ -334,6 +348,22 @@ function SiteGamesPage() {
                       className="border-border rounded-md border px-2.5 py-1.5 text-xs"
                     >
                       {row.hot ? 'Unhot' : 'Hot'}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={removeFromSite.isPending}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Remove "${row.localizedTitle || row.catalogTitle}" from this site? Localized content and category assignments for this site game will also be deleted.`
+                          )
+                        ) {
+                          removeFromSite.mutate(row.id);
+                        }
+                      }}
+                      className="border-destructive/50 text-destructive rounded-md border px-2.5 py-1.5 text-xs disabled:opacity-50"
+                    >
+                      Remove
                     </button>
                   </div>
                 </td>
