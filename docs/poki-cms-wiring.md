@@ -351,6 +351,32 @@ UI 组件只接 props，不 import `@/modules/*` 或 DB。
 9. 检查首页、详情的 locale-aware links。
 10. build / typecheck。
 
+## 静态资源域名与迁移路径
+
+V2 数据库不绑定具体 CDN 域名。legacy `static.driftbossgame.org` 下的资源在迁移时转成可移植相对路径：
+
+```text
+https://static.driftbossgame.org/games/foo.png
+→ /games/foo.png
+
+https://static.driftbossgame.org/game-play/foo/index.html
+→ /game-play/foo/index.html
+```
+
+运行时通过公共环境变量补全：
+
+```env
+VITE_STATIC_ASSET_ORIGIN=https://static.klotski.org
+```
+
+规则：
+
+- 只剥离 legacy static host；CrazyGames / GameDistribution / 其他第三方绝对 URL 保持原样。
+- 游戏封面、相对 iframe/source URL、博客 cover、Markdown 图片统一走同一个 static origin resolver。
+- SEO/博客正文中的 legacy static 绝对引用在迁移时也会变成相对路径，避免旧域名死链。
+- 未配置 `VITE_STATIC_ASSET_ORIGIN` 时，相对资源回退为当前站 same-origin，便于本地调试。
+- 切 CDN 只改环境变量，不改数据库。
+
 ## 真实数据 Preview Fixture
 
 为验证当前 UI wiring，仓库内保留一份从 legacy `game-cms` 只读抽取的 DriftBoss 小样本：
@@ -379,6 +405,7 @@ export DATABASE_URL=file:data/ui-wiring-preview.db
 export SITE_KEY=driftbossgame
 export DEPLOY_ENV=preview
 export VITE_DEFAULT_LOCALE=en
+export VITE_STATIC_ASSET_ORIGIN=https://static.klotski.org
 
 pnpm db:setup
 pnpm db:push
