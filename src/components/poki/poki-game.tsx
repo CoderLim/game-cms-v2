@@ -196,6 +196,15 @@ export function PokiGamePage({
   }, [query, searchGames]);
 
   const firstCategory = categories[0];
+  const showDescriptionInDetails = Boolean(game.intro && game.description);
+  const hasLongContent = Boolean(
+    showDescriptionInDetails ||
+      game.howToPlay ||
+      game.controls ||
+      game.features ||
+      game.faq ||
+      game.content
+  );
 
   return (
     <div
@@ -447,79 +456,94 @@ export function PokiGamePage({
             />
           ) : null}
 
-          {expanded ? (
-            <div className="mt-6 max-w-[1036px] space-y-7">
-              {game.description ? (
-                <section>
-                  <MarkdownContent
-                    content={game.description}
-                    className="text-[#002b50]"
-                  />
-                </section>
-              ) : null}
+          {hasLongContent ? (
+            <>
+              <div className="relative mt-6 max-w-[1036px]">
+                <div
+                  id="game-details"
+                  className={
+                    expanded
+                      ? 'space-y-7'
+                      : 'max-h-[420px] space-y-7 overflow-hidden'
+                  }
+                >
+                  {showDescriptionInDetails ? (
+                    <section>
+                      <MarkdownContent
+                        content={game.description || ''}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
 
-              {game.howToPlay ? (
-                <section>
-                  <h2 className="mb-3 text-2xl font-bold">How to Play</h2>
-                  <MarkdownContent
-                    content={game.howToPlay}
-                    className="text-[#002b50]"
-                  />
-                </section>
-              ) : null}
+                  {game.howToPlay ? (
+                    <section>
+                      <h2 className="mb-3 text-2xl font-bold">How to Play</h2>
+                      <MarkdownContent
+                        content={game.howToPlay}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
 
-              {game.controls ? (
-                <section>
-                  <h2 className="mb-3 text-2xl font-bold">Controls</h2>
-                  <MarkdownContent
-                    content={game.controls}
-                    className="text-[#002b50]"
-                  />
-                </section>
-              ) : null}
+                  {game.controls ? (
+                    <section>
+                      <h2 className="mb-3 text-2xl font-bold">Controls</h2>
+                      <MarkdownContent
+                        content={game.controls}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
 
-              {game.features ? (
-                <section>
-                  <h2 className="mb-3 text-2xl font-bold">Features</h2>
-                  <MarkdownContent
-                    content={game.features}
-                    className="text-[#002b50]"
-                  />
-                </section>
-              ) : null}
+                  {game.features ? (
+                    <section>
+                      <h2 className="mb-3 text-2xl font-bold">Features</h2>
+                      <MarkdownContent
+                        content={game.features}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
 
-              {game.faq ? (
-                <section>
-                  <h2 className="mb-3 text-2xl font-bold">FAQ</h2>
-                  <MarkdownContent
-                    content={game.faq}
-                    className="text-[#002b50]"
-                  />
-                </section>
-              ) : null}
+                  {game.faq ? (
+                    <section>
+                      <h2 className="mb-3 text-2xl font-bold">FAQ</h2>
+                      <MarkdownContent
+                        content={game.faq}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
 
-              {game.content ? (
-                <section>
-                  <MarkdownContent
-                    content={game.content}
-                    className="text-[#002b50]"
+                  {game.content ? (
+                    <section>
+                      <MarkdownContent
+                        content={game.content}
+                        className="text-[#002b50]"
+                      />
+                    </section>
+                  ) : null}
+                </div>
+
+                {!expanded ? (
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-white/0 to-white"
+                    aria-hidden="true"
                   />
-                </section>
-              ) : null}
-            </div>
-          ) : game.description ||
-            game.howToPlay ||
-            game.controls ||
-            game.features ||
-            game.faq ||
-            game.content ? (
-            <button
-              type="button"
-              className="mt-4 text-sm font-bold tracking-wide uppercase"
-              onClick={() => setExpanded(true)}
-            >
-              Show more
-            </button>
+                ) : null}
+              </div>
+
+              <button
+                type="button"
+                className="mt-4 text-sm font-bold tracking-wide uppercase"
+                aria-expanded={expanded}
+                aria-controls="game-details"
+                onClick={() => setExpanded((value) => !value)}
+              >
+                {expanded ? 'Show less' : 'Show more'}
+              </button>
+            </>
           ) : null}
 
           <h2 className="mt-10 text-[28px] leading-7 font-bold">
