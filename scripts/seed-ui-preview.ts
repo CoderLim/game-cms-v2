@@ -76,6 +76,25 @@ type Fixture = {
   categoryMaps: Array<{ game_key: string; category: string }>;
 };
 
+const LEGACY_STATIC_ORIGIN = 'https://static.driftbossgame.org';
+
+function portableAssetPath(value: string | null | undefined) {
+  if (!value) return null;
+
+  const raw = value.trim();
+  if (!raw) return null;
+
+  for (const origin of [
+    LEGACY_STATIC_ORIGIN,
+    LEGACY_STATIC_ORIGIN.replace(/^https:/i, 'http:'),
+  ]) {
+    if (raw === origin) return '/';
+    if (raw.startsWith(`${origin}/`)) return raw.slice(origin.length);
+  }
+
+  return raw;
+}
+
 function id(scope: string, value: string) {
   return uuidv5(`${scope}:${value}`, NAMESPACE);
 }
@@ -144,8 +163,8 @@ async function main() {
         status: 'active',
         defaultLocale: 'en',
         enabledLocales: JSON.stringify(locales),
-        logoUrl: fixture.site.logo_url,
-        faviconUrl: fixture.site.favicon_url,
+        logoUrl: portableAssetPath(fixture.site.logo_url),
+        faviconUrl: portableAssetPath(fixture.site.favicon_url),
         createdAt: asDate(fixture.site.created_at),
         updatedAt: asDate(fixture.site.updated_at || fixture.site.created_at),
       })
@@ -158,8 +177,8 @@ async function main() {
           status: 'active',
           defaultLocale: 'en',
           enabledLocales: JSON.stringify(locales),
-          logoUrl: fixture.site.logo_url,
-          faviconUrl: fixture.site.favicon_url,
+          logoUrl: portableAssetPath(fixture.site.logo_url),
+          faviconUrl: portableAssetPath(fixture.site.favicon_url),
           updatedAt: asDate(fixture.site.updated_at || fixture.site.created_at),
         },
       });
@@ -451,7 +470,7 @@ async function main() {
           description: game.description,
           embedUrl: game.url,
           sourceUrl: game.video_url,
-          imageUrl: game.image,
+          imageUrl: portableAssetPath(game.image),
           provider: 'legacy-driftboss',
           embedType: 'iframe',
           status: 'active',
@@ -466,7 +485,7 @@ async function main() {
             description: game.description,
             embedUrl: game.url,
             sourceUrl: game.video_url,
-            imageUrl: game.image,
+            imageUrl: portableAssetPath(game.image),
             provider: 'legacy-driftboss',
             embedType: 'iframe',
             status: 'active',
