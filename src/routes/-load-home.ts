@@ -13,52 +13,6 @@ type GameCardData = {
 
 const CELL = 94;
 
-const CATEGORY_IMAGE_KEYS = new Set([
-  '3d',
-  'action',
-  'adventure',
-  'animals',
-  'arcade',
-  'boy',
-  'brain',
-  'car',
-  'categories',
-  'clicker',
-  'cooking',
-  'cozy',
-  'dinosaur',
-  'drifting',
-  'driving',
-  'escape',
-  'monster-truck',
-  'parking',
-  'racing',
-  'truck',
-  'fighting',
-  'flash',
-  'girls',
-  'gun',
-  'idle',
-  'mobile',
-  'multiplayer',
-  'obby',
-  'platform',
-  'popular',
-  'puzzle',
-  'running',
-  'shooting',
-  'simulation',
-  'skill',
-  'sniper',
-  'stickman',
-  'survival',
-  'two-player',
-  'tycoon',
-  'typing',
-  'war',
-  'watermelon',
-  'zombie',
-]);
 
 function uniqueGames(
   featured: GameCardData | undefined,
@@ -113,6 +67,7 @@ function mapCategoryGrid(
     categoryKey: string;
     slug: string;
     title: string;
+    imageUrl: string | null;
   }>
 ): HomeGrid {
   const regionSlots = [...homeLayout.categoryGrid.tiles]
@@ -127,9 +82,7 @@ function mapCategoryGrid(
       return {
         title: category.title,
         href: `/category/${category.slug}`,
-        image: CATEGORY_IMAGE_KEYS.has(category.categoryKey)
-          ? `/poki/categories/${category.categoryKey}.png`
-          : null,
+        image: category.imageUrl,
         x: slot.x,
         y: slot.y,
         w: slot.w,
