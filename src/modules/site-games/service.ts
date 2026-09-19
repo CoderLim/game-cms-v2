@@ -248,6 +248,8 @@ export async function getPublishedBySlug(input: {
   return row
     ? {
         ...row,
+        embedUrl: resolveStaticAssetUrl(row.embedUrl),
+        sourceUrl: resolveStaticAssetUrl(row.sourceUrl),
         imageUrl: resolveStaticAssetUrl(row.imageUrl),
       }
     : undefined;
