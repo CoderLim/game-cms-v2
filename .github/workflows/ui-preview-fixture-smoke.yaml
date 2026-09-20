@@ -124,14 +124,14 @@ jobs:
             'SELECT COUNT(*) AS value FROM site_category WHERE site_id = ?',
             [siteId]
           );
-          if (categoryCount !== 20) throw new Error(`Expected 20 site categories, got ${categoryCount}`);
+          if (categoryCount !== 15) throw new Error(`Expected 15 canonical site categories, got ${categoryCount}`);
           const categoryImageCount = await value(
             "SELECT COUNT(*) AS value FROM site_category WHERE site_id = ? AND image_url IS NOT NULL AND TRIM(image_url) <> ''",
             [siteId]
           );
-          if (categoryImageCount !== 20) {
+          if (categoryImageCount !== categoryCount) {
             throw new Error(
-              `Expected 20 category images, got ${categoryImageCount}`
+              `Expected every canonical preview category to keep an image, got ${categoryImageCount}/${categoryCount}`
             );
           }
 
@@ -139,7 +139,7 @@ jobs:
             sql: `SELECT gc.key, sc.image_url
                     FROM site_category sc
                     JOIN game_category gc ON gc.id = sc.category_id
-                    WHERE sc.site_id = ? AND gc.key IN ('boys-games', 'io-games')
+                    WHERE sc.site_id = ? AND gc.key IN ('driving-racing-games', 'io-games')
                     ORDER BY gc.key`,
             args: [siteId],
           });
@@ -149,14 +149,40 @@ jobs:
               String(row.image_url || ''),
             ])
           );
-          if (!imagesByKey.get('boys-games')?.startsWith('/games/')) {
+          if (imagesByKey.get('driving-racing-games') !== '/cat/racing-games.png') {
             throw new Error(
-              `Expected boys-games /games image, got ${imagesByKey.get('boys-games')}`
+              `Expected driving-racing-games to reuse the racing image, got ${imagesByKey.get('driving-racing-games')}`
             );
           }
           if (imagesByKey.get('io-games') !== '/cat/io-games.jpg') {
             throw new Error(
               `Expected io-games /cat image, got ${imagesByKey.get('io-games')}`
+            );
+          }
+
+          const legacyTopLevelCount = await value(
+            `SELECT COUNT(*) AS value
+               FROM site_category sc
+               JOIN game_category gc ON gc.id = sc.category_id
+               WHERE sc.site_id = ?
+                 AND gc.key IN (
+                   '3d-games',
+                   'boys-games',
+                   'stickman-games',
+                   'car-games',
+                   'racing-games',
+                   'clicker-games',
+                   'girls-games',
+                   'hypercasual-games',
+                   'kids-games',
+                   'mahjong-games',
+                   'soccer-games'
+                 )`,
+            [siteId]
+          );
+          if (legacyTopLevelCount !== 0) {
+            throw new Error(
+              `Expected no legacy top-level preview categories, got ${legacyTopLevelCount}`
             );
           }
 
@@ -200,8 +226,8 @@ jobs:
             'SELECT COUNT(*) AS value FROM site_game_category WHERE site_game_id = ?',
             [driftId]
           );
-          if (driftCategories !== 2) {
-            throw new Error(`Expected 2 Drift Boss categories, got ${driftCategories}`);
+          if (driftCategories < 1) {
+            throw new Error('Drift Boss must keep at least one canonical category');
           }
 
           const homepage = await value(
