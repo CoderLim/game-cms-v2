@@ -163,13 +163,13 @@ async function main() {
     let [category] = await db
       .select()
       .from(schema.gameCategory)
-      .where(eq(schema.gameCategory.key, 'demo-games'))
+      .where(eq(schema.gameCategory.key, 'casual-games'))
       .limit(1);
 
     if (!category) {
       [category] = await db
         .insert(schema.gameCategory)
-        .values({ id: uuidv4(), key: 'demo-games' })
+        .values({ id: uuidv4(), key: 'casual-games' })
         .returning();
     }
 
@@ -205,12 +205,12 @@ async function main() {
         siteId: site.id,
         siteCategoryId: siteCategory.id,
         locale,
-        slug: 'demo-games',
+        slug: 'casual-games',
         status: 'published',
-        title: 'Demo Games',
-        metaTitle: `Demo Games | ${site.name}`,
-        metaDescription: 'Development fixture category.',
-        description: 'Games used to validate the local Game Site Engine setup.',
+        title: 'Casual Games',
+        metaTitle: `Casual Games | ${site.name}`,
+        metaDescription: 'Casual browser games.',
+        description: 'Quick-play browser games, including the local Game Site Engine fixture.',
       })
       .onConflictDoUpdate({
         target: [
@@ -219,9 +219,9 @@ async function main() {
         ],
         set: {
           siteId: site.id,
-          slug: 'demo-games',
+          slug: 'casual-games',
           status: 'published',
-          title: 'Demo Games',
+          title: 'Casual Games',
           updatedAt: new Date(),
         },
       });
