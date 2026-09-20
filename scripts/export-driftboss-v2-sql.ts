@@ -3,6 +3,12 @@ import { dirname, resolve } from 'node:path';
 import postgres from 'postgres';
 import { v5 as uuidv5 } from 'uuid';
 
+import {
+  canonicalizeLegacyCategoryKey,
+  GAME_CATEGORY_TAXONOMY,
+  type CanonicalGameCategoryKey,
+} from '../src/modules/categories/taxonomy';
+
 /**
  * Export the legacy driftbossgame PostgreSQL/Supabase database into an
  * idempotent D1/SQLite-compatible SQL file for Game Site Engine V2.
@@ -180,11 +186,94 @@ try {
     throw new Error(`Unknown --games keys in legacy games table: ${missingGameKeys.join(', ')}`);
   }
 
+  const categorySourcePriority: Partial<
+    Record<CanonicalGameCategoryKey, string[]>
+  > = {
+    'driving-racing-games': ['racing-games', 'car-games'],
+    'sports-games': ['sports-games', 'soccer-games'],
+    'idle-clicker-games': ['clicker-games'],
+    'casual-games': ['hypercasual-games'],
+    'board-card-games': ['mahjong-games'],
+    'kids-educational-games': ['kids-games'],
+    'dress-up-games': ['girls-games'],
+  };
+
+  const normalizedGameCategoryMap = new Map<string, any>();
+  for (const row of legacyGameCategories) {
+    const category = canonicalizeLegacyCategoryKey(
+      String(row.category || '').trim()
+    );
+    const gameKey = String(row.game_key || '').trim();
+    if (!category || !gameKey) continue;
+    normalizedGameCategoryMap.set(`${gameKey}:${category}`, {
+      ...row,
+      category,
+    });
+  }
+  const normalizedGameCategories = [...normalizedGameCategoryMap.values()];
+
+  const legacyCategoryByKey = new Map(
+    legacyCategories.map((row: any) => [String(row.category || '').trim(), row])
+  );
+  const normalizedCategories = GAME_CATEGORY_TAXONOMY.map((definition) => {
+    const candidates = [
+      definition.key,
+      ...(categorySourcePriority[definition.key] || []),
+      ...legacyCategories
+        .map((row: any) => String(row.category || '').trim())
+        .filter(
+          (legacyKey: string) =>
+            canonicalizeLegacyCategoryKey(legacyKey) === definition.key
+        ),
+    ];
+    const sourceKey =
+      candidates.find((candidate) => legacyCategoryByKey.has(candidate)) ||
+      definition.key;
+    const source = legacyCategoryByKey.get(sourceKey) as any;
+
+    return {
+      ...(source || {}),
+      category: definition.key,
+      title: definition.title,
+    };
+  });
+
+  const seoCategoryPriority = (legacyKey: string, canonicalKey: string) => {
+    if (legacyKey === canonicalKey) return 100;
+    const preferred = categorySourcePriority[
+      canonicalKey as CanonicalGameCategoryKey
+    ] || [];
+    const index = preferred.indexOf(legacyKey);
+    return index === -1 ? 0 : 90 - index;
+  };
+  const normalizedSeoCategoryMap = new Map<
+    string,
+    { row: any; priority: number }
+  >();
+  for (const row of legacySeoCategories) {
+    const legacyKey = String(row.category || '').trim();
+    const category = canonicalizeLegacyCategoryKey(legacyKey);
+    if (!category) continue;
+
+    const mapKey = `${normalizeDomain(row.domain || '')}:${category}:${localeOf(row)}`;
+    const priority = seoCategoryPriority(legacyKey, category);
+    const existing = normalizedSeoCategoryMap.get(mapKey);
+    if (!existing || priority > existing.priority) {
+      normalizedSeoCategoryMap.set(mapKey, {
+        priority,
+        row: { ...row, category },
+      });
+    }
+  }
+  const normalizedSeoCategories = [
+    ...normalizedSeoCategoryMap.values(),
+  ].map((entry) => entry.row);
+
   const selectedGameCategories = selectedGameKeys.size
-    ? legacyGameCategories.filter((row: any) =>
+    ? normalizedGameCategories.filter((row: any) =>
         selectedGameKeys.has(String(row.game_key || '').trim())
       )
-    : legacyGameCategories;
+    : normalizedGameCategories;
   const selectedCategoryKeys = new Set(
     selectedGameCategories
       .map((row: any) => String(row.category || '').trim())
@@ -196,20 +285,20 @@ try {
       )
     : legacyGames;
   const selectedCategories = selectedGameKeys.size
-    ? legacyCategories.filter((row: any) =>
+    ? normalizedCategories.filter((row: any) =>
         selectedCategoryKeys.has(String(row.category || '').trim())
       )
-    : legacyCategories;
+    : normalizedCategories;
   const selectedSeoGames = selectedGameKeys.size
     ? legacySeoGames.filter((row: any) =>
         selectedGameKeys.has(String(row.game_key || '').trim())
       )
     : legacySeoGames;
   const selectedSeoCategories = selectedGameKeys.size
-    ? legacySeoCategories.filter((row: any) =>
+    ? normalizedSeoCategories.filter((row: any) =>
         selectedCategoryKeys.has(String(row.category || '').trim())
       )
-    : legacySeoCategories;
+    : normalizedSeoCategories;
   const selectedBlogs = includePosts ? legacyBlogs : [];
 
   const sitesByDomain = new Map<string, any>();
