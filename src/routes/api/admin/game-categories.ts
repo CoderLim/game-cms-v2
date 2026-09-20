@@ -10,6 +10,7 @@ import {
 import { listCategoryCatalog } from '@/modules/categories/admin';
 import {
   createCategory,
+  ensureCanonicalCategories,
   removeCategory,
   updateCategory,
 } from '@/modules/categories/service';
@@ -35,7 +36,17 @@ async function GET({ request }: { request: Request }) {
 async function POST({ request }: { request: Request }) {
   try {
     await requireAdmin(request);
-    const body = parseBody(createGameCategorySchema, await request.json());
+    const raw = await request.json();
+    if (
+      raw &&
+      typeof raw === 'object' &&
+      'action' in raw &&
+      raw.action === 'bootstrap'
+    ) {
+      return respData(await ensureCanonicalCategories());
+    }
+
+    const body = parseBody(createGameCategorySchema, raw);
     return respData(await createCategory({ key: body.key }));
   } catch (error: any) {
     return respErr(error.message || 'Failed to create game category');
