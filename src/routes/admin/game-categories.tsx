@@ -12,6 +12,10 @@ import {
   type PageResult,
 } from '@/lib/api-client';
 import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
+import {
+  GAME_CATEGORY_BY_KEY,
+  GAME_CATEGORY_TAXONOMY,
+} from '@/modules/categories/taxonomy';
 
 interface SiteRow {
   id: string;
@@ -74,8 +78,6 @@ export const Route = createFileRoute('/admin/game-categories')({
 function GameCategoriesPage() {
   const queryClient = useQueryClient();
   const [newKey, setNewKey] = useState('');
-  const [editingCatalogId, setEditingCatalogId] = useState<string | null>(null);
-  const [editingCatalogKey, setEditingCatalogKey] = useState('');
   const [siteId, setSiteId] = useState('');
   const [locale, setLocale] = useState('en');
   const [categoryId, setCategoryId] = useState('');
@@ -162,20 +164,13 @@ function GameCategoriesPage() {
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const updateCatalogCategory = useMutation({
-    mutationFn: () => {
-      if (!editingCatalogId) throw new Error('No category selected');
-      return apiPut('/api/admin/game-categories', {
-        id: editingCatalogId,
-        key: editingCatalogKey,
-      });
-    },
+  const bootstrapCategories = useMutation({
+    mutationFn: () =>
+      apiPost('/api/admin/game-categories', { action: 'bootstrap' }),
     onSuccess: () => {
-      toast.success('Category updated');
-      setEditingCatalogId(null);
-      setEditingCatalogKey('');
+      toast.success('Canonical taxonomy synced');
+      setNewKey('');
       queryClient.invalidateQueries({ queryKey: ['admin-game-categories'] });
-      queryClient.invalidateQueries({ queryKey: ['admin-site-categories'] });
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -280,21 +275,49 @@ function GameCategoriesPage() {
       </div>
 
       <section className="bg-card border-border rounded-xl border p-5">
-        <h2 className="mb-4 font-semibold">Global category catalog</h2>
-        <div className="flex max-w-xl gap-2">
-          <input
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 className="font-semibold">Global category taxonomy</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Top-level categories are fixed. Use tags or SEO landing pages for
+              narrower concepts such as 3D, stickman, soccer or drifting.
+            </p>
+          </div>
+          <button
+            type="button"
+            disabled={bootstrapCategories.isPending}
+            onClick={() => bootstrapCategories.mutate()}
+            className="bg-primary text-primary-foreground rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
+          >
+            Sync 18 standard categories
+          </button>
+        </div>
+
+        <div className="mt-4 flex max-w-2xl gap-2">
+          <select
             className="border-input bg-background h-10 min-w-0 flex-1 rounded-md border px-3"
-            placeholder="racing-games"
             value={newKey}
             onChange={(event) => setNewKey(event.target.value)}
-          />
+          >
+            <option value="">Add one missing standard category</option>
+            {GAME_CATEGORY_TAXONOMY.filter(
+              (definition) =>
+                !(catalog.data?.items || []).some(
+                  (item) => item.key === definition.key
+                )
+            ).map((definition) => (
+              <option key={definition.key} value={definition.key}>
+                {definition.title} · {definition.key}
+              </option>
+            ))}
+          </select>
           <button
             type="button"
             disabled={!newKey || createCategory.isPending}
             onClick={() => createCategory.mutate()}
-            className="bg-primary text-primary-foreground rounded-md px-4 text-sm font-medium disabled:opacity-50"
+            className="border-border rounded-md border px-4 text-sm font-medium disabled:opacity-50"
           >
-            Add category
+            Add
           </button>
         </div>
 
@@ -302,87 +325,61 @@ function GameCategoriesPage() {
           <table className="w-full text-sm">
             <thead className="bg-muted/50 text-left">
               <tr>
+                <th className="px-4 py-3">Category</th>
                 <th className="px-4 py-3">Key</th>
+                <th className="px-4 py-3">Type</th>
                 <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {(catalog.data?.items || []).map((item) => (
-                <tr key={item.id} className="border-border border-t">
-                  <td className="px-4 py-3">
-                    {editingCatalogId === item.id ? (
-                      <input
-                        autoFocus
-                        className="border-input bg-background h-9 w-full max-w-sm rounded-md border px-3 font-mono text-xs"
-                        value={editingCatalogKey}
-                        onChange={(event) =>
-                          setEditingCatalogKey(event.target.value)
-                        }
-                      />
-                    ) : (
+              {(catalog.data?.items || []).map((item) => {
+                const definition = GAME_CATEGORY_BY_KEY.get(item.key as any);
+                return (
+                  <tr key={item.id} className="border-border border-t">
+                    <td className="px-4 py-3">
+                      {definition?.title || 'Legacy category'}
+                    </td>
+                    <td className="px-4 py-3">
                       <span className="font-mono text-xs">{item.key}</span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex gap-2">
-                      {editingCatalogId === item.id ? (
-                        <>
-                          <button
-                            type="button"
-                            disabled={
-                              !editingCatalogKey ||
-                              updateCatalogCategory.isPending
-                            }
-                            onClick={() => updateCatalogCategory.mutate()}
-                            className="bg-primary text-primary-foreground rounded-md px-2.5 py-1.5 text-xs disabled:opacity-50"
-                          >
-                            Save
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingCatalogId(null);
-                              setEditingCatalogKey('');
-                            }}
-                            className="border-border rounded-md border px-2.5 py-1.5 text-xs"
-                          >
-                            Cancel
-                          </button>
-                        </>
+                    </td>
+                    <td className="px-4 py-3">
+                      {definition ? (
+                        <span className="text-xs">
+                          {definition.primaryNav ? 'Primary' : 'Secondary'}
+                        </span>
                       ) : (
-                        <>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingCatalogId(item.id);
-                              setEditingCatalogKey(item.key);
-                            }}
-                            className="border-border rounded-md border px-2.5 py-1.5 text-xs"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            type="button"
-                            disabled={deleteCatalogCategory.isPending}
-                            onClick={() => {
-                              if (
-                                window.confirm(
-                                  `Delete category "${item.key}"? This only succeeds when it has no site/game assignments.`
-                                )
-                              ) {
-                                deleteCatalogCategory.mutate(item.id);
-                              }
-                            }}
-                            className="border-destructive/50 text-destructive rounded-md border px-2.5 py-1.5 text-xs"
-                          >
-                            Delete
-                          </button>
-                        </>
+                        <span className="text-muted-foreground text-xs">
+                          Legacy
+                        </span>
                       )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="px-4 py-3">
+                      {definition ? (
+                        <span className="text-muted-foreground text-xs">
+                          Fixed taxonomy
+                        </span>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={deleteCatalogCategory.isPending}
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                `Delete legacy category "${item.key}"? This only succeeds when it has no site/game assignments.`
+                              )
+                            ) {
+                              deleteCatalogCategory.mutate(item.id);
+                            }
+                          }}
+                          className="border-destructive/50 text-destructive rounded-md border px-2.5 py-1.5 text-xs"
+                        >
+                          Delete legacy
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
