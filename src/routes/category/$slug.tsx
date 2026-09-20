@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { getLocale, localizeUrl } from '@/paraglide/runtime.js';
 import { PokiCategory } from '@/components/poki/poki-category';
+import { LEGACY_CATEGORY_SLUG_REDIRECTS } from '@/modules/categories/taxonomy';
 
 import { loadCategoryPage } from './-load-page';
 
@@ -10,8 +11,20 @@ function siteOrigin(domain: string) {
 }
 
 export const Route = createFileRoute('/category/$slug')({
-  loader: ({ params }) =>
-    loadCategoryPage({ data: { slug: params.slug, locale: getLocale() } }),
+  loader: ({ params }) => {
+    const canonicalSlug = LEGACY_CATEGORY_SLUG_REDIRECTS[params.slug];
+    if (canonicalSlug && canonicalSlug !== params.slug) {
+      throw redirect({
+        to: '/category/$slug',
+        params: { slug: canonicalSlug },
+        statusCode: 301,
+      });
+    }
+
+    return loadCategoryPage({
+      data: { slug: params.slug, locale: getLocale() },
+    });
+  },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const { site, locale, category, availableLocales } = loaderData;
