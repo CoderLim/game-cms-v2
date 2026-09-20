@@ -26,6 +26,7 @@
     "game:audit:cutover": "tsx scripts/audit-game-site-cutover.ts",
     "game:worker:configure": "tsx scripts/configure-game-site-worker.ts",
     "game:rbac:bootstrap-d1": "tsx scripts/export-d1-rbac-bootstrap-sql.ts",
+    "game:taxonomy:export": "tsx scripts/export-category-taxonomy-sql.ts",
     "rbac:init": "tsx scripts/with-env.ts tsx scripts/init-rbac.ts",
     "rbac:assign": "tsx scripts/with-env.ts tsx scripts/assign-role.ts",
     "format": "prettier --write .",
