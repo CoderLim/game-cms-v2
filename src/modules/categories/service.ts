@@ -19,6 +19,11 @@ import {
 import { getUuid } from '@/lib/hash';
 import { resolveStaticAssetUrl } from '@/lib/static-asset-url';
 
+import {
+  GAME_CATEGORY_TAXONOMY,
+  isCanonicalGameCategoryKey,
+} from './taxonomy';
+
 export enum SiteCategoryStatus {
   DRAFT = 'draft',
   PUBLISHED = 'published',
@@ -33,10 +38,49 @@ function normalizeSlug(value: string) {
   return value.trim().toLowerCase();
 }
 
+function assertCanonicalCategoryKey(value: string) {
+  const normalized = normalizeKey(value);
+  if (!isCanonicalGameCategoryKey(normalized)) {
+    throw new Error(
+      `Unknown top-level category "${normalized}". Use the canonical game taxonomy.`
+    );
+  }
+  return normalized;
+}
+
+export async function ensureCanonicalCategories() {
+  const rows = [];
+  for (const category of GAME_CATEGORY_TAXONOMY) {
+    const values = {
+      id: getUuid(),
+      key: category.key,
+    };
+
+    const inserted = await db()
+      .insert(gameCategory)
+      .values(values)
+      .onConflictDoNothing({ target: gameCategory.key })
+      .returning();
+
+    if (inserted[0]) {
+      rows.push(inserted[0]);
+      continue;
+    }
+
+    const [existing] = await db()
+      .select()
+      .from(gameCategory)
+      .where(eq(gameCategory.key, category.key))
+      .limit(1);
+    if (existing) rows.push(existing);
+  }
+  return rows;
+}
+
 export async function createCategory(input: { key: string }) {
   const values = {
     id: getUuid(),
-    key: normalizeKey(input.key),
+    key: assertCanonicalCategoryKey(input.key),
   };
 
   const [row] = await db().insert(gameCategory).values(values).returning();
@@ -46,7 +90,7 @@ export async function createCategory(input: { key: string }) {
 export async function updateCategory(id: string, input: { key: string }) {
   const [row] = await db()
     .update(gameCategory)
-    .set({ key: normalizeKey(input.key) })
+    .set({ key: assertCanonicalCategoryKey(input.key) })
     .where(eq(gameCategory.id, id))
     .returning();
 
