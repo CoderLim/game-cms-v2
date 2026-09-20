@@ -55,6 +55,28 @@ export function isCanonicalGameCategoryKey(
 export const LEGACY_GAME_CATEGORY_REMAP: Readonly<
   Record<string, CanonicalGameCategoryKey | null>
 > = {
+  // Earliest legacy databases used short keys before the "-games" convention.
+  '3d': null,
+  'action': 'action-games',
+  'adventure': 'adventure-games',
+  'arcade': 'arcade-games',
+  'boys': null,
+  'car': 'driving-racing-games',
+  'clicker': 'idle-clicker-games',
+  'girls': 'dress-up-games',
+  'hypercasual': 'casual-games',
+  'io': 'io-games',
+  'kids': 'kids-educational-games',
+  'mahjong': 'board-card-games',
+  'multiplayer': 'multiplayer-games',
+  'puzzle': 'puzzle-games',
+  'racing': 'driving-racing-games',
+  'soccer': 'sports-games',
+  'sports': 'sports-games',
+  'stickman': null,
+  'strategy': 'strategy-games',
+  'two-player': 'two-player-games',
+
   '3d-games': null,
   'action-games': 'action-games',
   'adventure-games': 'adventure-games',
