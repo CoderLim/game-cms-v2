@@ -138,7 +138,87 @@ function titleFromKey(value: string) {
 }
 
 function getFixture() {
-  return JSON.parse(readFileSync(FIXTURE_PATH, 'utf8')) as Fixture;
+  const fixture = JSON.parse(readFileSync(FIXTURE_PATH, 'utf8')) as Fixture;
+
+  const categorySourcePriority: Partial<
+    Record<CanonicalGameCategoryKey, string[]>
+  > = {
+    'driving-racing-games': ['racing-games', 'car-games'],
+    'sports-games': ['sports-games', 'soccer-games'],
+    'idle-clicker-games': ['clicker-games'],
+    'casual-games': ['hypercasual-games'],
+    'board-card-games': ['mahjong-games'],
+    'kids-educational-games': ['kids-games'],
+    'dress-up-games': ['girls-games'],
+  };
+
+  const normalizedMaps = new Map<string, { game_key: string; category: string }>();
+  for (const relation of fixture.categoryMaps) {
+    const category = canonicalizeLegacyCategoryKey(relation.category);
+    if (!category) continue;
+    normalizedMaps.set(`${relation.game_key}:${category}`, {
+      game_key: relation.game_key,
+      category,
+    });
+  }
+
+  const usedCategoryKeys = new Set(
+    [...normalizedMaps.values()].map((relation) => relation.category)
+  );
+  const legacyCategoryByKey = new Map(
+    fixture.categories.map((category) => [category.category, category])
+  );
+
+  const categorySourceKey = new Map<string, string>();
+  const normalizedCategories = GAME_CATEGORY_TAXONOMY.filter((definition) =>
+    usedCategoryKeys.has(definition.key)
+  ).map((definition) => {
+    const candidates = [
+      definition.key,
+      ...(categorySourcePriority[definition.key] || []),
+      ...fixture.categories
+        .map((category) => category.category)
+        .filter(
+          (legacyKey) =>
+            canonicalizeLegacyCategoryKey(legacyKey) === definition.key
+        ),
+    ];
+    const sourceKey =
+      candidates.find((candidate) => legacyCategoryByKey.has(candidate)) ||
+      definition.key;
+    categorySourceKey.set(definition.key, sourceKey);
+    const source = legacyCategoryByKey.get(sourceKey);
+
+    return {
+      category: definition.key,
+      title: definition.title,
+      description: source?.description || null,
+      image_url: source?.image_url || null,
+      created_at: source?.created_at || fixture.site.created_at,
+    };
+  });
+
+  const normalizedCategoryLocales = [];
+  for (const category of normalizedCategories) {
+    const sourceKey = categorySourceKey.get(category.category);
+    if (!sourceKey) continue;
+
+    for (const localeRow of fixture.categoryLocales.filter(
+      (item) => item.category === sourceKey
+    )) {
+      normalizedCategoryLocales.push({
+        ...localeRow,
+        category: category.category,
+      });
+    }
+  }
+
+  return {
+    ...fixture,
+    categories: normalizedCategories,
+    categoryLocales: normalizedCategoryLocales,
+    categoryMaps: [...normalizedMaps.values()],
+  };
 }
 
 async function main() {
