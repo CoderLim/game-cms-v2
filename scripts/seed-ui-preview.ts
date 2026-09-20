@@ -8,6 +8,11 @@ import { v5 as uuidv5 } from 'uuid';
 
 import * as domain from '../src/config/db/game-schema';
 import * as contentSchema from '../src/config/db/game-content-schema';
+import {
+  canonicalizeLegacyCategoryKey,
+  GAME_CATEGORY_TAXONOMY,
+  type CanonicalGameCategoryKey,
+} from '../src/modules/categories/taxonomy';
 
 const NAMESPACE = 'f4c48c70-99cb-4cbb-85dc-8f66dbaf7657';
 const FIXTURE_PATH = fileURLToPath(
