@@ -169,7 +169,7 @@ export async function createCheckout(params: {
   }
 
   const finalSuccessUrl =
-    paymentOrder.successUrl || `${appUrl}/settings/billing?success=1`;
+    paymentOrder.successUrl || `${appUrl}/admin?success=1`;
   const callbackSuccessUrl = `${appUrl}/api/payment/callback?order_no=${orderNo}&redirect=${encodeURIComponent(finalSuccessUrl)}`;
 
   const session = await pm.createPayment({
@@ -178,8 +178,7 @@ export async function createCheckout(params: {
       productId: resolvedProductId,
       orderNo,
       successUrl: callbackSuccessUrl,
-      cancelUrl:
-        paymentOrder.cancelUrl || `${appUrl}/settings/billing?canceled=1`,
+      cancelUrl: paymentOrder.cancelUrl || `${appUrl}/admin?canceled=1`,
     },
     provider,
   });

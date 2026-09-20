@@ -147,7 +147,7 @@ export function SupportWidget() {
                 <p className="text-muted-foreground text-xs">
                   {m['common.support.track_hint_prefix']()}{' '}
                   <Link
-                    href="/settings/tickets"
+                    href="/admin/tickets"
                     className="hover:text-foreground underline"
                   >
                     {m['common.support.track_hint_link']()}

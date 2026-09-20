@@ -65,11 +65,7 @@ async function POST({ request }: { request: Request }) {
 
     // Build success/cancel URLs — only accept same-origin redirects.
     const baseUrl = configs.app_url || 'http://localhost:3000';
-    const safeRedirectPath = safeSameOriginPath(
-      redirect,
-      '/settings/billing',
-      baseUrl
-    );
+    const safeRedirectPath = safeSameOriginPath(redirect, '/admin', baseUrl);
     // Straight to the destination: safeSameOriginPath has already reduced it
     // to a path on this site. The old detour through /auth-callback exists to
     // hand a session token to a desktop client — a browser coming back from

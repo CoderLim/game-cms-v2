@@ -74,7 +74,7 @@ export function PricingTable({
         credits_valid_days: plan.creditsValidDays,
         payment_provider: plan.paymentProvider || 'stripe',
         // Come back to the page the user paid from.
-        redirect: currentPathWithQuery('/settings/billing'),
+        redirect: currentPathWithQuery('/admin'),
       }),
     onSuccess: (data) => {
       if (data?.checkout_url) {

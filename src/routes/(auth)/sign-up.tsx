@@ -51,12 +51,12 @@ function SignUpPage() {
   }, []);
 
   // Already signed in (visited /sign-up directly, or a stale callbackUrl looped
-  // back here) → go home. The auth pages never gate themselves, so this can't loop.
+  // back here) → go admin. The auth pages never gate themselves, so this can't loop.
   useEffect(() => {
     if (sessionPending || navigatingRef.current) return;
     if (session?.user) {
       navigatingRef.current = true;
-      router.push('/');
+      router.push('/admin');
     }
   }, [sessionPending, session?.user, router]);
 
@@ -66,7 +66,7 @@ function SignUpPage() {
   const afterLoginUrl = resolveAfterAuthUrl({
     redirect: redirectParam,
     callbackUrl,
-    fallback: '/settings',
+    fallback: '/admin',
   });
 
   // Carry callbackUrl/redirect across to sign-in so the destination survives the switch.

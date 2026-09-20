@@ -33,7 +33,7 @@ async function GET({ request }: { request: Request }) {
   const redirect = url.searchParams.get('redirect');
   const configs = await getAllConfigs();
   const appUrl = configs.app_url || 'http://localhost:3000';
-  const fallback = `${appUrl}/settings/billing`;
+  const fallback = `${appUrl}/admin`;
 
   try {
     if (orderNo) {

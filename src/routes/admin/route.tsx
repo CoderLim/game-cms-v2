@@ -12,9 +12,9 @@ import {
   Shield,
 } from 'lucide-react';
 
-import { AppLayout } from '@/components/app-layout';
 import { envConfigs } from '@/config';
 import { m } from '@/paraglide/messages.js';
+import { AppLayout } from '@/components/app-layout';
 
 export const Route = createFileRoute('/admin')({
   component: AdminLayout,
@@ -39,9 +39,17 @@ function AdminLayout() {
         { href: '/admin/site-content', label: 'Homepage SEO', icon: Home },
         { href: '/admin/game-catalog', label: 'Game Catalog', icon: Library },
         { href: '/admin/site-games', label: 'Site Games', icon: Gamepad2 },
-        { href: '/admin/game-categories', label: 'Game Categories', icon: FolderOpen },
+        {
+          href: '/admin/game-categories',
+          label: 'Game Categories',
+          icon: FolderOpen,
+        },
         { href: '/admin/site-posts', label: 'Posts & Guides', icon: FileText },
-        { href: '/admin/site-settings', label: 'Site Settings', icon: Settings },
+        {
+          href: '/admin/site-settings',
+          label: 'Site Settings',
+          icon: Settings,
+        },
       ],
     },
     {
@@ -95,7 +103,6 @@ function AdminLayout() {
       footerNavItems={footerNavItems}
       brand={envConfigs.app_name}
       brandHref="/admin"
-      profileHref="/settings/profile"
       requirePermission="admin.*"
     >
       <Outlet />

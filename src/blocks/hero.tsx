@@ -29,7 +29,7 @@ export function Hero() {
 
         <div className="flex items-center justify-center gap-3 pt-4">
           <Link
-            href="/settings"
+            href="/admin"
             className={cn(
               buttonVariants({ size: 'lg' }),
               'h-12 gap-2 rounded-full px-8'

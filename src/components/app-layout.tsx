@@ -26,7 +26,7 @@ export function AppLayout({
   headerExtra,
   profileHref,
   requirePermission,
-  unauthorizedRedirect = '/settings',
+  unauthorizedRedirect = '/',
 }: {
   children: React.ReactNode;
   navItems: NavItem[];

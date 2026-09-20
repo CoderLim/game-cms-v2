@@ -28,11 +28,6 @@ export function Footer() {
     {
       title: m['landing.footer.feature'](),
       links: [
-        {
-          label: m['landing.footer.settings'](),
-          href: '/settings',
-          external: true,
-        },
         { label: m['landing.footer.admin'](), href: '/admin', external: true },
       ],
     },

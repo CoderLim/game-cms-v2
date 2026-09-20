@@ -3,7 +3,7 @@
  *
  * Two kinds of "come back here afterwards" targets flow through the auth pages:
  *
- * - **Internal paths** (`/chat`, `/settings/billing`) — the normal web case.
+ * - **Internal paths** (`/chat`, `/admin`) — the normal web case.
  *   Navigated to directly. Must stay same-origin, or a crafted `?callbackUrl=`
  *   turns sign-in into an open redirect.
  * - **App protocol URLs** (`myapp://auth/callback`) — a desktop/mobile client
@@ -92,7 +92,7 @@ export function resolveAfterAuthUrl(params: {
   callbackUrl?: string | null;
   fallback?: string;
 }): string {
-  const { redirect, callbackUrl, fallback = '/settings' } = params;
+  const { redirect, callbackUrl, fallback = '/admin' } = params;
   if (isAppProtocolUrl(redirect)) {
     // Scheme allow-listing happens on /auth-callback, which is the only place
     // that can hand out a token.
